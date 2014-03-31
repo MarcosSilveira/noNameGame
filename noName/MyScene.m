@@ -49,12 +49,19 @@
     SKNode *node = [self nodeAtPoint:location];
     
     SKNode *loja = [self childNodeWithName:@"LojaNode"];
+    SKNode *play = [self childNodeWithName:@"JogarNode"];
     
     if([node.name isEqualToString:@"LojaNode"]){
         SKAction *action = [SKAction scaleBy:2 duration:3];
         [loja runAction:action];
     }
-    
+    if([node.name isEqualToString:@"JogarNode"]){
+        SKAction *action = [SKAction scaleBy:2 duration:3];
+        [play runAction:action];
+        SKScene *Play = [[GameScene alloc] initWithSize:self.size];
+        SKTransition *troca = [SKTransition fadeWithDuration:0.5];
+        [self.view presentScene:Play transition:troca];
+    }
 }
 
 -(void)update:(CFTimeInterval)currentTime {
