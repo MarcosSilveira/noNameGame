@@ -57,10 +57,11 @@
     }
     if([node.name isEqualToString:@"JogarNode"]){
         SKAction *action = [SKAction scaleBy:2 duration:3];
-        [play runAction:action];
-        SKScene *Play = [[GameScene alloc] initWithSize:self.size];
-        SKTransition *troca = [SKTransition fadeWithDuration:0.5];
-        [self.view presentScene:Play transition:troca];
+        [play runAction:action completion:^{
+            SKScene *Play = [[GameScene alloc] initWithSize:self.size];
+            SKTransition *troca = [SKTransition fadeWithDuration:0.5];
+            [self.view presentScene:Play transition:troca];
+        }];
     }
 }
 
