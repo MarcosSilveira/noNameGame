@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D5CABBB18E9E4B500FDFDF1 /* grecia.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D5CABBA18E9E4B500FDFDF1 /* grecia.jpg */; };
 		8DAC9A7D18E098A7000A016F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DAC9A7C18E098A7000A016F /* Foundation.framework */; };
 		8DAC9A7F18E098A7000A016F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DAC9A7E18E098A7000A016F /* CoreGraphics.framework */; };
 		8DAC9A8118E098A7000A016F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DAC9A8018E098A7000A016F /* UIKit.framework */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8D5CABBA18E9E4B500FDFDF1 /* grecia.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grecia.jpg; sourceTree = "<group>"; };
 		8DAC9A7918E098A7000A016F /* noName.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = noName.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DAC9A7C18E098A7000A016F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8DAC9A7E18E098A7000A016F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -138,6 +140,7 @@
 		8DAC9A8518E098A7000A016F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8D5CABBA18E9E4B500FDFDF1 /* grecia.jpg */,
 				8DAC9A8618E098A7000A016F /* noName-Info.plist */,
 				8DAC9A8718E098A7000A016F /* InfoPlist.strings */,
 				8DAC9A8A18E098A7000A016F /* main.m */,
@@ -244,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DAC9A8918E098A7000A016F /* InfoPlist.strings in Resources */,
+				8D5CABBB18E9E4B500FDFDF1 /* grecia.jpg in Resources */,
 				8DAC9A9C18E098A7000A016F /* Images.xcassets in Resources */,
 				8DAC9A9A18E098A7000A016F /* Spaceship.png in Resources */,
 				8DAC9A9218E098A7000A016F /* Main.storyboard in Resources */,
@@ -477,6 +481,7 @@
 				8DAC9AB418E098A7000A016F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8DAC9AB518E098A7000A016F /* Build configuration list for PBXNativeTarget "noNameTests" */ = {
 			isa = XCConfigurationList;
@@ -485,6 +490,7 @@
 				8DAC9AB718E098A7000A016F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
