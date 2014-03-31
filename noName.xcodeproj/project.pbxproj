@@ -25,6 +25,7 @@
 		8DAC9AA518E098A7000A016F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DAC9A8018E098A7000A016F /* UIKit.framework */; };
 		8DAC9AAD18E098A7000A016F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DAC9AAB18E098A7000A016F /* InfoPlist.strings */; };
 		8DAC9AAF18E098A7000A016F /* noNameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DAC9AAE18E098A7000A016F /* noNameTests.m */; };
+		A08E389218E9EC2800C27179 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A08E389118E9EC2800C27179 /* GameScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		8DAC9AAA18E098A7000A016F /* noNameTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "noNameTests-Info.plist"; sourceTree = "<group>"; };
 		8DAC9AAC18E098A7000A016F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8DAC9AAE18E098A7000A016F /* noNameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = noNameTests.m; sourceTree = "<group>"; };
+		A08E389018E9EC2800C27179 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		A08E389118E9EC2800C27179 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +126,7 @@
 		8DAC9A8418E098A7000A016F /* noName */ = {
 			isa = PBXGroup;
 			children = (
+				A08E389318E9ECDB00C27179 /* iPad */,
 				8DAC9A8D18E098A7000A016F /* AppDelegate.h */,
 				8DAC9A8E18E098A7000A016F /* AppDelegate.m */,
 				8DAC9A9018E098A7000A016F /* Main.storyboard */,
@@ -130,6 +134,8 @@
 				8DAC9A9418E098A7000A016F /* ViewController.m */,
 				8DAC9A9618E098A7000A016F /* MyScene.h */,
 				8DAC9A9718E098A7000A016F /* MyScene.m */,
+				A08E389018E9EC2800C27179 /* GameScene.h */,
+				A08E389118E9EC2800C27179 /* GameScene.m */,
 				8DAC9A9918E098A7000A016F /* Spaceship.png */,
 				8DAC9A9B18E098A7000A016F /* Images.xcassets */,
 				8DAC9A8518E098A7000A016F /* Supporting Files */,
@@ -165,6 +171,13 @@
 				8DAC9AAB18E098A7000A016F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A08E389318E9ECDB00C27179 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +284,7 @@
 			files = (
 				8DAC9A9818E098A7000A016F /* MyScene.m in Sources */,
 				8DAC9A9518E098A7000A016F /* ViewController.m in Sources */,
+				A08E389218E9EC2800C27179 /* GameScene.m in Sources */,
 				8DAC9A8F18E098A7000A016F /* AppDelegate.m in Sources */,
 				8DAC9A8B18E098A7000A016F /* main.m in Sources */,
 			);
@@ -401,8 +415,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "noName/noName-Prefix.pch";
 				INFOPLIST_FILE = "noName/noName-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -416,8 +432,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "noName/noName-Prefix.pch";
 				INFOPLIST_FILE = "noName/noName-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

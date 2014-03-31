@@ -7,6 +7,7 @@
 //
 
 #import "MyScene.h"
+#import "GameScene.h"
 
 @implementation MyScene
 
@@ -24,12 +25,12 @@
         
         StoreLabel.text = @"Loja";
         StoreLabel.fontSize = 30;
-        StoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), 150);
+        StoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), (self.scene.size.height*3)/8);
         StoreLabel.name = @"LojaNode";
         PlayLabel.name = @"JogarNode";
         PlayLabel.text = @"Jogar";
         PlayLabel.fontSize = 30;
-        PlayLabel.position = CGPointMake(CGRectGetMidX(self.frame), 200);
+        PlayLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.scene.size.height/2);
         
         [self addChild:fundo2];
         [self addChild:PlayLabel];
@@ -43,25 +44,17 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
-    for (UITouch *touch in touches) {
-        SKNode *aux = [self childNodeWithName:@"JogarNode"];
-
-        CGPoint location = [touch locationInNode:self];
-        CGPoint location2 = aux.position;
-                if(location==location2)
-        {
-        }
-        
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
-        
-        sprite.position = location;
-        
-        SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
-        
-        [sprite runAction:[SKAction repeatActionForever:action]];
-        
-        [self addChild:sprite];
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    SKNode *node = [self nodeAtPoint:location];
+    
+    SKNode *loja = [self childNodeWithName:@"LojaNode"];
+    
+    if([node.name isEqualToString:@"LojaNode"]){
+        SKAction *action = [SKAction scaleBy:2 duration:3];
+        [loja runAction:action];
     }
+    
 }
 
 -(void)update:(CFTimeInterval)currentTime {
