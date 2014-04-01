@@ -9,5 +9,8 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface GameScene : SKScene
+{
+    SKSpriteNode *heroi;
+}
 
 @end
