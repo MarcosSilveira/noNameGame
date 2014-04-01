@@ -8,6 +8,7 @@
 
 #import "MyScene.h"
 #import "GameScene.h"
+#import "StoreScene.h"
 
 @implementation MyScene
 
@@ -20,7 +21,7 @@
         SKSpriteNode *fundo2 = [[SKSpriteNode alloc] initWithTexture:fundo color:nil size:CGSizeMake(self.scene.size.width, self.scene.size.height)];
         fundo2.anchorPoint = CGPointZero;
         
-        SKLabelNode *PlayLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        SKLabelNode *PlayLabel = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
         SKLabelNode *StoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         
         StoreLabel.text = @"Loja";
@@ -52,11 +53,19 @@
     SKNode *play = [self childNodeWithName:@"JogarNode"];
     
     if([node.name isEqualToString:@"LojaNode"]){
-        SKAction *action = [SKAction scaleBy:2 duration:3];
-        [loja runAction:action];
+        SKAction *action = [SKAction scaleBy:2 duration:1];
+        SKAction *action2 = [SKAction removeFromParent];
+        [play runAction:action2];
+        [loja runAction:action completion:^{
+            SKScene *Store = [[StoreScene alloc] initWithSize:self.size];
+            SKTransition *troca = [SKTransition fadeWithDuration:0.5];
+            [self.view presentScene:Store transition:troca];
+        }];
     }
     if([node.name isEqualToString:@"JogarNode"]){
-        SKAction *action = [SKAction scaleBy:2 duration:3];
+        SKAction *action = [SKAction scaleBy:2 duration:1];
+        SKAction *action2 = [SKAction removeFromParent];
+        [loja runAction:action2];
         [play runAction:action completion:^{
             SKScene *Play = [[GameScene alloc] initWithSize:self.size];
             SKTransition *troca = [SKTransition fadeWithDuration:0.5];
