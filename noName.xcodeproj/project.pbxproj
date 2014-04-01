@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D47FF1118EB3BC9002C8D1C /* WALK_RIGHT.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8D47FF1018EB3BC9002C8D1C /* WALK_RIGHT.atlas */; };
 		8D5CABBB18E9E4B500FDFDF1 /* grecia.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D5CABBA18E9E4B500FDFDF1 /* grecia.jpg */; };
 		8DA59F2318EB2D630017DCFD /* StoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA59F2218EB2D630017DCFD /* StoreScene.m */; };
 		8DAC9A7D18E098A7000A016F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DAC9A7C18E098A7000A016F /* Foundation.framework */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8D47FF1018EB3BC9002C8D1C /* WALK_RIGHT.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = WALK_RIGHT.atlas; sourceTree = "<group>"; };
 		8D5CABBA18E9E4B500FDFDF1 /* grecia.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grecia.jpg; sourceTree = "<group>"; };
 		8DA59F2118EB2D630017DCFD /* StoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreScene.h; sourceTree = "<group>"; };
 		8DA59F2218EB2D630017DCFD /* StoreScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreScene.m; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 		8DAC9A7018E098A7000A016F = {
 			isa = PBXGroup;
 			children = (
+				8D47FF1018EB3BC9002C8D1C /* WALK_RIGHT.atlas */,
 				8DAC9A8418E098A7000A016F /* noName */,
 				8DAC9AA818E098A7000A016F /* noNameTests */,
 				8DAC9A7B18E098A7000A016F /* Frameworks */,
@@ -262,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DAC9A8918E098A7000A016F /* InfoPlist.strings in Resources */,
+				8D47FF1118EB3BC9002C8D1C /* WALK_RIGHT.atlas in Resources */,
 				8D5CABBB18E9E4B500FDFDF1 /* grecia.jpg in Resources */,
 				8DAC9A9C18E098A7000A016F /* Images.xcassets in Resources */,
 				8DAC9A9218E098A7000A016F /* Main.storyboard in Resources */,
