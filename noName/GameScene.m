@@ -153,20 +153,31 @@
 
     }
 
-    if ([node.name isEqualToString:@"Attack"]){
-        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ATACK_RIGHT"];
-        SKTexture *f1 = [atlas textureNamed:@"ATTACK_RIGHT_001.png"];
-        SKTexture *f2 = [atlas textureNamed:@"ATTACK_RIGHT_002.png"];
+    if ([node.name isEqualToString:@"Attack"]) {
+        if(esquerda)
+        {
+            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ATTACK_LEFT"];
+            SKTexture *f1 = [atlas textureNamed:@"ATTACK_LEFT_001.png"];
+            SKTexture *f2 = [atlas textureNamed:@"ATTACK_LEFT_002.png"];
             NSArray *spartanAttackTextures = @[f1, f2];
             
-            [self throwProjectile:spartan.position];
+            [self throwBiribinha];
+            [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
+            
+        }
+        else{
+            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ATACK_RIGHT"];
+            SKTexture *f1 = [atlas textureNamed:@"ATTACK_RIGHT_001.png"];
+            SKTexture *f2 = [atlas textureNamed:@"ATTACK_RIGHT_002.png"];
+            NSArray *spartanAttackTextures = @[f1, f2];
+            
+            [self throwBiribinha];
             [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
         }
-
-
-        [self throwBiribinha];
-        [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
+        
+        
     }
+
     if ([node.name isEqualToString:@"left"]) {
         esquerda = YES;
         SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
