@@ -32,16 +32,18 @@
     camera.name = @"camera";
     [myWorld addChild:camera];
     
-    [camera addChild:[self createCharacter]];
     [camera addChild:[self initializeBackground]];
-    [camera addChild:[self createRightButton]];
-    [camera addChild:[self createLeftButton]];
+    [camera addChild:[self createCharacter]];
+    
+    [myWorld addChild:[self platformGG]];
+    [self addChild:[self createRightButton]];
+    [self addChild:[self createLeftButton]];
     
     self.physicsWorld.gravity = CGVectorMake(0.0f, -1.0f);
 }
 
 -(SKSpriteNode *)createCharacter{
-    spartan = [[SKSpriteNode alloc] initWithColor:[SKColor blackColor] size:CGSizeMake(width*0.05, height*0.05)];
+    spartan = [[SKSpriteNode alloc] initWithColor:[SKColor blackColor] size:CGSizeMake(width*0.08, height*0.08)];
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
     SKTexture *parado = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
     spartan.texture = parado;
@@ -67,7 +69,7 @@
 
 - (void) centerOnNode: (SKNode *) node{
     CGPoint cameraPositionInScene = [node.scene convertPoint:node.position fromNode:node.parent];
-    node.parent.position = CGPointMake(node.parent.position.x - cameraPositionInScene.x,                                       node.parent.position.y);
+    node.parent.position = CGPointMake(node.parent.position.x - cameraPositionInScene.x-width/4,                                       node.parent.position.y);
 }
 
 -(SKSpriteNode *)createRightButton{
@@ -84,6 +86,16 @@
     left.position = CGPointMake(left.size.width/2-width/2, left.size.height/2-height/2);
     
     return left;
+}
+
+-(SKSpriteNode *)platformGG{
+    SKSpriteNode *platform = [[SKSpriteNode alloc] initWithColor:[SKColor brownColor] size:CGSizeMake(width, height/7)];
+    platform.name = @"platform";
+    platform.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:platform.size];
+    platform.physicsBody.dynamic = NO;
+    platform.position = CGPointMake(0, -height/2+(platform.size.height/2));
+    
+    return platform;
 }
 
 
@@ -107,8 +119,6 @@
         SKAction *moveRight = [SKAction moveByX:8.5 y:0 duration:0.1];
         
         [spartan runAction:[SKAction repeatActionForever:moveRight]];
-        [left runAction:[SKAction repeatActionForever:moveRight]];
-        [right runAction:[SKAction repeatActionForever:moveRight]];
         [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:monsterWalkTextures timePerFrame:0.1f]]];
     }
 
@@ -123,9 +133,6 @@
     spartan.texture = parado;
     
     [spartan removeAllActions];
-    [left removeAllActions];
-    [right removeAllActions];
-        
 }
 
 @end
