@@ -104,7 +104,7 @@
     //animation
     
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
-    //SKTexture *f1 = [atlas textureNamed:@"WALK_RIGHT_000_.png"];
+    SKTexture *f1 = [atlas textureNamed:@"WALK_RIGHT_000_.png"];
     SKTexture *f2 = [atlas textureNamed:@"WALK_RIGHT_001_.png"];
     SKTexture *f3 = [atlas textureNamed:@"WALK_RIGHT_002_.png"];
     SKTexture *f4 = [atlas textureNamed:@"WALK_RIGHT_003_.png"];
