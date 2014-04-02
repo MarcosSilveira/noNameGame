@@ -10,7 +10,7 @@
 
 @interface GameScene : SKScene
 {
-    SKSpriteNode *heroi;
+    SKSpriteNode *spartan;
 }
 
 @end

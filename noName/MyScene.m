@@ -53,10 +53,18 @@
     
     if([node.name isEqualToString:@"LojaNode"]){
         SKAction *action = [SKAction scaleBy:2 duration:1];
-        [loja runAction:action];
+        SKAction *action2 = [SKAction removeFromParent];
+        [play runAction:action2];
+        [loja runAction:action completion:^{
+            SKScene *Store = [[StoreScene alloc] initWithSize:self.size];
+            SKTransition *troca = [SKTransition fadeWithDuration:0.5];
+            [self.view presentScene:Store transition:troca];
+        }];
     }
     if([node.name isEqualToString:@"JogarNode"]){
-        SKAction *action = [SKAction scaleBy:2 duration:0.1];
+        SKAction *action = [SKAction scaleBy:2 duration:1];
+        SKAction *action2 = [SKAction removeFromParent];
+        [loja runAction:action2];
         [play runAction:action completion:^{
             SKScene *Play = [[GameScene alloc] initWithSize:self.size];
             SKTransition *troca = [SKTransition fadeWithDuration:0.5];

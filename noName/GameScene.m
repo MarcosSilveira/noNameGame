@@ -21,6 +21,7 @@
     self.backgroundColor = [SKColor redColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
     self.anchorPoint = CGPointMake (0.5,0.5);
+    [self touchesEnded:nil withEvent:nil];
     
     SKNode *myWorld = [SKNode node];
     [self addChild:myWorld];
@@ -40,7 +41,10 @@
 }
 
 -(SKSpriteNode *)createCharacter{
-    SKSpriteNode *spartan = [[SKSpriteNode alloc] initWithColor:[SKColor blackColor] size:CGSizeMake(width*0.05, height*0.05)];
+    spartan = [[SKSpriteNode alloc] initWithColor:[SKColor blackColor] size:CGSizeMake(width*0.05, height*0.05)];
+    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
+    SKTexture *parado = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
+    spartan.texture = parado;
     spartan.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:spartan.size];
     spartan.name = @"spartan";
 //    spartan.position = CGPointMake(200, 200);
@@ -90,29 +94,15 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
-    SKNode *spartan = [self childNodeWithName:@"//spartan"];
+//    SKNode *spartan = [self childNodeWithName:@"//spartan"];
     SKNode *right = [self childNodeWithName:@"//right"];
     SKNode *left = [self childNodeWithName:@"//left"];
     spartan.position = CGPointMake(spartan.position.x + 100, spartan.position.y);
     left.position = CGPointMake(left.position.x + 100, left.position.y);
     right.position = CGPointMake(right.position.x + 100, right.position.y);
-}
-
-    heroi = [[SKSpriteNode alloc] initWithColor:[SKColor redColor] size:CGSizeMake(100,100)];
-    heroi.name = @"Heroi";
-    [self touchesEnded:nil withEvent:nil];
-    heroi.position= CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    
-    [self addChild:heroi];
-    [self createBotoes];
-    
-    
-    return self;
-}
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     
     //animation
-   
+    
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
     //SKTexture *f1 = [atlas textureNamed:@"WALK_RIGHT_000_.png"];
     SKTexture *f2 = [atlas textureNamed:@"WALK_RIGHT_001_.png"];
@@ -122,29 +112,20 @@
     SKTexture *f6 = [atlas textureNamed:@"WALK_RIGHT_005_.png"];
     SKTexture *f7 = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
     NSArray *monsterWalkTextures = @[f2,f3,f4,f5,f6,f7];
-    heroi.position= CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+//    spartan.position= CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     
-    [heroi runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:monsterWalkTextures timePerFrame:0.1f]]];
-  
-    
-    //end of animation
-    
-}
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    
-    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
-    SKTexture *parado = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
-    heroi.texture = parado;
-    
-    [heroi removeAllActions];
-    
+    [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:monsterWalkTextures timePerFrame:0.1f]]];
 }
 
--(void) createBotoes{
-    SKSpriteNode *direita = [[SKSpriteNode alloc] initWithColor:[SKColor redColor] size:CGSizeMake(50, 50)];
-    direita.name = @"BotaoDireita";
-    direita.position = CGPointMake(direita.size.width/2, direita.size.height*2);
-    [self addChild:direita];
     
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+        
+    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
+    SKTexture *parado = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
+    spartan.texture = parado;
+        
+    [spartan removeAllActions];
+        
 }
+
 @end
