@@ -96,6 +96,7 @@
 
 - (void)touchesBegan:(NSSet *) touches withEvent:(UIEvent *)event
 {
+    NSLog(@"toq");
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
@@ -116,6 +117,7 @@
         [left runAction:[SKAction repeatActionForever:moveRight]];
         [right runAction:[SKAction repeatActionForever:moveRight]];
         [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:monsterWalkTextures timePerFrame:0.1f]]];
+
     }
 
     if ([node.name isEqualToString:@"Attack"]) {
