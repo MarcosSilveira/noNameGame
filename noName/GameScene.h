@@ -13,6 +13,7 @@
     SKSpriteNode *spartan;
     SKSpriteNode *right;
     SKSpriteNode *left;
+    SKSpriteNode *attack;
 }
 
 @end

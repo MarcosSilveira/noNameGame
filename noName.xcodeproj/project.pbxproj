@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D266EF818EC87F40018D2C8 /* ATACK_RIGHT.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8D266EF718EC87F40018D2C8 /* ATACK_RIGHT.atlas */; };
+		8D266EFA18EC8A2E0018D2C8 /* WALK_LEFT.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8D266EF918EC8A2E0018D2C8 /* WALK_LEFT.atlas */; };
 		8D47FF1118EB3BC9002C8D1C /* WALK_RIGHT.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8D47FF1018EB3BC9002C8D1C /* WALK_RIGHT.atlas */; };
 		8D5CABBB18E9E4B500FDFDF1 /* grecia.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D5CABBA18E9E4B500FDFDF1 /* grecia.jpg */; };
 		8DA59F2318EB2D630017DCFD /* StoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA59F2218EB2D630017DCFD /* StoreScene.m */; };
@@ -40,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8D266EF718EC87F40018D2C8 /* ATACK_RIGHT.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ATACK_RIGHT.atlas; sourceTree = "<group>"; };
+		8D266EF918EC8A2E0018D2C8 /* WALK_LEFT.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = WALK_LEFT.atlas; sourceTree = "<group>"; };
 		8D47FF1018EB3BC9002C8D1C /* WALK_RIGHT.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = WALK_RIGHT.atlas; sourceTree = "<group>"; };
 		8D5CABBA18E9E4B500FDFDF1 /* grecia.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grecia.jpg; sourceTree = "<group>"; };
 		8DA59F2118EB2D630017DCFD /* StoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreScene.h; sourceTree = "<group>"; };
@@ -98,6 +102,8 @@
 		8DAC9A7018E098A7000A016F = {
 			isa = PBXGroup;
 			children = (
+				8D266EF918EC8A2E0018D2C8 /* WALK_LEFT.atlas */,
+				8D266EF718EC87F40018D2C8 /* ATACK_RIGHT.atlas */,
 				8D47FF1018EB3BC9002C8D1C /* WALK_RIGHT.atlas */,
 				8DAC9A8418E098A7000A016F /* noName */,
 				8DAC9AA818E098A7000A016F /* noNameTests */,
@@ -233,7 +239,7 @@
 				ORGANIZATIONNAME = "Marcos Sokolowski";
 				TargetAttributes = {
 					8DAC9A7818E098A7000A016F = {
-						DevelopmentTeam = 4452968868;
+						DevelopmentTeam = T5N5TT4E82;
 					};
 					8DAC9AA018E098A7000A016F = {
 						TestTargetID = 8DAC9A7818E098A7000A016F;
@@ -264,7 +270,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D266EFA18EC8A2E0018D2C8 /* WALK_LEFT.atlas in Resources */,
 				8DAC9A8918E098A7000A016F /* InfoPlist.strings in Resources */,
+				8D266EF818EC87F40018D2C8 /* ATACK_RIGHT.atlas in Resources */,
 				8D47FF1118EB3BC9002C8D1C /* WALK_RIGHT.atlas in Resources */,
 				8D5CABBB18E9E4B500FDFDF1 /* grecia.jpg in Resources */,
 				8DAC9A9C18E098A7000A016F /* Images.xcassets in Resources */,
