@@ -71,7 +71,7 @@
 }
 
 -(SKSpriteNode *)createRightButton{
-    SKSpriteNode *right = [[SKSpriteNode alloc] initWithColor:[SKColor grayColor] size:CGSizeMake(width*0.06, width*0.06)];
+    right = [[SKSpriteNode alloc] initWithColor:[SKColor grayColor] size:CGSizeMake(width*0.06, width*0.06)];
     right.name = @"right";
     right.position = CGPointMake(width/8-width/2, right.size.height/2-height/2);
     
@@ -79,7 +79,7 @@
 }
 
 -(SKSpriteNode *)createLeftButton{
-    SKSpriteNode *left = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(width*0.06, width*0.06)];
+    left = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(width*0.06, width*0.06)];
     left.name = @"left";
     left.position = CGPointMake(left.size.width/2-width/2, left.size.height/2-height/2);
     
@@ -94,27 +94,25 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
-//    SKNode *spartan = [self childNodeWithName:@"//spartan"];
-    SKNode *right = [self childNodeWithName:@"//right"];
-    SKNode *left = [self childNodeWithName:@"//left"];
-    spartan.position = CGPointMake(spartan.position.x + 100, spartan.position.y);
-    left.position = CGPointMake(left.position.x + 100, left.position.y);
-    right.position = CGPointMake(right.position.x + 100, right.position.y);
+    if([node.name isEqualToString:(@"right")]){
+        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
+        //SKTexture *f1 = [atlas textureNamed:@"WALK_RIGHT_000_.png"];
+        SKTexture *f2 = [atlas textureNamed:@"WALK_RIGHT_001_.png"];
+        SKTexture *f3 = [atlas textureNamed:@"WALK_RIGHT_002_.png"];
+        SKTexture *f4 = [atlas textureNamed:@"WALK_RIGHT_003_.png"];
+        SKTexture *f5 = [atlas textureNamed:@"WALK_RIGHT_004_.png"];
+        SKTexture *f6 = [atlas textureNamed:@"WALK_RIGHT_005_.png"];
+        SKTexture *f7 = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
+        NSArray *monsterWalkTextures = @[f2,f3,f4,f5,f6,f7];
+        SKAction *moveRight = [SKAction moveByX:8.5 y:0 duration:0.1];
+        
+        [spartan runAction:[SKAction repeatActionForever:moveRight]];
+        [left runAction:[SKAction repeatActionForever:moveRight]];
+        [right runAction:[SKAction repeatActionForever:moveRight]];
+        [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:monsterWalkTextures timePerFrame:0.1f]]];
+    }
+
     
-    //animation
-    
-    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
-    //SKTexture *f1 = [atlas textureNamed:@"WALK_RIGHT_000_.png"];
-    SKTexture *f2 = [atlas textureNamed:@"WALK_RIGHT_001_.png"];
-    SKTexture *f3 = [atlas textureNamed:@"WALK_RIGHT_002_.png"];
-    SKTexture *f4 = [atlas textureNamed:@"WALK_RIGHT_003_.png"];
-    SKTexture *f5 = [atlas textureNamed:@"WALK_RIGHT_004_.png"];
-    SKTexture *f6 = [atlas textureNamed:@"WALK_RIGHT_005_.png"];
-    SKTexture *f7 = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
-    NSArray *monsterWalkTextures = @[f2,f3,f4,f5,f6,f7];
-//    spartan.position= CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    
-    [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:monsterWalkTextures timePerFrame:0.1f]]];
 }
 
     
@@ -123,8 +121,10 @@
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
     SKTexture *parado = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
     spartan.texture = parado;
-        
+    
     [spartan removeAllActions];
+    [left removeAllActions];
+    [right removeAllActions];
         
 }
 

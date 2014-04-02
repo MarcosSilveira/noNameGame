@@ -11,6 +11,8 @@
 @interface GameScene : SKScene
 {
     SKSpriteNode *spartan;
+    SKSpriteNode *right;
+    SKSpriteNode *left;
 }
 
 @end
