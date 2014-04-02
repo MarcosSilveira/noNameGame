@@ -14,6 +14,7 @@
     SKSpriteNode *right;
     SKSpriteNode *left;
     SKSpriteNode *attack;
+    BOOL esquerda;
 }
 
 @end
