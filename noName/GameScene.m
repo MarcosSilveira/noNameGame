@@ -154,21 +154,39 @@
     }
 
     if ([node.name isEqualToString:@"Attack"]) {
+        if(esquerda)
+        {
+            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ATTACK_LEFT"];
+            SKTexture *f1 = [atlas textureNamed:@"ATTACK_LEFT_001.png"];
+            SKTexture *f2 = [atlas textureNamed:@"ATTACK_LEFT_002.png"];
+            NSArray *spartanAttackTextures = @[f1, f2];
+            
+            [self throwProjectile:spartan.position];
+            [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
+        
+        }
+        else{
         SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ATACK_RIGHT"];
         SKTexture *f1 = [atlas textureNamed:@"ATTACK_RIGHT_001.png"];
         SKTexture *f2 = [atlas textureNamed:@"ATTACK_RIGHT_002.png"];
+            NSArray *spartanAttackTextures = @[f1, f2];
+            
+            [self throwProjectile:spartan.position];
+            [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
+        }
 
-        NSArray *spartanAttackTextures = @[f1, f2];
 
-        [self throwProjectile:spartan.position];
-        [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
     }
     if ([node.name isEqualToString:@"left"]) {
         esquerda = YES;
         SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
-        SKTexture *f1 = [atlas textureNamed:@"WAlk_LEFT_001-TEST1.png"];
-        SKTexture *f2 = [atlas textureNamed:@"WAlk_LEFT_001-TEST2.png"];
-        NSArray *spartanMoveLeft = @[f1];
+        SKTexture *f1 = [atlas textureNamed:@"WALK_LEFT_001.png"];
+        SKTexture *f2 = [atlas textureNamed:@"WALK_LEFT_002.png"];
+        SKTexture *f3 = [atlas textureNamed:@"WALK_LEFT_003.png"];
+        SKTexture *f4 = [atlas textureNamed:@"WALK_LEFT_004.png"];
+        SKTexture *f5 = [atlas textureNamed:@"WALK_LEFT_005.png"];
+        SKTexture *f6 = [atlas textureNamed:@"WALK_LEFT_006.png"];
+        NSArray *spartanMoveLeft = @[f1,f2,f3,f4,f5,f6];
         SKAction *moveLeft = [SKAction moveByX:-8.5 y:0 duration:0.1];
         [spartan runAction:[SKAction repeatActionForever:moveLeft]];
         [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:spartanMoveLeft timePerFrame:0.1f]]];
@@ -180,7 +198,7 @@
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     if (esquerda) {
         SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
-        SKTexture *parado = [atlas textureNamed:@"WAlk_LEFT_001-TEST2.png"];
+        SKTexture *parado = [atlas textureNamed:@"WALK_LEFT_006.png"];
         spartan.texture = parado;
     }
     else{
