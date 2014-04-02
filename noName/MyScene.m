@@ -8,6 +8,7 @@
 
 #import "MyScene.h"
 #import "GameScene.h"
+#import "StoreScene.h"
 
 @implementation MyScene
 
@@ -15,12 +16,11 @@
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         
-        //self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
         SKTexture *fundo = [SKTexture textureWithImageNamed:@"Grecia.jpg"];
         SKSpriteNode *fundo2 = [[SKSpriteNode alloc] initWithTexture:fundo color:nil size:CGSizeMake(self.scene.size.width, self.scene.size.height)];
         fundo2.anchorPoint = CGPointZero;
         
-        SKLabelNode *PlayLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        SKLabelNode *PlayLabel = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
         SKLabelNode *StoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         
         StoreLabel.text = @"Loja";
