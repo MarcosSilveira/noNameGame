@@ -36,7 +36,7 @@
     [camera addChild:[self initializeBackground]];
     [camera addChild:[self createRightButton]];
     [camera addChild:[self createLeftButton]];
-    
+    [self addChild:[self createAttackButton]];
     self.physicsWorld.gravity = CGVectorMake(0.0f, -1.0f);
 }
 
@@ -86,6 +86,12 @@
     return left;
 }
 
+-(SKSpriteNode *) createAttackButton{
+    attack = [[SKSpriteNode alloc] initWithColor:[UIColor redColor]size:CGSizeMake(width*0.06, width*0.06)];
+    attack.name = @"Attack";
+    attack.position = CGPointMake(width*0.5-(attack.size.width/2),-(height*0.5)+(attack.size.height/2));
+    return attack;
+}
 
 
 - (void)touchesBegan:(NSSet *) touches withEvent:(UIEvent *)event
@@ -94,26 +100,44 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
-//    SKNode *spartan = [self childNodeWithName:@"//spartan"];
-    SKNode *right = [self childNodeWithName:@"//right"];
-    SKNode *left = [self childNodeWithName:@"//left"];
-    spartan.position = CGPointMake(spartan.position.x + 100, spartan.position.y);
-    left.position = CGPointMake(left.position.x + 100, left.position.y);
-    right.position = CGPointMake(right.position.x + 100, right.position.y);
-    
-    //animation
-    
-    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
-    SKTexture *f1 = [atlas textureNamed:@"WALK_RIGHT_000_.png"];
-    SKTexture *f2 = [atlas textureNamed:@"WALK_RIGHT_001_.png"];
-    SKTexture *f3 = [atlas textureNamed:@"WALK_RIGHT_002_.png"];
-    SKTexture *f4 = [atlas textureNamed:@"WALK_RIGHT_003_.png"];
-    SKTexture *f5 = [atlas textureNamed:@"WALK_RIGHT_004_.png"];
-    SKTexture *f6 = [atlas textureNamed:@"WALK_RIGHT_005_.png"];
-    SKTexture *f7 = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
-    NSArray *monsterWalkTextures = @[f2,f3,f4,f5,f6,f7];
-//    spartan.position= CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    
+    if([node.name isEqualToString:(@"right")]){
+        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
+       SKTexture *f1 = [atlas textureNamed:@"WALK_RIGHT_000_.png"];
+        SKTexture *f2 = [atlas textureNamed:@"WALK_RIGHT_001_.png"];
+        SKTexture *f3 = [atlas textureNamed:@"WALK_RIGHT_002_.png"];
+        SKTexture *f4 = [atlas textureNamed:@"WALK_RIGHT_003_.png"];
+        SKTexture *f5 = [atlas textureNamed:@"WALK_RIGHT_004_.png"];
+        SKTexture *f6 = [atlas textureNamed:@"WALK_RIGHT_005_.png"];
+        SKTexture *f7 = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
+        NSArray *monsterWalkTextures = @[f2,f3,f4,f5,f6,f7];
+        SKAction *moveRight = [SKAction moveByX:8.5 y:0 duration:0.1];
+        
+        [spartan runAction:[SKAction repeatActionForever:moveRight]];
+        [left runAction:[SKAction repeatActionForever:moveRight]];
+        [right runAction:[SKAction repeatActionForever:moveRight]];
+        [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:monsterWalkTextures timePerFrame:0.1f]]];
+    }
+
+    if ([node.name isEqualToString:@"Attack"]) {
+        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ATACK_RIGHT"];
+        SKTexture *f1 = [atlas textureNamed:@"ATTACK_RIGHT_001.png"];
+        SKTexture *f2 = [atlas textureNamed:@"ATTACK_RIGHT_002.png"];
+
+        NSArray *spartanAttackTextures = @[f1,f2];
+
+        [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.1f]];
+    }
+    if ([node.name isEqualToString:@"left"]) {
+        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
+        SKTexture *f1 = [atlas textureNamed:@"WAlk_LEFT_001-TEST1.png"];
+        SKTexture *f2 = [atlas textureNamed:@"WAlk_LEFT_001-TEST2.png"];
+        NSArray *spartanMoveLeft = @[f1];
+        SKAction *moveLeft = [SKAction moveByX:-8.5 y:0 duration:0.1];
+        [spartan runAction:[SKAction repeatActionForever:moveLeft]];
+        [left runAction:[SKAction repeatActionForever:moveLeft]];
+        [right runAction:[SKAction repeatActionForever:moveLeft]];
+        [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:spartanMoveLeft timePerFrame:0.1f]]];
+    }
 }
 
     
