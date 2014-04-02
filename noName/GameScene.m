@@ -36,8 +36,10 @@
     [camera addChild:[self createCharacter]];
     
     [myWorld addChild:[self platformGG]];
+    [camera addChild:[self creatorBlock]];
     [self addChild:[self createRightButton]];
     [self addChild:[self createLeftButton]];
+    [self addChild:[self createAttackButton]];
     
     self.physicsWorld.gravity = CGVectorMake(0.0f, -1.0f);
 }
@@ -47,7 +49,8 @@
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
     SKTexture *parado = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
     spartan.texture = parado;
-    spartan.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:spartan.size];
+    CGSize hue = CGSizeMake(spartan.size.width, spartan.size.height-15);
+    spartan.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:hue];
     spartan.name = @"spartan";
 //    spartan.position = CGPointMake(200, 200);
     spartan.zPosition = 1;
@@ -73,7 +76,7 @@
 }
 
 -(SKSpriteNode *)createRightButton{
-    right = [[SKSpriteNode alloc] initWithColor:[SKColor grayColor] size:CGSizeMake(width*0.06, width*0.06)];
+    right = [[SKSpriteNode alloc] initWithColor:[SKColor grayColor] size:CGSizeMake(width*0.08, width*0.08)];
     right.name = @"right";
     right.position = CGPointMake(width/8-width/2, right.size.height/2-height/2);
     
@@ -81,7 +84,7 @@
 }
 
 -(SKSpriteNode *)createLeftButton{
-    left = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(width*0.06, width*0.06)];
+    left = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(width*0.08, width*0.08)];
     left.name = @"left";
     left.position = CGPointMake(left.size.width/2-width/2, left.size.height/2-height/2);
     
@@ -97,6 +100,31 @@
     
     return platform;
 }
+    
+-(SKSpriteNode *)createAttackButton{
+    attack = [[SKSpriteNode alloc] initWithColor:[UIColor redColor]size:CGSizeMake(width*0.08, width*0.08)];
+    attack.name = @"Attack";
+    attack.position = CGPointMake(width*0.5-(attack.size.width/2),-(height*0.5)+(attack.size.height/2));
+    return attack;
+}
+
+-(SKSpriteNode *)creatorBlock{
+    SKSpriteNode *block = [[SKSpriteNode alloc] initWithColor:[SKColor brownColor] size:CGSizeMake(width/7, height/7)];
+    block.name = @"block";
+    block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size];
+    block.position = CGPointMake(0, 0);
+    
+    return block;
+}
+
+-(void)throwProjectile:(CGPoint)position{
+    SKSpriteNode *projectile = [[SKSpriteNode alloc] initWithColor:[SKColor brownColor] size:CGSizeMake(10, 10)];
+    projectile.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:projectile.size];
+    projectile.physicsBody.mass = 9001;
+    [self addChild:projectile];
+    projectile.position = position;
+    [projectile.physicsBody applyImpulse:CGVectorMake(100, 20)];
+}
 
 
 
@@ -108,7 +136,7 @@
     
     if([node.name isEqualToString:(@"right")]){
         SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
-       SKTexture *f1 = [atlas textureNamed:@"WALK_RIGHT_000_.png"];
+        SKTexture *f1 = [atlas textureNamed:@"WALK_RIGHT_000_.png"];
         SKTexture *f2 = [atlas textureNamed:@"WALK_RIGHT_001_.png"];
         SKTexture *f3 = [atlas textureNamed:@"WALK_RIGHT_002_.png"];
         SKTexture *f4 = [atlas textureNamed:@"WALK_RIGHT_003_.png"];
@@ -127,9 +155,10 @@
         SKTexture *f1 = [atlas textureNamed:@"ATTACK_RIGHT_001.png"];
         SKTexture *f2 = [atlas textureNamed:@"ATTACK_RIGHT_002.png"];
 
-        NSArray *spartanAttackTextures = @[f1,f2];
+        NSArray *spartanAttackTextures = @[f1, f2];
 
-        [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.1f]];
+        [self throwProjectile:spartan.position];
+        [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
     }
     if ([node.name isEqualToString:@"left"]) {
         SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
@@ -138,10 +167,9 @@
         NSArray *spartanMoveLeft = @[f1];
         SKAction *moveLeft = [SKAction moveByX:-8.5 y:0 duration:0.1];
         [spartan runAction:[SKAction repeatActionForever:moveLeft]];
-        [left runAction:[SKAction repeatActionForever:moveLeft]];
-        [right runAction:[SKAction repeatActionForever:moveLeft]];
         [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:spartanMoveLeft timePerFrame:0.1f]]];
     }
+    
 }
 
     
