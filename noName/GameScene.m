@@ -117,13 +117,13 @@
     return block;
 }
 
--(void)throwProjectile:(CGPoint)position{
+-(void)throwBiribinha{
     SKSpriteNode *projectile = [[SKSpriteNode alloc] initWithColor:[SKColor brownColor] size:CGSizeMake(10, 10)];
     projectile.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:projectile.size];
-    projectile.physicsBody.mass = 9001;
+    projectile.position = spartan.position;
     [self addChild:projectile];
-    projectile.position = position;
-    [projectile.physicsBody applyImpulse:CGVectorMake(100, 20)];
+    projectile.zPosition = 1;
+    [projectile.physicsBody applyImpulse:CGVectorMake(10, 5)];
 }
 
 
@@ -150,14 +150,14 @@
         [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:monsterWalkTextures timePerFrame:0.1f]]];
     }
 
-    if ([node.name isEqualToString:@"Attack"]) {
+    if ([node.name isEqualToString:@"Attack"]){
         SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ATACK_RIGHT"];
         SKTexture *f1 = [atlas textureNamed:@"ATTACK_RIGHT_001.png"];
         SKTexture *f2 = [atlas textureNamed:@"ATTACK_RIGHT_002.png"];
 
         NSArray *spartanAttackTextures = @[f1, f2];
 
-        [self throwProjectile:spartan.position];
+        [self throwBiribinha];
         [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
     }
     if ([node.name isEqualToString:@"left"]) {
