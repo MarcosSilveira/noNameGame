@@ -52,11 +52,11 @@
     SKNode *play = [self childNodeWithName:@"JogarNode"];
     
     if([node.name isEqualToString:@"LojaNode"]){
-        SKAction *action = [SKAction scaleBy:2 duration:3];
+        SKAction *action = [SKAction scaleBy:2 duration:1];
         [loja runAction:action];
     }
     if([node.name isEqualToString:@"JogarNode"]){
-        SKAction *action = [SKAction scaleBy:2 duration:3];
+        SKAction *action = [SKAction scaleBy:2 duration:0.1];
         [play runAction:action completion:^{
             SKScene *Play = [[GameScene alloc] initWithSize:self.size];
             SKTransition *troca = [SKTransition fadeWithDuration:0.5];
