@@ -14,9 +14,13 @@
     SKSpriteNode *right;
     SKSpriteNode *left;
     SKSpriteNode *attack;
+    SKSpriteNode *attack2;
     SKSpriteNode *projectile;
     SKNode *camera;
     BOOL esquerda;
+    NSInteger lancas;
+    SKLabelNode *lancasCount;
+    NSString *aux;
 }
 
 @end
