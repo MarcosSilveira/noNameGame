@@ -16,7 +16,7 @@
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         
-        SKTexture *fundo = [SKTexture textureWithImageNamed:@"great-fire-painting-b.png"];
+        SKTexture *fundo = [SKTexture textureWithImageNamed:@"grecia.png"];
         SKSpriteNode *fundo2 = [[SKSpriteNode alloc] initWithTexture:fundo color:nil size:CGSizeMake(self.scene.size.width, self.scene.size.height)];
         fundo2.anchorPoint = CGPointZero;
         

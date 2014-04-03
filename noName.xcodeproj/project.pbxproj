@@ -30,7 +30,7 @@
 		8DAC9AAD18E098A7000A016F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DAC9AAB18E098A7000A016F /* InfoPlist.strings */; };
 		8DAC9AAF18E098A7000A016F /* noNameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DAC9AAE18E098A7000A016F /* noNameTests.m */; };
 		A03ACC6A18EDC96E0007299C /* SPEAR.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A03ACC6918EDC96E0007299C /* SPEAR.atlas */; };
-		A03ACC6C18EDCFBA0007299C /* great-fire-painting-b.png in Resources */ = {isa = PBXBuildFile; fileRef = A03ACC6B18EDCFBA0007299C /* great-fire-painting-b.png */; };
+		A03ACC6E18EDD2B10007299C /* grecia.png in Resources */ = {isa = PBXBuildFile; fileRef = A03ACC6D18EDD2B10007299C /* grecia.png */; };
 		A08E389218E9EC2800C27179 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A08E389118E9EC2800C27179 /* GameScene.m */; };
 /* End PBXBuildFile section */
 
@@ -75,7 +75,7 @@
 		8DAC9AAC18E098A7000A016F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8DAC9AAE18E098A7000A016F /* noNameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = noNameTests.m; sourceTree = "<group>"; };
 		A03ACC6918EDC96E0007299C /* SPEAR.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = SPEAR.atlas; sourceTree = "<group>"; };
-		A03ACC6B18EDCFBA0007299C /* great-fire-painting-b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "great-fire-painting-b.png"; sourceTree = "<group>"; };
+		A03ACC6D18EDD2B10007299C /* grecia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grecia.png; sourceTree = "<group>"; };
 		A08E389018E9EC2800C27179 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		A08E389118E9EC2800C27179 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,7 +156,7 @@
 				A08E389118E9EC2800C27179 /* GameScene.m */,
 				8DA59F2118EB2D630017DCFD /* StoreScene.h */,
 				8DA59F2218EB2D630017DCFD /* StoreScene.m */,
-				A03ACC6B18EDCFBA0007299C /* great-fire-painting-b.png */,
+				A03ACC6D18EDD2B10007299C /* grecia.png */,
 				8DAC9A9B18E098A7000A016F /* Images.xcassets */,
 				8DAC9A8518E098A7000A016F /* Supporting Files */,
 			);
@@ -279,7 +279,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A03ACC6C18EDCFBA0007299C /* great-fire-painting-b.png in Resources */,
+				A03ACC6E18EDD2B10007299C /* grecia.png in Resources */,
 				8DAC9A8918E098A7000A016F /* InfoPlist.strings in Resources */,
 				A03ACC6A18EDC96E0007299C /* SPEAR.atlas in Resources */,
 				8D266EF818EC87F40018D2C8 /* ATACK_RIGHT.atlas in Resources */,
