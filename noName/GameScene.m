@@ -8,6 +8,11 @@
 
 #import "GameScene.h"
 
+const uint32_t SPARTAN = 0x1 << 0;
+const uint32_t BIRIBINHA = 0x1 << 1;
+const uint32_t ROCK = 0x1 << 2;
+const uint32_t ENEMY = 0x1 << 4;
+
 @implementation GameScene{
     int width;
     int height;
@@ -28,11 +33,11 @@
     
     myWorld.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     
-    SKNode *camera = [SKNode node];
+    camera = [SKNode node];
     camera.name = @"camera";
     [myWorld addChild:camera];
     
-    [camera addChild:[self initializeBackground]];
+    [myWorld addChild:[self initializeBackground]];
     [camera addChild:[self createCharacter]];
     
     [myWorld addChild:[self platformGG]];
@@ -52,14 +57,16 @@
     CGSize hue = CGSizeMake(spartan.size.width, spartan.size.height-15);
     spartan.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:hue];
     spartan.name = @"spartan";
-//    spartan.position = CGPointMake(200, 200);
     spartan.zPosition = 1;
+    spartan.physicsBody.categoryBitMask = SPARTAN;
+    spartan.physicsBody.collisionBitMask = SPARTAN | ROCK;
+    spartan.physicsBody.contactTestBitMask = ROCK;
     
     return spartan;
 }
 
 -(SKSpriteNode *)initializeBackground{
-    SKTexture *fundo = [SKTexture textureWithImageNamed:@"grecia.jpg"];
+    SKTexture *fundo = [SKTexture textureWithImageNamed:@"great-fire-painting-b.png"];
     SKSpriteNode *fundo2 = [[SKSpriteNode alloc] initWithTexture:fundo color:nil size:CGSizeMake(self.scene.size.width, self.scene.size.height)];
     fundo2.anchorPoint = CGPointMake (0.5,0.5);
     return fundo2;
@@ -96,6 +103,9 @@
     platform.name = @"platform";
     platform.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:platform.size];
     platform.physicsBody.dynamic = NO;
+    platform.physicsBody.categoryBitMask = ROCK;
+    platform.physicsBody.collisionBitMask = SPARTAN | BIRIBINHA | ROCK;
+    platform.physicsBody.contactTestBitMask = SPARTAN;
     platform.position = CGPointMake(0, -height/2+(platform.size.height/2));
     
     return platform;
@@ -110,20 +120,44 @@
 
 -(SKSpriteNode *)creatorBlock{
     SKSpriteNode *block = [[SKSpriteNode alloc] initWithColor:[SKColor brownColor] size:CGSizeMake(width/7, height/7)];
-    block.name = @"block";
+    block.name = @"enemy";
     block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size];
+    block.physicsBody.categoryBitMask = ENEMY;
+    block.physicsBody.collisionBitMask = SPARTAN | BIRIBINHA | ROCK;
+    block.physicsBody.contactTestBitMask = SPARTAN | BIRIBINHA | ROCK;
     block.position = CGPointMake(0, 0);
     
     return block;
 }
 
--(void)throwBiribinha{
-    SKSpriteNode *projectile = [[SKSpriteNode alloc] initWithColor:[SKColor brownColor] size:CGSizeMake(10, 10)];
+-(void)throwBiribinhaRight{
+    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEAR"];
+    SKTexture *spear = [atlas textureNamed:@"spearToRight.png"];
+    projectile = [[SKSpriteNode alloc] initWithTexture:spear];
     projectile.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:projectile.size];
     projectile.position = spartan.position;
-    [self addChild:projectile];
+    projectile.name = @"spear";
+    [camera addChild:projectile];
     projectile.zPosition = 1;
-    [projectile.physicsBody applyImpulse:CGVectorMake(10, 5)];
+    projectile.physicsBody.categoryBitMask = BIRIBINHA;
+    projectile.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
+    projectile.physicsBody.contactTestBitMask = ROCK;
+    [projectile.physicsBody applyImpulse:CGVectorMake(10, 0)];
+}
+
+-(void)throwBiribinhaLeft{
+    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEAR"];
+    SKTexture *spear = [atlas textureNamed:@"spearToLeft.png"];
+    projectile = [[SKSpriteNode alloc] initWithTexture:spear];
+    projectile.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:projectile.size];
+    projectile.position = spartan.position;
+    projectile.name = @"spear";
+    [camera addChild:projectile];
+    projectile.zPosition = 1;
+    projectile.physicsBody.categoryBitMask = BIRIBINHA;
+    projectile.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
+    projectile.physicsBody.contactTestBitMask = ROCK;
+    [projectile.physicsBody applyImpulse:CGVectorMake(-10, 0)];
 }
 
 
@@ -161,7 +195,7 @@
             SKTexture *f2 = [atlas textureNamed:@"ATTACK_LEFT_002.png"];
             NSArray *spartanAttackTextures = @[f1, f2];
             
-            [self throwBiribinha];
+            [self throwBiribinhaLeft];
             [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
             
         }
@@ -171,7 +205,7 @@
             SKTexture *f2 = [atlas textureNamed:@"ATTACK_RIGHT_002.png"];
             NSArray *spartanAttackTextures = @[f1, f2];
             
-            [self throwBiribinha];
+            [self throwBiribinhaRight];
             [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
         }
         
@@ -209,6 +243,21 @@
     }
     
     [spartan removeAllActions];
+}
+
+-(void)didBeginContact:(SKPhysicsContact *)contact
+{
+    NSLog(@"body A %@",contact.bodyA.node.name);
+    NSLog(@"body B %@",contact.bodyB.node.name);
+    if([contact.bodyB.node.name isEqualToString:@"spear"]){
+        [contact.bodyB.node removeFromParent];
+    }
+    if([contact.bodyA.node.name isEqualToString:@"spear"]){
+        [contact.bodyA.node removeFromParent];
+    }
+    if([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"spear"]){
+        [contact.bodyA.node removeFromParent];
+    }
 }
 
 @end

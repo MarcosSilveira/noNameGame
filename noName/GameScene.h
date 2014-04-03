@@ -14,6 +14,8 @@
     SKSpriteNode *right;
     SKSpriteNode *left;
     SKSpriteNode *attack;
+    SKSpriteNode *projectile;
+    SKNode *camera;
     BOOL esquerda;
 }
 
