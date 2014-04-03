@@ -220,10 +220,21 @@ const uint32_t ENEMY = 0x1 << 4;
         else if ([node.name isEqualToString:@"Attack2"]){
             if (esquerda) {
                 SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEARLAUNCH"];
-                SKTexture *f1 = [atlas textureNamed:@"lancandoSpear-LEFT.pbg"];
+                SKTexture *f1 = [atlas textureNamed:@"lancandoSpear-LEFT.png"];
                 NSArray *spartanAttackTextures = @[f1];
                 [self throwBiribinhaLeft];
+                if (lancas>0)
                 [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
+                else attack2.color = [UIColor grayColor];
+            }
+            else{
+                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEARLAUNCH"];
+                SKTexture *f1 = [atlas textureNamed:@"lancandoSpear-RIGHT.png"];
+                NSArray *spartanAttackTextures = @[f1];
+                [self throwBiribinhaRight];
+                if (lancas>0)
+                [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
+                else attack2.color = [UIColor grayColor];
             }
         }
         
@@ -236,8 +247,8 @@ const uint32_t ENEMY = 0x1 << 4;
                 SKTexture *f2 = [atlas textureNamed:@"ATTACK_LEFT_002.png"];
                 NSArray *spartanAttackTextures = @[f1, f2];
                 
-                [self throwBiribinhaLeft];
-                [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
+               // [self throwBiribinhaLeft];
+                    [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
                 
             }
             else{
@@ -246,8 +257,8 @@ const uint32_t ENEMY = 0x1 << 4;
                 SKTexture *f2 = [atlas textureNamed:@"ATTACK_RIGHT_002.png"];
                 NSArray *spartanAttackTextures = @[f1, f2];
                 
-                [self throwBiribinhaRight];
-                [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
+                    [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
+                
             }
             
             
