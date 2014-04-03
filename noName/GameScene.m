@@ -110,7 +110,8 @@ const uint32_t ENEMY = 0x1 << 4;
 }
 
 -(SKSpriteNode *)platformGG{
-    SKSpriteNode *platform = [[SKSpriteNode alloc] initWithColor:[SKColor brownColor] size:CGSizeMake(width, height/7)];
+    SKTexture *ground = [SKTexture textureWithImageNamed:@"Ground.png"];
+    SKSpriteNode *platform = [[SKSpriteNode alloc] initWithTexture:ground color:[SKColor blackColor] size:CGSizeMake(width, height/7)];
     platform.name = @"platform";
     platform.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:platform.size];
     platform.physicsBody.dynamic = NO;
@@ -125,7 +126,7 @@ const uint32_t ENEMY = 0x1 << 4;
 -(SKSpriteNode *)creatAtackButton2{
     attack2 = [[SKSpriteNode alloc] initWithColor:[UIColor orangeColor]size:CGSizeMake(width*0.08, width*0.08)];
     attack2.name = @"Attack2";
-    attack2.position = CGPointMake(width*0.8-(attack2.size.width/2),-(height*0.5)+(attack2.size.height/2));
+    attack2.position = CGPointMake(attack.position.x-attack.size.width-attack.size.width/2,-(height*0.5)+(attack2.size.height/2));
     return attack2;
 }
     
