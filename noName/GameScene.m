@@ -47,6 +47,7 @@ const uint32_t ENEMY = 0x1 << 4;
     [self addChild:[self createLeftButton]];
     [self addChild:[self createAttackButton]];
     [self addChild:[self creatAtackButton2]];
+    [self addChild:[self createDefenseButton]];
     
     self.physicsWorld.gravity = CGVectorMake(0.0f, -1.0f);
     
@@ -101,6 +102,7 @@ const uint32_t ENEMY = 0x1 << 4;
     return right;
 }
 
+
 -(SKSpriteNode *)createLeftButton{
     left = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(width*0.08, width*0.08)];
     left.name = @"left";
@@ -135,6 +137,14 @@ const uint32_t ENEMY = 0x1 << 4;
     attack.name = @"Attack";
     attack.position = CGPointMake(width*0.5-(attack.size.width/2),-(height*0.5)+(attack.size.height/2));
     return attack;
+}
+
+-(SKSpriteNode *)createDefenseButton{
+    defense = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(width*0.08,width*0.08)];
+    defense.name = @"defense";
+    defense.position = CGPointMake(attack2.position.x-attack2.size.width-attack2.size.width/2,-(height*0.5)+(defense.size.height/2));
+    
+    return defense;
 }
 
 -(SKSpriteNode *)creatorBlock{
@@ -246,6 +256,7 @@ const uint32_t ENEMY = 0x1 << 4;
         }
         
         
+        
         else if ([node.name isEqualToString:@"Attack"]) {
             if(esquerda)
             {
@@ -285,6 +296,24 @@ const uint32_t ENEMY = 0x1 << 4;
             [spartan runAction:[SKAction repeatActionForever:moveLeft]];
             [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:spartanMoveLeft timePerFrame:0.1f]]];
         }
+        else if([node.name isEqualToString:@"defense"]){
+            if (esquerda) {
+                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPARTAN_DEF"];
+                SKTexture *f1 = [atlas textureNamed:@"DEF_LEFT.png"];
+                NSArray *spartanDefenseRight = @[f1];
+                [spartan runAction:[SKAction animateWithTextures:spartanDefenseRight timePerFrame:0.01f]];
+                defendendo = YES;
+                
+            }
+            else{
+                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPARTAN_DEF"];
+                SKTexture *f1 = [atlas textureNamed:@"DEF_RIGHT.png"];
+                NSArray *spartanDefenseLeft = @[f1];
+                [spartan runAction:[SKAction animateWithTextures:spartanDefenseLeft timePerFrame:0.01f]];
+                defendendo = YES;
+                
+            }
+        }
     }
     
 }
@@ -310,7 +339,7 @@ const uint32_t ENEMY = 0x1 << 4;
     SKTexture *parado = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
     spartan.texture = parado;
     }
-    
+    defendendo = NO;
     [spartan removeAllActions];
 }
 
