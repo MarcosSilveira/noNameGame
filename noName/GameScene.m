@@ -138,7 +138,7 @@ const uint32_t ENEMY = 0x1 << 4;
 }
 
 -(SKSpriteNode *)creatorBlock{
-    SKSpriteNode *block = [[SKSpriteNode alloc] initWithColor:[SKColor brownColor] size:CGSizeMake(width/7, height/7)];
+    SKSpriteNode *block = [[SKSpriteNode alloc] initWithColor:[SKColor brownColor] size:CGSizeMake(width*0.08, height*0.08)];
     block.name = @"enemy";
     block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size];
     block.physicsBody.categoryBitMask = ENEMY;
@@ -146,6 +146,9 @@ const uint32_t ENEMY = 0x1 << 4;
     block.physicsBody.contactTestBitMask = SPARTAN | BIRIBINHA | ROCK;
     block.position = CGPointMake(width/3, height/3);
     block.zPosition = 1;
+    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
+    SKTexture *enemyLT = [atlas textureNamed:@"inimigo1_03_L_parado.png"];
+    block.texture = enemyLT;
     
     return block;
 }
@@ -190,7 +193,11 @@ const uint32_t ENEMY = 0x1 << 4;
         lancasCount.fontColor = [UIColor redColor];
 }
 
-
+-(void)verificaAtaque{
+    spartan.physicsBody.collisionBitMask = BIRIBINHA | ROCK | ENEMY;
+    spartan.physicsBody.contactTestBitMask= ENEMY;
+    
+}
 - (void)touchesBegan:(NSSet *) touches withEvent:(UIEvent *)event
 {
     NSLog(@"toq");
@@ -246,7 +253,7 @@ const uint32_t ENEMY = 0x1 << 4;
                 SKTexture *f1 = [atlas textureNamed:@"ATTACK_LEFT_001.png"];
                 SKTexture *f2 = [atlas textureNamed:@"ATTACK_LEFT_002.png"];
                 NSArray *spartanAttackTextures = @[f1, f2];
-                
+                [self verificaAtaque];
                // [self throwBiribinhaLeft];
                     [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
                 
