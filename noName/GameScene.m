@@ -12,6 +12,7 @@ const uint32_t SPARTAN = 0x1 << 0;
 const uint32_t BIRIBINHA = 0x1 << 1;
 const uint32_t ROCK = 0x1 << 2;
 const uint32_t ENEMY = 0x1 << 4;
+const uint32_t ATTACK = 0x1 << 8;
 
 @implementation GameScene{
     int width;
@@ -143,7 +144,7 @@ const uint32_t ENEMY = 0x1 << 4;
     block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size];
     block.physicsBody.categoryBitMask = ENEMY;
     block.physicsBody.collisionBitMask = SPARTAN | ROCK;
-    block.physicsBody.contactTestBitMask = SPARTAN | BIRIBINHA | ROCK;
+    block.physicsBody.contactTestBitMask = SPARTAN | BIRIBINHA | ROCK | ATTACK;
     block.position = CGPointMake(width/3, height/3);
     block.zPosition = 1;
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
@@ -193,11 +194,26 @@ const uint32_t ENEMY = 0x1 << 4;
         lancasCount.fontColor = [UIColor redColor];
 }
 
--(void)verificaAtaque{
-    spartan.physicsBody.collisionBitMask = BIRIBINHA | ROCK | ENEMY;
-    spartan.physicsBody.contactTestBitMask= ENEMY;
+-(void)attackActionRight{
+    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEAR"];
+    SKTexture *spear = [atlas textureNamed:@"spearToRight.png"];
+    attackRegion = [[SKSpriteNode alloc] initWithTexture:spear];
+    attackRegion.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:attackRegion.size];
+    attackRegion.position = CGPointMake(spartan.position.x, spartan.position.y);
+    attackRegion.name = @"attack";
+    [camera addChild:attackRegion];
+    attackRegion.zPosition = 1;
+    projectile.physicsBody.categoryBitMask = ATTACK;
+    projectile.physicsBody.collisionBitMask = ATTACK | ROCK;
+    projectile.physicsBody.contactTestBitMask = ROCK;
     
 }
+
+-(void)attackActionLeft{
+    
+}
+
+
 - (void)touchesBegan:(NSSet *) touches withEvent:(UIEvent *)event
 {
     NSLog(@"toq");
@@ -253,7 +269,6 @@ const uint32_t ENEMY = 0x1 << 4;
                 SKTexture *f1 = [atlas textureNamed:@"ATTACK_LEFT_001.png"];
                 SKTexture *f2 = [atlas textureNamed:@"ATTACK_LEFT_002.png"];
                 NSArray *spartanAttackTextures = @[f1, f2];
-                [self verificaAtaque];
                // [self throwBiribinhaLeft];
                     [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
                 
@@ -264,6 +279,7 @@ const uint32_t ENEMY = 0x1 << 4;
                 SKTexture *f2 = [atlas textureNamed:@"ATTACK_RIGHT_002.png"];
                 NSArray *spartanAttackTextures = @[f1, f2];
                 
+                [self attackActionRight];
                     [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]];
                 
             }
@@ -318,16 +334,16 @@ const uint32_t ENEMY = 0x1 << 4;
 {
     NSLog(@"body A %@",contact.bodyA.node.name);
     NSLog(@"body B %@",contact.bodyB.node.name);
-    if([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"spear"]){
+    if(([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"spear"]) || ([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"attack"])){
         [contact.bodyA.node removeFromParent];
     }
-    if([contact.bodyB.node.name isEqualToString:@"enemy"] && [contact.bodyA.node.name isEqualToString:@"spear"]){
+    if(([contact.bodyB.node.name isEqualToString:@"enemy"] && [contact.bodyA.node.name isEqualToString:@"spear"]) || ([contact.bodyB.node.name isEqualToString:@"enemy"] && [contact.bodyA.node.name isEqualToString:@"attack"])){
         [contact.bodyB.node removeFromParent];
     }
-    if([contact.bodyB.node.name isEqualToString:@"spear"]){
+    if([contact.bodyB.node.name isEqualToString:@"spear"] || [contact.bodyB.node.name isEqualToString:@"attack"]){
         [contact.bodyB.node removeFromParent];
     }
-    if([contact.bodyA.node.name isEqualToString:@"spear"]){
+    if([contact.bodyA.node.name isEqualToString:@"spear"] || [contact.bodyA.node.name isEqualToString:@"attack"]){
         [contact.bodyA.node removeFromParent];
     }
     

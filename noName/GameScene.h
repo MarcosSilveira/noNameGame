@@ -16,6 +16,7 @@
     SKSpriteNode *attack;
     SKSpriteNode *attack2;
     SKSpriteNode *projectile;
+    SKSpriteNode *attackRegion;
     SKNode *camera;
     BOOL esquerda;
     NSInteger lancas;
