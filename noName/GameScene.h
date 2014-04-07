@@ -19,6 +19,7 @@
     SKSpriteNode *attackRegion;
     SKNode *camera;
     BOOL esquerda;
+    BOOL defendendo;
     NSInteger lancas;
     SKLabelNode *lancasCount;
     NSString *aux;

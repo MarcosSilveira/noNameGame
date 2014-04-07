@@ -13,6 +13,7 @@
 		8D6F788518EC999600A1F41D /* ATTACK_LEFT.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8D6F788418EC999600A1F41D /* ATTACK_LEFT.atlas */; };
 		8D6F788718EC9CBC00A1F41D /* WALK_LEFT.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8D6F788618EC9CBC00A1F41D /* WALK_LEFT.atlas */; };
 		8DA59F2318EB2D630017DCFD /* StoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA59F2218EB2D630017DCFD /* StoreScene.m */; };
+		8DA63C9B18F320230000E0AD /* SPARTAN_DEF.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8DA63C9A18F320230000E0AD /* SPARTAN_DEF.atlas */; };
 		8DAC9A7D18E098A7000A016F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DAC9A7C18E098A7000A016F /* Foundation.framework */; };
 		8DAC9A7F18E098A7000A016F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DAC9A7E18E098A7000A016F /* CoreGraphics.framework */; };
 		8DAC9A8118E098A7000A016F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DAC9A8018E098A7000A016F /* UIKit.framework */; };
@@ -56,6 +57,7 @@
 		8D6F788618EC9CBC00A1F41D /* WALK_LEFT.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = WALK_LEFT.atlas; sourceTree = "<group>"; };
 		8DA59F2118EB2D630017DCFD /* StoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreScene.h; sourceTree = "<group>"; };
 		8DA59F2218EB2D630017DCFD /* StoreScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreScene.m; sourceTree = "<group>"; };
+		8DA63C9A18F320230000E0AD /* SPARTAN_DEF.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = SPARTAN_DEF.atlas; sourceTree = "<group>"; };
 		8DAC9A7918E098A7000A016F /* noName.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = noName.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DAC9A7C18E098A7000A016F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8DAC9A7E18E098A7000A016F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -116,6 +118,7 @@
 		8DAC9A7018E098A7000A016F = {
 			isa = PBXGroup;
 			children = (
+				8DA63C9A18F320230000E0AD /* SPARTAN_DEF.atlas */,
 				8DBF9F7218EDF05E00C3032A /* ENEMY_LEFT.atlas */,
 				8DBF9F7018EDF05800C3032A /* ENEMY_RIGHT.atlas */,
 				8DBF9F6E18EDEA4400C3032A /* SPEARLAUNCH.atlas */,
@@ -305,6 +308,7 @@
 				8DBF9F7318EDF05E00C3032A /* ENEMY_LEFT.atlas in Resources */,
 				8DAC9A9218E098A7000A016F /* Main.storyboard in Resources */,
 				A09BD64D18EDE82200202C1B /* Ground.png in Resources */,
+				8DA63C9B18F320230000E0AD /* SPARTAN_DEF.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
