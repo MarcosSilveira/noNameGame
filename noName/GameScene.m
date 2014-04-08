@@ -113,6 +113,7 @@ const uint32_t ATTACK = 0x1 << 8;
     right = [[SKSpriteNode alloc] initWithColor:[SKColor grayColor] size:CGSizeMake(width*0.08, width*0.08)];
     right.name = @"right";
     right.position = CGPointMake(width/8-width/2, right.size.height/2-height/2);
+    right.texture = [SKTexture textureWithImageNamed:@"botao_direcao_R.png"];
     
     return right;
 }
@@ -122,6 +123,7 @@ const uint32_t ATTACK = 0x1 << 8;
     left = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(width*0.08, width*0.08)];
     left.name = @"left";
     left.position = CGPointMake(left.size.width/2-width/2, left.size.height/2-height/2);
+    left.texture = [SKTexture textureWithImageNamed:@"botao_direcao_L.png"];
     
     return left;
 }
