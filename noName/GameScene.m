@@ -183,11 +183,13 @@ const uint32_t ATTACK = 0x1 << 8;
     block.physicsBody.categoryBitMask = ENEMY;
     block.physicsBody.collisionBitMask = SPARTAN | ROCK;
     block.physicsBody.contactTestBitMask = SPARTAN | BIRIBINHA | ROCK | ATTACK;
-    block.position = CGPointMake(camera.position.x, height/3);
+    block.position = CGPointMake(-camera.position.x+width/4, -height/2+(platform.size.height));
     block.zPosition = 1;
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
     SKTexture *enemyLT = [atlas textureNamed:@"inimigo1_03_L_parado.png"];
     block.texture = enemyLT;
+    SKAction *moveLeft = [SKAction moveByX:-500 y:0 duration:5];
+    [block runAction:moveLeft];
     
     return block;
 }
@@ -391,7 +393,7 @@ const uint32_t ATTACK = 0x1 << 8;
         }
         stages++;
     }
-//    NSLog(@"%f",camera.position.x);
+    NSLog(@"%f",camera.position.x);
 }
 
 //-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
