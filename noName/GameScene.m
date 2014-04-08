@@ -18,10 +18,12 @@ const uint32_t ATTACK = 0x1 << 8;
     int width;
     int height;
     int counter;
+    int stages;
 }
 
 -(void)didMoveToView:(SKView *)view{
     counter = 60;
+    stages = 1;
     width = self.scene.size.width;
     height = self.scene.size.height;
     
@@ -35,20 +37,24 @@ const uint32_t ATTACK = 0x1 << 8;
     [self addChild:myWorld];
     
     myWorld.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
+    myWorld.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(-width/2, -height/2) toPoint:CGPointMake(width/2, -height/2)];
     
     camera = [SKNode node];
     camera.name = @"camera";
     [myWorld addChild:camera];
     
-    [myWorld addChild:[self initializeBackground]];
+    [camera addChild:[self background1]];
+    [camera addChild:[self background2]];
     [camera addChild:[self createCharacter]];
     
-    [myWorld addChild:[self platformGG]];
+    [camera addChild:[self platformGG]];
+    [camera addChild:[self platformGG2]];
     [self addChild:[self createRightButton]];
     [self addChild:[self createLeftButton]];
     [self addChild:[self createAttackButton]];
     [self addChild:[self creatAtackButton2]];
     [self addChild:[self createDefenseButton]];
+    
     
     self.physicsWorld.gravity = CGVectorMake(0.0f, -1.0f);
     
@@ -67,7 +73,7 @@ const uint32_t ATTACK = 0x1 << 8;
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
     SKTexture *parado = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
     spartan.texture = parado;
-    CGSize hue = CGSizeMake(spartan.size.width, spartan.size.height-15);
+    CGSize hue = CGSizeMake(spartan.size.width-15, spartan.size.height-15);
     spartan.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:hue];
     spartan.name = @"spartan";
     spartan.zPosition = 1;
@@ -78,10 +84,18 @@ const uint32_t ATTACK = 0x1 << 8;
     return spartan;
 }
 
--(SKSpriteNode *)initializeBackground{
-    SKTexture *fundo = [SKTexture textureWithImageNamed:@"grecia.png"];
-    SKSpriteNode *fundo2 = [[SKSpriteNode alloc] initWithTexture:fundo color:nil size:CGSizeMake(self.scene.size.width, self.scene.size.height)];
+-(SKSpriteNode *)background1{
+    SKTexture *fundoTexture = [SKTexture textureWithImageNamed:@"prebackground1.png"];
+    fundo = [[SKSpriteNode alloc] initWithTexture:fundoTexture color:nil size:CGSizeMake(self.scene.size.width, self.scene.size.height)];
+    fundo.anchorPoint = CGPointMake (0.5,0.5);
+    return fundo;
+}
+
+-(SKSpriteNode *)background2{
+    SKTexture *fundoTexture = [SKTexture textureWithImageNamed:@"prebackground2.png"];
+    fundo2 = [[SKSpriteNode alloc] initWithTexture:fundoTexture color:nil size:CGSizeMake(self.scene.size.width, self.scene.size.height)];
     fundo2.anchorPoint = CGPointMake (0.5,0.5);
+    fundo2.position = CGPointMake(fundo.position.x+fundo2.size.width, fundo.position.y);
     return fundo2;
 }
 
@@ -114,7 +128,7 @@ const uint32_t ATTACK = 0x1 << 8;
 
 -(SKSpriteNode *)platformGG{
     SKTexture *ground = [SKTexture textureWithImageNamed:@"Ground.png"];
-    SKSpriteNode *platform = [[SKSpriteNode alloc] initWithTexture:ground color:[SKColor blackColor] size:CGSizeMake(width, height/7)];
+    platform = [[SKSpriteNode alloc] initWithTexture:ground color:[SKColor blackColor] size:CGSizeMake(width, height/7)];
     platform.name = @"platform";
     platform.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:platform.size];
     platform.physicsBody.dynamic = NO;
@@ -124,6 +138,20 @@ const uint32_t ATTACK = 0x1 << 8;
     platform.position = CGPointMake(0, -height/2+(platform.size.height/2));
     
     return platform;
+}
+
+-(SKSpriteNode *)platformGG2{
+    SKTexture *ground = [SKTexture textureWithImageNamed:@"Ground.png"];
+    platform2 = [[SKSpriteNode alloc] initWithTexture:ground color:[SKColor blackColor] size:CGSizeMake(width, height/7)];
+    platform2.name = @"platform2";
+    platform2.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:platform2.size];
+    platform2.physicsBody.dynamic = NO;
+    platform2.physicsBody.categoryBitMask = ROCK;
+    platform2.physicsBody.collisionBitMask = SPARTAN | BIRIBINHA | ROCK | ENEMY;
+    platform2.physicsBody.contactTestBitMask = SPARTAN;
+    platform2.position = CGPointMake(platform.position.x+platform.size.width, -height/2+(platform2.size.height/2));
+    
+    return platform2;
 }
 
 -(SKSpriteNode *)creatAtackButton2{
@@ -208,8 +236,8 @@ const uint32_t ATTACK = 0x1 << 8;
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEAR"];
     SKTexture *spear = [atlas textureNamed:@"spearToRight.png"];
     attackRegion = [[SKSpriteNode alloc] initWithTexture:spear];
-    attackRegion.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:attackRegion.size];
-    attackRegion.position = CGPointMake(spartan.position.x, spartan.position.y);
+    attackRegion.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(spartan.size.width*2, spartan.size.height*2)];
+    attackRegion.position = CGPointMake(spartan.position.x+spartan.size.width/2, spartan.position.y);
     attackRegion.name = @"attack";
     [camera addChild:attackRegion];
     attackRegion.zPosition = 1;
@@ -341,6 +369,18 @@ const uint32_t ATTACK = 0x1 << 8;
         [camera addChild:[self creatorBlock]];
         counter = 60;
     }
+    if(camera.position.x <= -width*stages){
+        if(stages%2!=0){
+            platform.position = CGPointMake(platform2.position.x+platform.size.width, platform.position.y);
+            fundo.position = CGPointMake(fundo2.position.x+fundo.size.width, fundo.position.y);
+        }
+        else{
+            platform2.position = CGPointMake(platform.position.x+platform.size.width, platform.position.y);
+            fundo2.position = CGPointMake(fundo.position.x+fundo.size.width, fundo.position.y);
+        }
+        stages++;
+    }
+//    NSLog(@"%f",camera.position.x);
 }
 
     
