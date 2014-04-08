@@ -17,6 +17,7 @@
     SKSpriteNode *attack2;
     SKSpriteNode *projectile;
     SKSpriteNode *attackRegion;
+    SKSpriteNode *defense;
     SKNode *camera;
     BOOL esquerda;
     BOOL defendendo;
