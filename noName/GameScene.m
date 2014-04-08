@@ -427,9 +427,7 @@ const uint32_t ATTACK = 0x1 << 8;
     }
     
     else if([node.name isEqualToString:@"left"]){
-        if (esquerda) {
             [spartan removeAllActions];
-        }
     }
     
     else if([node.name isEqualToString:@"right"]){
@@ -448,14 +446,8 @@ const uint32_t ATTACK = 0x1 << 8;
             [spartan removeActionForKey:@"AttackLAction2"];
         }
        else [spartan removeActionForKey:@"AttackRAction2"];}
-}
--(void)update:(NSTimeInterval)currentTime{
-    lancasCount.text = [NSString stringWithFormat:@"%@ %ld",aux, (long)lancas];
-    counter--;
-    if(counter == 0){
-        [camera addChild:[self creatorBlock]];
-        counter = 60;
-    }
+    else
+        [spartan removeAllActions];
 }
 -(void)didBeginContact:(SKPhysicsContact *)contact
 {
