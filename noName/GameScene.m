@@ -183,7 +183,7 @@ const uint32_t ATTACK = 0x1 << 8;
     block.physicsBody.categoryBitMask = ENEMY;
     block.physicsBody.collisionBitMask = SPARTAN | ROCK;
     block.physicsBody.contactTestBitMask = SPARTAN | BIRIBINHA | ROCK | ATTACK;
-    block.position = CGPointMake(width/3, height/3);
+    block.position = CGPointMake(camera.position.x, height/3);
     block.zPosition = 1;
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
     SKTexture *enemyLT = [atlas textureNamed:@"inimigo1_03_L_parado.png"];
@@ -248,7 +248,17 @@ const uint32_t ATTACK = 0x1 << 8;
 }
 
 -(void)attackActionLeft{
-    
+    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEAR"];
+    SKTexture *spear = [atlas textureNamed:@"spearToRight.png"];
+    attackRegion = [[SKSpriteNode alloc] initWithTexture:spear];
+    attackRegion.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(spartan.size.width*2, spartan.size.height*2)];
+    attackRegion.position = CGPointMake(spartan.position.x-spartan.size.width/2, spartan.position.y);
+    attackRegion.name = @"attack";
+    [camera addChild:attackRegion];
+    attackRegion.zPosition = 1;
+    projectile.physicsBody.categoryBitMask = ATTACK;
+    projectile.physicsBody.collisionBitMask = ATTACK | ROCK;
+    projectile.physicsBody.contactTestBitMask = ROCK;
 }
 
 
@@ -309,6 +319,7 @@ const uint32_t ATTACK = 0x1 << 8;
                 SKTexture *f2 = [atlas textureNamed:@"ATTACK_LEFT_002.png"];
                 NSArray *spartanAttackTextures = @[f1, f2];
                // [self throwBiribinhaLeft];
+                [self attackActionLeft];
                     [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]withKey:@"AttackLAction1"];
                 
             }
