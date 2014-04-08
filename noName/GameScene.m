@@ -380,15 +380,14 @@ const uint32_t ATTACK = 0x1 << 8;
     
     else if([node.name isEqualToString:@"left"]){
         if (esquerda) {
-            [spartan removeActionForKey:@"WalkLAction1"];
-            [spartan removeActionForKey:@"WalkLAction2"];
+            [spartan removeAllActions];
         }
     }
     
     else if([node.name isEqualToString:@"right"]){
-        [spartan removeActionForKey:@"WalkRAction1"];
-        [spartan removeActionForKey:@"WalkRAction2"];
+        [spartan removeAllActions];
     }
+    
     
     else if([node.name isEqualToString:@"Attack"]){
         if (esquerda) {
