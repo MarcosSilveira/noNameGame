@@ -198,7 +198,7 @@ const uint32_t ATTACK = 0x1 << 4;
     return block;
 }
 -(void)enemyMovingLeft{
-    if(block.position.x < spartan.position.x+10){
+    if(block.position.x > spartan.position.x+550){
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
     SKAction *moveLeft = [SKAction moveByX:-400 y:0 duration:5];
     SKTexture *f1 = [atlas textureNamed:@"inimigo1_05_L_correndo.png"];
@@ -213,7 +213,7 @@ const uint32_t ATTACK = 0x1 << 4;
     
     [block runAction:moveLeft];
     }
-    else if(block.position.x > spartan.position.x+10){
+    else{
         [block removeActionForKey:@"EnemyWalkLAction1"];
         [block removeActionForKey:@"EnemyWalkLAction2"];
     }
@@ -424,7 +424,8 @@ const uint32_t ATTACK = 0x1 << 4;
         [self enemyMovingLeft];
     }
 //    NSLog(@"%f",camera.position.x);
-    NSLog(@"%f",spartan.position.y);
+    NSLog(@"%f",spartan.position.x);
+    NSLog(@"%f",block.position.x);
 }
 
 //-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
