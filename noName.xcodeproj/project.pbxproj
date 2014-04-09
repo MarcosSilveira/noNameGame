@@ -37,6 +37,8 @@
 		A03ACC6E18EDD2B10007299C /* grecia.png in Resources */ = {isa = PBXBuildFile; fileRef = A03ACC6D18EDD2B10007299C /* grecia.png */; };
 		A08E389218E9EC2800C27179 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A08E389118E9EC2800C27179 /* GameScene.m */; };
 		A09BD64D18EDE82200202C1B /* Ground.png in Resources */ = {isa = PBXBuildFile; fileRef = A09BD64C18EDE82200202C1B /* Ground.png */; };
+		A0DDE61318F5AA6400F301AA /* nuvem1.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61118F5AA6400F301AA /* nuvem1.png */; };
+		A0DDE61418F5AA6400F301AA /* nuvem2.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61218F5AA6400F301AA /* nuvem2.png */; };
 		A0EAFF2618F463DB00B76CB5 /* prebackground1.png in Resources */ = {isa = PBXBuildFile; fileRef = A0EAFF2418F463DB00B76CB5 /* prebackground1.png */; };
 		A0EAFF2718F463DB00B76CB5 /* prebackground2.png in Resources */ = {isa = PBXBuildFile; fileRef = A0EAFF2518F463DB00B76CB5 /* prebackground2.png */; };
 /* End PBXBuildFile section */
@@ -90,6 +92,8 @@
 		A08E389018E9EC2800C27179 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		A08E389118E9EC2800C27179 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		A09BD64C18EDE82200202C1B /* Ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ground.png; sourceTree = "<group>"; };
+		A0DDE61118F5AA6400F301AA /* nuvem1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nuvem1.png; sourceTree = "<group>"; };
+		A0DDE61218F5AA6400F301AA /* nuvem2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nuvem2.png; sourceTree = "<group>"; };
 		A0EAFF2418F463DB00B76CB5 /* prebackground1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prebackground1.png; sourceTree = "<group>"; };
 		A0EAFF2518F463DB00B76CB5 /* prebackground2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prebackground2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -178,6 +182,8 @@
 				A09BD64C18EDE82200202C1B /* Ground.png */,
 				A0EAFF2418F463DB00B76CB5 /* prebackground1.png */,
 				A0EAFF2518F463DB00B76CB5 /* prebackground2.png */,
+				A0DDE61118F5AA6400F301AA /* nuvem1.png */,
+				A0DDE61218F5AA6400F301AA /* nuvem2.png */,
 				8DAC9A9B18E098A7000A016F /* Images.xcassets */,
 				8DAC9A8518E098A7000A016F /* Supporting Files */,
 			);
@@ -303,7 +309,9 @@
 				A0EAFF2718F463DB00B76CB5 /* prebackground2.png in Resources */,
 				A03ACC6E18EDD2B10007299C /* grecia.png in Resources */,
 				8DAC9A8918E098A7000A016F /* InfoPlist.strings in Resources */,
+				A0DDE61318F5AA6400F301AA /* nuvem1.png in Resources */,
 				8DBF9F7118EDF05800C3032A /* ENEMY_RIGHT.atlas in Resources */,
+				A0DDE61418F5AA6400F301AA /* nuvem2.png in Resources */,
 				A03ACC6A18EDC96E0007299C /* SPEAR.atlas in Resources */,
 				8D266EF818EC87F40018D2C8 /* ATACK_RIGHT.atlas in Resources */,
 				8D47FF1118EB3BC9002C8D1C /* WALK_RIGHT.atlas in Resources */,
