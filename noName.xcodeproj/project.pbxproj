@@ -43,6 +43,7 @@
 		A09BD64D18EDE82200202C1B /* Ground.png in Resources */ = {isa = PBXBuildFile; fileRef = A09BD64C18EDE82200202C1B /* Ground.png */; };
 		A0DDE61318F5AA6400F301AA /* nuvem1.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61118F5AA6400F301AA /* nuvem1.png */; };
 		A0DDE61418F5AA6400F301AA /* nuvem2.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61218F5AA6400F301AA /* nuvem2.png */; };
+		A0DDE61618F5C4B600F301AA /* backgroundfixo.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61518F5C4B600F301AA /* backgroundfixo.png */; };
 		A0EAFF2618F463DB00B76CB5 /* prebackground1.png in Resources */ = {isa = PBXBuildFile; fileRef = A0EAFF2418F463DB00B76CB5 /* prebackground1.png */; };
 		A0EAFF2718F463DB00B76CB5 /* prebackground2.png in Resources */ = {isa = PBXBuildFile; fileRef = A0EAFF2518F463DB00B76CB5 /* prebackground2.png */; };
 /* End PBXBuildFile section */
@@ -102,6 +103,7 @@
 		A09BD64C18EDE82200202C1B /* Ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ground.png; sourceTree = "<group>"; };
 		A0DDE61118F5AA6400F301AA /* nuvem1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nuvem1.png; sourceTree = "<group>"; };
 		A0DDE61218F5AA6400F301AA /* nuvem2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nuvem2.png; sourceTree = "<group>"; };
+		A0DDE61518F5C4B600F301AA /* backgroundfixo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundfixo.png; sourceTree = "<group>"; };
 		A0EAFF2418F463DB00B76CB5 /* prebackground1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prebackground1.png; sourceTree = "<group>"; };
 		A0EAFF2518F463DB00B76CB5 /* prebackground2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prebackground2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -192,6 +194,7 @@
 				A0EAFF2518F463DB00B76CB5 /* prebackground2.png */,
 				A0DDE61118F5AA6400F301AA /* nuvem1.png */,
 				A0DDE61218F5AA6400F301AA /* nuvem2.png */,
+				A0DDE61518F5C4B600F301AA /* backgroundfixo.png */,
 				8DAC9A9B18E098A7000A016F /* Images.xcassets */,
 				8DAC9A8518E098A7000A016F /* Supporting Files */,
 			);
@@ -287,7 +290,7 @@
 				ORGANIZATIONNAME = "Marcos Sokolowski";
 				TargetAttributes = {
 					8DAC9A7818E098A7000A016F = {
-						DevelopmentTeam = T5N5TT4E82;
+						DevelopmentTeam = 4452968868;
 					};
 					8DAC9AA018E098A7000A016F = {
 						TestTargetID = 8DAC9A7818E098A7000A016F;
@@ -329,6 +332,7 @@
 				8D47FF1118EB3BC9002C8D1C /* WALK_RIGHT.atlas in Resources */,
 				8D6F788718EC9CBC00A1F41D /* WALK_LEFT.atlas in Resources */,
 				8DBF9F6F18EDEA4400C3032A /* SPEARLAUNCH.atlas in Resources */,
+				A0DDE61618F5C4B600F301AA /* backgroundfixo.png in Resources */,
 				8D5CABBB18E9E4B500FDFDF1 /* grecia.jpg in Resources */,
 				8D2CA9F518F479970062F480 /* botao_direcao_L.png in Resources */,
 				8DAC9A9C18E098A7000A016F /* Images.xcassets in Resources */,

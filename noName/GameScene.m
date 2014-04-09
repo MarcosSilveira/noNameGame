@@ -20,6 +20,8 @@ const uint32_t ATTACK = 0x1 << 4;
     int counter;
     int stages;
     NSString *currentButton;
+    NSString *beginningTouch;
+    int HP;
 }
 
 -(void)didMoveToView:(SKView *)view{
@@ -28,6 +30,8 @@ const uint32_t ATTACK = 0x1 << 4;
     width = self.scene.size.width;
     height = self.scene.size.height;
     currentButton = @"";
+    beginningTouch = @"";
+    HP = 5;
     
     self.physicsWorld.contactDelegate = (id)self;
     self.backgroundColor = [SKColor redColor];
@@ -37,6 +41,7 @@ const uint32_t ATTACK = 0x1 << 4;
     
     SKNode *myWorld = [SKNode node];
     [self addChild:myWorld];
+    [self background3];
     
     myWorld.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     myWorld.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(-width/2, -height/2) toPoint:CGPointMake(width/2, -height/2)];
@@ -47,6 +52,7 @@ const uint32_t ATTACK = 0x1 << 4;
     
     [camera addChild:[self background1]];
     [camera addChild:[self background2]];
+    
     [camera addChild:[self platformGG]];
     [camera addChild:[self platformGG2]];
     [camera addChild:[self createCharacter]];
@@ -95,11 +101,19 @@ const uint32_t ATTACK = 0x1 << 4;
 }
 
 -(SKSpriteNode *)background2{
-    SKTexture *fundoTexture = [SKTexture textureWithImageNamed:@"prebackground2.png"];
+    SKTexture *fundoTexture = [SKTexture textureWithImageNamed:@"nuvem2.png"];
     fundo2 = [[SKSpriteNode alloc] initWithTexture:fundoTexture color:nil size:CGSizeMake(self.scene.size.width, self.scene.size.height)];
     fundo2.anchorPoint = CGPointMake (0.5,0.5);
     fundo2.position = CGPointMake(fundo.position.x+fundo2.size.width, fundo.position.y);
     return fundo2;
+}
+
+-(void)background3{
+    SKTexture *fundoTexture = [SKTexture textureWithImageNamed:@"backgroundfixo.png"];
+    SKSpriteNode *fundoF = [[SKSpriteNode alloc] initWithTexture:fundoTexture color:nil size:CGSizeMake(self.scene.size.width, self.scene.size.height)];
+    fundoF.anchorPoint = CGPointMake (0.5,0.5);
+    [self addChild:fundoF];
+    fundoF.zPosition = -1;
 }
 
 
@@ -295,10 +309,9 @@ const uint32_t ATTACK = 0x1 << 4;
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
-    if(node.name == NULL){
-        return;
+    if(![node.name isEqualToString:currentButton]){
+        beginningTouch = node.name;
     }
-    
     
     for (UITouch *touch in touches) {
 //        CGPoint touchLocation = [touch locationInNode:self];
@@ -459,6 +472,9 @@ const uint32_t ATTACK = 0x1 << 4;
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
+    if(node.name != NULL){
+        return;
+    }
     
     if([currentButton isEqualToString:@""]){
         [spartan removeAllActions];
@@ -472,6 +488,7 @@ const uint32_t ATTACK = 0x1 << 4;
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     NSLog(@"%@",node.name);
+
     if(![currentButton isEqualToString:@""] && node.name == NULL){
         [spartan removeAllActions];
     }
@@ -529,8 +546,8 @@ const uint32_t ATTACK = 0x1 << 4;
 
 -(void)didBeginContact:(SKPhysicsContact *)contact
 {
-//    NSLog(@"body A %@",contact.bodyA.node.name);
-//    NSLog(@"body B %@",contact.bodyB.node.name);
+    NSLog(@"body A %@",contact.bodyA.node.name);
+    NSLog(@"body B %@",contact.bodyB.node.name);
     if(([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"spear"]) || ([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"attack"])){
         [contact.bodyA.node removeFromParent];
     }
@@ -542,6 +559,24 @@ const uint32_t ATTACK = 0x1 << 4;
     }
     if([contact.bodyA.node.name isEqualToString:@"spear"] || [contact.bodyA.node.name isEqualToString:@"attack"]){
         [contact.bodyA.node removeFromParent];
+    }
+    if([contact.bodyB.node.name isEqualToString:@"spartan"] && [contact.bodyA.node.name isEqualToString:@"enemy"]){
+        if(HP == 0){
+            [contact.bodyB.node removeFromParent];
+        }
+        else{
+            HP--;
+            contact.bodyB.node.position = CGPointMake(contact.bodyB.node.position.x+100, contact.bodyB.node.position.y);
+        }
+    }
+    if([contact.bodyA.node.name isEqualToString:@"spartan"] && [contact.bodyB.node.name isEqualToString:@"enemy"]){
+        if(HP == 0){
+            [contact.bodyA.node removeFromParent];
+        }
+        else{
+            HP--;
+            contact.bodyA.node.position = CGPointMake(contact.bodyA.node.position.x+100, contact.bodyA.node.position.y);
+        }
     }
     
 }
