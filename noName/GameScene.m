@@ -167,6 +167,8 @@ const uint32_t ATTACK = 0x1 << 8;
     attack = [[SKSpriteNode alloc] initWithColor:[UIColor redColor]size:CGSizeMake(width*0.08, width*0.08)];
     attack.name = @"Attack";
     attack.position = CGPointMake(width*0.5-(attack.size.width/2),-(height*0.5)+(attack.size.height/2));
+    attack.texture = [SKTexture textureWithImageNamed:@"botao_lanca.png"];
+    
     return attack;
 }
 
@@ -174,12 +176,13 @@ const uint32_t ATTACK = 0x1 << 8;
     defense = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(width*0.08,width*0.08)];
     defense.name = @"defense";
     defense.position = CGPointMake(attack2.position.x-attack2.size.width-attack2.size.width/2,-(height*0.5)+(defense.size.height/2));
+    defense.texture = [SKTexture textureWithImageNamed:@"botao_escudo.png"];
     
     return defense;
 }
 
 -(SKSpriteNode *)creatorBlock{
-    SKSpriteNode *block = [[SKSpriteNode alloc] initWithColor:[SKColor brownColor] size:CGSizeMake(width*0.08, height*0.08)];
+    block = [[SKSpriteNode alloc] initWithColor:[SKColor brownColor] size:CGSizeMake(width*0.08, height*0.08)];
     block.name = @"enemy";
     block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size];
     block.physicsBody.categoryBitMask = ENEMY;
@@ -190,10 +193,31 @@ const uint32_t ATTACK = 0x1 << 8;
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
     SKTexture *enemyLT = [atlas textureNamed:@"inimigo1_03_L_parado.png"];
     block.texture = enemyLT;
-    SKAction *moveLeft = [SKAction moveByX:-500 y:0 duration:5];
-    [block runAction:moveLeft];
+    [self enemyMovingLeft];
     
     return block;
+}
+-(void)enemyMovingLeft{
+    if(block.position.x < spartan.position.x+10){
+    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
+    SKAction *moveLeft = [SKAction moveByX:-400 y:0 duration:5];
+    SKTexture *f1 = [atlas textureNamed:@"inimigo1_05_L_correndo.png"];
+    SKTexture *f2 = [atlas textureNamed:@"inimigo1_06_L_correndo.png"];
+    SKTexture *f3 = [atlas textureNamed:@"inimigo1_07_L_correndo.png"];
+    SKTexture *f4 = [atlas textureNamed:@"inimigo1_08_L_correndo.png"];
+    SKTexture *f5 = [atlas textureNamed:@"inimigo1_09_L_correndo.png"];
+    SKTexture *f6 = [atlas textureNamed:@"inimigo1_10_L_correndo.png"];
+    NSArray *enemyLeftWalk = @[f1,f2,f3,f4,f5,f6];
+    [block runAction:[SKAction repeatActionForever:moveLeft ] withKey:@"EnemyWalkLAction1"];
+    [block runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:enemyLeftWalk timePerFrame:0.1f]] withKey:@"EnemyWalkLAction2"];
+    
+    [block runAction:moveLeft];
+    }
+    else if(block.position.x > spartan.position.x+10){
+        [block removeActionForKey:@"EnemyWalkLAction1"];
+        [block removeActionForKey:@"EnemyWalkLAction2"];
+    }
+
 }
 
 -(void)throwBiribinhaRight{
@@ -394,6 +418,7 @@ const uint32_t ATTACK = 0x1 << 8;
             fundo2.position = CGPointMake(fundo.position.x+fundo.size.width, fundo.position.y);
         }
         stages++;
+        [self enemyMovingLeft];
     }
     NSLog(@"%f",camera.position.x);
 }
