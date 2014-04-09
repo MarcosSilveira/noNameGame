@@ -491,10 +491,7 @@ const uint32_t ATTACK = 0x1 << 4;
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     NSLog(@"%@",node.name);
-    if(![currentButton isEqualToString:@""] && node.name == NULL){
-        [spartan removeAllActions];
-    }
-    
+
     if (esquerda) {
         SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
         SKTexture *parado = [atlas textureNamed:@"WALK_LEFT_006.png"];
@@ -519,16 +516,14 @@ const uint32_t ATTACK = 0x1 << 4;
     else if([node.name isEqualToString:@"left"]){
         [spartan removeActionForKey:@"WalkLAction1"];
         [spartan removeActionForKey:@"WalkLAction2"];
+        [spartan removeAllActions];
     }
     
     else if([node.name isEqualToString:@"right"]){
+        [spartan removeActionForKey:@"WalkRAction1"];
+        [spartan removeActionForKey:@"WalkRAction2"];
         [spartan removeAllActions];
     }
-    else if([node.name isEqualToString:currentButton]){
-        [spartan removeAllActions];
-        currentButton = @"";
-    }
-    
     
     else if([node.name isEqualToString:@"Attack"]){
         if (esquerda) {
@@ -543,8 +538,8 @@ const uint32_t ATTACK = 0x1 << 4;
             [spartan removeActionForKey:@"AttackLAction2"];
         }
         else [spartan removeActionForKey:@"AttackRAction2"];}
-    else
-        return;
+    else [spartan removeAllActions];
+
 }
 
 -(void)didBeginContact:(SKPhysicsContact *)contact
