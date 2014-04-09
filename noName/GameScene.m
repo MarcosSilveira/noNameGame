@@ -20,7 +20,6 @@ const uint32_t ATTACK = 0x1 << 4;
     int counter;
     int stages;
     NSString *currentButton;
-    NSString *beginningTouch;
     int HP;
 }
 
@@ -30,7 +29,6 @@ const uint32_t ATTACK = 0x1 << 4;
     width = self.scene.size.width;
     height = self.scene.size.height;
     currentButton = @"";
-    beginningTouch = @"";
     HP = 5;
     
     self.physicsWorld.contactDelegate = (id)self;
@@ -306,10 +304,7 @@ const uint32_t ATTACK = 0x1 << 4;
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
-    if(![node.name isEqualToString:currentButton]){
-        beginningTouch = node.name;
-    }
-    
+
     for (UITouch *touch in touches) {
 //        CGPoint touchLocation = [touch locationInNode:self];
         if([node.name isEqualToString:(@"right")]){
@@ -484,21 +479,18 @@ const uint32_t ATTACK = 0x1 << 4;
     NSLog(@"%f",block.position.x);
 }
 
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-    
-    UITouch *touch = [touches anyObject];
-    CGPoint location = [touch locationInNode:self];
-    SKNode *node = [self nodeAtPoint:location];
-    if(node.name != NULL){
-        return;
-    }
-    
-    if([currentButton isEqualToString:@""]){
-        [spartan removeAllActions];
-    }
-    NSLog(@"%@",node.name);
-    NSLog(@"%@",currentButton);
-}
+//-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+//    
+//    UITouch *touch = [touches anyObject];
+//    CGPoint location = [touch locationInNode:self];
+//    SKNode *node = [self nodeAtPoint:location];
+//    
+//    if([currentButton isEqualToString:@""]){
+//        [spartan removeAllActions];
+//    }
+//    NSLog(@"%@",node.name);
+//    NSLog(@"%@",currentButton);
+//}
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [touches anyObject];
