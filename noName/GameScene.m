@@ -383,8 +383,9 @@ const uint32_t ATTACK = 0x1 << 4;
                 
                 
 //                [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.05f]withKey:@"AttackRAction1"];
+                [self attackActionRight];
                 [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.1f] completion:^{
-                    [self attackActionRight];
+                    
                 }];
                 
             }
@@ -588,6 +589,7 @@ const uint32_t ATTACK = 0x1 << 4;
             [contact.bodyB.node.physicsBody applyImpulse:CGVectorMake(10, 0)];
         }
     }
+    }
     if([contact.bodyA.node.name isEqualToString:@"spartan"] && [contact.bodyB.node.name isEqualToString:@"enemy"]){
         if(HP == 0){
             [contact.bodyA.node removeFromParent];
@@ -600,6 +602,8 @@ const uint32_t ATTACK = 0x1 << 4;
             [contact.bodyA.node.physicsBody applyImpulse:CGVectorMake(10, 0)];
         }
     }
+    }
 }
 
 @end
+
