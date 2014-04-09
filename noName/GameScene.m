@@ -203,7 +203,7 @@ const uint32_t ATTACK = 0x1 << 4;
     return block;
 }
 -(void)enemyMovingLeft{
-    if(block.position.x > spartan.position.x+400){
+    
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
     SKAction *moveLeft = [SKAction moveByX:-400 y:0 duration:5];
     SKTexture *f1 = [atlas textureNamed:@"inimigo1_05_L_correndo.png"];
@@ -217,11 +217,8 @@ const uint32_t ATTACK = 0x1 << 4;
     [block runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:enemyLeftWalk timePerFrame:0.1f]] withKey:@"EnemyWalkLAction2"];
     
     [block runAction:moveLeft];
-    }
-    else{
-        [block removeActionForKey:@"EnemyWalkLAction1"];
-        [block removeActionForKey:@"EnemyWalkLAction2"];
-    }
+
+    
 
 }
 
@@ -476,18 +473,18 @@ const uint32_t ATTACK = 0x1 << 4;
     NSLog(@"%f",block.position.x);
 }
 
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-    
-    UITouch *touch = [touches anyObject];
-    CGPoint location = [touch locationInNode:self];
-    SKNode *node = [self nodeAtPoint:location];
-    
-    if([currentButton isEqualToString:@""]){
-        [spartan removeAllActions];
-    }
-    NSLog(@"%@",node.name);
-    NSLog(@"%@",currentButton);
-}
+//-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+//    
+//    UITouch *touch = [touches anyObject];
+//    CGPoint location = [touch locationInNode:self];
+//    SKNode *node = [self nodeAtPoint:location];
+//    
+//    if([currentButton isEqualToString:@""]){
+//        [spartan removeAllActions];
+//    }
+//    NSLog(@"%@",node.name);
+//    NSLog(@"%@",currentButton);
+//}
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [touches anyObject];
@@ -519,13 +516,14 @@ const uint32_t ATTACK = 0x1 << 4;
        else [spartan removeActionForKey:@"DefenseRAction1"];
     }
     
-//    else if([node.name isEqualToString:@"left"]){
-//            [spartan removeAllActions];
-//    }
-//    
-//    else if([node.name isEqualToString:@"right"]){
-//        [spartan removeAllActions];
-//    }
+    else if([node.name isEqualToString:@"left"]){
+        [spartan removeActionForKey:@"WalkLAction1"];
+        [spartan removeActionForKey:@"WalkLAction2"];
+    }
+    
+    else if([node.name isEqualToString:@"right"]){
+        [spartan removeAllActions];
+    }
     else if([node.name isEqualToString:currentButton]){
         [spartan removeAllActions];
         currentButton = @"";
@@ -533,12 +531,12 @@ const uint32_t ATTACK = 0x1 << 4;
     
     
     else if([node.name isEqualToString:@"Attack"]){
-//        if (esquerda) {
-//            [spartan removeActionForKey:@"AttackLAction1"];
-//        }
-//        else [spartan removeActionForKey:@"AttackRAction1"];
-        return;
+        if (esquerda) {
+            [spartan removeActionForKey:@"AttackLAction1"];
+        }
+        else [spartan removeActionForKey:@"AttackRAction1"];
     }
+    
     
     else if([node.name isEqualToString:@"Attack2"]){
         if (esquerda) {
