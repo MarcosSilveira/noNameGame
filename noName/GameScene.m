@@ -61,7 +61,7 @@ const uint32_t ATTACK = 0x1 << 4;
     [self addChild:[self createDefenseButton]];
     
     
-    self.physicsWorld.gravity = CGVectorMake(0.0f, 0.0f);
+    self.physicsWorld.gravity = CGVectorMake(0.0f, -1.0f);
     
     lancasCount = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
     aux = @"Lanças:";
@@ -78,15 +78,14 @@ const uint32_t ATTACK = 0x1 << 4;
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
     SKTexture *parado = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
     spartan.texture = parado;
-    CGSize hue = CGSizeMake(spartan.size.width/2, spartan.size.height-15);
+    CGSize hue = CGSizeMake(spartan.size.width/2, spartan.size.height);
     spartan.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:hue];
     spartan.position = CGPointMake(0, -height/2.15+(platform.size.height));
     spartan.name = @"spartan";
     spartan.zPosition = 1;
     spartan.physicsBody.categoryBitMask = SPARTAN;
-    spartan.physicsBody.collisionBitMask = ROCK | ENEMY | ATTACK;
+    spartan.physicsBody.collisionBitMask = ROCK | ENEMY;
     spartan.physicsBody.contactTestBitMask = ROCK | ENEMY;
-    spartan.physicsBody.dynamic = NO;
     
     return spartan;
 }
@@ -277,10 +276,14 @@ const uint32_t ATTACK = 0x1 << 4;
     attackRegion.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(width*0.04, height*0.05)];
     attackRegion.position = CGPointMake(spartan.position.x, spartan.position.y);
     attackRegion.name = @"attack";
-    projectile.physicsBody.categoryBitMask = ATTACK;
-    projectile.physicsBody.collisionBitMask = 0;
-    projectile.physicsBody.contactTestBitMask = ROCK;
+    attackRegion.physicsBody.categoryBitMask = ATTACK;
+    attackRegion.physicsBody.collisionBitMask = 0;
+    attackRegion.physicsBody.contactTestBitMask = ROCK;
+    SKAction *moveRight = [SKAction moveByX:attackRegion.size.width y:0 duration:0.1];
     [camera addChild:attackRegion];
+    [attackRegion runAction:moveRight completion:^{
+        [attackRegion removeFromParent];
+    }];
 }
 
 -(void)attackActionLeft{
@@ -292,9 +295,9 @@ const uint32_t ATTACK = 0x1 << 4;
     attackRegion.name = @"attack";
     [camera addChild:attackRegion];
     attackRegion.zPosition = 1;
-    projectile.physicsBody.categoryBitMask = ATTACK;
-    projectile.physicsBody.collisionBitMask = ATTACK | ROCK;
-    projectile.physicsBody.contactTestBitMask = ROCK;
+    attackRegion.physicsBody.categoryBitMask = ATTACK;
+    attackRegion.physicsBody.collisionBitMask = ATTACK | ROCK;
+    attackRegion.physicsBody.contactTestBitMask = ROCK;
 }
 
 
@@ -577,6 +580,7 @@ const uint32_t ATTACK = 0x1 << 4;
         else{
             HP--;
             contact.bodyB.node.position = CGPointMake(contact.bodyB.node.position.x+100, contact.bodyB.node.position.y);
+            [contact.bodyB.node.physicsBody applyImpulse:CGVectorMake(10, 0)];
         }
     }
     if([contact.bodyA.node.name isEqualToString:@"spartan"] && [contact.bodyB.node.name isEqualToString:@"enemy"]){
@@ -586,9 +590,9 @@ const uint32_t ATTACK = 0x1 << 4;
         else{
             HP--;
             contact.bodyA.node.position = CGPointMake(contact.bodyA.node.position.x+100, contact.bodyA.node.position.y);
+            [contact.bodyA.node.physicsBody applyImpulse:CGVectorMake(10, 0)];
         }
     }
-    
 }
 
 @end
