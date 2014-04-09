@@ -27,7 +27,9 @@
     BOOL defendendo;
     NSInteger lancas;
     SKLabelNode *lancasCount;
+    SKLabelNode *vidaCount;
     NSString *aux;
+    NSString *auxHP;
     SKSpriteNode *block;
 }
 

@@ -71,6 +71,11 @@ const uint32_t ATTACK = 0x1 << 4;
     lancasCount.fontSize = 20;
     lancasCount.fontColor = [UIColor whiteColor];
     [self addChild:lancasCount];
+    vidaCount = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
+    auxHP = @"Vidas";
+    vidaCount.text = [NSString stringWithFormat:@"%@, %ld", aux,(long)HP];
+    vidaCount.position = CGPointMake(0, lancasCount.position.y+20);
+    [self addChild:vidaCount];
 }
 
 -(SKSpriteNode *)createCharacter{
@@ -174,6 +179,7 @@ const uint32_t ATTACK = 0x1 << 4;
     attack2 = [[SKSpriteNode alloc] initWithColor:[UIColor orangeColor]size:CGSizeMake(width*0.08, width*0.08)];
     attack2.name = @"Attack2";
     attack2.position = CGPointMake(attack.position.x-attack.size.width-attack.size.width/2,-(height*0.5)+(attack2.size.height/2));
+    attack2.texture = [SKTexture textureWithImageNamed:@"botao_atira_lanca_disponivel"];
     return attack2;
 }
     
@@ -247,8 +253,10 @@ const uint32_t ATTACK = 0x1 << 4;
         [projectile.physicsBody applyImpulse:CGVectorMake(10, 0)];
         lancas--;
     }
-    else
+    else{
         lancasCount.fontColor = [UIColor redColor];
+        attack2.texture = [SKTexture textureWithImageNamed:@"botao_atira_lanca_indisponivel"];
+    }
 }
 
 -(void)throwBiribinhaLeft{
@@ -456,6 +464,7 @@ const uint32_t ATTACK = 0x1 << 4;
 
 -(void)update:(NSTimeInterval)currentTime{
     lancasCount.text = [NSString stringWithFormat:@"%@ %ld",aux, (long)lancas];
+    vidaCount.text = [NSString stringWithFormat:@"%@ %ld", auxHP, (long)HP];
     counter--;
     
     if (counter==0) {
@@ -501,10 +510,6 @@ const uint32_t ATTACK = 0x1 << 4;
     SKNode *node = [self nodeAtPoint:location];
     NSLog(@"%@",node.name);
 
-    if(![currentButton isEqualToString:@""] && node.name == NULL){
-        [spartan removeAllActions];
-    }
-    
     if (esquerda) {
         SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
         SKTexture *parado = [atlas textureNamed:@"WALK_LEFT_006.png"];
@@ -529,16 +534,14 @@ const uint32_t ATTACK = 0x1 << 4;
     else if([node.name isEqualToString:@"left"]){
         [spartan removeActionForKey:@"WalkLAction1"];
         [spartan removeActionForKey:@"WalkLAction2"];
+        [spartan removeAllActions];
     }
     
     else if([node.name isEqualToString:@"right"]){
+        [spartan removeActionForKey:@"WalkRAction1"];
+        [spartan removeActionForKey:@"WalkRAction2"];
         [spartan removeAllActions];
     }
-    else if([node.name isEqualToString:currentButton]){
-        [spartan removeAllActions];
-        currentButton = @"";
-    }
-    
     
     else if([node.name isEqualToString:@"Attack"]){
         if (esquerda) {
@@ -553,8 +556,8 @@ const uint32_t ATTACK = 0x1 << 4;
             [spartan removeActionForKey:@"AttackLAction2"];
         }
         else [spartan removeActionForKey:@"AttackRAction2"];}
-    else
-        return;
+    else [spartan removeAllActions];
+
 }
 
 -(void)didBeginContact:(SKPhysicsContact *)contact
@@ -578,6 +581,8 @@ const uint32_t ATTACK = 0x1 << 4;
             [contact.bodyB.node removeFromParent];
         }
         else{
+            if (!defendendo) {
+                
             HP--;
             contact.bodyB.node.position = CGPointMake(contact.bodyB.node.position.x+100, contact.bodyB.node.position.y);
             [contact.bodyB.node.physicsBody applyImpulse:CGVectorMake(10, 0)];
@@ -588,6 +593,8 @@ const uint32_t ATTACK = 0x1 << 4;
             [contact.bodyA.node removeFromParent];
         }
         else{
+            if (!defendendo) {
+                
             HP--;
             contact.bodyA.node.position = CGPointMake(contact.bodyA.node.position.x+100, contact.bodyA.node.position.y);
             [contact.bodyA.node.physicsBody applyImpulse:CGVectorMake(10, 0)];
