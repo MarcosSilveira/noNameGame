@@ -20,6 +20,8 @@ const uint32_t ATTACK = 0x1 << 4;
     int counter;
     int stages;
     NSString *currentButton;
+    NSMutableArray *inimigos;
+    int contadorAux;
 }
 
 -(void)didMoveToView:(SKView *)view{
@@ -28,13 +30,13 @@ const uint32_t ATTACK = 0x1 << 4;
     width = self.scene.size.width;
     height = self.scene.size.height;
     currentButton = @"";
-    
+    contadorAux = 0;
     self.physicsWorld.contactDelegate = (id)self;
     self.backgroundColor = [SKColor redColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
     self.anchorPoint = CGPointMake (0.5,0.5);
     [self touchesEnded:nil withEvent:nil];
-    
+   // [self enemyCreator];
     SKNode *myWorld = [SKNode node];
     [self addChild:myWorld];
     
@@ -201,7 +203,7 @@ const uint32_t ATTACK = 0x1 << 4;
     return block;
 }
 -(void)enemyMovingLeft{
-    if(block.position.x > spartan.position.x+550){
+    if(block.position.x > spartan.position.x+400){
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
     SKAction *moveLeft = [SKAction moveByX:-400 y:0 duration:5];
     SKTexture *f1 = [atlas textureNamed:@"inimigo1_05_L_correndo.png"];
@@ -430,14 +432,33 @@ const uint32_t ATTACK = 0x1 << 4;
         }
     }
 }
+//-(void)enemyCreator{
+//    
+//    inimigos = [[NSMutableArray alloc] init];
+//    
+//    for (int i = 0; i<15; i++) {
+//        
+//        
+//        
+//            inimigos[i] = [self creatorBlock];
+//            [camera addChild:inimigos[i]];
+//        
+//        
+//    }
+//    
+//}
 
 -(void)update:(NSTimeInterval)currentTime{
     lancasCount.text = [NSString stringWithFormat:@"%@ %ld",aux, (long)lancas];
     counter--;
-    if(counter == 0){
-        [camera addChild:[self creatorBlock]];
-        counter = 60;
+    
+    if (counter==0) {
+       
+            [camera addChild:[self creatorBlock]];
+
+         counter = 60;
     }
+
     if(camera.position.x <= -width*stages){
         if(stages%2!=0){
             platform.position = CGPointMake(platform2.position.x+platform.size.width, platform.position.y);
