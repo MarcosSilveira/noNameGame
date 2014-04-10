@@ -13,6 +13,7 @@ const uint32_t SPARTAN = 0x1 << 1;
 const uint32_t ENEMY = 0x1 << 2;
 const uint32_t BIRIBINHA = 0x1 << 3;
 const uint32_t ATTACK = 0x1 << 4;
+//@property(getter=isPaused, nonatomic) BOOL paused;
 
 @implementation GameScene{
     int width;
@@ -22,6 +23,7 @@ const uint32_t ATTACK = 0x1 << 4;
     NSString *currentButton;
     int HP;
     SKTexture *texturaAux;
+
 }
 
 #pragma mark - Move to View
@@ -43,6 +45,11 @@ const uint32_t ATTACK = 0x1 << 4;
     SKNode *myWorld = [SKNode node];
     [self addChild:myWorld];
     [self background3];
+#warning arrumar posição
+    pause = [[SKSpriteNode alloc] initWithImageNamed:@"pause.png"];
+    pause.position = CGPointMake(0, 0);
+    pause.size = CGSizeMake(40, 40);
+    pause.name = @"PauseButton";
     
     myWorld.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     myWorld.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(-width/2, -height/2) toPoint:CGPointMake(width/2, -height/2)];
@@ -62,7 +69,7 @@ const uint32_t ATTACK = 0x1 << 4;
     [self addChild:[self createAttackButton]];
     [self addChild:[self creatAtackButton2]];
     [self addChild:[self createDefenseButton]];
-    
+    [self addChild:pause];
     
     self.physicsWorld.gravity = CGVectorMake(0.0f, -1.0f);
     
@@ -474,6 +481,14 @@ const uint32_t ATTACK = 0x1 << 4;
     }
     defendendo = NO;
     
+    if ([node.name isEqualToString:@"PauseButton"]) {
+        if (self.paused)
+            self.paused = NO;
+        else
+            self.paused = YES;
+        
+    
+    }
     if([node.name isEqualToString:@"defense"]){
         if (esquerda) {
             [spartan removeActionForKey:@"DefenseLAction1"];

@@ -19,6 +19,8 @@
 		8DA4AF3018F703EA005CB817 /* menufundo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF2D18F703EA005CB817 /* menufundo.png */; };
 		8DA4AF3318F70FDE005CB817 /* jogar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF3118F70FDE005CB817 /* jogar.png */; };
 		8DA4AF3418F70FDE005CB817 /* loja.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF3218F70FDE005CB817 /* loja.png */; };
+		8DA4AF3618F71893005CB817 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF3518F71893005CB817 /* pause.png */; };
+		8DA4AF3818F71B76005CB817 /* lanca_contador.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF3718F71B76005CB817 /* lanca_contador.png */; };
 		8DA59F2318EB2D630017DCFD /* StoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA59F2218EB2D630017DCFD /* StoreScene.m */; };
 		8DA63C9B18F320230000E0AD /* SPARTAN_DEF.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8DA63C9A18F320230000E0AD /* SPARTAN_DEF.atlas */; };
 		8DAB851818F5CA610099437C /* botao_atira_lanca_disponivel.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAB851618F5CA610099437C /* botao_atira_lanca_disponivel.png */; };
@@ -77,6 +79,8 @@
 		8DA4AF2D18F703EA005CB817 /* menufundo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menufundo.png; sourceTree = "<group>"; };
 		8DA4AF3118F70FDE005CB817 /* jogar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jogar.png; sourceTree = "<group>"; };
 		8DA4AF3218F70FDE005CB817 /* loja.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loja.png; sourceTree = "<group>"; };
+		8DA4AF3518F71893005CB817 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
+		8DA4AF3718F71B76005CB817 /* lanca_contador.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lanca_contador.png; sourceTree = "<group>"; };
 		8DA59F2118EB2D630017DCFD /* StoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreScene.h; sourceTree = "<group>"; };
 		8DA59F2218EB2D630017DCFD /* StoreScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreScene.m; sourceTree = "<group>"; };
 		8DA63C9A18F320230000E0AD /* SPARTAN_DEF.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = SPARTAN_DEF.atlas; sourceTree = "<group>"; };
@@ -213,6 +217,8 @@
 				8DA4AF2D18F703EA005CB817 /* menufundo.png */,
 				8DA4AF3118F70FDE005CB817 /* jogar.png */,
 				8DA4AF3218F70FDE005CB817 /* loja.png */,
+				8DA4AF3518F71893005CB817 /* pause.png */,
+				8DA4AF3718F71B76005CB817 /* lanca_contador.png */,
 				8DAC9A9B18E098A7000A016F /* Images.xcassets */,
 				8DAC9A8518E098A7000A016F /* Supporting Files */,
 			);
@@ -341,6 +347,7 @@
 			files = (
 				A0DDE61818F6FD9400F301AA /* LIFE.atlas in Resources */,
 				8DA4AF3018F703EA005CB817 /* menufundo.png in Resources */,
+				8DA4AF3618F71893005CB817 /* pause.png in Resources */,
 				A0EAFF2718F463DB00B76CB5 /* prebackground2.png in Resources */,
 				A03ACC6E18EDD2B10007299C /* grecia.png in Resources */,
 				8DAC9A8918E098A7000A016F /* InfoPlist.strings in Resources */,
@@ -367,6 +374,7 @@
 				8DA4AF3318F70FDE005CB817 /* jogar.png in Resources */,
 				8D2CA9FA18F47F2F0062F480 /* botao_lanca.png in Resources */,
 				8D2CA9F918F47F2F0062F480 /* botao_escudo.png in Resources */,
+				8DA4AF3818F71B76005CB817 /* lanca_contador.png in Resources */,
 				8DA63C9B18F320230000E0AD /* SPARTAN_DEF.atlas in Resources */,
 				8DAB851918F5CA610099437C /* botao_atira_lanca_indisponivel.png in Resources */,
 			);
