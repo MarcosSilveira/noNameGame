@@ -199,7 +199,7 @@ const uint32_t ATTACK = 0x1 << 4;
 -(SKSpriteNode *)createDefenseButton{
     defense = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(width*0.08,width*0.08)];
     defense.name = @"defense";
-    defense.position = CGPointMake(attack2.position.x-attack2.size.width-attack2.size.width/2,-(height*0.5)+(defense.size.height/2));
+    defense.position = CGPointMake(attack2.position.x , -(height*0.5)+(defense.size.height/2)+attack.size.height);
     defense.texture = [SKTexture textureWithImageNamed:@"botao_escudo.png"];
     
     return defense;
