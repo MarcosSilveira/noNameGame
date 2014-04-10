@@ -24,8 +24,10 @@ const uint32_t ATTACK = 0x1 << 4;
     SKTexture *texturaAux;
 }
 
+#pragma mark - Move to View
+
 -(void)didMoveToView:(SKView *)view{
-    counter = 60;
+    counter = 120;
     stages = 1;
     width = self.scene.size.width;
     height = self.scene.size.height;
@@ -79,6 +81,8 @@ const uint32_t ATTACK = 0x1 << 4;
     [self addChild:vidas];
 }
 
+#pragma mark - Create Sparta
+
 -(SKSpriteNode *)createCharacter{
     spartan = [[SKSpriteNode alloc] initWithColor:[SKColor blackColor] size:CGSizeMake(width*0.08, height*0.08)];
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
@@ -95,6 +99,8 @@ const uint32_t ATTACK = 0x1 << 4;
     
     return spartan;
 }
+
+#pragma mark - Background / Stage
 
 -(SKSpriteNode *)background1{
     SKTexture *fundoTexture = [SKTexture textureWithImageNamed:@"nuvem1.png"];
@@ -117,35 +123,6 @@ const uint32_t ATTACK = 0x1 << 4;
     fundoF.anchorPoint = CGPointMake (0.5,0.5);
     [self addChild:fundoF];
     fundoF.zPosition = -1;
-}
-
-
-- (void)didSimulatePhysics{
-    [self centerOnNode: [self childNodeWithName: @"//spartan"]];
-}
-
-- (void) centerOnNode: (SKNode *) node{
-    CGPoint cameraPositionInScene = [node.scene convertPoint:node.position fromNode:node.parent];
-    node.parent.position = CGPointMake(node.parent.position.x - cameraPositionInScene.x-width/4,                                       node.parent.position.y);
-}
-
--(SKSpriteNode *)createRightButton{
-    right = [[SKSpriteNode alloc] initWithColor:[SKColor grayColor] size:CGSizeMake(width*0.08, width*0.08)];
-    right.name = @"right";
-    right.position = CGPointMake(width/8-width/2, right.size.height/2-height/2);
-    right.texture = [SKTexture textureWithImageNamed:@"botao_direcao_R.png"];
-    
-    return right;
-}
-
-
--(SKSpriteNode *)createLeftButton{
-    left = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(width*0.08, width*0.08)];
-    left.name = @"left";
-    left.position = CGPointMake(left.size.width/2-width/2, left.size.height/2-height/2);
-    left.texture = [SKTexture textureWithImageNamed:@"botao_direcao_L.png"];
-    
-    return left;
 }
 
 -(SKSpriteNode *)platformGG{
@@ -176,6 +153,29 @@ const uint32_t ATTACK = 0x1 << 4;
     return platform2;
 }
 
+#pragma mark - Buttons
+
+-(SKSpriteNode *)createRightButton{
+    right = [[SKSpriteNode alloc] initWithColor:[SKColor grayColor] size:CGSizeMake(width*0.08, width*0.08)];
+    right.name = @"right";
+    right.position = CGPointMake(width/8-width/2, right.size.height/2-height/2);
+    right.texture = [SKTexture textureWithImageNamed:@"botao_direcao_R.png"];
+    
+    return right;
+}
+
+
+-(SKSpriteNode *)createLeftButton{
+    left = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(width*0.08, width*0.08)];
+    left.name = @"left";
+    left.position = CGPointMake(left.size.width/2-width/2, left.size.height/2-height/2);
+    left.texture = [SKTexture textureWithImageNamed:@"botao_direcao_L.png"];
+    
+    return left;
+}
+
+
+
 -(SKSpriteNode *)creatAtackButton2{
     attack2 = [[SKSpriteNode alloc] initWithColor:[UIColor orangeColor]size:CGSizeMake(width*0.08, width*0.08)];
     attack2.name = @"Attack2";
@@ -202,41 +202,8 @@ const uint32_t ATTACK = 0x1 << 4;
     return defense;
 }
 
--(SKSpriteNode *)creatorBlock{
-    block = [[SKSpriteNode alloc] initWithColor:[SKColor brownColor] size:CGSizeMake(width*0.08, height*0.08)];
-    block.name = @"enemy";
-    block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size];
-    block.physicsBody.categoryBitMask = ENEMY;
-    block.physicsBody.collisionBitMask = SPARTAN | ROCK;
-    block.physicsBody.contactTestBitMask = SPARTAN | BIRIBINHA | ROCK | ATTACK;
-    block.position = CGPointMake(-camera.position.x+width/4, -height/2+(platform.size.height));
-    block.zPosition = 1;
-    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
-    SKTexture *enemyLT = [atlas textureNamed:@"inimigo1_03_L_parado.png"];
-    block.texture = enemyLT;
-    [self enemyMovingLeft];
-    
-    return block;
-}
--(void)enemyMovingLeft{
-    
-    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
-    SKAction *moveLeft = [SKAction moveByX:-400 y:0 duration:5];
-    SKTexture *f1 = [atlas textureNamed:@"inimigo1_05_L_correndo.png"];
-    SKTexture *f2 = [atlas textureNamed:@"inimigo1_06_L_correndo.png"];
-    SKTexture *f3 = [atlas textureNamed:@"inimigo1_07_L_correndo.png"];
-    SKTexture *f4 = [atlas textureNamed:@"inimigo1_08_L_correndo.png"];
-    SKTexture *f5 = [atlas textureNamed:@"inimigo1_09_L_correndo.png"];
-    SKTexture *f6 = [atlas textureNamed:@"inimigo1_10_L_correndo.png"];
-    NSArray *enemyLeftWalk = @[f1,f2,f3,f4,f5,f6];
-    [block runAction:[SKAction repeatActionForever:moveLeft ] withKey:@"EnemyWalkLAction1"];
-    [block runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:enemyLeftWalk timePerFrame:0.1f]] withKey:@"EnemyWalkLAction2"];
-    
-    [block runAction:moveLeft];
 
-    
-
-}
+#pragma mark - Actions
 
 -(void)throwBiribinhaRight{
     if(lancas>0){
@@ -309,6 +276,44 @@ const uint32_t ATTACK = 0x1 << 4;
     attackRegion.physicsBody.contactTestBitMask = ROCK;
 }
 
+#pragma mark - Enemy
+
+-(SKSpriteNode *)creatorBlock{
+    block = [[SKSpriteNode alloc] initWithColor:[SKColor brownColor] size:CGSizeMake(width*0.08, height*0.08)];
+    block.name = @"enemy";
+    block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size];
+    block.physicsBody.categoryBitMask = ENEMY;
+    block.physicsBody.collisionBitMask = SPARTAN | ROCK;
+    block.physicsBody.contactTestBitMask = SPARTAN | BIRIBINHA | ROCK | ATTACK;
+    block.position = CGPointMake(-camera.position.x+width/4, -height/2+(platform.size.height));
+    block.zPosition = 1;
+    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
+    SKTexture *enemyLT = [atlas textureNamed:@"inimigo1_03_L_parado.png"];
+    block.texture = enemyLT;
+    [self enemyMovingLeft];
+    
+    return block;
+}
+
+-(void)enemyMovingLeft{
+    
+    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
+    SKAction *moveLeft = [SKAction moveByX:-400 y:0 duration:5];
+    SKTexture *f1 = [atlas textureNamed:@"inimigo1_05_L_correndo.png"];
+    SKTexture *f2 = [atlas textureNamed:@"inimigo1_06_L_correndo.png"];
+    SKTexture *f3 = [atlas textureNamed:@"inimigo1_07_L_correndo.png"];
+    SKTexture *f4 = [atlas textureNamed:@"inimigo1_08_L_correndo.png"];
+    SKTexture *f5 = [atlas textureNamed:@"inimigo1_09_L_correndo.png"];
+    SKTexture *f6 = [atlas textureNamed:@"inimigo1_10_L_correndo.png"];
+    NSArray *enemyLeftWalk = @[f1,f2,f3,f4,f5,f6];
+    [block runAction:[SKAction repeatActionForever:moveLeft ] withKey:@"EnemyWalkLAction1"];
+    [block runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:enemyLeftWalk timePerFrame:0.1f]] withKey:@"EnemyWalkLAction2"];
+    
+    [block runAction:moveLeft];
+}
+
+
+#pragma mark - Touch Control
 
 - (void)touchesBegan:(NSSet *) touches withEvent:(UIEvent *)event
 {
@@ -448,63 +453,6 @@ const uint32_t ATTACK = 0x1 << 4;
         }
     }
 }
-//-(void)enemyCreator{
-//    
-//    inimigos = [[NSMutableArray alloc] init];
-//    
-//    for (int i = 0; i<15; i++) {
-//        
-//        
-//        
-//            inimigos[i] = [self creatorBlock];
-//            [camera addChild:inimigos[i]];
-//        
-//        
-//    }
-//    
-//}
-
--(void)update:(NSTimeInterval)currentTime{
-    lancasCount.text = [NSString stringWithFormat:@"%@ %ld",aux, (long)lancas];
-
-    counter--;
-    
-    if (counter==0) {
-       
-            [camera addChild:[self creatorBlock]];
-
-         counter = 60;
-    }
-
-    if(camera.position.x <= -width*stages){
-        if(stages%2!=0){
-            platform.position = CGPointMake(platform2.position.x+platform.size.width, platform.position.y);
-            fundo.position = CGPointMake(fundo2.position.x+fundo.size.width, fundo.position.y);
-        }
-        else{
-            platform2.position = CGPointMake(platform.position.x+platform.size.width, platform.position.y);
-            fundo2.position = CGPointMake(fundo.position.x+fundo.size.width, fundo.position.y);
-        }
-        stages++;
-        [self enemyMovingLeft];
-    }
-//    NSLog(@"%f",camera.position.x);
-    NSLog(@"%f",spartan.position.x);
-    NSLog(@"%f",block.position.x);
-}
-
-//-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-//    
-//    UITouch *touch = [touches anyObject];
-//    CGPoint location = [touch locationInNode:self];
-//    SKNode *node = [self nodeAtPoint:location];
-//    
-//    if([currentButton isEqualToString:@""]){
-//        [spartan removeAllActions];
-//    }
-//    NSLog(@"%@",node.name);
-//    NSLog(@"%@",currentButton);
-//}
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [touches anyObject];
@@ -560,6 +508,48 @@ const uint32_t ATTACK = 0x1 << 4;
         else [spartan removeActionForKey:@"AttackRAction2"];}
     else [spartan removeAllActions];
 
+}
+
+#pragma mark - Update
+
+-(void)update:(NSTimeInterval)currentTime{
+    lancasCount.text = [NSString stringWithFormat:@"%@ %ld",aux, (long)lancas];
+    
+    counter--;
+    
+    if (counter==0) {
+        
+        [camera addChild:[self creatorBlock]];
+        
+        counter = 60;
+    }
+    
+    if(camera.position.x <= -width*stages){
+        if(stages%2!=0){
+            platform.position = CGPointMake(platform2.position.x+platform.size.width, platform.position.y);
+            fundo.position = CGPointMake(fundo2.position.x+fundo.size.width, fundo.position.y);
+        }
+        else{
+            platform2.position = CGPointMake(platform.position.x+platform.size.width, platform.position.y);
+            fundo2.position = CGPointMake(fundo.position.x+fundo.size.width, fundo.position.y);
+        }
+        stages++;
+        [self enemyMovingLeft];
+    }
+    NSLog(@"%f",spartan.position.x);
+    NSLog(@"%f",block.position.x);
+}
+
+
+#pragma mark - Physics
+
+- (void)didSimulatePhysics{
+    [self centerOnNode: [self childNodeWithName: @"//spartan"]];
+}
+
+- (void) centerOnNode: (SKNode *) node{
+    CGPoint cameraPositionInScene = [node.scene convertPoint:node.position fromNode:node.parent];
+    node.parent.position = CGPointMake(node.parent.position.x - cameraPositionInScene.x-width/4,                                       node.parent.position.y);
 }
 
 -(void)didBeginContact:(SKPhysicsContact *)contact
