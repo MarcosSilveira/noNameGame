@@ -608,7 +608,7 @@ const uint32_t ATTACK = 0x1 << 4;
                 }
                 else if(HP==2){
                     texturaAux= [SKTexture textureWithImageNamed:@"2-5_hearts.png"];
-                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
+                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil siz.tee:CGSizeMake(200, 30)];
                 }
                 else if (HP==1){
                     texturaAux= [SKTexture textureWithImageNamed:@"1-5_hearts.png"];
@@ -618,6 +618,7 @@ const uint32_t ATTACK = 0x1 << 4;
                     texturaAux= [SKTexture textureWithImageNamed:@"0-5_hearts.png"];
                     vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
                 }
+            
         }
     }
     }
