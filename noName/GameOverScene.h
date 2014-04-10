@@ -14,8 +14,9 @@
     SKSpriteNode *playAgain;
     int width;
     int height;
+    SKLabelNode *scoreAux;
 }
 
-
+-(id)initWithSize:(CGSize)size andScore:(NSNumber*)score;
 
 @end

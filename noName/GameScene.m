@@ -21,6 +21,7 @@ const uint32_t ATTACK = 0x1 << 4;
     int height;
     int counter;
     int stages;
+    NSNumber *score;
     NSString *currentButton;
     int HP;
     SKTexture *texturaAux;
@@ -36,6 +37,8 @@ const uint32_t ATTACK = 0x1 << 4;
     height = self.scene.size.height;
     currentButton = @"";
     HP = 5;
+    score = [[NSNumber alloc] initWithFloat:(0)];
+  //  score++;
     
     self.physicsWorld.contactDelegate = (id)self;
     self.backgroundColor = [SKColor redColor];
@@ -584,7 +587,7 @@ const uint32_t ATTACK = 0x1 << 4;
             [contact.bodyB.node removeFromParent];
             
             
-            SKScene *GO = [[GameOverScene alloc] initWithSize:self.size];
+            SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
             SKTransition *troca = [SKTransition fadeWithDuration:0.5];
             [self.view presentScene:GO transition:troca];
         }
@@ -603,7 +606,7 @@ const uint32_t ATTACK = 0x1 << 4;
         SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
         if(HP == 0){
             [contact.bodyA.node removeFromParent];
-            SKScene *GO = [[GameOverScene alloc] initWithSize:self.size];
+            SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
             SKTransition *troca = [SKTransition fadeWithDuration:0.5];
             [self.view presentScene:GO transition:troca];
         }

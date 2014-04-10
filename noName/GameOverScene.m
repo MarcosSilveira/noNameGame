@@ -14,9 +14,11 @@
 @implementation GameOverScene{
 
 }
--(id)initWithSize:(CGSize)size {
+
+-(id)initWithSize:(CGSize)size andScore:(NSNumber*)score
+{
     if (self = [super initWithSize:size]) {
-        /* Setup your scene here */
+       
         width = self.scene.size.width;
         height = self.scene.size.height;
         
@@ -25,19 +27,35 @@
         fundo2.anchorPoint = CGPointZero;
         
         playAgain = [[SKSpriteNode alloc] initWithImageNamed:@"jogarnovamente.png"];
-        playAgain.size = CGSizeMake(self.scene.size.width*0.30, self.scene.size.height*0.15);
-        playAgain.position = CGPointMake(CGRectGetMidX(self.frame), height*0.7);
+        playAgain.size = CGSizeMake(self.scene.size.width*0.70, self.scene.size.height*0.08);
+        playAgain.position = CGPointMake(CGRectGetMidX(self.frame), self.scene.size.height/4);
         playAgain.name = @"playAgain";
         
+        scoreAux = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
+        scoreAux.text = [NSString stringWithFormat:@"%@", score];
+        scoreAux.position = CGPointMake(width*0.70, height*0.46);
         [self addChild:fundo2];
         [self addChild:playAgain];
-
-        
+        [self addChild:scoreAux];
     }
+    
     return self;
 }
 
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    SKNode *node = [self nodeAtPoint:location];
+    
+    if ([node.name isEqualToString:@"playAgain"]) {
+        SKAction *action = [SKAction scaleBy:2 duration:1];
+        [playAgain runAction:action completion:^{
 
-
+        SKScene *gameAgain= [[GameScene alloc] initWithSize:self.size];
+        SKTransition *troca = [SKTransition fadeWithDuration:0.5];
+        [self.view presentScene:gameAgain transition:troca];
+        }];
+    }
+}
 
 @end
