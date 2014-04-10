@@ -16,21 +16,17 @@
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         
-        SKTexture *fundo = [SKTexture textureWithImageNamed:@"grecia.png"];
+        SKTexture *fundo = [SKTexture textureWithImageNamed:@"menufundo.png"];
         SKSpriteNode *fundo2 = [[SKSpriteNode alloc] initWithTexture:fundo color:nil size:CGSizeMake(self.scene.size.width, self.scene.size.height)];
         fundo2.anchorPoint = CGPointZero;
         
-        SKLabelNode *PlayLabel = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-        SKLabelNode *StoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        
-        StoreLabel.text = @"Loja";
-        StoreLabel.fontSize = 30;
+        SKSpriteNode *PlayLabel = [[SKSpriteNode alloc] initWithImageNamed:@"jogar.png"];
+        SKSpriteNode *StoreLabel = [[SKSpriteNode alloc] initWithImageNamed:@"loja.png"];
+        StoreLabel.size = CGSizeMake(self.scene.size.width*0.30, self.scene.size.height*0.15);
         StoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), (self.scene.size.height*3)/8);
-        StoreLabel.name = @"LojaNode";
-        PlayLabel.name = @"JogarNode";
-        PlayLabel.text = @"Jogar";
-        PlayLabel.fontSize = 30;
-        PlayLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.scene.size.height/2);
+        
+        PlayLabel.size = CGSizeMake(self.scene.size.width*0.30, self.scene.size.height*0.15);
+        PlayLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.scene.size.height/1.7);
         
         [self addChild:fundo2];
         [self addChild:PlayLabel];
