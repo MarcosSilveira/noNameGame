@@ -52,8 +52,8 @@ const uint32_t ATTACK = 0x1 << 4;
     
     [myWorld addChild:camera];
     
-    [camera addChild:[self background1]];
-    [camera addChild:[self background2]];
+    [self addChild:[self background1]];
+    [self addChild:[self background2]];
     [camera addChild:[self platformGG]];
     [camera addChild:[self platformGG2]];
     [camera addChild:[self createCharacter]];
@@ -484,38 +484,49 @@ const uint32_t ATTACK = 0x1 << 4;
 #pragma mark - Update
 
 -(void)update:(NSTimeInterval)currentTime{
+    NSLog(@"%f",camera.position.x);
+    NSLog(@"%f",spartan.position.x);
     lancasCount.text = [NSString stringWithFormat:@"%@ %ld",aux, (long)lancas];
     
     counter--;
     
     if (counter==0) {
         
-        [camera addChild:[self creatorBlock]];
+//        [camera addChild:[self creatorBlock]];
         
         counter = 60;
+    }
+    
+    fundo.position = CGPointMake(fundo.position.x-width*0.0007, fundo.position.y);
+    fundo2.position = CGPointMake(fundo2.position.x-width*0.0007, fundo2.position.y);
+    
+    if (fundo.position.x < -fundo.size.width){
+        fundo.position = CGPointMake(fundo2.position.x + fundo2.size.width, fundo.position.y);
+    }
+    
+    if (fundo2.position.x < -fundo2.size.width){
+        fundo2.position = CGPointMake(fundo.position.x + fundo.size.width, fundo2.position.y);
     }
     
     if(camera.position.x <= -width*stages){
         if(stages%2!=0){
             platform.position = CGPointMake(platform2.position.x+platform.size.width, platform.position.y);
-            fundo.position = CGPointMake(fundo2.position.x+fundo.size.width, fundo.position.y);
         }
         else{
             platform2.position = CGPointMake(platform.position.x+platform.size.width, platform.position.y);
-            fundo2.position = CGPointMake(fundo.position.x+fundo.size.width, fundo.position.y);
         }
         stages++;
         [self enemyMovingLeft];
     }
-    NSLog(@"%f",spartan.position.x);
-    NSLog(@"%f",block.position.x);
 }
 
 
 #pragma mark - Physics
 
 - (void)didSimulatePhysics{
-    [self centerOnNode: [self childNodeWithName: @"//spartan"]];
+    if(-spartan.position.x <= -width*(stages-1)){
+        [self centerOnNode: [self childNodeWithName: @"//spartan"]];
+    }
 }
 
 - (void) centerOnNode: (SKNode *) node{
