@@ -7,6 +7,7 @@
 //
 
 #import "GameScene.h"
+#import "GameOverScene.h"
 
 const uint32_t ROCK = 0x1 << 0;
 const uint32_t SPARTAN = 0x1 << 1;
@@ -84,7 +85,7 @@ const uint32_t ATTACK = 0x1 << 4;
     [self addChild:lancasCount];
     SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
     texturaAux = [lifeAtlas textureNamed:@"heart5.png"];
-    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
+    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(width*0.17, height*0.06)];
     vidas.position = CGPointMake(0, lancasCount.position.y+50);
     [self addChild:vidas];
     lancasNode = [[SKSpriteNode alloc] initWithImageNamed:@"lanca_contador.png"];
@@ -438,6 +439,10 @@ const uint32_t ATTACK = 0x1 << 4;
             
         }
     }
+    
+
+    
+    
 }
 
 
@@ -515,7 +520,7 @@ const uint32_t ATTACK = 0x1 << 4;
     
     if (counter==0) {
         
-//        [camera addChild:[self creatorBlock]];
+        [camera addChild:[self creatorBlock]];
         
         counter = 60;
     }
@@ -577,7 +582,13 @@ const uint32_t ATTACK = 0x1 << 4;
         SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
         if(HP == 0){
             [contact.bodyB.node removeFromParent];
+            
+            
+            SKScene *GO = [[GameOverScene alloc] initWithSize:self.size];
+            SKTransition *troca = [SKTransition fadeWithDuration:0.5];
+            [self.view presentScene:GO transition:troca];
         }
+        
         else{
             if (!defendendo) {
                 
@@ -592,6 +603,9 @@ const uint32_t ATTACK = 0x1 << 4;
         SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
         if(HP == 0){
             [contact.bodyA.node removeFromParent];
+            SKScene *GO = [[GameOverScene alloc] initWithSize:self.size];
+            SKTransition *troca = [SKTransition fadeWithDuration:0.5];
+            [self.view presentScene:GO transition:troca];
         }
         else{
             if (!defendendo) {

@@ -22,6 +22,9 @@
 		8DA4AF3618F71893005CB817 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF3518F71893005CB817 /* pause.png */; };
 		8DA4AF3818F71B76005CB817 /* lanca_contador.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF3718F71B76005CB817 /* lanca_contador.png */; };
 		8DA4AF3C18F71FC3005CB817 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF3B18F71FC3005CB817 /* play.png */; };
+		8DA4AF3F18F7253C005CB817 /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA4AF3E18F7253C005CB817 /* GameOverScene.m */; };
+		8DA4AF4118F726B9005CB817 /* gameover.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF4018F726B9005CB817 /* gameover.png */; };
+		8DA4AF4318F726BF005CB817 /* jogarnovamente.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF4218F726BF005CB817 /* jogarnovamente.png */; };
 		8DA59F2318EB2D630017DCFD /* StoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA59F2218EB2D630017DCFD /* StoreScene.m */; };
 		8DA63C9B18F320230000E0AD /* SPARTAN_DEF.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8DA63C9A18F320230000E0AD /* SPARTAN_DEF.atlas */; };
 		8DAB851818F5CA610099437C /* botao_atira_lanca_disponivel.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAB851618F5CA610099437C /* botao_atira_lanca_disponivel.png */; };
@@ -83,6 +86,10 @@
 		8DA4AF3518F71893005CB817 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		8DA4AF3718F71B76005CB817 /* lanca_contador.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lanca_contador.png; sourceTree = "<group>"; };
 		8DA4AF3B18F71FC3005CB817 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		8DA4AF3D18F7253C005CB817 /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
+		8DA4AF3E18F7253C005CB817 /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
+		8DA4AF4018F726B9005CB817 /* gameover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameover.png; sourceTree = "<group>"; };
+		8DA4AF4218F726BF005CB817 /* jogarnovamente.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jogarnovamente.png; sourceTree = "<group>"; };
 		8DA59F2118EB2D630017DCFD /* StoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreScene.h; sourceTree = "<group>"; };
 		8DA59F2218EB2D630017DCFD /* StoreScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreScene.m; sourceTree = "<group>"; };
 		8DA63C9A18F320230000E0AD /* SPARTAN_DEF.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = SPARTAN_DEF.atlas; sourceTree = "<group>"; };
@@ -205,6 +212,8 @@
 				8DAC9A9718E098A7000A016F /* MyScene.m */,
 				A08E389018E9EC2800C27179 /* GameScene.h */,
 				A08E389118E9EC2800C27179 /* GameScene.m */,
+				8DA4AF3D18F7253C005CB817 /* GameOverScene.h */,
+				8DA4AF3E18F7253C005CB817 /* GameOverScene.m */,
 				8DA59F2118EB2D630017DCFD /* StoreScene.h */,
 				8DA59F2218EB2D630017DCFD /* StoreScene.m */,
 				A03ACC6D18EDD2B10007299C /* grecia.png */,
@@ -222,6 +231,8 @@
 				8DA4AF3518F71893005CB817 /* pause.png */,
 				8DA4AF3B18F71FC3005CB817 /* play.png */,
 				8DA4AF3718F71B76005CB817 /* lanca_contador.png */,
+				8DA4AF4018F726B9005CB817 /* gameover.png */,
+				8DA4AF4218F726BF005CB817 /* jogarnovamente.png */,
 				8DAC9A9B18E098A7000A016F /* Images.xcassets */,
 				8DAC9A8518E098A7000A016F /* Supporting Files */,
 			);
@@ -361,6 +372,7 @@
 				8D266EF818EC87F40018D2C8 /* ATACK_RIGHT.atlas in Resources */,
 				8D47FF1118EB3BC9002C8D1C /* WALK_RIGHT.atlas in Resources */,
 				8DA4AF3418F70FDE005CB817 /* loja.png in Resources */,
+				8DA4AF4118F726B9005CB817 /* gameover.png in Resources */,
 				8D6F788718EC9CBC00A1F41D /* WALK_LEFT.atlas in Resources */,
 				8DBF9F6F18EDEA4400C3032A /* SPEARLAUNCH.atlas in Resources */,
 				A0DDE61618F5C4B600F301AA /* backgroundfixo.png in Resources */,
@@ -374,6 +386,7 @@
 				8D2CA9F618F479970062F480 /* botao_direcao_R.png in Resources */,
 				A0EAFF2618F463DB00B76CB5 /* prebackground1.png in Resources */,
 				A09BD64D18EDE82200202C1B /* Ground.png in Resources */,
+				8DA4AF4318F726BF005CB817 /* jogarnovamente.png in Resources */,
 				8DA4AF3318F70FDE005CB817 /* jogar.png in Resources */,
 				8D2CA9FA18F47F2F0062F480 /* botao_lanca.png in Resources */,
 				8D2CA9F918F47F2F0062F480 /* botao_escudo.png in Resources */,
@@ -399,6 +412,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DA4AF3F18F7253C005CB817 /* GameOverScene.m in Sources */,
 				8DAC9A9818E098A7000A016F /* MyScene.m in Sources */,
 				8DAC9A9518E098A7000A016F /* ViewController.m in Sources */,
 				8DA59F2318EB2D630017DCFD /* StoreScene.m in Sources */,
