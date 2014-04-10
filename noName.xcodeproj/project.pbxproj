@@ -20,12 +20,6 @@
 		8DA63C9B18F320230000E0AD /* SPARTAN_DEF.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8DA63C9A18F320230000E0AD /* SPARTAN_DEF.atlas */; };
 		8DAB851818F5CA610099437C /* botao_atira_lanca_disponivel.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAB851618F5CA610099437C /* botao_atira_lanca_disponivel.png */; };
 		8DAB851918F5CA610099437C /* botao_atira_lanca_indisponivel.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAB851718F5CA610099437C /* botao_atira_lanca_indisponivel.png */; };
-		8DAB852218F5D9970099437C /* 0-5_hearts.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAB851C18F5D9970099437C /* 0-5_hearts.png */; };
-		8DAB852318F5D9970099437C /* 1-5_hearts.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAB851D18F5D9970099437C /* 1-5_hearts.png */; };
-		8DAB852418F5D9970099437C /* 2-5_hearts.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAB851E18F5D9970099437C /* 2-5_hearts.png */; };
-		8DAB852518F5D9970099437C /* 3-5_hearts.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAB851F18F5D9970099437C /* 3-5_hearts.png */; };
-		8DAB852618F5D9970099437C /* 4-5_hearts.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAB852018F5D9970099437C /* 4-5_hearts.png */; };
-		8DAB852718F5D9970099437C /* 5-5_hearts.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAB852118F5D9970099437C /* 5-5_hearts.png */; };
 		8DAC9A7D18E098A7000A016F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DAC9A7C18E098A7000A016F /* Foundation.framework */; };
 		8DAC9A7F18E098A7000A016F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DAC9A7E18E098A7000A016F /* CoreGraphics.framework */; };
 		8DAC9A8118E098A7000A016F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DAC9A8018E098A7000A016F /* UIKit.framework */; };
@@ -52,6 +46,7 @@
 		A0DDE61318F5AA6400F301AA /* nuvem1.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61118F5AA6400F301AA /* nuvem1.png */; };
 		A0DDE61418F5AA6400F301AA /* nuvem2.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61218F5AA6400F301AA /* nuvem2.png */; };
 		A0DDE61618F5C4B600F301AA /* backgroundfixo.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61518F5C4B600F301AA /* backgroundfixo.png */; };
+		A0DDE61818F6FD9400F301AA /* LIFE.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61718F6FD9400F301AA /* LIFE.atlas */; };
 		A0EAFF2618F463DB00B76CB5 /* prebackground1.png in Resources */ = {isa = PBXBuildFile; fileRef = A0EAFF2418F463DB00B76CB5 /* prebackground1.png */; };
 		A0EAFF2718F463DB00B76CB5 /* prebackground2.png in Resources */ = {isa = PBXBuildFile; fileRef = A0EAFF2518F463DB00B76CB5 /* prebackground2.png */; };
 /* End PBXBuildFile section */
@@ -81,12 +76,6 @@
 		8DA63C9A18F320230000E0AD /* SPARTAN_DEF.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = SPARTAN_DEF.atlas; sourceTree = "<group>"; };
 		8DAB851618F5CA610099437C /* botao_atira_lanca_disponivel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_atira_lanca_disponivel.png; sourceTree = "<group>"; };
 		8DAB851718F5CA610099437C /* botao_atira_lanca_indisponivel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_atira_lanca_indisponivel.png; sourceTree = "<group>"; };
-		8DAB851C18F5D9970099437C /* 0-5_hearts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0-5_hearts.png"; sourceTree = "<group>"; };
-		8DAB851D18F5D9970099437C /* 1-5_hearts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-5_hearts.png"; sourceTree = "<group>"; };
-		8DAB851E18F5D9970099437C /* 2-5_hearts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2-5_hearts.png"; sourceTree = "<group>"; };
-		8DAB851F18F5D9970099437C /* 3-5_hearts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3-5_hearts.png"; sourceTree = "<group>"; };
-		8DAB852018F5D9970099437C /* 4-5_hearts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4-5_hearts.png"; sourceTree = "<group>"; };
-		8DAB852118F5D9970099437C /* 5-5_hearts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5-5_hearts.png"; sourceTree = "<group>"; };
 		8DAC9A7918E098A7000A016F /* noName.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = noName.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DAC9A7C18E098A7000A016F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8DAC9A7E18E098A7000A016F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -120,6 +109,7 @@
 		A0DDE61118F5AA6400F301AA /* nuvem1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nuvem1.png; sourceTree = "<group>"; };
 		A0DDE61218F5AA6400F301AA /* nuvem2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nuvem2.png; sourceTree = "<group>"; };
 		A0DDE61518F5C4B600F301AA /* backgroundfixo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundfixo.png; sourceTree = "<group>"; };
+		A0DDE61718F6FD9400F301AA /* LIFE.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = LIFE.atlas; sourceTree = "<group>"; };
 		A0EAFF2418F463DB00B76CB5 /* prebackground1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prebackground1.png; sourceTree = "<group>"; };
 		A0EAFF2518F463DB00B76CB5 /* prebackground2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prebackground2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,6 +142,7 @@
 		8DAC9A7018E098A7000A016F = {
 			isa = PBXGroup;
 			children = (
+				A0DDE61718F6FD9400F301AA /* LIFE.atlas */,
 				8DA63C9A18F320230000E0AD /* SPARTAN_DEF.atlas */,
 				8DBF9F7218EDF05E00C3032A /* ENEMY_LEFT.atlas */,
 				8DBF9F7018EDF05800C3032A /* ENEMY_RIGHT.atlas */,
@@ -213,12 +204,6 @@
 				A0DDE61518F5C4B600F301AA /* backgroundfixo.png */,
 				8DAB851618F5CA610099437C /* botao_atira_lanca_disponivel.png */,
 				8DAB851718F5CA610099437C /* botao_atira_lanca_indisponivel.png */,
-				8DAB851C18F5D9970099437C /* 0-5_hearts.png */,
-				8DAB851D18F5D9970099437C /* 1-5_hearts.png */,
-				8DAB851E18F5D9970099437C /* 2-5_hearts.png */,
-				8DAB851F18F5D9970099437C /* 3-5_hearts.png */,
-				8DAB852018F5D9970099437C /* 4-5_hearts.png */,
-				8DAB852118F5D9970099437C /* 5-5_hearts.png */,
 				8DAC9A9B18E098A7000A016F /* Images.xcassets */,
 				8DAC9A8518E098A7000A016F /* Supporting Files */,
 			);
@@ -314,7 +299,7 @@
 				ORGANIZATIONNAME = "Marcos Sokolowski";
 				TargetAttributes = {
 					8DAC9A7818E098A7000A016F = {
-						DevelopmentTeam = T5N5TT4E82;
+						DevelopmentTeam = 4452968868;
 					};
 					8DAC9AA018E098A7000A016F = {
 						TestTargetID = 8DAC9A7818E098A7000A016F;
@@ -345,6 +330,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0DDE61818F6FD9400F301AA /* LIFE.atlas in Resources */,
 				A0EAFF2718F463DB00B76CB5 /* prebackground2.png in Resources */,
 				A03ACC6E18EDD2B10007299C /* grecia.png in Resources */,
 				8DAC9A8918E098A7000A016F /* InfoPlist.strings in Resources */,
@@ -355,12 +341,10 @@
 				8D266EF818EC87F40018D2C8 /* ATACK_RIGHT.atlas in Resources */,
 				8D47FF1118EB3BC9002C8D1C /* WALK_RIGHT.atlas in Resources */,
 				8D6F788718EC9CBC00A1F41D /* WALK_LEFT.atlas in Resources */,
-				8DAB852318F5D9970099437C /* 1-5_hearts.png in Resources */,
 				8DBF9F6F18EDEA4400C3032A /* SPEARLAUNCH.atlas in Resources */,
 				A0DDE61618F5C4B600F301AA /* backgroundfixo.png in Resources */,
 				8DAB851818F5CA610099437C /* botao_atira_lanca_disponivel.png in Resources */,
 				8D5CABBB18E9E4B500FDFDF1 /* grecia.jpg in Resources */,
-				8DAB852618F5D9970099437C /* 4-5_hearts.png in Resources */,
 				8D2CA9F518F479970062F480 /* botao_direcao_L.png in Resources */,
 				8DAC9A9C18E098A7000A016F /* Images.xcassets in Resources */,
 				8D6F788518EC999600A1F41D /* ATTACK_LEFT.atlas in Resources */,
@@ -370,12 +354,8 @@
 				A0EAFF2618F463DB00B76CB5 /* prebackground1.png in Resources */,
 				A09BD64D18EDE82200202C1B /* Ground.png in Resources */,
 				8D2CA9FA18F47F2F0062F480 /* botao_lanca.png in Resources */,
-				8DAB852518F5D9970099437C /* 3-5_hearts.png in Resources */,
 				8D2CA9F918F47F2F0062F480 /* botao_escudo.png in Resources */,
 				8DA63C9B18F320230000E0AD /* SPARTAN_DEF.atlas in Resources */,
-				8DAB852418F5D9970099437C /* 2-5_hearts.png in Resources */,
-				8DAB852218F5D9970099437C /* 0-5_hearts.png in Resources */,
-				8DAB852718F5D9970099437C /* 5-5_hearts.png in Resources */,
 				8DAB851918F5CA610099437C /* botao_atira_lanca_indisponivel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
