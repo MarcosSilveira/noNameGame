@@ -28,6 +28,7 @@
     NSInteger lancas;
     SKLabelNode *lancasCount;
     SKLabelNode *vidaCount;
+    SKSpriteNode *vidas;
     NSString *aux;
     NSString *auxHP;
     SKSpriteNode *block;

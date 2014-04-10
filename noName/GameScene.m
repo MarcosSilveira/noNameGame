@@ -21,6 +21,7 @@ const uint32_t ATTACK = 0x1 << 4;
     int stages;
     NSString *currentButton;
     int HP;
+    SKTexture *texturaAux;
 }
 
 -(void)didMoveToView:(SKView *)view{
@@ -71,11 +72,14 @@ const uint32_t ATTACK = 0x1 << 4;
     lancasCount.fontSize = 20;
     lancasCount.fontColor = [UIColor whiteColor];
     [self addChild:lancasCount];
-    vidaCount = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
-    auxHP = @"Vidas";
-    vidaCount.text = [NSString stringWithFormat:@"%@, %ld", aux,(long)HP];
-    vidaCount.position = CGPointMake(0, lancasCount.position.y+20);
-    [self addChild:vidaCount];
+//    vidaCount = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
+//    auxHP = @"Vidas";
+//    vidaCount.text = [NSString stringWithFormat:@"%@, %ld", aux,(long)HP];
+    texturaAux= [SKTexture textureWithImageNamed:@"5-5_hearts.png"];
+    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
+    
+    vidas.position = CGPointMake(0, lancasCount.position.y+50);
+    [self addChild:vidas];
 }
 
 -(SKSpriteNode *)createCharacter{
@@ -465,7 +469,7 @@ const uint32_t ATTACK = 0x1 << 4;
 
 -(void)update:(NSTimeInterval)currentTime{
     lancasCount.text = [NSString stringWithFormat:@"%@ %ld",aux, (long)lancas];
-    vidaCount.text = [NSString stringWithFormat:@"%@ %ld", auxHP, (long)HP];
+
     counter--;
     
     if (counter==0) {
@@ -587,6 +591,33 @@ const uint32_t ATTACK = 0x1 << 4;
             HP--;
             contact.bodyB.node.position = CGPointMake(contact.bodyB.node.position.x+100, contact.bodyB.node.position.y);
             [contact.bodyB.node.physicsBody applyImpulse:CGVectorMake(10, 0)];
+                if(HP==5){
+                    texturaAux= [SKTexture textureWithImageNamed:@"5-5_hearts.png"];
+                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
+                //    [self addChild:vidas];
+                }
+                else if (HP==4){
+                    texturaAux= [SKTexture textureWithImageNamed:@"4-5_hearts.png"];
+                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
+                 //   [self addChild:vidas];
+                }
+                else if (HP==3){
+                    texturaAux= [SKTexture textureWithImageNamed:@"3-5_hearts.png"];
+                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
+                   // [self addChild:vidas];
+                }
+                else if(HP==2){
+                    texturaAux= [SKTexture textureWithImageNamed:@"2-5_hearts.png"];
+                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
+                }
+                else if (HP==1){
+                    texturaAux= [SKTexture textureWithImageNamed:@"1-5_hearts.png"];
+                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
+                }
+                else if (HP==0){
+                    texturaAux= [SKTexture textureWithImageNamed:@"0-5_hearts.png"];
+                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
+                }
         }
     }
     }
@@ -600,8 +631,37 @@ const uint32_t ATTACK = 0x1 << 4;
             HP--;
             contact.bodyA.node.position = CGPointMake(contact.bodyA.node.position.x+100, contact.bodyA.node.position.y);
             [contact.bodyA.node.physicsBody applyImpulse:CGVectorMake(10, 0)];
+                if(HP==5){
+                    texturaAux= [SKTexture textureWithImageNamed:@"5-5_hearts.png"];
+                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
+                }
+                else if (HP==4){
+                    texturaAux= [SKTexture textureWithImageNamed:@"4-5_hearts.png"];
+                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
+                    
+                }
+                else if (HP==3){
+                    
+                    texturaAux= [SKTexture textureWithImageNamed:@"3-5_hearts.png"];
+                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
+                   // [self addChild:vidas];
+                }
+                else if(HP==2){
+                    texturaAux= [SKTexture textureWithImageNamed:@"2-5_hearts.png"];
+                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
+                }
+                else if (HP==1){
+                    texturaAux= [SKTexture textureWithImageNamed:@"1-5_hearts.png"];
+                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
+                }
+                else if (HP==0){
+                    texturaAux= [SKTexture textureWithImageNamed:@"0-5_hearts.png"];
+                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
+                }
+            }
+
+        
         }
-    }
     }
 }
 
