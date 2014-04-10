@@ -456,11 +456,14 @@ const uint32_t ATTACK = 0x1 << 4;
     }
     
     if ([node.name isEqualToString:@"PauseButton"]) {
-        if (self.paused)
+        if (self.paused){
             self.paused = NO;
-        else
+            pause.texture = [SKTexture textureWithImageNamed:@"pause.png"];
+        }
+        else{
             self.paused = YES;
-        
+            pause.texture = [SKTexture textureWithImageNamed:@"play.png"];
+        }
     
     }
     if([node.name isEqualToString:@"defense"]){
