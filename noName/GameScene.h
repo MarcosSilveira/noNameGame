@@ -33,6 +33,7 @@
     NSString *auxHP;
     SKSpriteNode *block;
     SKSpriteNode *pause;
+    SKSpriteNode *lancasNode;
     }
 
 @end

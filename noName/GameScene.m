@@ -77,7 +77,7 @@ const uint32_t ATTACK = 0x1 << 4;
     lancasCount = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
     aux = @"Lanças:";
     lancas = 5;
-    lancasCount.text = [NSString stringWithFormat:@"%@,%ld",aux,(long)lancas];
+    lancasCount.text = [NSString stringWithFormat:@"%ld",(long)lancas];
     lancasCount.position = CGPointMake(0, height/3);
     lancasCount.fontSize = 20;
     lancasCount.fontColor = [UIColor whiteColor];
@@ -87,6 +87,11 @@ const uint32_t ATTACK = 0x1 << 4;
     vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
     vidas.position = CGPointMake(0, lancasCount.position.y+50);
     [self addChild:vidas];
+    lancasNode = [[SKSpriteNode alloc] initWithImageNamed:@"lanca_contador.png"];
+    lancasNode.size = CGSizeMake(150, 150);
+    lancasNode.position = CGPointMake(lancasCount.position.x-50, lancasCount.position.y);
+    [self addChild:lancasNode];
+    
 }
 
 #pragma mark - Create Sparta
@@ -504,7 +509,7 @@ const uint32_t ATTACK = 0x1 << 4;
 -(void)update:(NSTimeInterval)currentTime{
     NSLog(@"%f",camera.position.x);
     NSLog(@"%f",spartan.position.x);
-    lancasCount.text = [NSString stringWithFormat:@"%@ %ld",aux, (long)lancas];
+    lancasCount.text = [NSString stringWithFormat:@"%ld", (long)lancas];
     
     counter--;
     
