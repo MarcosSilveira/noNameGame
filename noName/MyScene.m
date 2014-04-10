@@ -27,7 +27,8 @@
         
         PlayLabel.size = CGSizeMake(self.scene.size.width*0.30, self.scene.size.height*0.15);
         PlayLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.scene.size.height/1.7);
-        
+        PlayLabel.name = @"JogarNode";
+        StoreLabel.name = @"StoreLabel";
         [self addChild:fundo2];
         [self addChild:PlayLabel];
         [self addChild:StoreLabel];
