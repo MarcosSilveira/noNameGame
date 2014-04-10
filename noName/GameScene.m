@@ -588,34 +588,9 @@ const uint32_t ATTACK = 0x1 << 4;
                 
             HP--;
             [contact.bodyB.node.physicsBody applyImpulse:CGVectorMake(10, 0)];
-                if(HP==5){
-                    texturaAux= [SKTexture textureWithImageNamed:@"5-5_hearts.png"];
-                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
-                //    [self addChild:vidas];
-                }
-                else if (HP==4){
-                    texturaAux= [SKTexture textureWithImageNamed:@"4-5_hearts.png"];
-                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
-                 //   [self addChild:vidas];
-                }
-                else if (HP==3){
-                    texturaAux= [SKTexture textureWithImageNamed:@"3-5_hearts.png"];
-                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
-                   // [self addChild:vidas];
-                }
-                else if(HP==2){
-                    texturaAux= [SKTexture textureWithImageNamed:@"2-5_hearts.png"];
-                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil siz.tee:CGSizeMake(200, 30)];
-                }
-                else if (HP==1){
-                    texturaAux= [SKTexture textureWithImageNamed:@"1-5_hearts.png"];
-                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
-                }
-                else if (HP==0){
-                    texturaAux= [SKTexture textureWithImageNamed:@"0-5_hearts.png"];
-                    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(200, 30)];
-                }
-            
+            NSString *textureName = [NSString stringWithFormat:@"heart%d",HP];
+            vidas.texture = [lifeAtlas textureNamed:textureName];
+            }
         }
     }
     if([contact.bodyA.node.name isEqualToString:@"spartan"] && [contact.bodyB.node.name isEqualToString:@"enemy"]){
