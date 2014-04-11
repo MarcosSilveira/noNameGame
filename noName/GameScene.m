@@ -569,6 +569,11 @@ const uint32_t ATTACK = 0x1 << 4;
         [spartan removeAllActions];
     }
     
+    if(node.name == NULL){
+        [spartan removeAllActions];
+        defendendo = NO;
+    }
+    
     if(!defendendo){
         if (esquerda) {
             SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
@@ -590,13 +595,6 @@ const uint32_t ATTACK = 0x1 << 4;
     if([node.name isEqualToString:@"Attack2"]){
         return;
     }
-    
-    
-    if(node.name == NULL){
-        [spartan removeAllActions];
-    }
-    
-    
 }
 
 
