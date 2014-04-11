@@ -15,7 +15,7 @@
 
 }
 
--(id)initWithSize:(CGSize)size andScore:(NSNumber*)score
+-(id)initWithSize:(CGSize)size andScore:(NSInteger)score
 {
     if (self = [super initWithSize:size]) {
        
@@ -32,7 +32,9 @@
         playAgain.name = @"playAgain";
         
         scoreAux = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
-        scoreAux.text = [NSString stringWithFormat:@"%@", score];
+        scoreAux.text = [NSString stringWithFormat:@"%lx", (long)score];
+        scoreAux.fontColor = [UIColor grayColor];
+        scoreAux.fontSize = 60;
         scoreAux.position = CGPointMake(width*0.70, height*0.46);
         [self addChild:fundo2];
         [self addChild:playAgain];

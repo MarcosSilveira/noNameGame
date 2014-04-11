@@ -17,6 +17,6 @@
     SKLabelNode *scoreAux;
 }
 
--(id)initWithSize:(CGSize)size andScore:(NSNumber*)score;
+-(id)initWithSize:(CGSize)size andScore:(NSInteger)score;
 
 @end

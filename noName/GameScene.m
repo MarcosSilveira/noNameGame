@@ -21,7 +21,7 @@ const uint32_t ATTACK = 0x1 << 4;
     int height;
     int counter;
     int stages;
-    NSNumber *score;
+    NSInteger score;
     NSString *currentButton;
     int HP;
     SKTexture *texturaAux;
@@ -37,7 +37,8 @@ const uint32_t ATTACK = 0x1 << 4;
     height = self.scene.size.height;
     currentButton = @"";
     HP = 5;
-    score = [[NSNumber alloc] initWithFloat:(0)];
+    //score = [[NSNumber alloc] initWithFloat:(0)];
+    score = 0;
   //  score++;
     
     self.physicsWorld.contactDelegate = (id)self;
@@ -571,15 +572,20 @@ const uint32_t ATTACK = 0x1 << 4;
     NSLog(@"body B %@",contact.bodyB.node.name);
     if(([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"spear"]) || ([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"attack"])){
         [contact.bodyA.node removeFromParent];
+        score++;
+        
     }
     if(([contact.bodyB.node.name isEqualToString:@"enemy"] && [contact.bodyA.node.name isEqualToString:@"spear"]) || ([contact.bodyB.node.name isEqualToString:@"enemy"] && [contact.bodyA.node.name isEqualToString:@"attack"])){
         [contact.bodyB.node removeFromParent];
+       // score++;
     }
     if([contact.bodyB.node.name isEqualToString:@"spear"] || [contact.bodyB.node.name isEqualToString:@"attack"]){
         [contact.bodyB.node removeFromParent];
+    //    score++;
     }
     if([contact.bodyA.node.name isEqualToString:@"spear"] || [contact.bodyA.node.name isEqualToString:@"attack"]){
         [contact.bodyA.node removeFromParent];
+     //   score++;
     }
     if([contact.bodyB.node.name isEqualToString:@"spartan"] && [contact.bodyA.node.name isEqualToString:@"enemy"]){
         SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
