@@ -96,8 +96,22 @@ const uint32_t ATTACK = 0x1 << 4;
     lancasNode.size = CGSizeMake(150, 150);
     lancasNode.position = CGPointMake(lancasCount.position.x-50, lancasCount.position.y);
     [self addChild:lancasNode];
+    [self addChild:[self newSmoke:(width*0.5-(attack.size.width/2))+30:(-(height*0.5)+(attack.size.height/2))]];
     
 }
+#pragma mark - Create Particles
+
+- (SKEmitterNode *) newSmoke: (float)posX : (float) posY
+{
+    SKEmitterNode *emitter =  [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Smoke" ofType:@"sks"]];
+    emitter.position = CGPointMake(posX,posY);
+    emitter.name = @"explosion";
+    emitter.targetNode = self.scene;
+    emitter.numParticlesToEmit = 1000;
+    emitter.zPosition=2.0;
+    return emitter;
+}
+
 
 #pragma mark - Create Sparta
 
