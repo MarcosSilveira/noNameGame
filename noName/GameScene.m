@@ -250,10 +250,12 @@ const uint32_t ATTACK = 0x1 << 4;
         projectile.physicsBody.categoryBitMask = BIRIBINHA;
         projectile.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
         projectile.physicsBody.contactTestBitMask = ROCK;
-        [projectile.physicsBody applyImpulse:CGVectorMake(10, 0)];
+        projectile.physicsBody.dynamic=NO;
+//        [projectile.physicsBody applyForce:CGVectorMake(10, 0)];
+//        [projectile.physicsBody applyImpulse:CGVectorMake(10, 0)];
+    //    [projectile.physicsBody ]
         lancas--;
-        //[self newFire:projectile.position.x :projectile.position.y];
-        
+
     }
     else{
         lancasCount.fontColor = [UIColor redColor];
@@ -601,8 +603,8 @@ const uint32_t ATTACK = 0x1 << 4;
 #pragma mark - Update
 
 -(void)update:(NSTimeInterval)currentTime{
-    Fire.position = block.position;
-    
+    Fire.position = projectile.position;
+    [projectile runAction:[SKAction moveByX:30 y:0 duration:1]];
     lancasCount.text = [NSString stringWithFormat:@"%ld", (long)lancas];
     
     counter--;
