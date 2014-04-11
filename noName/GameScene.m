@@ -43,16 +43,12 @@ const uint32_t ATTACK = 0x1 << 4;
     self.backgroundColor = [SKColor redColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
     self.anchorPoint = CGPointMake (0.5,0.5);
+    self.physicsWorld.gravity = CGVectorMake(0.0f, -1.0f);
     [self touchesEnded:nil withEvent:nil];
     SKNode *myWorld = [SKNode node];
     
     [self addChild:myWorld];
     [self background3];
-    
-    pause = [[SKSpriteNode alloc] initWithImageNamed:@"pause.png"];
-    pause.position = CGPointMake(-width/2+pause.size.width/2, height/2-pause.size.height/2);
-    pause.size = CGSizeMake(width*0.06, width*0.06);
-    pause.name = @"PauseButton";
     
     myWorld.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     myWorld.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(-width/2, -height/2) toPoint:CGPointMake(width/2, -height/2)];
@@ -73,9 +69,6 @@ const uint32_t ATTACK = 0x1 << 4;
     [self addChild:[self createAttackButton]];
     [self addChild:[self creatAtackButton2]];
     [self addChild:[self createDefenseButton]];
-    [self addChild:pause];
-    
-    self.physicsWorld.gravity = CGVectorMake(0.0f, -1.0f);
     
     lancasCount = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
     aux = @"Lanças:";
@@ -85,14 +78,16 @@ const uint32_t ATTACK = 0x1 << 4;
     lancasCount.fontSize = 20;
     lancasCount.fontColor = [UIColor whiteColor];
     [self addChild:lancasCount];
+    
     SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
     texturaAux = [lifeAtlas textureNamed:@"heart5.png"];
     vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(width*0.17, height*0.06)];
     vidas.position = CGPointMake(0, lancasCount.position.y+50);
     [self addChild:vidas];
+    
     lancasNode = [[SKSpriteNode alloc] initWithImageNamed:@"lanca_contador.png"];
-    lancasNode.size = CGSizeMake(150, 150);
-    lancasNode.position = CGPointMake(lancasCount.position.x-50, lancasCount.position.y);
+    lancasNode.size = CGSizeMake(width*0.15, width*0.15);
+    lancasNode.position = CGPointMake(width/2-lancasNode.size.width/2, height/2-lancasNode.size.height/2);
     [self addChild:lancasNode];
     
 //    [self addChild:[self newSmoke:(width*0.5-(attack.size.width/2))+70:(-(height*0.5)+(attack.size.height/2))]];
@@ -208,7 +203,6 @@ const uint32_t ATTACK = 0x1 << 4;
 }
 
 
-
 -(SKSpriteNode *)creatAtackButton2{
     attack2 = [[SKSpriteNode alloc] initWithColor:[UIColor orangeColor]size:CGSizeMake(width*0.08, width*0.08)];
     attack2.name = @"Attack2";
@@ -316,6 +310,7 @@ const uint32_t ATTACK = 0x1 << 4;
     attackRegion.physicsBody.collisionBitMask = 0;
     attackRegion.physicsBody.contactTestBitMask = ROCK;
     SKAction *moveRight = [SKAction moveByX:attackRegion.size.width y:0 duration:0.1];
+    attackRegion.hidden = YES;
     [camera addChild:attackRegion];
     [attackRegion runAction:moveRight completion:^{
         [attackRegion removeFromParent];
@@ -331,6 +326,7 @@ const uint32_t ATTACK = 0x1 << 4;
     attackRegion.physicsBody.collisionBitMask = 0;
     attackRegion.physicsBody.contactTestBitMask = ROCK;
     SKAction *moveLeft = [SKAction moveByX:-attackRegion.size.width y:0 duration:0.1];
+    attackRegion.hidden = YES;
     [camera addChild:attackRegion];
     [attackRegion runAction:moveLeft completion:^{
         [attackRegion removeFromParent];
@@ -394,6 +390,8 @@ const uint32_t ATTACK = 0x1 << 4;
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
+    
+    //__________________________________________Move Right_______________________________
 
     if([node.name isEqualToString:(@"right")]){
         currentButton = node.name;
@@ -411,14 +409,20 @@ const uint32_t ATTACK = 0x1 << 4;
         [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:monsterWalkTextures timePerFrame:0.1f]] withKey:@"WalkRAction2"];
         
     }
+    
+    //__________________________________________Ranged Attack_______________________________
+    
+
     else if ([node.name isEqualToString:@"Attack2"]){
         if (esquerda) {
             SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEARLAUNCH"];
             SKTexture *f1 = [atlas textureNamed:@"lancandoSpear-LEFT.png"];
             NSArray *spartanAttackTextures = @[f1];
             [self throwBiribinhaLeft];
-            if (lancas>0)
+            if (lancas>0){
                 [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]withKey:@"AttackLAction2"];
+                [self runAction:[SKAction playSoundFileNamed:@"spearT.wav" waitForCompletion:NO]];
+            }
             else attack2.color = [UIColor grayColor];
         }
         else{
@@ -426,11 +430,16 @@ const uint32_t ATTACK = 0x1 << 4;
             SKTexture *f1 = [atlas textureNamed:@"lancandoSpear-RIGHT.png"];
             NSArray *spartanAttackTextures = @[f1];
             [self throwBiribinhaRight];
-            if (lancas>0)
+            if (lancas>0){
                 [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]withKey:@"AttackRAction2"];
+                [self runAction:[SKAction playSoundFileNamed:@"spearT.wav" waitForCompletion:NO]];
+            }
             else attack2.color = [UIColor grayColor];
         }
     }
+    
+    //__________________________________________Melee Attack_______________________________
+
     
     else if ([node.name isEqualToString:@"Attack"]) {
         if(esquerda)
@@ -443,6 +452,7 @@ const uint32_t ATTACK = 0x1 << 4;
             SKTexture *f2 = [atlas textureNamed:@"ATTACK_LEFT_002.png"];
             NSArray *spartanAttackTextures = @[f1, f2, parado];
             [self attackActionLeft];
+            [self runAction:[SKAction playSoundFileNamed:@"attack.mp3" waitForCompletion:NO]];
             [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.1f] completion:^{
                 
             }];
@@ -457,12 +467,16 @@ const uint32_t ATTACK = 0x1 << 4;
             SKTexture *f2 = [atlas textureNamed:@"ATTACK_RIGHT_002.png"];
             NSArray *spartanAttackTextures = @[f1, f2, parado];
             [self attackActionRight];
+            [self runAction:[SKAction playSoundFileNamed:@"attack.mp3" waitForCompletion:NO]];
             [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.1f] completion:^{
                 
             }];
             
         }
     }
+    
+    //__________________________________________Pause_______________________________
+
     
     else if ([node.name isEqualToString:@"PauseButton"]) {
         if (self.paused){
@@ -472,6 +486,9 @@ const uint32_t ATTACK = 0x1 << 4;
             pause.texture = [SKTexture textureWithImageNamed:@"play.png"];
         }
     }
+    
+    //__________________________________________Move Left_______________________________
+
     
     else if ([node.name isEqualToString:@"left"]) {
         currentButton = node.name;
@@ -488,6 +505,9 @@ const uint32_t ATTACK = 0x1 << 4;
         [spartan runAction:[SKAction repeatActionForever:moveLeft]withKey:@"WalkLAction1"];
         [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:spartanMoveLeft timePerFrame:0.1f]]withKey:@"WalkLAction2"];
     }
+    
+    //__________________________________________Defense_______________________________
+
     
     else if([node.name isEqualToString:@"defense"]){
         currentButton = node.name;
@@ -508,10 +528,6 @@ const uint32_t ATTACK = 0x1 << 4;
             
         }
     }
-    
-
-    
-    
 }
 
 
@@ -524,6 +540,7 @@ const uint32_t ATTACK = 0x1 << 4;
     if ([node.name isEqualToString:@"PauseButton"]) {
         if (self.paused){
             self.view.paused = NO;
+            pause.texture = [SKTexture textureWithImageNamed:@"pause.png"];
         }
         else{
             self.view.paused = YES;
@@ -531,17 +548,6 @@ const uint32_t ATTACK = 0x1 << 4;
         
     }
     
-    if ([node.name isEqualToString:@"PauseButton"]) {
-        if (self.paused){
-            self.paused = NO;
-            pause.texture = [SKTexture textureWithImageNamed:@"pause.png"];
-        }
-        else{
-            self.paused = YES;
-            pause.texture = [SKTexture textureWithImageNamed:@"play.png"];
-        }
-    
-    }
     if([node.name isEqualToString:@"defense"]){
         if (esquerda) {
             [spartan removeActionForKey:@"DefenseLAction1"];
@@ -596,8 +602,7 @@ const uint32_t ATTACK = 0x1 << 4;
 #pragma mark - Update
 
 -(void)update:(NSTimeInterval)currentTime{
-    NSLog(@"%f",camera.position.x);
-    NSLog(@"%f",spartan.position.x);
+    
     lancasCount.text = [NSString stringWithFormat:@"%ld", (long)lancas];
     
     counter--;
@@ -606,7 +611,7 @@ const uint32_t ATTACK = 0x1 << 4;
         
         [camera addChild:[self creatorBlock]];
         
-        counter = 60;
+        counter = 480/stages;
     }
     
     fundo.position = CGPointMake(fundo.position.x-width*0.0007, fundo.position.y);
@@ -649,13 +654,17 @@ const uint32_t ATTACK = 0x1 << 4;
     NSLog(@"body A %@",contact.bodyA.node.name);
     NSLog(@"body B %@",contact.bodyB.node.name);
     if(([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"spear"]) || ([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"attack"])){
+        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
         [contact.bodyA.node removeFromParent];
         score++;
         
     }
     if(([contact.bodyB.node.name isEqualToString:@"enemy"] && [contact.bodyA.node.name isEqualToString:@"spear"]) || ([contact.bodyB.node.name isEqualToString:@"enemy"] && [contact.bodyA.node.name isEqualToString:@"attack"])){
+        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
         [contact.bodyB.node removeFromParent];
+        score++;
     }
+    
     if([contact.bodyB.node.name isEqualToString:@"spear"] || [contact.bodyB.node.name isEqualToString:@"attack"]){
         [contact.bodyB.node removeFromParent];
     }
@@ -664,6 +673,8 @@ const uint32_t ATTACK = 0x1 << 4;
     }
     if([contact.bodyB.node.name isEqualToString:@"spartan"] && [contact.bodyA.node.name isEqualToString:@"enemy"]){
         SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
+        if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
+        else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
         if(HP == 0){
             [contact.bodyB.node removeFromParent];
             
@@ -694,6 +705,8 @@ const uint32_t ATTACK = 0x1 << 4;
     }
     if([contact.bodyA.node.name isEqualToString:@"spartan"] && [contact.bodyB.node.name isEqualToString:@"enemy"]){
         SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
+        if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
+        else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
         if(HP == 0){
             [contact.bodyA.node removeFromParent];
             SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
