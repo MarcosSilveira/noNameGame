@@ -14,7 +14,6 @@ const uint32_t SPARTAN = 0x1 << 1;
 const uint32_t ENEMY = 0x1 << 2;
 const uint32_t BIRIBINHA = 0x1 << 3;
 const uint32_t ATTACK = 0x1 << 4;
-//@property(getter=isPaused, nonatomic) BOOL paused;
 
 @implementation GameScene{
     int width;
@@ -37,9 +36,7 @@ const uint32_t ATTACK = 0x1 << 4;
     height = self.scene.size.height;
     currentButton = @"";
     HP = 5;
-    //score = [[NSNumber alloc] initWithFloat:(0)];
     score = 0;
-  //  score++;
     
     self.physicsWorld.contactDelegate = (id)self;
     self.backgroundColor = [SKColor redColor];
@@ -50,10 +47,10 @@ const uint32_t ATTACK = 0x1 << 4;
     
     [self addChild:myWorld];
     [self background3];
-#warning arrumar posição
+    
     pause = [[SKSpriteNode alloc] initWithImageNamed:@"pause.png"];
-    pause.position = CGPointMake(0, 0);
-    pause.size = CGSizeMake(40, 40);
+    pause.position = CGPointMake(-width/2+pause.size.width/2, height/2-pause.size.height/2);
+    pause.size = CGSizeMake(width*0.06, width*0.06);
     pause.name = @"PauseButton";
     
     myWorld.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
@@ -229,7 +226,7 @@ const uint32_t ATTACK = 0x1 << 4;
 -(SKSpriteNode *)createDefenseButton{
     defense = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(width*0.08,width*0.08)];
     defense.name = @"defense";
-    defense.position = CGPointMake(attack2.position.x , -(height*0.5)+(defense.size.height/2)+attack.size.height);
+    defense.position = CGPointMake(attack.position.x , -(height*0.5)+(defense.size.height/2)+attack.size.height);
     defense.texture = [SKTexture textureWithImageNamed:@"botao_escudo.png"];
     
     return defense;
@@ -422,6 +419,15 @@ const uint32_t ATTACK = 0x1 << 4;
         }
     }
     
+    else if ([node.name isEqualToString:@"PauseButton"]) {
+        if (self.paused){
+            pause.texture = [SKTexture textureWithImageNamed:@"pause.png"];
+        }
+        else{
+            pause.texture = [SKTexture textureWithImageNamed:@"play.png"];
+        }
+    }
+    
     else if ([node.name isEqualToString:@"left"]) {
         currentButton = node.name;
         esquerda = YES;
@@ -469,16 +475,13 @@ const uint32_t ATTACK = 0x1 << 4;
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
-    if(!defendendo){
-        if (esquerda) {
-            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
-            SKTexture *parado = [atlas textureNamed:@"WALK_LEFT_006.png"];
-            spartan.texture = parado;
+    
+    if ([node.name isEqualToString:@"PauseButton"]) {
+        if (self.paused){
+            self.view.paused = NO;
         }
         else{
-            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
-            SKTexture *parado = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
-            spartan.texture = parado;
+            self.view.paused = YES;
         }
         
     }
@@ -502,30 +505,48 @@ const uint32_t ATTACK = 0x1 << 4;
         defendendo = NO;
     }
     
-    else if([node.name isEqualToString:@"left"]){
+    if([node.name isEqualToString:@"left"]){
         [spartan removeActionForKey:@"WalkLAction1"];
         [spartan removeActionForKey:@"WalkLAction2"];
         [spartan removeAllActions];
     }
     
-    else if([node.name isEqualToString:@"right"]){
+    if([node.name isEqualToString:@"right"]){
         [spartan removeActionForKey:@"WalkRAction1"];
         [spartan removeActionForKey:@"WalkRAction2"];
         [spartan removeAllActions];
     }
     
-    else if([node.name isEqualToString:@"Attack"]){
+    if(!defendendo){
+        if (esquerda) {
+            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
+            SKTexture *parado = [atlas textureNamed:@"WALK_LEFT_006.png"];
+            spartan.texture = parado;
+        }
+        else{
+            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
+            SKTexture *parado = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
+            spartan.texture = parado;
+        }
+        
+    }
+    
+    if([node.name isEqualToString:@"Attack"]){
         return;
     }
     
-    else if([node.name isEqualToString:@"Attack2"]){
+    if([node.name isEqualToString:@"Attack2"]){
         return;
     }
     
-    else{
+    
+    if(node.name == NULL){
         [spartan removeAllActions];
     }
+    
+    
 }
+
 
 #pragma mark - Update
 
@@ -570,9 +591,7 @@ const uint32_t ATTACK = 0x1 << 4;
 #pragma mark - Physics
 
 - (void)didSimulatePhysics{
-    if(-spartan.position.x <= -width*(stages-1)){
-        [self centerOnNode: [self childNodeWithName: @"//spartan"]];
-    }
+    [self centerOnNode: [self childNodeWithName: @"//spartan"]];
 }
 
 - (void) centerOnNode: (SKNode *) node{
@@ -591,15 +610,12 @@ const uint32_t ATTACK = 0x1 << 4;
     }
     if(([contact.bodyB.node.name isEqualToString:@"enemy"] && [contact.bodyA.node.name isEqualToString:@"spear"]) || ([contact.bodyB.node.name isEqualToString:@"enemy"] && [contact.bodyA.node.name isEqualToString:@"attack"])){
         [contact.bodyB.node removeFromParent];
-       // score++;
     }
     if([contact.bodyB.node.name isEqualToString:@"spear"] || [contact.bodyB.node.name isEqualToString:@"attack"]){
         [contact.bodyB.node removeFromParent];
-    //    score++;
     }
     if([contact.bodyA.node.name isEqualToString:@"spear"] || [contact.bodyA.node.name isEqualToString:@"attack"]){
         [contact.bodyA.node removeFromParent];
-     //   score++;
     }
     if([contact.bodyB.node.name isEqualToString:@"spartan"] && [contact.bodyA.node.name isEqualToString:@"enemy"]){
         SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
@@ -616,7 +632,6 @@ const uint32_t ATTACK = 0x1 << 4;
             if (!defendendo) {
                 
                 HP--;
-                [contact.bodyB.node.physicsBody applyImpulse:CGVectorMake(-10, 0)];
                 NSString *textureName = [NSString stringWithFormat:@"heart%d",HP];
                 vidas.texture = [lifeAtlas textureNamed:textureName];
             }
@@ -634,7 +649,6 @@ const uint32_t ATTACK = 0x1 << 4;
             if (!defendendo) {
                 
                 HP--;
-                [contact.bodyA.node.physicsBody applyImpulse:CGVectorMake(-10, 0)];
                 NSString *textureName = [NSString stringWithFormat:@"heart%d",HP];
                 vidas.texture = [lifeAtlas textureNamed:textureName];
             }
