@@ -68,21 +68,6 @@ const uint32_t ATTACK = 0x1 << 4;
     [self addChild:[self creatAtackButton2]];
     [self addChild:[self createDefenseButton]];
     
-    lancasCount = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
-    aux = @"Lanças:";
-    lancas = 5;
-    lancasCount.text = [NSString stringWithFormat:@"%ld",(long)lancas];
-    lancasCount.position = CGPointMake(0, height/3);
-    lancasCount.fontSize = 20;
-    lancasCount.fontColor = [UIColor whiteColor];
-    [self addChild:lancasCount];
-    
-    SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
-    texturaAux = [lifeAtlas textureNamed:@"heart5.png"];
-    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(width*0.17, height*0.06)];
-    vidas.position = CGPointMake(0, lancasCount.position.y+50);
-    [self addChild:vidas];
-    
     lancasNode = [[SKSpriteNode alloc] initWithImageNamed:@"lanca_contador.png"];
     lancasNode.size = CGSizeMake(width*0.15, width*0.15);
     lancasNode.position = CGPointMake(width/2-lancasNode.size.width/2, height/2-lancasNode.size.height/2);
@@ -93,6 +78,23 @@ const uint32_t ATTACK = 0x1 << 4;
     pause.size = CGSizeMake(width*0.06, width*0.06);
     pause.name = @"PauseButton";
     [self addChild:pause];
+    
+    lancasCount = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
+    aux = @"Lanças:";
+    lancas = 5;
+    lancasCount.text = [NSString stringWithFormat:@"%ld",(long)lancas];
+    lancasCount.position = CGPointMake(width/2-lancasNode.size.width/2+lancasNode.size.width*0.2, height/3+lancasNode.size.width*0.072);
+    lancasCount.fontSize = 20;
+    lancasCount.fontColor = [UIColor whiteColor];
+    [self addChild:lancasCount];
+    
+    SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
+    texturaAux = [lifeAtlas textureNamed:@"heart5.png"];
+    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(width*0.17, height*0.06)];
+    vidas.position = CGPointMake(0, lancasCount.position.y+50);
+    [self addChild:vidas];
+    
+    
 }
 
 #pragma mark - Create Sparta
@@ -458,7 +460,7 @@ const uint32_t ATTACK = 0x1 << 4;
         currentButton = node.name;
         if (esquerda) {
             SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPARTAN_DEF"];
-            SKTexture *f1 = [atlas textureNamed:@"DEF_LEFT.png"];
+            SKTexture *f1 = [atlas textureNamed:@"DEF_NEW.png"];
             NSArray *spartanDefenseRight = @[f1];
             [spartan runAction:[SKAction animateWithTextures:spartanDefenseRight timePerFrame:0.01f]withKey:@"DefenseLAction1"];
             defendendo = YES;
@@ -470,7 +472,6 @@ const uint32_t ATTACK = 0x1 << 4;
             NSArray *spartanDefenseLeft = @[f1];
             [spartan runAction:[SKAction animateWithTextures:spartanDefenseLeft timePerFrame:0.01f]withKey:@"DefenseRAction1"];
             defendendo = YES;
-            
         }
     }
 }
