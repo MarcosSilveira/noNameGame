@@ -29,7 +29,6 @@
 		8DA59F2318EB2D630017DCFD /* StoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA59F2218EB2D630017DCFD /* StoreScene.m */; };
 		8DA6096518F8552500CBD4A0 /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8DA6096318F8552500CBD4A0 /* Smoke.sks */; };
 		8DA6096618F8552500CBD4A0 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA6096418F8552500CBD4A0 /* spark.png */; };
-		8DA63C9B18F320230000E0AD /* SPARTAN_DEF.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8DA63C9A18F320230000E0AD /* SPARTAN_DEF.atlas */; };
 		8DAB851818F5CA610099437C /* botao_atira_lanca_disponivel.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAB851618F5CA610099437C /* botao_atira_lanca_disponivel.png */; };
 		8DAB851918F5CA610099437C /* botao_atira_lanca_indisponivel.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAB851718F5CA610099437C /* botao_atira_lanca_indisponivel.png */; };
 		8DAC9A7D18E098A7000A016F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DAC9A7C18E098A7000A016F /* Foundation.framework */; };
@@ -105,7 +104,6 @@
 		8DA59F2218EB2D630017DCFD /* StoreScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreScene.m; sourceTree = "<group>"; };
 		8DA6096318F8552500CBD4A0 /* Smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Smoke.sks; sourceTree = "<group>"; };
 		8DA6096418F8552500CBD4A0 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
-		8DA63C9A18F320230000E0AD /* SPARTAN_DEF.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = SPARTAN_DEF.atlas; sourceTree = "<group>"; };
 		8DAB851618F5CA610099437C /* botao_atira_lanca_disponivel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_atira_lanca_disponivel.png; sourceTree = "<group>"; };
 		8DAB851718F5CA610099437C /* botao_atira_lanca_indisponivel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_atira_lanca_indisponivel.png; sourceTree = "<group>"; };
 		8DAC9A7918E098A7000A016F /* noName.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = noName.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -357,7 +355,7 @@
 				ORGANIZATIONNAME = "Marcos Sokolowski";
 				TargetAttributes = {
 					8DAC9A7818E098A7000A016F = {
-						DevelopmentTeam = T5N5TT4E82;
+						DevelopmentTeam = 4452968868;
 					};
 					8DAC9AA018E098A7000A016F = {
 						TestTargetID = 8DAC9A7818E098A7000A016F;

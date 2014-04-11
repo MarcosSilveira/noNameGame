@@ -652,8 +652,7 @@ const uint32_t ATTACK = 0x1 << 4;
 
 -(void)didBeginContact:(SKPhysicsContact *)contact
 {
-    NSLog(@"body A %@",contact.bodyA.node.name);
-    NSLog(@"body B %@",contact.bodyB.node.name);
+    //Attack melee / ranged, remove enemy
     if(([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"spear"]) || ([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"attack"])){
         [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
         [contact.bodyA.node removeFromParent];
@@ -666,12 +665,15 @@ const uint32_t ATTACK = 0x1 << 4;
         score++;
     }
     
+    //Remove attack / spear node
     if([contact.bodyB.node.name isEqualToString:@"spear"] || [contact.bodyB.node.name isEqualToString:@"attack"]){
         [contact.bodyB.node removeFromParent];
     }
     if([contact.bodyA.node.name isEqualToString:@"spear"] || [contact.bodyA.node.name isEqualToString:@"attack"]){
         [contact.bodyA.node removeFromParent];
     }
+    
+    //Inflict damage on Grecules
     if([contact.bodyB.node.name isEqualToString:@"spartan"] && [contact.bodyA.node.name isEqualToString:@"enemy"]){
         SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
         if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
