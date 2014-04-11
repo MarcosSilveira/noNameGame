@@ -12,6 +12,7 @@
 		8D2CA9F618F479970062F480 /* botao_direcao_R.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2CA9F418F479970062F480 /* botao_direcao_R.png */; };
 		8D2CA9F918F47F2F0062F480 /* botao_escudo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2CA9F718F47F2F0062F480 /* botao_escudo.png */; };
 		8D2CA9FA18F47F2F0062F480 /* botao_lanca.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2CA9F818F47F2F0062F480 /* botao_lanca.png */; };
+		8D4625FB18F85FA7005B871C /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8D4625FA18F85FA7005B871C /* Fire.sks */; };
 		8D47FF1118EB3BC9002C8D1C /* WALK_RIGHT.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8D47FF1018EB3BC9002C8D1C /* WALK_RIGHT.atlas */; };
 		8D5CABBB18E9E4B500FDFDF1 /* grecia.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D5CABBA18E9E4B500FDFDF1 /* grecia.jpg */; };
 		8D6F788518EC999600A1F41D /* ATTACK_LEFT.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8D6F788418EC999600A1F41D /* ATTACK_LEFT.atlas */; };
@@ -26,6 +27,9 @@
 		8DA4AF4118F726B9005CB817 /* gameover.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF4018F726B9005CB817 /* gameover.png */; };
 		8DA4AF4318F726BF005CB817 /* jogarnovamente.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF4218F726BF005CB817 /* jogarnovamente.png */; };
 		8DA59F2318EB2D630017DCFD /* StoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA59F2218EB2D630017DCFD /* StoreScene.m */; };
+		8DA6096518F8552500CBD4A0 /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8DA6096318F8552500CBD4A0 /* Smoke.sks */; };
+		8DA6096618F8552500CBD4A0 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA6096418F8552500CBD4A0 /* spark.png */; };
+		8DA63C9B18F320230000E0AD /* SPARTAN_DEF.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8DA63C9A18F320230000E0AD /* SPARTAN_DEF.atlas */; };
 		8DAB851818F5CA610099437C /* botao_atira_lanca_disponivel.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAB851618F5CA610099437C /* botao_atira_lanca_disponivel.png */; };
 		8DAB851918F5CA610099437C /* botao_atira_lanca_indisponivel.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAB851718F5CA610099437C /* botao_atira_lanca_indisponivel.png */; };
 		8DAC9A7D18E098A7000A016F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DAC9A7C18E098A7000A016F /* Foundation.framework */; };
@@ -82,6 +86,7 @@
 		8D2CA9F418F479970062F480 /* botao_direcao_R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_direcao_R.png; sourceTree = "<group>"; };
 		8D2CA9F718F47F2F0062F480 /* botao_escudo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_escudo.png; sourceTree = "<group>"; };
 		8D2CA9F818F47F2F0062F480 /* botao_lanca.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_lanca.png; sourceTree = "<group>"; };
+		8D4625FA18F85FA7005B871C /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
 		8D47FF1018EB3BC9002C8D1C /* WALK_RIGHT.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = WALK_RIGHT.atlas; sourceTree = "<group>"; };
 		8D5CABBA18E9E4B500FDFDF1 /* grecia.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grecia.jpg; sourceTree = "<group>"; };
 		8D6F788418EC999600A1F41D /* ATTACK_LEFT.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ATTACK_LEFT.atlas; sourceTree = "<group>"; };
@@ -98,6 +103,9 @@
 		8DA4AF4218F726BF005CB817 /* jogarnovamente.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jogarnovamente.png; sourceTree = "<group>"; };
 		8DA59F2118EB2D630017DCFD /* StoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreScene.h; sourceTree = "<group>"; };
 		8DA59F2218EB2D630017DCFD /* StoreScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreScene.m; sourceTree = "<group>"; };
+		8DA6096318F8552500CBD4A0 /* Smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Smoke.sks; sourceTree = "<group>"; };
+		8DA6096418F8552500CBD4A0 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		8DA63C9A18F320230000E0AD /* SPARTAN_DEF.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = SPARTAN_DEF.atlas; sourceTree = "<group>"; };
 		8DAB851618F5CA610099437C /* botao_atira_lanca_disponivel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_atira_lanca_disponivel.png; sourceTree = "<group>"; };
 		8DAB851718F5CA610099437C /* botao_atira_lanca_indisponivel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_atira_lanca_indisponivel.png; sourceTree = "<group>"; };
 		8DAC9A7918E098A7000A016F /* noName.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = noName.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,7 +182,9 @@
 		8DAC9A7018E098A7000A016F = {
 			isa = PBXGroup;
 			children = (
-				A03A683518F86B8D00A2661B /* SPARTAN_DEF.atlas */,
+				8D4625FA18F85FA7005B871C /* Fire.sks */,
+				8DA6096318F8552500CBD4A0 /* Smoke.sks */,
+				8DA6096418F8552500CBD4A0 /* spark.png */,
 				A0DDE61718F6FD9400F301AA /* LIFE.atlas */,
 				8DBF9F7218EDF05E00C3032A /* ENEMY_LEFT.atlas */,
 				8DBF9F7018EDF05800C3032A /* ENEMY_RIGHT.atlas */,
@@ -347,7 +357,7 @@
 				ORGANIZATIONNAME = "Marcos Sokolowski";
 				TargetAttributes = {
 					8DAC9A7818E098A7000A016F = {
-						DevelopmentTeam = 4452968868;
+						DevelopmentTeam = T5N5TT4E82;
 					};
 					8DAC9AA018E098A7000A016F = {
 						TestTargetID = 8DAC9A7818E098A7000A016F;
@@ -399,6 +409,7 @@
 				A03A682918F85D8F00A2661B /* spearT.wav in Resources */,
 				A03A683618F86B8D00A2661B /* SPARTAN_DEF.atlas in Resources */,
 				A0DDE61618F5C4B600F301AA /* backgroundfixo.png in Resources */,
+				8DA6096618F8552500CBD4A0 /* spark.png in Resources */,
 				8DAB851818F5CA610099437C /* botao_atira_lanca_disponivel.png in Resources */,
 				A03A682518F85BBB00A2661B /* hitS.wav in Resources */,
 				8D5CABBB18E9E4B500FDFDF1 /* grecia.jpg in Resources */,
@@ -418,6 +429,8 @@
 				A03A682B18F85EB700A2661B /* attack.mp3 in Resources */,
 				8DA4AF3818F71B76005CB817 /* lanca_contador.png in Resources */,
 				8DAB851918F5CA610099437C /* botao_atira_lanca_indisponivel.png in Resources */,
+				8DA6096518F8552500CBD4A0 /* Smoke.sks in Resources */,
+				8D4625FB18F85FA7005B871C /* Fire.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
