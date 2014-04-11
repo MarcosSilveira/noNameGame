@@ -26,7 +26,6 @@
 		8DA4AF4118F726B9005CB817 /* gameover.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF4018F726B9005CB817 /* gameover.png */; };
 		8DA4AF4318F726BF005CB817 /* jogarnovamente.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF4218F726BF005CB817 /* jogarnovamente.png */; };
 		8DA59F2318EB2D630017DCFD /* StoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA59F2218EB2D630017DCFD /* StoreScene.m */; };
-		8DA63C9B18F320230000E0AD /* SPARTAN_DEF.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8DA63C9A18F320230000E0AD /* SPARTAN_DEF.atlas */; };
 		8DAB851818F5CA610099437C /* botao_atira_lanca_disponivel.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAB851618F5CA610099437C /* botao_atira_lanca_disponivel.png */; };
 		8DAB851918F5CA610099437C /* botao_atira_lanca_indisponivel.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAB851718F5CA610099437C /* botao_atira_lanca_indisponivel.png */; };
 		8DAC9A7D18E098A7000A016F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DAC9A7C18E098A7000A016F /* Foundation.framework */; };
@@ -54,6 +53,7 @@
 		A03A682B18F85EB700A2661B /* attack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A03A682A18F85EB700A2661B /* attack.mp3 */; };
 		A03A682D18F8628700A2661B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A03A682C18F8628700A2661B /* AVFoundation.framework */; };
 		A03A682F18F862E500A2661B /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A03A682E18F862E500A2661B /* music.mp3 */; };
+		A03A683618F86B8D00A2661B /* SPARTAN_DEF.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A03A683518F86B8D00A2661B /* SPARTAN_DEF.atlas */; };
 		A03ACC6A18EDC96E0007299C /* SPEAR.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A03ACC6918EDC96E0007299C /* SPEAR.atlas */; };
 		A03ACC6E18EDD2B10007299C /* grecia.png in Resources */ = {isa = PBXBuildFile; fileRef = A03ACC6D18EDD2B10007299C /* grecia.png */; };
 		A08E389218E9EC2800C27179 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A08E389118E9EC2800C27179 /* GameScene.m */; };
@@ -98,7 +98,6 @@
 		8DA4AF4218F726BF005CB817 /* jogarnovamente.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jogarnovamente.png; sourceTree = "<group>"; };
 		8DA59F2118EB2D630017DCFD /* StoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreScene.h; sourceTree = "<group>"; };
 		8DA59F2218EB2D630017DCFD /* StoreScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreScene.m; sourceTree = "<group>"; };
-		8DA63C9A18F320230000E0AD /* SPARTAN_DEF.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = SPARTAN_DEF.atlas; sourceTree = "<group>"; };
 		8DAB851618F5CA610099437C /* botao_atira_lanca_disponivel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_atira_lanca_disponivel.png; sourceTree = "<group>"; };
 		8DAB851718F5CA610099437C /* botao_atira_lanca_indisponivel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_atira_lanca_indisponivel.png; sourceTree = "<group>"; };
 		8DAC9A7918E098A7000A016F /* noName.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = noName.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +131,7 @@
 		A03A682A18F85EB700A2661B /* attack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = attack.mp3; sourceTree = "<group>"; };
 		A03A682C18F8628700A2661B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A03A682E18F862E500A2661B /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
+		A03A683518F86B8D00A2661B /* SPARTAN_DEF.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = SPARTAN_DEF.atlas; sourceTree = "<group>"; };
 		A03ACC6918EDC96E0007299C /* SPEAR.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = SPEAR.atlas; sourceTree = "<group>"; };
 		A03ACC6D18EDD2B10007299C /* grecia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grecia.png; sourceTree = "<group>"; };
 		A08E389018E9EC2800C27179 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
@@ -174,8 +174,8 @@
 		8DAC9A7018E098A7000A016F = {
 			isa = PBXGroup;
 			children = (
+				A03A683518F86B8D00A2661B /* SPARTAN_DEF.atlas */,
 				A0DDE61718F6FD9400F301AA /* LIFE.atlas */,
-				8DA63C9A18F320230000E0AD /* SPARTAN_DEF.atlas */,
 				8DBF9F7218EDF05E00C3032A /* ENEMY_LEFT.atlas */,
 				8DBF9F7018EDF05800C3032A /* ENEMY_RIGHT.atlas */,
 				8DBF9F6E18EDEA4400C3032A /* SPEARLAUNCH.atlas */,
@@ -397,6 +397,7 @@
 				8D6F788718EC9CBC00A1F41D /* WALK_LEFT.atlas in Resources */,
 				8DBF9F6F18EDEA4400C3032A /* SPEARLAUNCH.atlas in Resources */,
 				A03A682918F85D8F00A2661B /* spearT.wav in Resources */,
+				A03A683618F86B8D00A2661B /* SPARTAN_DEF.atlas in Resources */,
 				A0DDE61618F5C4B600F301AA /* backgroundfixo.png in Resources */,
 				8DAB851818F5CA610099437C /* botao_atira_lanca_disponivel.png in Resources */,
 				A03A682518F85BBB00A2661B /* hitS.wav in Resources */,
@@ -416,7 +417,6 @@
 				8DA4AF3C18F71FC3005CB817 /* play.png in Resources */,
 				A03A682B18F85EB700A2661B /* attack.mp3 in Resources */,
 				8DA4AF3818F71B76005CB817 /* lanca_contador.png in Resources */,
-				8DA63C9B18F320230000E0AD /* SPARTAN_DEF.atlas in Resources */,
 				8DAB851918F5CA610099437C /* botao_atira_lanca_indisponivel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
