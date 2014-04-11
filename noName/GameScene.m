@@ -24,7 +24,6 @@ const uint32_t ATTACK = 0x1 << 4;
     NSString *currentButton;
     int HP;
     SKTexture *texturaAux;
-
 }
 
 #pragma mark - Move to View
@@ -271,6 +270,7 @@ const uint32_t ATTACK = 0x1 << 4;
     attackRegion.physicsBody.collisionBitMask = 0;
     attackRegion.physicsBody.contactTestBitMask = ROCK;
     SKAction *moveRight = [SKAction moveByX:attackRegion.size.width y:0 duration:0.1];
+    attackRegion.hidden = YES;
     [camera addChild:attackRegion];
     [attackRegion runAction:moveRight completion:^{
         [attackRegion removeFromParent];
@@ -286,6 +286,7 @@ const uint32_t ATTACK = 0x1 << 4;
     attackRegion.physicsBody.collisionBitMask = 0;
     attackRegion.physicsBody.contactTestBitMask = ROCK;
     SKAction *moveLeft = [SKAction moveByX:-attackRegion.size.width y:0 duration:0.1];
+    attackRegion.hidden = YES;
     [camera addChild:attackRegion];
     [attackRegion runAction:moveLeft completion:^{
         [attackRegion removeFromParent];
@@ -472,10 +473,6 @@ const uint32_t ATTACK = 0x1 << 4;
             
         }
     }
-    
-
-    
-    
 }
 
 

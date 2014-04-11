@@ -52,6 +52,8 @@
 		A03A682518F85BBB00A2661B /* hitS.wav in Resources */ = {isa = PBXBuildFile; fileRef = A03A682318F85BBB00A2661B /* hitS.wav */; };
 		A03A682918F85D8F00A2661B /* spearT.wav in Resources */ = {isa = PBXBuildFile; fileRef = A03A682818F85D8F00A2661B /* spearT.wav */; };
 		A03A682B18F85EB700A2661B /* attack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A03A682A18F85EB700A2661B /* attack.mp3 */; };
+		A03A682D18F8628700A2661B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A03A682C18F8628700A2661B /* AVFoundation.framework */; };
+		A03A682F18F862E500A2661B /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A03A682E18F862E500A2661B /* music.mp3 */; };
 		A03ACC6A18EDC96E0007299C /* SPEAR.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A03ACC6918EDC96E0007299C /* SPEAR.atlas */; };
 		A03ACC6E18EDD2B10007299C /* grecia.png in Resources */ = {isa = PBXBuildFile; fileRef = A03ACC6D18EDD2B10007299C /* grecia.png */; };
 		A08E389218E9EC2800C27179 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A08E389118E9EC2800C27179 /* GameScene.m */; };
@@ -128,6 +130,8 @@
 		A03A682318F85BBB00A2661B /* hitS.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitS.wav; sourceTree = "<group>"; };
 		A03A682818F85D8F00A2661B /* spearT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = spearT.wav; sourceTree = "<group>"; };
 		A03A682A18F85EB700A2661B /* attack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = attack.mp3; sourceTree = "<group>"; };
+		A03A682C18F8628700A2661B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A03A682E18F862E500A2661B /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 		A03ACC6918EDC96E0007299C /* SPEAR.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = SPEAR.atlas; sourceTree = "<group>"; };
 		A03ACC6D18EDD2B10007299C /* grecia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grecia.png; sourceTree = "<group>"; };
 		A08E389018E9EC2800C27179 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A03A682D18F8628700A2661B /* AVFoundation.framework in Frameworks */,
 				8DAC9A7F18E098A7000A016F /* CoreGraphics.framework in Frameworks */,
 				8DAC9A8118E098A7000A016F /* UIKit.framework in Frameworks */,
 				8DAC9A8318E098A7000A016F /* SpriteKit.framework in Frameworks */,
@@ -198,6 +203,7 @@
 		8DAC9A7B18E098A7000A016F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A03A682C18F8628700A2661B /* AVFoundation.framework */,
 				8DAC9A7C18E098A7000A016F /* Foundation.framework */,
 				8DAC9A7E18E098A7000A016F /* CoreGraphics.framework */,
 				8DAC9A8018E098A7000A016F /* UIKit.framework */,
@@ -245,6 +251,7 @@
 				A03A682318F85BBB00A2661B /* hitS.wav */,
 				A03A682818F85D8F00A2661B /* spearT.wav */,
 				A03A682A18F85EB700A2661B /* attack.mp3 */,
+				A03A682E18F862E500A2661B /* music.mp3 */,
 				8DAC9A9B18E098A7000A016F /* Images.xcassets */,
 				8DAC9A8518E098A7000A016F /* Supporting Files */,
 			);
@@ -371,6 +378,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A03A682F18F862E500A2661B /* music.mp3 in Resources */,
 				A0DDE61818F6FD9400F301AA /* LIFE.atlas in Resources */,
 				8DA4AF3018F703EA005CB817 /* menufundo.png in Resources */,
 				A03A682418F85BBB00A2661B /* hitC.mp3 in Resources */,
