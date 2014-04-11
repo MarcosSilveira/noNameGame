@@ -12,6 +12,7 @@
 		8D2CA9F618F479970062F480 /* botao_direcao_R.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2CA9F418F479970062F480 /* botao_direcao_R.png */; };
 		8D2CA9F918F47F2F0062F480 /* botao_escudo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2CA9F718F47F2F0062F480 /* botao_escudo.png */; };
 		8D2CA9FA18F47F2F0062F480 /* botao_lanca.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2CA9F818F47F2F0062F480 /* botao_lanca.png */; };
+		8D4625FB18F85FA7005B871C /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8D4625FA18F85FA7005B871C /* Fire.sks */; };
 		8D47FF1118EB3BC9002C8D1C /* WALK_RIGHT.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8D47FF1018EB3BC9002C8D1C /* WALK_RIGHT.atlas */; };
 		8D5CABBB18E9E4B500FDFDF1 /* grecia.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D5CABBA18E9E4B500FDFDF1 /* grecia.jpg */; };
 		8D6F788518EC999600A1F41D /* ATTACK_LEFT.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8D6F788418EC999600A1F41D /* ATTACK_LEFT.atlas */; };
@@ -78,6 +79,7 @@
 		8D2CA9F418F479970062F480 /* botao_direcao_R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_direcao_R.png; sourceTree = "<group>"; };
 		8D2CA9F718F47F2F0062F480 /* botao_escudo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_escudo.png; sourceTree = "<group>"; };
 		8D2CA9F818F47F2F0062F480 /* botao_lanca.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_lanca.png; sourceTree = "<group>"; };
+		8D4625FA18F85FA7005B871C /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
 		8D47FF1018EB3BC9002C8D1C /* WALK_RIGHT.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = WALK_RIGHT.atlas; sourceTree = "<group>"; };
 		8D5CABBA18E9E4B500FDFDF1 /* grecia.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grecia.jpg; sourceTree = "<group>"; };
 		8D6F788418EC999600A1F41D /* ATTACK_LEFT.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ATTACK_LEFT.atlas; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 		8DAC9A7018E098A7000A016F = {
 			isa = PBXGroup;
 			children = (
+				8D4625FA18F85FA7005B871C /* Fire.sks */,
 				8DA6096318F8552500CBD4A0 /* Smoke.sks */,
 				8DA6096418F8552500CBD4A0 /* spark.png */,
 				A0DDE61718F6FD9400F301AA /* LIFE.atlas */,
@@ -402,6 +405,7 @@
 				8DA63C9B18F320230000E0AD /* SPARTAN_DEF.atlas in Resources */,
 				8DAB851918F5CA610099437C /* botao_atira_lanca_indisponivel.png in Resources */,
 				8DA6096518F8552500CBD4A0 /* Smoke.sks in Resources */,
+				8D4625FB18F85FA7005B871C /* Fire.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
