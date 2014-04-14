@@ -36,7 +36,7 @@ const uint32_t LOOT = 0x1 << 5;
 #pragma mark - Move to View
 
 -(void)didMoveToView:(SKView *)view{
-    attackCool = 30;
+    attackCool = 15;
     counter = 120;
     counter2 = 240;
     stages = 1;
@@ -618,7 +618,7 @@ const uint32_t LOOT = 0x1 << 5;
                 [self attackActionLeft];
                 [self runAction:[SKAction playSoundFileNamed:@"attack.mp3" waitForCompletion:NO]];
                 [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.1f] completion:^{
-                    attackCool = 30;
+                    attackCool = 15;
                 }];
                 
             }
@@ -633,7 +633,7 @@ const uint32_t LOOT = 0x1 << 5;
                 [self attackActionRight];
                 [self runAction:[SKAction playSoundFileNamed:@"attack.mp3" waitForCompletion:NO]];
                 [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.1f] completion:^{
-                    attackCool = 30;
+                    attackCool = 15;
                 }];
                 
             }
@@ -907,12 +907,12 @@ const uint32_t LOOT = 0x1 << 5;
         if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
         else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
         if(HP == 0){
-            [contact.bodyB.node removeFromParent];
-            
-            
-            SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
-            SKTransition *troca = [SKTransition fadeWithDuration:0.5];
-            [self.view presentScene:GO transition:troca];
+            if(!defendendo){
+                [contact.bodyB.node removeFromParent];
+                SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
+                SKTransition *troca = [SKTransition fadeWithDuration:0.5];
+                [self.view presentScene:GO transition:troca];
+            }
         }
         
         else{
@@ -949,10 +949,12 @@ const uint32_t LOOT = 0x1 << 5;
         if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
         else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
         if(HP == 0){
-            [contact.bodyA.node removeFromParent];
-            SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
-            SKTransition *troca = [SKTransition fadeWithDuration:0.5];
-            [self.view presentScene:GO transition:troca];
+            if(!defendendo){
+                [contact.bodyA.node removeFromParent];
+                SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
+                SKTransition *troca = [SKTransition fadeWithDuration:0.5];
+                [self.view presentScene:GO transition:troca];
+            }
         }
         else{
             if (!defendendo) {
@@ -987,12 +989,12 @@ const uint32_t LOOT = 0x1 << 5;
         if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
         else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
         if(HP == 0){
-            [contact.bodyB.node removeFromParent];
-            
-            
-            SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
-            SKTransition *troca = [SKTransition fadeWithDuration:0.5];
-            [self.view presentScene:GO transition:troca];
+            if(!defendendo){
+                [contact.bodyB.node removeFromParent];
+                SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
+                SKTransition *troca = [SKTransition fadeWithDuration:0.5];
+                [self.view presentScene:GO transition:troca];
+            }
         }
         
         else{
@@ -1029,10 +1031,12 @@ const uint32_t LOOT = 0x1 << 5;
         if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
         else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
         if(HP == 0){
-            [contact.bodyA.node removeFromParent];
-            SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
-            SKTransition *troca = [SKTransition fadeWithDuration:0.5];
-            [self.view presentScene:GO transition:troca];
+            if(!defendendo){
+                [contact.bodyA.node removeFromParent];
+                SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
+                SKTransition *troca = [SKTransition fadeWithDuration:0.5];
+                [self.view presentScene:GO transition:troca];
+            }
         }
         else{
             if (!defendendo) {
