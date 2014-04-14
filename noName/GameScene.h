@@ -24,9 +24,12 @@
     SKSpriteNode *fundo;
     SKSpriteNode *fundo2;
     SKSpriteNode *special;
+    SKSpriteNode *drop;
     SKNode *camera;
     BOOL esquerda;
     BOOL defendendo;
+    BOOL FOGAREU;
+    int specialAux;
     NSInteger lancas;
     SKLabelNode *lancasCount;
     SKLabelNode *vidaCount;

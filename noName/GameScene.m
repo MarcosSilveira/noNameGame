@@ -14,7 +14,9 @@ const uint32_t SPARTAN = 0x1 << 1;
 const uint32_t ENEMY = 0x1 << 2;
 const uint32_t BIRIBINHA = 0x1 << 3;
 const uint32_t ATTACK = 0x1 << 4;
-const uint32_t FIREMODAFOCKA = 0x1 << 5;
+const uint32_t FIREMODAFOCKA = 0x1 << 6;
+const uint32_t LOOT = 0x1 << 5;
+
 @implementation GameScene{
     int width;
     int height;
@@ -38,6 +40,8 @@ const uint32_t FIREMODAFOCKA = 0x1 << 5;
     currentButton = @"";
     HP = 5;
     score = 0;
+    FOGAREU = NO;
+    specialAux = 0;
     
     self.physicsWorld.contactDelegate = (id)self;
     self.backgroundColor = [SKColor redColor];
@@ -245,7 +249,7 @@ const uint32_t FIREMODAFOCKA = 0x1 << 5;
 #pragma mark - Actions
 
 -(void)throwFiremodafockaRight{
-    if(lancas>0){
+    
         especial = [[SKSpriteNode alloc] init];
         especial.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100, 10)];
         especial.position = spartan.position;
@@ -262,13 +266,9 @@ const uint32_t FIREMODAFOCKA = 0x1 << 5;
 //        [especial.physicsBody applyForce:CGVectorMake(10, 0)];
 //        [especial.physicsBody applyImpulse:CGVectorMake(10, 0)];
     //    [especial.physicsBody ]
-        lancas--;
+    
 
-    }
-    else{
-        lancasCount.fontColor = [UIColor redColor];
-        attack2.texture = [SKTexture textureWithImageNamed:@"botao_atira_lanca_indisponivel"];
-    }
+
 }
 -(void)throwBiribinhaRight{
     if(lancas>0){
@@ -444,14 +444,18 @@ const uint32_t FIREMODAFOCKA = 0x1 << 5;
             else attack2.color = [UIColor grayColor];
         }
     }
-    else if ([node.name isEqualToString:@"special"]){
+    else if ([node.name isEqualToString:@"Special"]){
         if(esquerda)
         {
             
+            
         }
         else{
-            
-    
+            if (FOGAREU) {
+                
+                [self throwFiremodafockaRight];
+                FOGAREU = NO;
+            }
         }
     }
     
@@ -619,6 +623,10 @@ const uint32_t FIREMODAFOCKA = 0x1 << 5;
     Fire.position = especial.position;
     [especial runAction:[SKAction moveByX:30 y:0 duration:1]];
     lancasCount.text = [NSString stringWithFormat:@"%ld", (long)lancas];
+    if (specialAux>9) {
+        FOGAREU = YES;
+    }
+    
     if(lancas < 1){
         lancasCount.fontColor = [UIColor redColor];
         attack2.texture = [SKTexture textureWithImageNamed:@"botao_atira_lanca_indisponivel"];
@@ -697,6 +705,7 @@ const uint32_t FIREMODAFOCKA = 0x1 << 5;
     
         [contact.bodyA.node removeFromParent];
         score++;
+        specialAux++;
         score = score*stages;
         
         
@@ -722,6 +731,7 @@ const uint32_t FIREMODAFOCKA = 0x1 << 5;
         
         [contact.bodyB.node removeFromParent];
         score++;
+        specialAux++;
         score = score*stages;
         
         
