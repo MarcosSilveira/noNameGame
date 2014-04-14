@@ -16,12 +16,14 @@
     SKSpriteNode *attack;
     SKSpriteNode *attack2;
     SKSpriteNode *projectile;
+    SKSpriteNode *especial;
     SKSpriteNode *attackRegion;
     SKSpriteNode *defense;
     SKSpriteNode *platform;
     SKSpriteNode *platform2;
     SKSpriteNode *fundo;
     SKSpriteNode *fundo2;
+    SKSpriteNode *special;
     SKNode *camera;
     BOOL esquerda;
     BOOL defendendo;

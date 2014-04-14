@@ -14,7 +14,7 @@ const uint32_t SPARTAN = 0x1 << 1;
 const uint32_t ENEMY = 0x1 << 2;
 const uint32_t BIRIBINHA = 0x1 << 3;
 const uint32_t ATTACK = 0x1 << 4;
-
+const uint32_t FIREMODAFOCKA = 0x1 << 5;
 @implementation GameScene{
     int width;
     int height;
@@ -69,6 +69,7 @@ const uint32_t ATTACK = 0x1 << 4;
     [self addChild:[self createAttackButton]];
     [self addChild:[self creatAtackButton2]];
     [self addChild:[self createDefenseButton]];
+    [self addChild:[self createSpecialButton]];
     
     lancasCount = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
     aux = @"Lanças:";
@@ -221,6 +222,13 @@ const uint32_t ATTACK = 0x1 << 4;
     
     return attack;
 }
+-(SKSpriteNode *)createSpecialButton{
+    special = [[SKSpriteNode alloc] initWithColor:[UIColor purpleColor] size:CGSizeMake(width*0.08, width*0.08)];
+    special.name = @"Special";
+    special.position = CGPointMake(attack2.position.x , -(height*0.5)+(especial.size.height/2)+attack.size.height);
+    
+    return special;
+}
 
 -(SKSpriteNode *)createDefenseButton{
     defense = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(width*0.08,width*0.08)];
@@ -234,26 +242,24 @@ const uint32_t ATTACK = 0x1 << 4;
 
 #pragma mark - Actions
 
--(void)throwBiribinhaRight{
+-(void)throwFiremodafockaRight{
     if(lancas>0){
-        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEAR"];
-        SKTexture *spear = [atlas textureNamed:@"spearToRight.png"];
-        projectile = [[SKSpriteNode alloc] init];
-        projectile.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100, 10)];
-        projectile.position = spartan.position;
-        projectile.name = @"spear";
-        Fire = [self newFire:projectile.position.x :projectile.position.y];
-        Fire.position = projectile.position;
-        [camera addChild:projectile];
+        especial = [[SKSpriteNode alloc] init];
+        especial.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100, 10)];
+        especial.position = spartan.position;
+        especial.name = @"spear";
+        Fire = [self newFire:especial.position.x :especial.position.y];
+        Fire.position = especial.position;
+        [camera addChild:especial];
         [camera addChild:Fire];
-        projectile.zPosition = 1;
-        projectile.physicsBody.categoryBitMask = BIRIBINHA;
-        projectile.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
-        projectile.physicsBody.contactTestBitMask = ROCK;
-        projectile.physicsBody.dynamic=NO;
-//        [projectile.physicsBody applyForce:CGVectorMake(10, 0)];
-//        [projectile.physicsBody applyImpulse:CGVectorMake(10, 0)];
-    //    [projectile.physicsBody ]
+        especial.zPosition = 1;
+        especial.physicsBody.categoryBitMask = BIRIBINHA;
+        especial.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
+        especial.physicsBody.contactTestBitMask = ROCK;
+        especial.physicsBody.dynamic=NO;
+//        [especial.physicsBody applyForce:CGVectorMake(10, 0)];
+//        [especial.physicsBody applyImpulse:CGVectorMake(10, 0)];
+    //    [especial.physicsBody ]
         lancas--;
 
     }
@@ -262,27 +268,27 @@ const uint32_t ATTACK = 0x1 << 4;
         attack2.texture = [SKTexture textureWithImageNamed:@"botao_atira_lanca_indisponivel"];
     }
 }
-//-(void)throwBiribinhaRight{
-//    if(lancas>0){
-//        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEAR"];
-//        SKTexture *spear = [atlas textureNamed:@"spearToRight.png"];
-//        projectile = [[SKSpriteNode alloc] initWithTexture:spear];
-//        projectile.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:projectile.size];
-//        projectile.position = spartan.position;
-//        projectile.name = @"spear";
-//        [camera addChild:projectile];
-//        projectile.zPosition = 1;
-//        projectile.physicsBody.categoryBitMask = BIRIBINHA;
-//        projectile.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
-//        projectile.physicsBody.contactTestBitMask = ROCK;
-//        [projectile.physicsBody applyImpulse:CGVectorMake(10, 0)];
-//        lancas--;
-//    }
-//    else{
-//        lancasCount.fontColor = [UIColor redColor];
-//        attack2.texture = [SKTexture textureWithImageNamed:@"botao_atira_lanca_indisponivel"];
-//    }
-//}
+-(void)throwBiribinhaRight{
+    if(lancas>0){
+        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEAR"];
+        SKTexture *spear = [atlas textureNamed:@"spearToRight.png"];
+        projectile = [[SKSpriteNode alloc] initWithTexture:spear];
+        projectile.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:projectile.size];
+        projectile.position = spartan.position;
+        projectile.name = @"spear";
+        [camera addChild:projectile];
+        projectile.zPosition = 1;
+        projectile.physicsBody.categoryBitMask = BIRIBINHA;
+        projectile.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
+        projectile.physicsBody.contactTestBitMask = ROCK;
+        [projectile.physicsBody applyImpulse:CGVectorMake(10, 0)];
+        lancas--;
+    }
+    else{
+        lancasCount.fontColor = [UIColor redColor];
+        attack2.texture = [SKTexture textureWithImageNamed:@"botao_atira_lanca_indisponivel"];
+    }
+}
 
 -(void)throwBiribinhaLeft{
     if(lancas>0){
@@ -438,6 +444,16 @@ const uint32_t ATTACK = 0x1 << 4;
                 [self runAction:[SKAction playSoundFileNamed:@"spearT.wav" waitForCompletion:NO]];
             }
             else attack2.color = [UIColor grayColor];
+        }
+    }
+    else if ([node.name isEqualToString:@"special"]){
+        if(esquerda)
+        {
+            
+        }
+        else{
+            
+    
         }
     }
     
@@ -603,8 +619,8 @@ const uint32_t ATTACK = 0x1 << 4;
 #pragma mark - Update
 
 -(void)update:(NSTimeInterval)currentTime{
-    Fire.position = projectile.position;
-    [projectile runAction:[SKAction moveByX:30 y:0 duration:1]];
+    Fire.position = especial.position;
+    [especial runAction:[SKAction moveByX:30 y:0 duration:1]];
     lancasCount.text = [NSString stringWithFormat:@"%ld", (long)lancas];
     
     counter--;
