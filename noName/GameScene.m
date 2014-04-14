@@ -29,6 +29,7 @@ const uint32_t LOOT = 0x1 << 5;
     SKTexture *texturaAux;
     SKEmitterNode *Fire;
     BOOL noLanca;
+    BOOL specialEsquerda;
 }
 
 #pragma mark - Move to View
@@ -254,17 +255,18 @@ const uint32_t LOOT = 0x1 << 5;
         especial = [[SKSpriteNode alloc] init];
         especial.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100, 10)];
         especial.position = spartan.position;
-        especial.name = @"fire";
+        especial.name = @"spear";
         Fire = [self newFire:especial.position.x :especial.position.y];
         Fire.position = especial.position;
         [camera addChild:especial];
         [camera addChild:Fire];
         especial.zPosition = 1;
         especial.physicsBody.categoryBitMask = BIRIBINHA;
-        especial.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
-        especial.physicsBody.contactTestBitMask = ROCK;
+ //       especial.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
+        especial.physicsBody.contactTestBitMask = ENEMY;
         especial.physicsBody.dynamic=NO;
-        [especial runAction:[SKAction moveByX:30 y:0 duration:1]];
+    specialEsquerda = NO;
+    
 
 
 }
@@ -273,17 +275,18 @@ const uint32_t LOOT = 0x1 << 5;
     especial = [[SKSpriteNode alloc] init];
     especial.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100, 10)];
     especial.position = spartan.position;
-    especial.name = @"fire";
+    especial.name = @"spear";
     Fire = [self newFire:especial.position.x :especial.position.y];
     Fire.position = especial.position;
     [camera addChild:especial];
     [camera addChild:Fire];
     especial.zPosition = 1;
     especial.physicsBody.categoryBitMask = BIRIBINHA;
-    especial.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
-    especial.physicsBody.contactTestBitMask = ROCK;
+ //   especial.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
+    especial.physicsBody.contactTestBitMask = ENEMY;
     especial.physicsBody.dynamic=NO;
-    [especial runAction:[SKAction moveByX:-30 y:0 duration:1]];
+    specialEsquerda = YES;
+//    [especial runAction:[SKAction moveByX:-30 y:0 duration:1]];
     
     
 }
@@ -698,6 +701,12 @@ const uint32_t LOOT = 0x1 << 5;
 
 -(void)update:(NSTimeInterval)currentTime{
     Fire.position = especial.position;
+    
+    if (specialEsquerda) {
+        [especial runAction:[SKAction moveByX:-30 y:0 duration:1]];
+    }
+    else
+        [especial runAction:[SKAction moveByX:30 y:0 duration:1]];
 
     lancasCount.text = [NSString stringWithFormat:@"%ld", (long)lancas];
     if (specialAux>9) {
