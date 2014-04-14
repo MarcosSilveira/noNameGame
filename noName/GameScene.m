@@ -231,7 +231,7 @@ const uint32_t LOOT = 0x1 << 5;
     
     return attack2;
 }
-    
+
 -(SKSpriteNode *)createAttackButton{
     attack = [[SKSpriteNode alloc] initWithColor:[UIColor redColor]size:CGSizeMake(width*0.08, width*0.08)];
     attack.name = @"Attack";
@@ -262,23 +262,23 @@ const uint32_t LOOT = 0x1 << 5;
 
 -(void)throwFiremodafockaRight{
     
-        especial = [[SKSpriteNode alloc] init];
-        especial.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100, 10)];
-        especial.position = spartan.position;
-        especial.name = @"spear";
-        Fire = [self newFire:especial.position.x :especial.position.y];
-        Fire.position = especial.position;
-        [camera addChild:especial];
-        [camera addChild:Fire];
-        especial.zPosition = 1;
-        especial.physicsBody.categoryBitMask = BIRIBINHA;
-        especial.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
-        especial.physicsBody.contactTestBitMask = ENEMY;
-        especial.physicsBody.dynamic=NO;
+    especial = [[SKSpriteNode alloc] init];
+    especial.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100, 10)];
+    especial.position = spartan.position;
+    especial.name = @"spear";
+    Fire = [self newFire:especial.position.x :especial.position.y];
+    Fire.position = especial.position;
+    [camera addChild:especial];
+    [camera addChild:Fire];
+    especial.zPosition = 1;
+    especial.physicsBody.categoryBitMask = BIRIBINHA;
+    especial.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
+    especial.physicsBody.contactTestBitMask = ENEMY;
+    especial.physicsBody.dynamic=NO;
     specialEsquerda = NO;
     
-
-
+    
+    
 }
 -(void)throwFiremodafockaLeft{
     
@@ -296,7 +296,7 @@ const uint32_t LOOT = 0x1 << 5;
     especial.physicsBody.contactTestBitMask = ENEMY;
     especial.physicsBody.dynamic=NO;
     specialEsquerda = YES;
-//    [especial runAction:[SKAction moveByX:-30 y:0 duration:1]];
+    //    [especial runAction:[SKAction moveByX:-30 y:0 duration:1]];
     
     
 }
@@ -483,7 +483,7 @@ const uint32_t LOOT = 0x1 << 5;
     SKNode *node = [self nodeAtPoint:location];
     
     //__________________________________________Move Right_______________________________
-
+    
     if([node.name isEqualToString:(@"right")]){
         currentButton = node.name;
         esquerda = NO;
@@ -503,7 +503,7 @@ const uint32_t LOOT = 0x1 << 5;
     
     //__________________________________________Ranged Attack_______________________________
     
-
+    
     else if ([node.name isEqualToString:@"Attack2"]){
         if (esquerda) {
             SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEARLAUNCH"];
@@ -550,7 +550,7 @@ const uint32_t LOOT = 0x1 << 5;
     }
     
     //__________________________________________Pause_______________________________
-
+    
     
     else if ([node.name isEqualToString:@"PauseButton"]) {
         if (self.paused){
@@ -562,7 +562,7 @@ const uint32_t LOOT = 0x1 << 5;
     }
     
     //__________________________________________Move Left_______________________________
-
+    
     
     else if ([node.name isEqualToString:@"left"]) {
         currentButton = node.name;
@@ -581,7 +581,7 @@ const uint32_t LOOT = 0x1 << 5;
     }
     
     //__________________________________________Defense_______________________________
-
+    
     
     else if([node.name isEqualToString:@"defense"]){
         currentButton = node.name;
@@ -725,7 +725,7 @@ const uint32_t LOOT = 0x1 << 5;
     }
     else
         [especial runAction:[SKAction moveByX:30 y:0 duration:1]];
-
+    
     lancasCount.text = [NSString stringWithFormat:@"%ld", (long)lancas];
     if (specialAux>9) {
         FOGAREU = YES;
@@ -1070,7 +1070,6 @@ const uint32_t LOOT = 0x1 << 5;
             }
         }
     }
-
 }
 
 @end
