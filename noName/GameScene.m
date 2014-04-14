@@ -20,12 +20,12 @@ const uint32_t FIREMODAFOCKA = 0x1 << 5;
     int height;
     int counter;
     int stages;
-    NSInteger score;
+    int score;
     NSString *currentButton;
     int HP;
     SKTexture *texturaAux;
     SKEmitterNode *Fire;
-
+    BOOL noLanca;
 }
 
 #pragma mark - Move to View
@@ -71,21 +71,6 @@ const uint32_t FIREMODAFOCKA = 0x1 << 5;
     [self addChild:[self createDefenseButton]];
     [self addChild:[self createSpecialButton]];
     
-    lancasCount = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
-    aux = @"Lanças:";
-    lancas = 5;
-    lancasCount.text = [NSString stringWithFormat:@"%ld",(long)lancas];
-    lancasCount.position = CGPointMake(0, height/3);
-    lancasCount.fontSize = 20;
-    lancasCount.fontColor = [UIColor whiteColor];
-    [self addChild:lancasCount];
-    
-    SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
-    texturaAux = [lifeAtlas textureNamed:@"heart5.png"];
-    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(width*0.17, height*0.06)];
-    vidas.position = CGPointMake(0, lancasCount.position.y+50);
-    [self addChild:vidas];
-    
     lancasNode = [[SKSpriteNode alloc] initWithImageNamed:@"lanca_contador.png"];
     lancasNode.size = CGSizeMake(width*0.15, width*0.15);
     lancasNode.position = CGPointMake(width/2-lancasNode.size.width/2, height/2-lancasNode.size.height/2);
@@ -96,6 +81,23 @@ const uint32_t FIREMODAFOCKA = 0x1 << 5;
     pause.size = CGSizeMake(width*0.06, width*0.06);
     pause.name = @"PauseButton";
     [self addChild:pause];
+    
+    lancasCount = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
+    aux = @"Lanças:";
+    lancas = 5;
+    lancasCount.text = [NSString stringWithFormat:@"%ld",(long)lancas];
+    lancasCount.position = CGPointMake(width/2-lancasNode.size.width/2+lancasNode.size.width*0.2, height/3+lancasNode.size.width*0.072);
+    lancasCount.fontSize = 20;
+    lancasCount.fontColor = [UIColor whiteColor];
+    [self addChild:lancasCount];
+    
+    SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
+    texturaAux = [lifeAtlas textureNamed:@"heart5.png"];
+    vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(width*0.17, height*0.06)];
+    vidas.position = CGPointMake(0, lancasCount.position.y+50);
+    [self addChild:vidas];
+    
+    
 }
 #pragma mark - Create Particles
 
@@ -125,7 +127,7 @@ const uint32_t FIREMODAFOCKA = 0x1 << 5;
     spartan.zPosition = 1;
     spartan.physicsBody.categoryBitMask = SPARTAN;
     spartan.physicsBody.collisionBitMask = ROCK | ENEMY;
-    spartan.physicsBody.contactTestBitMask = ROCK | ENEMY;
+    spartan.physicsBody.contactTestBitMask = ROCK | ENEMY | LOOT;
     
     return spartan;
 }
@@ -283,10 +285,6 @@ const uint32_t FIREMODAFOCKA = 0x1 << 5;
         projectile.physicsBody.contactTestBitMask = ROCK;
         [projectile.physicsBody applyImpulse:CGVectorMake(10, 0)];
         lancas--;
-    }
-    else{
-        lancasCount.fontColor = [UIColor redColor];
-        attack2.texture = [SKTexture textureWithImageNamed:@"botao_atira_lanca_indisponivel"];
     }
 }
 
@@ -532,7 +530,7 @@ const uint32_t FIREMODAFOCKA = 0x1 << 5;
         currentButton = node.name;
         if (esquerda) {
             SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPARTAN_DEF"];
-            SKTexture *f1 = [atlas textureNamed:@"DEF_LEFT.png"];
+            SKTexture *f1 = [atlas textureNamed:@"DEF_NEW.png"];
             NSArray *spartanDefenseRight = @[f1];
             [spartan runAction:[SKAction animateWithTextures:spartanDefenseRight timePerFrame:0.01f]withKey:@"DefenseLAction1"];
             defendendo = YES;
@@ -544,7 +542,6 @@ const uint32_t FIREMODAFOCKA = 0x1 << 5;
             NSArray *spartanDefenseLeft = @[f1];
             [spartan runAction:[SKAction animateWithTextures:spartanDefenseLeft timePerFrame:0.01f]withKey:@"DefenseRAction1"];
             defendendo = YES;
-            
         }
     }
 }
@@ -622,6 +619,16 @@ const uint32_t FIREMODAFOCKA = 0x1 << 5;
     Fire.position = especial.position;
     [especial runAction:[SKAction moveByX:30 y:0 duration:1]];
     lancasCount.text = [NSString stringWithFormat:@"%ld", (long)lancas];
+    if(lancas < 1){
+        lancasCount.fontColor = [UIColor redColor];
+        attack2.texture = [SKTexture textureWithImageNamed:@"botao_atira_lanca_indisponivel"];
+        noLanca = YES;
+    }
+    else if(lancas >=1 && noLanca){
+        lancasCount.fontColor = [UIColor whiteColor];
+        attack2.texture = [SKTexture textureWithImageNamed:@"botao_atira_lanca_disponivel"];
+        noLanca = NO;
+    }
     
     counter--;
     
@@ -669,26 +676,76 @@ const uint32_t FIREMODAFOCKA = 0x1 << 5;
 
 -(void)didBeginContact:(SKPhysicsContact *)contact
 {
-    NSLog(@"body A %@",contact.bodyA.node.name);
-    NSLog(@"body B %@",contact.bodyB.node.name);
+    //Attack melee / ranged, remove enemy
     if(([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"spear"]) || ([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"attack"])){
+        
         [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
+        
+        //Drop random loot
+        int random = arc4random_uniform(5);
+        if(random == 3){
+            SKTexture *drop1 = [SKTexture textureWithImageNamed:@"lanca_diagonal.png"];
+            drop = [[SKSpriteNode alloc] initWithTexture:drop1 color:[SKColor blackColor] size:spartan.size];
+            drop.position = contact.contactPoint;
+            drop.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:spartan.size];
+            drop.name = @"loot";
+            drop.physicsBody.categoryBitMask = LOOT;
+            drop.physicsBody.collisionBitMask = ROCK;
+            drop.physicsBody.contactTestBitMask = SPARTAN;
+            [camera addChild:drop];
+        }
+    
         [contact.bodyA.node removeFromParent];
         score++;
+        score = score*stages;
+        
+        
         
     }
     if(([contact.bodyB.node.name isEqualToString:@"enemy"] && [contact.bodyA.node.name isEqualToString:@"spear"]) || ([contact.bodyB.node.name isEqualToString:@"enemy"] && [contact.bodyA.node.name isEqualToString:@"attack"])){
         [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
+        
+        //Drop random loot
+        int random = arc4random_uniform(5);
+        if(random == 3){
+            SKTexture *drop1 = [SKTexture textureWithImageNamed:@"lanca_diagonal.png"];
+            drop = [[SKSpriteNode alloc] initWithTexture:drop1 color:[SKColor blackColor] size:spartan.size];
+            drop.position = contact.contactPoint;
+            drop.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:spartan.size];
+            drop.physicsBody.categoryBitMask = LOOT;
+            drop.physicsBody.collisionBitMask = ROCK;
+            drop.physicsBody.contactTestBitMask = SPARTAN;
+            drop.name = @"loot";
+            [camera addChild:drop];
+        }
+    
+        
         [contact.bodyB.node removeFromParent];
         score++;
+        score = score*stages;
+        
+        
     }
     
+    //Grecules touches loot
+    if([contact.bodyB.node.name isEqualToString:@"spartan"] && [contact.bodyA.node.name isEqualToString:@"loot"]){
+        [contact.bodyA.node removeFromParent];
+        lancas++;
+    }
+    if([contact.bodyA.node.name isEqualToString:@"spartan"] && [contact.bodyB.node.name isEqualToString:@"loot"]){
+        [contact.bodyB.node removeFromParent];
+        lancas++;
+    }
+    
+    //Remove attack / spear node
     if([contact.bodyB.node.name isEqualToString:@"spear"] || [contact.bodyB.node.name isEqualToString:@"attack"]){
         [contact.bodyB.node removeFromParent];
     }
     if([contact.bodyA.node.name isEqualToString:@"spear"] || [contact.bodyA.node.name isEqualToString:@"attack"]){
         [contact.bodyA.node removeFromParent];
     }
+    
+    //Inflict damage on Grecules
     if([contact.bodyB.node.name isEqualToString:@"spartan"] && [contact.bodyA.node.name isEqualToString:@"enemy"]){
         SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
         if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];

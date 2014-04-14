@@ -56,6 +56,7 @@
 		A03A682D18F8628700A2661B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A03A682C18F8628700A2661B /* AVFoundation.framework */; };
 		A03A682F18F862E500A2661B /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A03A682E18F862E500A2661B /* music.mp3 */; };
 		A03A683618F86B8D00A2661B /* SPARTAN_DEF.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A03A683518F86B8D00A2661B /* SPARTAN_DEF.atlas */; };
+		A03A683A18F87AAF00A2661B /* lanca_diagonal.png in Resources */ = {isa = PBXBuildFile; fileRef = A03A683918F87AAF00A2661B /* lanca_diagonal.png */; };
 		A03ACC6A18EDC96E0007299C /* SPEAR.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A03ACC6918EDC96E0007299C /* SPEAR.atlas */; };
 		A03ACC6E18EDD2B10007299C /* grecia.png in Resources */ = {isa = PBXBuildFile; fileRef = A03ACC6D18EDD2B10007299C /* grecia.png */; };
 		A08E389218E9EC2800C27179 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A08E389118E9EC2800C27179 /* GameScene.m */; };
@@ -136,6 +137,7 @@
 		A03A682C18F8628700A2661B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A03A682E18F862E500A2661B /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 		A03A683518F86B8D00A2661B /* SPARTAN_DEF.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = SPARTAN_DEF.atlas; sourceTree = "<group>"; };
+		A03A683918F87AAF00A2661B /* lanca_diagonal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lanca_diagonal.png; sourceTree = "<group>"; };
 		A03ACC6918EDC96E0007299C /* SPEAR.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = SPEAR.atlas; sourceTree = "<group>"; };
 		A03ACC6D18EDD2B10007299C /* grecia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grecia.png; sourceTree = "<group>"; };
 		A08E389018E9EC2800C27179 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				8DA4AF3718F71B76005CB817 /* lanca_contador.png */,
 				8DA4AF4018F726B9005CB817 /* gameover.png */,
 				8DA4AF4218F726BF005CB817 /* jogarnovamente.png */,
+				A03A683918F87AAF00A2661B /* lanca_diagonal.png */,
 				A03A682218F85BBB00A2661B /* hitC.mp3 */,
 				A03A682318F85BBB00A2661B /* hitS.wav */,
 				A03A682818F85D8F00A2661B /* spearT.wav */,
@@ -353,7 +356,7 @@
 				ORGANIZATIONNAME = "Marcos Sokolowski";
 				TargetAttributes = {
 					8DAC9A7818E098A7000A016F = {
-						DevelopmentTeam = T5N5TT4E82;
+						DevelopmentTeam = 4452968868;
 					};
 					8DAC9AA018E098A7000A016F = {
 						TestTargetID = 8DAC9A7818E098A7000A016F;
@@ -422,6 +425,7 @@
 				8D2CA9FA18F47F2F0062F480 /* botao_lanca.png in Resources */,
 				8D2CA9F918F47F2F0062F480 /* botao_escudo.png in Resources */,
 				8DA4AF3C18F71FC3005CB817 /* play.png in Resources */,
+				A03A683A18F87AAF00A2661B /* lanca_diagonal.png in Resources */,
 				A03A682B18F85EB700A2661B /* attack.mp3 in Resources */,
 				8DA4AF3818F71B76005CB817 /* lanca_contador.png in Resources */,
 				8DAB851918F5CA610099437C /* botao_atira_lanca_indisponivel.png in Resources */,

@@ -15,7 +15,7 @@
 
 }
 
--(id)initWithSize:(CGSize)size andScore:(NSInteger)score
+-(id)initWithSize:(CGSize)size andScore:(int)score
 {
     if (self = [super initWithSize:size]) {
        
@@ -32,7 +32,7 @@
         playAgain.name = @"playAgain";
         
         scoreAux = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
-        scoreAux.text = [NSString stringWithFormat:@"%lx", (long)score];
+        scoreAux.text = [NSString stringWithFormat:@"%d",score];
         scoreAux.fontColor = [UIColor grayColor];
         scoreAux.fontSize = 60;
         scoreAux.position = CGPointMake(width*0.70, height*0.46);
@@ -50,7 +50,7 @@
     SKNode *node = [self nodeAtPoint:location];
     
     if ([node.name isEqualToString:@"playAgain"]) {
-        SKAction *action = [SKAction scaleBy:2 duration:1];
+        SKAction *action = [SKAction scaleBy:1.2 duration:0.5];
         [playAgain runAction:action completion:^{
 
         SKScene *gameAgain= [[GameScene alloc] initWithSize:self.size];
