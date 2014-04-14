@@ -61,6 +61,7 @@
 		A03ACC6E18EDD2B10007299C /* grecia.png in Resources */ = {isa = PBXBuildFile; fileRef = A03ACC6D18EDD2B10007299C /* grecia.png */; };
 		A08E389218E9EC2800C27179 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A08E389118E9EC2800C27179 /* GameScene.m */; };
 		A09BD64D18EDE82200202C1B /* Ground.png in Resources */ = {isa = PBXBuildFile; fileRef = A09BD64C18EDE82200202C1B /* Ground.png */; };
+		A09C852D18FC68CA00EC3654 /* gameover2.png in Resources */ = {isa = PBXBuildFile; fileRef = A09C852C18FC68CA00EC3654 /* gameover2.png */; };
 		A0DDE61318F5AA6400F301AA /* nuvem1.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61118F5AA6400F301AA /* nuvem1.png */; };
 		A0DDE61418F5AA6400F301AA /* nuvem2.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61218F5AA6400F301AA /* nuvem2.png */; };
 		A0DDE61618F5C4B600F301AA /* backgroundfixo.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61518F5C4B600F301AA /* backgroundfixo.png */; };
@@ -143,6 +144,7 @@
 		A08E389018E9EC2800C27179 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		A08E389118E9EC2800C27179 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		A09BD64C18EDE82200202C1B /* Ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ground.png; sourceTree = "<group>"; };
+		A09C852C18FC68CA00EC3654 /* gameover2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameover2.png; sourceTree = "<group>"; };
 		A0DDE61118F5AA6400F301AA /* nuvem1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nuvem1.png; sourceTree = "<group>"; };
 		A0DDE61218F5AA6400F301AA /* nuvem2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nuvem2.png; sourceTree = "<group>"; };
 		A0DDE61518F5C4B600F301AA /* backgroundfixo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundfixo.png; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				8DA4AF3B18F71FC3005CB817 /* play.png */,
 				8DA4AF3718F71B76005CB817 /* lanca_contador.png */,
 				8DA4AF4018F726B9005CB817 /* gameover.png */,
+				A09C852C18FC68CA00EC3654 /* gameover2.png */,
 				8DA4AF4218F726BF005CB817 /* jogarnovamente.png */,
 				A03A683918F87AAF00A2661B /* lanca_diagonal.png */,
 				A03A682218F85BBB00A2661B /* hitC.mp3 */,
@@ -356,7 +359,7 @@
 				ORGANIZATIONNAME = "Marcos Sokolowski";
 				TargetAttributes = {
 					8DAC9A7818E098A7000A016F = {
-						DevelopmentTeam = T5N5TT4E82;
+						DevelopmentTeam = 4452968868;
 					};
 					8DAC9AA018E098A7000A016F = {
 						TestTargetID = 8DAC9A7818E098A7000A016F;
@@ -395,6 +398,7 @@
 				A0EAFF2718F463DB00B76CB5 /* prebackground2.png in Resources */,
 				A03ACC6E18EDD2B10007299C /* grecia.png in Resources */,
 				8DAC9A8918E098A7000A016F /* InfoPlist.strings in Resources */,
+				A09C852D18FC68CA00EC3654 /* gameover2.png in Resources */,
 				A0DDE61318F5AA6400F301AA /* nuvem1.png in Resources */,
 				8DBF9F7118EDF05800C3032A /* ENEMY_RIGHT.atlas in Resources */,
 				A0DDE61418F5AA6400F301AA /* nuvem2.png in Resources */,

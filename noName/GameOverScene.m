@@ -22,7 +22,7 @@
         width = self.scene.size.width;
         height = self.scene.size.height;
         
-        background = [SKTexture textureWithImageNamed:@"gameover.png"];
+        background = [SKTexture textureWithImageNamed:@"gameover2.png"];
         SKSpriteNode *fundo2 = [[SKSpriteNode alloc] initWithTexture:background color:nil size:CGSizeMake(self.scene.size.width, self.scene.size.height)];
         fundo2.anchorPoint = CGPointZero;
         

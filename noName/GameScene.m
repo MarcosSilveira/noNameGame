@@ -264,7 +264,7 @@ const uint32_t LOOT = 0x1 << 5;
         [camera addChild:Fire];
         especial.zPosition = 1;
         especial.physicsBody.categoryBitMask = BIRIBINHA;
- //       especial.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
+        especial.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
         especial.physicsBody.contactTestBitMask = ENEMY;
         especial.physicsBody.dynamic=NO;
     specialEsquerda = NO;
@@ -284,7 +284,7 @@ const uint32_t LOOT = 0x1 << 5;
     [camera addChild:Fire];
     especial.zPosition = 1;
     especial.physicsBody.categoryBitMask = BIRIBINHA;
- //   especial.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
+    especial.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
     especial.physicsBody.contactTestBitMask = ENEMY;
     especial.physicsBody.dynamic=NO;
     specialEsquerda = YES;
@@ -883,10 +883,12 @@ const uint32_t LOOT = 0x1 << 5;
     
     //Remove attack / spear node
     if([contact.bodyB.node.name isEqualToString:@"spear"] || [contact.bodyB.node.name isEqualToString:@"attack"]){
-        [contact.bodyB.node removeFromParent];
+        [projectile removeFromParent];
+        [attackRegion removeFromParent];
     }
     if([contact.bodyA.node.name isEqualToString:@"spear"] || [contact.bodyA.node.name isEqualToString:@"attack"]){
-        [contact.bodyA.node removeFromParent];
+        [projectile removeFromParent];
+        [attackRegion removeFromParent];
     }
     
     //Inflict damage on Grecules
