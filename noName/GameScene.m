@@ -21,13 +21,12 @@ const uint32_t LOOT = 0x1 << 5;
     int height;
     int counter;
     int stages;
-    NSInteger score;
+    int score;
     NSString *currentButton;
     int HP;
     SKTexture *texturaAux;
     SKEmitterNode *Fire;
     BOOL noLanca;
-
 }
 
 #pragma mark - Move to View
@@ -677,11 +676,11 @@ const uint32_t LOOT = 0x1 << 5;
             drop.physicsBody.collisionBitMask = ROCK;
             drop.physicsBody.contactTestBitMask = SPARTAN;
             [camera addChild:drop];
-            [drop.physicsBody applyImpulse:CGVectorMake(5, 10)];
         }
     
         [contact.bodyA.node removeFromParent];
         score++;
+        score = score*stages;
         
         
         
@@ -701,12 +700,12 @@ const uint32_t LOOT = 0x1 << 5;
             drop.physicsBody.contactTestBitMask = SPARTAN;
             drop.name = @"loot";
             [camera addChild:drop];
-            [drop.physicsBody applyImpulse:CGVectorMake(5, 10)];
         }
     
         
         [contact.bodyB.node removeFromParent];
         score++;
+        score = score*stages;
         
         
     }

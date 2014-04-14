@@ -59,7 +59,7 @@
         }];
     }
     if([node.name isEqualToString:@"JogarNode"]){
-        SKAction *action = [SKAction scaleBy:2 duration:1];
+        SKAction *action = [SKAction scaleBy:1.2 duration:0.5];
         SKAction *action2 = [SKAction removeFromParent];
         [loja runAction:action2];
         [play runAction:action completion:^{
