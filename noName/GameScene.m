@@ -232,7 +232,7 @@ const uint32_t LOOT = 0x1 << 5;
 -(SKSpriteNode *)createSpecialButton{
     special = [[SKSpriteNode alloc] initWithColor:[UIColor purpleColor] size:CGSizeMake(width*0.08, width*0.08)];
     special.name = @"Special";
-    special.position = CGPointMake(attack2.position.x , -(height*0.5)+(especial.size.height/2)+attack.size.height);
+    special.position = CGPointMake(attack2.position.x , -(height*0.5)+(defense.size.height/2)+attack.size.height);
     
     return special;
 }
@@ -763,6 +763,7 @@ const uint32_t LOOT = 0x1 << 5;
         
         [contact.bodyA.node removeFromParent];
         score = score+stages;
+        specialAux++;
     }
     
     if(([contact.bodyB.node.name isEqualToString:@"enemy"] && [contact.bodyA.node.name isEqualToString:@"spear"]) || ([contact.bodyB.node.name isEqualToString:@"enemy"] && [contact.bodyA.node.name isEqualToString:@"attack"])){
@@ -785,6 +786,7 @@ const uint32_t LOOT = 0x1 << 5;
         
         [contact.bodyB.node removeFromParent];
         score = score+stages;
+        specialAux++;
     }
     
     if(([contact.bodyA.node.name isEqualToString:@"enemy2"] && [contact.bodyB.node.name isEqualToString:@"spear"]) || ([contact.bodyA.node.name isEqualToString:@"enemy2"] && [contact.bodyB.node.name isEqualToString:@"attack"])){
@@ -807,6 +809,7 @@ const uint32_t LOOT = 0x1 << 5;
         
         [contact.bodyA.node removeFromParent];
         score = score+stages;
+        specialAux++;
     }
     
     if(([contact.bodyB.node.name isEqualToString:@"enemy2"] && [contact.bodyA.node.name isEqualToString:@"spear"]) || ([contact.bodyB.node.name isEqualToString:@"enemy2"] && [contact.bodyA.node.name isEqualToString:@"attack"])){
@@ -829,6 +832,7 @@ const uint32_t LOOT = 0x1 << 5;
         
         [contact.bodyB.node removeFromParent];
         score = score+stages;
+        specialAux++;
     }
     
     //Grecules touches loot
