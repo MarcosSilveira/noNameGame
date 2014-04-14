@@ -98,6 +98,14 @@ const uint32_t LOOT = 0x1 << 5;
     lancasCount.fontColor = [UIColor whiteColor];
     [self addChild:lancasCount];
     
+    pontosCount = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
+    auxPontos = @"Lanças:";
+    pontosCount.text = [NSString stringWithFormat:@"%ld",(long)score];
+    pontosCount.position = CGPointMake(0,0);
+    pontosCount.fontSize = 20;
+    pontosCount.fontColor = [UIColor whiteColor];
+    [self addChild:pontosCount];
+    
     SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
     texturaAux = [lifeAtlas textureNamed:@"heart5.png"];
     vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(width*0.17, height*0.06)];
@@ -701,6 +709,7 @@ const uint32_t LOOT = 0x1 << 5;
 
 -(void)update:(NSTimeInterval)currentTime{
     Fire.position = especial.position;
+    pontosCount.text = [NSString stringWithFormat:@"Pontos: %ld",(long)score];
     
     if (specialEsquerda) {
         [especial runAction:[SKAction moveByX:-30 y:0 duration:1]];

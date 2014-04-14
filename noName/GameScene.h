@@ -33,9 +33,11 @@
     NSInteger lancas;
     SKLabelNode *lancasCount;
     SKLabelNode *vidaCount;
+    SKLabelNode *pontosCount;
     SKSpriteNode *vidas;
     NSString *aux;
     NSString *auxHP;
+    NSString *auxPontos;
     SKSpriteNode *block;
     SKSpriteNode *block2;
     SKSpriteNode *pause;

@@ -14,10 +14,12 @@
 		8D2CA9FA18F47F2F0062F480 /* botao_lanca.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2CA9F818F47F2F0062F480 /* botao_lanca.png */; };
 		8D4625FB18F85FA7005B871C /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8D4625FA18F85FA7005B871C /* Fire.sks */; };
 		8D47FF1118EB3BC9002C8D1C /* WALK_RIGHT.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8D47FF1018EB3BC9002C8D1C /* WALK_RIGHT.atlas */; };
+		8D4D72F418FC659B002D3898 /* menufundo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D4D72F318FC659B002D3898 /* menufundo.png */; };
+		8D4D72F718FC668A002D3898 /* special_available.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D4D72F518FC668A002D3898 /* special_available.png */; };
+		8D4D72F818FC668A002D3898 /* special_unavailable.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D4D72F618FC668A002D3898 /* special_unavailable.png */; };
 		8D5CABBB18E9E4B500FDFDF1 /* grecia.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D5CABBA18E9E4B500FDFDF1 /* grecia.jpg */; };
 		8D6F788518EC999600A1F41D /* ATTACK_LEFT.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8D6F788418EC999600A1F41D /* ATTACK_LEFT.atlas */; };
 		8D6F788718EC9CBC00A1F41D /* WALK_LEFT.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8D6F788618EC9CBC00A1F41D /* WALK_LEFT.atlas */; };
-		8DA4AF3018F703EA005CB817 /* menufundo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF2D18F703EA005CB817 /* menufundo.png */; };
 		8DA4AF3318F70FDE005CB817 /* jogar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF3118F70FDE005CB817 /* jogar.png */; };
 		8DA4AF3418F70FDE005CB817 /* loja.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF3218F70FDE005CB817 /* loja.png */; };
 		8DA4AF3618F71893005CB817 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF3518F71893005CB817 /* pause.png */; };
@@ -87,10 +89,12 @@
 		8D2CA9F818F47F2F0062F480 /* botao_lanca.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_lanca.png; sourceTree = "<group>"; };
 		8D4625FA18F85FA7005B871C /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
 		8D47FF1018EB3BC9002C8D1C /* WALK_RIGHT.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = WALK_RIGHT.atlas; sourceTree = "<group>"; };
+		8D4D72F318FC659B002D3898 /* menufundo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menufundo.png; sourceTree = "<group>"; };
+		8D4D72F518FC668A002D3898 /* special_available.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = special_available.png; sourceTree = "<group>"; };
+		8D4D72F618FC668A002D3898 /* special_unavailable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = special_unavailable.png; sourceTree = "<group>"; };
 		8D5CABBA18E9E4B500FDFDF1 /* grecia.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grecia.jpg; sourceTree = "<group>"; };
 		8D6F788418EC999600A1F41D /* ATTACK_LEFT.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ATTACK_LEFT.atlas; sourceTree = "<group>"; };
 		8D6F788618EC9CBC00A1F41D /* WALK_LEFT.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = WALK_LEFT.atlas; sourceTree = "<group>"; };
-		8DA4AF2D18F703EA005CB817 /* menufundo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menufundo.png; sourceTree = "<group>"; };
 		8DA4AF3118F70FDE005CB817 /* jogar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jogar.png; sourceTree = "<group>"; };
 		8DA4AF3218F70FDE005CB817 /* loja.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loja.png; sourceTree = "<group>"; };
 		8DA4AF3518F71893005CB817 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
@@ -247,7 +251,6 @@
 				A0DDE61518F5C4B600F301AA /* backgroundfixo.png */,
 				8DAB851618F5CA610099437C /* botao_atira_lanca_disponivel.png */,
 				8DAB851718F5CA610099437C /* botao_atira_lanca_indisponivel.png */,
-				8DA4AF2D18F703EA005CB817 /* menufundo.png */,
 				8DA4AF3118F70FDE005CB817 /* jogar.png */,
 				8DA4AF3218F70FDE005CB817 /* loja.png */,
 				8DA4AF3518F71893005CB817 /* pause.png */,
@@ -255,7 +258,10 @@
 				8DA4AF3718F71B76005CB817 /* lanca_contador.png */,
 				8DA4AF4018F726B9005CB817 /* gameover.png */,
 				8DA4AF4218F726BF005CB817 /* jogarnovamente.png */,
+				8D4D72F318FC659B002D3898 /* menufundo.png */,
 				A03A683918F87AAF00A2661B /* lanca_diagonal.png */,
+				8D4D72F518FC668A002D3898 /* special_available.png */,
+				8D4D72F618FC668A002D3898 /* special_unavailable.png */,
 				A03A682218F85BBB00A2661B /* hitC.mp3 */,
 				A03A682318F85BBB00A2661B /* hitS.wav */,
 				A03A682818F85D8F00A2661B /* spearT.wav */,
@@ -389,8 +395,8 @@
 			files = (
 				A03A682F18F862E500A2661B /* music.mp3 in Resources */,
 				A0DDE61818F6FD9400F301AA /* LIFE.atlas in Resources */,
-				8DA4AF3018F703EA005CB817 /* menufundo.png in Resources */,
 				A03A682418F85BBB00A2661B /* hitC.mp3 in Resources */,
+				8D4D72F418FC659B002D3898 /* menufundo.png in Resources */,
 				8DA4AF3618F71893005CB817 /* pause.png in Resources */,
 				A0EAFF2718F463DB00B76CB5 /* prebackground2.png in Resources */,
 				A03ACC6E18EDD2B10007299C /* grecia.png in Resources */,
@@ -416,6 +422,7 @@
 				8DAC9A9C18E098A7000A016F /* Images.xcassets in Resources */,
 				8D6F788518EC999600A1F41D /* ATTACK_LEFT.atlas in Resources */,
 				8DBF9F7318EDF05E00C3032A /* ENEMY_LEFT.atlas in Resources */,
+				8D4D72F718FC668A002D3898 /* special_available.png in Resources */,
 				8DAC9A9218E098A7000A016F /* Main.storyboard in Resources */,
 				8D2CA9F618F479970062F480 /* botao_direcao_R.png in Resources */,
 				A0EAFF2618F463DB00B76CB5 /* prebackground1.png in Resources */,
@@ -429,6 +436,7 @@
 				A03A682B18F85EB700A2661B /* attack.mp3 in Resources */,
 				8DA4AF3818F71B76005CB817 /* lanca_contador.png in Resources */,
 				8DAB851918F5CA610099437C /* botao_atira_lanca_indisponivel.png in Resources */,
+				8D4D72F818FC668A002D3898 /* special_unavailable.png in Resources */,
 				8D4625FB18F85FA7005B871C /* Fire.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
