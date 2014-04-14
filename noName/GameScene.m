@@ -244,7 +244,7 @@ const uint32_t LOOT = 0x1 << 5;
     special = [[SKSpriteNode alloc] initWithColor:[UIColor purpleColor] size:CGSizeMake(width*0.08, width*0.08)];
     special.name = @"Special";
     special.position = CGPointMake(attack2.position.x , -(height*0.5)+(defense.size.height/2)+attack.size.height);
-    
+    special.texture = [SKTexture textureWithImageNamed:@"special_unavailable.png"];
     return special;
 }
 
@@ -713,6 +713,12 @@ const uint32_t LOOT = 0x1 << 5;
 -(void)update:(NSTimeInterval)currentTime{
     Fire.position = especial.position;
     pontosCount.text = [NSString stringWithFormat:@"Pontos: %ld",(long)score];
+    if(FOGAREU){
+        special.texture = [SKTexture textureWithImageNamed:@"special_available.png"];
+    }
+    else{
+        special.texture = [SKTexture textureWithImageNamed:@"special_unavailable.png"];
+    }
     
     if (specialEsquerda) {
         [especial runAction:[SKAction moveByX:-30 y:0 duration:1]];
