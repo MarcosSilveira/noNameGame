@@ -14,6 +14,7 @@ const uint32_t SPARTAN = 0x1 << 1;
 const uint32_t ENEMY = 0x1 << 2;
 const uint32_t BIRIBINHA = 0x1 << 3;
 const uint32_t ATTACK = 0x1 << 4;
+const uint32_t FIREMODAFOCKA = 0x1 << 6;
 const uint32_t LOOT = 0x1 << 5;
 
 @implementation GameScene{
@@ -41,6 +42,8 @@ const uint32_t LOOT = 0x1 << 5;
     currentButton = @"";
     HP = 5;
     score = 0;
+    FOGAREU = NO;
+    specialAux = 0;
     
     self.physicsWorld.contactDelegate = (id)self;
     self.backgroundColor = [SKColor redColor];
@@ -72,6 +75,7 @@ const uint32_t LOOT = 0x1 << 5;
     [self addChild:[self createAttackButton]];
     [self addChild:[self creatAtackButton2]];
     [self addChild:[self createDefenseButton]];
+    [self addChild:[self createSpecialButton]];
     
     lancasNode = [[SKSpriteNode alloc] initWithImageNamed:@"lanca_contador.png"];
     lancasNode.size = CGSizeMake(width*0.15, width*0.15);
@@ -225,6 +229,13 @@ const uint32_t LOOT = 0x1 << 5;
     
     return attack;
 }
+-(SKSpriteNode *)createSpecialButton{
+    special = [[SKSpriteNode alloc] initWithColor:[UIColor purpleColor] size:CGSizeMake(width*0.08, width*0.08)];
+    special.name = @"Special";
+    special.position = CGPointMake(attack2.position.x , -(height*0.5)+(especial.size.height/2)+attack.size.height);
+    
+    return special;
+}
 
 -(SKSpriteNode *)createDefenseButton{
     defense = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(width*0.08,width*0.08)];
@@ -238,6 +249,28 @@ const uint32_t LOOT = 0x1 << 5;
 
 #pragma mark - Actions
 
+-(void)throwFiremodafockaRight{
+    
+        especial = [[SKSpriteNode alloc] init];
+        especial.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100, 10)];
+        especial.position = spartan.position;
+        especial.name = @"spear";
+        Fire = [self newFire:especial.position.x :especial.position.y];
+        Fire.position = especial.position;
+        [camera addChild:especial];
+        [camera addChild:Fire];
+        especial.zPosition = 1;
+        especial.physicsBody.categoryBitMask = BIRIBINHA;
+        especial.physicsBody.collisionBitMask = BIRIBINHA | ROCK;
+        especial.physicsBody.contactTestBitMask = ROCK;
+        especial.physicsBody.dynamic=NO;
+//        [especial.physicsBody applyForce:CGVectorMake(10, 0)];
+//        [especial.physicsBody applyImpulse:CGVectorMake(10, 0)];
+    //    [especial.physicsBody ]
+    
+
+
+}
 -(void)throwBiribinhaRight{
     if(lancas>0){
         SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEAR"];
@@ -465,6 +498,20 @@ const uint32_t LOOT = 0x1 << 5;
             else attack2.color = [UIColor grayColor];
         }
     }
+    else if ([node.name isEqualToString:@"Special"]){
+        if(esquerda)
+        {
+            
+            
+        }
+        else{
+            if (FOGAREU) {
+                
+                [self throwFiremodafockaRight];
+                FOGAREU = NO;
+            }
+        }
+    }
     
     //__________________________________________Melee Attack_______________________________
 
@@ -627,9 +674,13 @@ const uint32_t LOOT = 0x1 << 5;
 #pragma mark - Update
 
 -(void)update:(NSTimeInterval)currentTime{
-    Fire.position = block.position;
-    
+    Fire.position = especial.position;
+    [especial runAction:[SKAction moveByX:30 y:0 duration:1]];
     lancasCount.text = [NSString stringWithFormat:@"%ld", (long)lancas];
+    if (specialAux>9) {
+        FOGAREU = YES;
+    }
+    
     if(lancas < 1){
         lancasCount.fontColor = [UIColor redColor];
         attack2.texture = [SKTexture textureWithImageNamed:@"botao_atira_lanca_indisponivel"];
