@@ -22,6 +22,7 @@
     SKSpriteNode *platform2;
     SKSpriteNode *fundo;
     SKSpriteNode *fundo2;
+    SKSpriteNode *drop;
     SKNode *camera;
     BOOL esquerda;
     BOOL defendendo;

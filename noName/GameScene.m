@@ -14,6 +14,7 @@ const uint32_t SPARTAN = 0x1 << 1;
 const uint32_t ENEMY = 0x1 << 2;
 const uint32_t BIRIBINHA = 0x1 << 3;
 const uint32_t ATTACK = 0x1 << 4;
+const uint32_t LOOT = 0x1 << 5;
 
 @implementation GameScene{
     int width;
@@ -25,6 +26,7 @@ const uint32_t ATTACK = 0x1 << 4;
     int HP;
     SKTexture *texturaAux;
     SKEmitterNode *Fire;
+    BOOL noLanca;
 
 }
 
@@ -126,7 +128,7 @@ const uint32_t ATTACK = 0x1 << 4;
     spartan.zPosition = 1;
     spartan.physicsBody.categoryBitMask = SPARTAN;
     spartan.physicsBody.collisionBitMask = ROCK | ENEMY;
-    spartan.physicsBody.contactTestBitMask = ROCK | ENEMY;
+    spartan.physicsBody.contactTestBitMask = ROCK | ENEMY | LOOT;
     
     return spartan;
 }
@@ -256,10 +258,6 @@ const uint32_t ATTACK = 0x1 << 4;
         lancas--;
         //[self newFire:projectile.position.x :projectile.position.y];
         
-    }
-    else{
-        lancasCount.fontColor = [UIColor redColor];
-        attack2.texture = [SKTexture textureWithImageNamed:@"botao_atira_lanca_indisponivel"];
     }
 }
 //-(void)throwBiribinhaRight{
@@ -605,6 +603,16 @@ const uint32_t ATTACK = 0x1 << 4;
     Fire.position = block.position;
     
     lancasCount.text = [NSString stringWithFormat:@"%ld", (long)lancas];
+    if(lancas < 1){
+        lancasCount.fontColor = [UIColor redColor];
+        attack2.texture = [SKTexture textureWithImageNamed:@"botao_atira_lanca_indisponivel"];
+        noLanca = YES;
+    }
+    else if(lancas >=1 && noLanca){
+        lancasCount.fontColor = [UIColor whiteColor];
+        attack2.texture = [SKTexture textureWithImageNamed:@"botao_atira_lanca_disponivel"];
+        noLanca = NO;
+    }
     
     counter--;
     
@@ -654,15 +662,63 @@ const uint32_t ATTACK = 0x1 << 4;
 {
     //Attack melee / ranged, remove enemy
     if(([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"spear"]) || ([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"attack"])){
+        
         [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
+        
+        //Drop random loot
+        int random = arc4random_uniform(5);
+        if(random == 3){
+            SKTexture *drop1 = [SKTexture textureWithImageNamed:@"lanca_diagonal.png"];
+            drop = [[SKSpriteNode alloc] initWithTexture:drop1 color:[SKColor blackColor] size:spartan.size];
+            drop.position = contact.contactPoint;
+            drop.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:spartan.size];
+            drop.name = @"loot";
+            drop.physicsBody.categoryBitMask = LOOT;
+            drop.physicsBody.collisionBitMask = ROCK;
+            drop.physicsBody.contactTestBitMask = SPARTAN;
+            [camera addChild:drop];
+            [drop.physicsBody applyImpulse:CGVectorMake(5, 10)];
+        }
+    
         [contact.bodyA.node removeFromParent];
         score++;
+        
+        
         
     }
     if(([contact.bodyB.node.name isEqualToString:@"enemy"] && [contact.bodyA.node.name isEqualToString:@"spear"]) || ([contact.bodyB.node.name isEqualToString:@"enemy"] && [contact.bodyA.node.name isEqualToString:@"attack"])){
         [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
+        
+        //Drop random loot
+        int random = arc4random_uniform(5);
+        if(random == 3){
+            SKTexture *drop1 = [SKTexture textureWithImageNamed:@"lanca_diagonal.png"];
+            drop = [[SKSpriteNode alloc] initWithTexture:drop1 color:[SKColor blackColor] size:spartan.size];
+            drop.position = contact.contactPoint;
+            drop.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:spartan.size];
+            drop.physicsBody.categoryBitMask = LOOT;
+            drop.physicsBody.collisionBitMask = ROCK;
+            drop.physicsBody.contactTestBitMask = SPARTAN;
+            drop.name = @"loot";
+            [camera addChild:drop];
+            [drop.physicsBody applyImpulse:CGVectorMake(5, 10)];
+        }
+    
+        
         [contact.bodyB.node removeFromParent];
         score++;
+        
+        
+    }
+    
+    //Grecules touches loot
+    if([contact.bodyB.node.name isEqualToString:@"spartan"] && [contact.bodyA.node.name isEqualToString:@"loot"]){
+        [contact.bodyA.node removeFromParent];
+        lancas++;
+    }
+    if([contact.bodyA.node.name isEqualToString:@"spartan"] && [contact.bodyB.node.name isEqualToString:@"loot"]){
+        [contact.bodyB.node removeFromParent];
+        lancas++;
     }
     
     //Remove attack / spear node
