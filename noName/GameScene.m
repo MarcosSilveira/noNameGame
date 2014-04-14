@@ -22,6 +22,7 @@ const uint32_t LOOT = 0x1 << 5;
     int height;
     int counter;
     int counter2;
+    int attackCool;
     int stages;
     int score;
     NSString *currentButton;
@@ -35,6 +36,7 @@ const uint32_t LOOT = 0x1 << 5;
 #pragma mark - Move to View
 
 -(void)didMoveToView:(SKView *)view{
+    attackCool = 30;
     counter = 120;
     counter2 = 240;
     stages = 1;
@@ -547,43 +549,6 @@ const uint32_t LOOT = 0x1 << 5;
         }
     }
     
-    //__________________________________________Melee Attack_______________________________
-
-    
-    else if ([node.name isEqualToString:@"Attack"]) {
-        if(esquerda)
-        {
-            SKTextureAtlas *atlas2 = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
-            SKTexture *parado = [atlas2 textureNamed:@"WALK_LEFT_006.png"];
-            spartan.texture = parado;
-            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ATTACK_LEFT"];
-            SKTexture *f1 = [atlas textureNamed:@"ATTACK_LEFT_001.png"];
-            SKTexture *f2 = [atlas textureNamed:@"ATTACK_LEFT_002.png"];
-            NSArray *spartanAttackTextures = @[f1, f2, parado];
-            [self attackActionLeft];
-            [self runAction:[SKAction playSoundFileNamed:@"attack.mp3" waitForCompletion:NO]];
-            [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.1f] completion:^{
-                
-            }];
-            
-        }
-        else{
-            SKTextureAtlas *atlas2 = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
-            SKTexture *parado = [atlas2 textureNamed:@"WALK_RIGHT_006_.png"];
-            spartan.texture = parado;
-            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ATACK_RIGHT"];
-            SKTexture *f1 = [atlas textureNamed:@"ATTACK_RIGHT_001.png"];
-            SKTexture *f2 = [atlas textureNamed:@"ATTACK_RIGHT_002.png"];
-            NSArray *spartanAttackTextures = @[f1, f2, parado];
-            [self attackActionRight];
-            [self runAction:[SKAction playSoundFileNamed:@"attack.mp3" waitForCompletion:NO]];
-            [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.1f] completion:^{
-                
-            }];
-            
-        }
-    }
-    
     //__________________________________________Pause_______________________________
 
     
@@ -634,6 +599,44 @@ const uint32_t LOOT = 0x1 << 5;
             NSArray *spartanDefenseLeft = @[f1];
             [spartan runAction:[SKAction animateWithTextures:spartanDefenseLeft timePerFrame:0.01f]withKey:@"DefenseRAction1"];
             defendendo = YES;
+        }
+    }
+    
+    //__________________________________________Melee Attack_______________________________
+    
+    else if(attackCool <=0){
+        if ([node.name isEqualToString:@"Attack"]) {
+            if(esquerda)
+            {
+                SKTextureAtlas *atlas2 = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
+                SKTexture *parado = [atlas2 textureNamed:@"WALK_LEFT_006.png"];
+                spartan.texture = parado;
+                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ATTACK_LEFT"];
+                SKTexture *f1 = [atlas textureNamed:@"ATTACK_LEFT_001.png"];
+                SKTexture *f2 = [atlas textureNamed:@"ATTACK_LEFT_002.png"];
+                NSArray *spartanAttackTextures = @[f1, f2, parado];
+                [self attackActionLeft];
+                [self runAction:[SKAction playSoundFileNamed:@"attack.mp3" waitForCompletion:NO]];
+                [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.1f] completion:^{
+                    attackCool = 30;
+                }];
+                
+            }
+            else{
+                SKTextureAtlas *atlas2 = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
+                SKTexture *parado = [atlas2 textureNamed:@"WALK_RIGHT_006_.png"];
+                spartan.texture = parado;
+                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ATACK_RIGHT"];
+                SKTexture *f1 = [atlas textureNamed:@"ATTACK_RIGHT_001.png"];
+                SKTexture *f2 = [atlas textureNamed:@"ATTACK_RIGHT_002.png"];
+                NSArray *spartanAttackTextures = @[f1, f2, parado];
+                [self attackActionRight];
+                [self runAction:[SKAction playSoundFileNamed:@"attack.mp3" waitForCompletion:NO]];
+                [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.1f] completion:^{
+                    attackCool = 30;
+                }];
+                
+            }
         }
     }
 }
@@ -735,6 +738,7 @@ const uint32_t LOOT = 0x1 << 5;
     
     counter--;
     counter2--;
+    attackCool--;
     
     if (counter==0) {
         [camera addChild:[self creatorBlockLeft]];
