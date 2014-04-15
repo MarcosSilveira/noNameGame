@@ -64,6 +64,7 @@
 		A08E389218E9EC2800C27179 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A08E389118E9EC2800C27179 /* GameScene.m */; };
 		A09BD64D18EDE82200202C1B /* Ground.png in Resources */ = {isa = PBXBuildFile; fileRef = A09BD64C18EDE82200202C1B /* Ground.png */; };
 		A09C852D18FC68CA00EC3654 /* gameover2.png in Resources */ = {isa = PBXBuildFile; fileRef = A09C852C18FC68CA00EC3654 /* gameover2.png */; };
+		A09C852F18FDA28400EC3654 /* back.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A09C852E18FDA28400EC3654 /* back.mp3 */; };
 		A0DDE61318F5AA6400F301AA /* nuvem1.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61118F5AA6400F301AA /* nuvem1.png */; };
 		A0DDE61418F5AA6400F301AA /* nuvem2.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61218F5AA6400F301AA /* nuvem2.png */; };
 		A0DDE61618F5C4B600F301AA /* backgroundfixo.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61518F5C4B600F301AA /* backgroundfixo.png */; };
@@ -149,6 +150,7 @@
 		A08E389118E9EC2800C27179 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		A09BD64C18EDE82200202C1B /* Ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ground.png; sourceTree = "<group>"; };
 		A09C852C18FC68CA00EC3654 /* gameover2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameover2.png; sourceTree = "<group>"; };
+		A09C852E18FDA28400EC3654 /* back.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = back.mp3; sourceTree = "<group>"; };
 		A0DDE61118F5AA6400F301AA /* nuvem1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nuvem1.png; sourceTree = "<group>"; };
 		A0DDE61218F5AA6400F301AA /* nuvem2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nuvem2.png; sourceTree = "<group>"; };
 		A0DDE61518F5C4B600F301AA /* backgroundfixo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundfixo.png; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				A03A682818F85D8F00A2661B /* spearT.wav */,
 				A03A682A18F85EB700A2661B /* attack.mp3 */,
 				A03A682E18F862E500A2661B /* music.mp3 */,
+				A09C852E18FDA28400EC3654 /* back.mp3 */,
 				8DAC9A9B18E098A7000A016F /* Images.xcassets */,
 				8DAC9A8518E098A7000A016F /* Supporting Files */,
 			);
@@ -398,6 +401,7 @@
 			files = (
 				A03A682F18F862E500A2661B /* music.mp3 in Resources */,
 				A0DDE61818F6FD9400F301AA /* LIFE.atlas in Resources */,
+				A09C852F18FDA28400EC3654 /* back.mp3 in Resources */,
 				A03A682418F85BBB00A2661B /* hitC.mp3 in Resources */,
 				8D4D72F418FC659B002D3898 /* menufundo.png in Resources */,
 				8DA4AF3618F71893005CB817 /* pause.png in Resources */,

@@ -8,19 +8,22 @@
 
 #import "GameScene.h"
 #import "GameOverScene.h"
+@import AVFoundation;
 
 const uint32_t ROCK = 0x1 << 0;
 const uint32_t SPARTAN = 0x1 << 1;
 const uint32_t ENEMY = 0x1 << 2;
 const uint32_t BIRIBINHA = 0x1 << 3;
 const uint32_t ATTACK = 0x1 << 4;
-const uint32_t BOSS = 0x1 << 6;
 const uint32_t LOOT = 0x1 << 5;
+const uint32_t BOSS = 0x1 << 6;
 const uint32_t BOSSBIRIBINHA = 0x1 << 7;
+const uint32_t ENEMY2 = 0x1 << 8;
 
 @implementation GameScene{
     int width;
     int height;
+    AVAudioPlayer * backgroundMusicPlayer;
     int counter;
     int counter2;
     int counter3;
@@ -40,6 +43,14 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
 #pragma mark - Move to View
 
 -(void)didMoveToView:(SKView *)view{
+    
+    NSError *error;
+    NSURL * backgroundMusicURL = [[NSBundle mainBundle] URLForResource:@"back" withExtension:@"mp3"];
+    backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
+    backgroundMusicPlayer.numberOfLoops = -1;
+    [backgroundMusicPlayer prepareToPlay];
+    [backgroundMusicPlayer play];
+    
     attackCool = 15;
     counter = 120;
     counter2 = 240;
@@ -110,7 +121,7 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     pontosCount = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
     auxPontos = @"Lanças:";
     pontosCount.text = [NSString stringWithFormat:@"%ld",(long)score];
-    pontosCount.position = CGPointMake(0,0);
+    pontosCount.position = CGPointMake(0,(height*3)/9);
     pontosCount.fontSize = 20;
     pontosCount.fontColor = [UIColor whiteColor];
     [self addChild:pontosCount];
@@ -150,27 +161,27 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     spartan.zPosition = 1;
     spartan.physicsBody.categoryBitMask = SPARTAN;
     spartan.physicsBody.collisionBitMask = ROCK | ENEMY | BOSS;
-    spartan.physicsBody.contactTestBitMask = ROCK | ENEMY | LOOT | BOSSBIRIBINHA;
+    spartan.physicsBody.contactTestBitMask = ROCK | ENEMY | LOOT | BOSSBIRIBINHA | ENEMY2;
     
     return spartan;
 }
 
--(SKSpriteNode *)createBoss{
-    boss = [[SKSpriteNode alloc] initWithColor:[SKColor blackColor] size:CGSizeMake(width*0.08, height*0.08)];
-    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
-    SKTexture *parado = [atlas textureNamed:@"WALK_LEFT_006.png"];
-    boss.texture = parado;
-    CGSize hue = CGSizeMake(spartan.size.width/2, spartan.size.height);
-    boss.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:hue];
-    boss.position = CGPointMake(-camera.position.x+width/4, -height/2+(platform.size.height));;
-    boss.name = @"boss";
-    boss.zPosition = 1;
-    block.physicsBody.categoryBitMask = BOSS;
-    block.physicsBody.collisionBitMask = SPARTAN | ROCK;
-    block.physicsBody.contactTestBitMask = SPARTAN | BIRIBINHA | ROCK | ATTACK;
-    
-    return boss;
-}
+//-(SKSpriteNode *)createBoss{
+//    boss = [[SKSpriteNode alloc] initWithColor:[SKColor blackColor] size:CGSizeMake(width*0.08, height*0.08)];
+//    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
+//    SKTexture *parado = [atlas textureNamed:@"WALK_LEFT_006.png"];
+//    boss.texture = parado;
+//    CGSize hue = CGSizeMake(spartan.size.width/2, spartan.size.height);
+//    boss.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:hue];
+//    boss.position = CGPointMake(-camera.position.x+width/4, -height/2+(platform.size.height));;
+//    boss.name = @"boss";
+//    boss.zPosition = 1;
+//    boss.physicsBody.categoryBitMask = BOSS;
+//    boss.physicsBody.collisionBitMask = SPARTAN | ROCK;
+//    boss.physicsBody.contactTestBitMask = SPARTAN | BIRIBINHA | ROCK | ATTACK;
+//    
+//    return boss;
+//}
 
 #pragma mark - Background / Stage
 
@@ -300,10 +311,8 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     especial.physicsBody.contactTestBitMask = ENEMY;
     especial.physicsBody.dynamic=NO;
     specialEsquerda = NO;
-    
-    
-    
 }
+
 -(void)throwFiremodafockaLeft{
     
     especial = [[SKSpriteNode alloc] init];
@@ -320,25 +329,22 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     especial.physicsBody.contactTestBitMask = ENEMY;
     especial.physicsBody.dynamic=NO;
     specialEsquerda = YES;
-    //    [especial runAction:[SKAction moveByX:-30 y:0 duration:1]];
-    
-    
 }
--(void)BossthrowBiribinhaLeft{
-        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEAR"];
-        SKTexture *spear = [atlas textureNamed:@"spearToLeft.png"];
-        projectile = [[SKSpriteNode alloc] initWithTexture:spear];
-        projectile.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:projectile.size];
-        projectile.position = CGPointMake(boss.position.x-100, boss.position.y);
-        projectile.name = @"Bspear";
-        [camera addChild:projectile];
-        projectile.zPosition = 1;
-        projectile.physicsBody.categoryBitMask = BOSSBIRIBINHA;
-        projectile.physicsBody.collisionBitMask = BOSSBIRIBINHA | ROCK;
-        projectile.physicsBody.contactTestBitMask = ROCK;
-        [projectile.physicsBody applyImpulse:CGVectorMake(-10, 0)];
 
-}
+//-(void)BossthrowBiribinhaLeft{
+//        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEAR"];
+//        SKTexture *spear = [atlas textureNamed:@"spearToLeft.png"];
+//        projectile = [[SKSpriteNode alloc] initWithTexture:spear];
+//        projectile.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:projectile.size];
+//        projectile.position = CGPointMake(boss.position.x, boss.position.y);
+//        projectile.name = @"Bspear";
+//        [camera addChild:projectile];
+//        projectile.zPosition = 1;
+//        projectile.physicsBody.categoryBitMask = ENEMY;
+//        projectile.physicsBody.collisionBitMask = ENEMY | ROCK;
+//        projectile.physicsBody.contactTestBitMask = ROCK;
+//        [projectile.physicsBody applyImpulse:CGVectorMake(-10, 0)];
+//}
 
 -(void)throwBiribinhaRight{
     if(lancas>0){
@@ -380,7 +386,7 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
 
 -(void)attackActionRight{
     attackRegion = [[SKSpriteNode alloc] initWithColor:[SKColor blackColor] size:CGSizeMake(width*0.04, height*0.05)];
-    attackRegion.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(width*0.04, height*0.05)];
+    attackRegion.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(width*0.03, height*0.04)];
     attackRegion.position = CGPointMake(spartan.position.x, spartan.position.y);
     attackRegion.name = @"attack";
     attackRegion.physicsBody.categoryBitMask = ATTACK;
@@ -396,7 +402,7 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
 
 -(void)attackActionLeft{
     attackRegion = [[SKSpriteNode alloc] initWithColor:[SKColor blackColor] size:CGSizeMake(width*0.04, height*0.05)];
-    attackRegion.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(width*0.04, height*0.05)];
+    attackRegion.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(width*0.03, height*0.04)];
     attackRegion.position = CGPointMake(spartan.position.x, spartan.position.y);
     attackRegion.name = @"attack";
     attackRegion.physicsBody.categoryBitMask = ATTACK;
@@ -468,7 +474,7 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     block2 = [[SKSpriteNode alloc] initWithColor:[SKColor brownColor] size:CGSizeMake(width*0.08, height*0.08)];
     block2.name = @"enemy2";
     block2.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block2.size];
-    block2.physicsBody.categoryBitMask = ENEMY;
+    block2.physicsBody.categoryBitMask = ENEMY2;
     block2.physicsBody.collisionBitMask = SPARTAN | ROCK;
     block2.physicsBody.contactTestBitMask = SPARTAN | BIRIBINHA | ROCK | ATTACK;
     block2.position = CGPointMake(-camera.position.x-width/2, -height/2+(platform.size.height));
@@ -674,7 +680,6 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
                 [spartan runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.1f] completion:^{
                     attackCool = 15;
                 }];
-                
             }
         }
     }
@@ -750,24 +755,25 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
 #pragma mark - Update
 
 -(void)update:(NSTimeInterval)currentTime{
-    //--------BOSS--------//
-    if(stages>1 && bossAux==NO){
-        [camera addChild:[self createBoss]];
-        bossAux=YES;
-        NSLog(@"**BOSS**");
-    }
     
-    if (counter3<0 && bossAux) {
-        
-
-        [self BossthrowBiribinhaLeft];
-        counter3 = 120;
-    }
-    counter3--;
-
-    
-    
-    //------ENDBOSS-------//
+//    //--------BOSS--------//
+//    if(stages>1 && bossAux==NO){
+//        [camera addChild:[self createBoss]];
+//        bossAux=YES;
+//        NSLog(@"**BOSS**");
+//    }
+//    
+//    if (counter3<0 && bossAux) {
+//        
+//
+//        [self BossthrowBiribinhaLeft];
+//        counter3 = 120;
+//    }
+//    counter3--;
+//
+//    
+//    
+//    //------ENDBOSS-------//
     Fire.position = especial.position;
     pontosCount.text = [NSString stringWithFormat:@"Pontos: %ld",(long)score];
     
@@ -852,58 +858,59 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
 
 -(void)didBeginContact:(SKPhysicsContact *)contact
 {
-    //Attack in boss
-    if(([contact.bodyA.node.name isEqualToString:@"spartan"] && [contact.bodyB.node.name isEqualToString:@"bspear"]) || ([contact.bodyA.node.name isEqualToString:@"spartan"] && [contact.bodyB.node.name isEqualToString:@"battack"])){
-        
-        if (defendendo) {
-            [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
-        }
-        else{
-            [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-            HP--;
-        }
-    }
+//    //Attack in boss
+//    if((contact.bodyA.categoryBitMask == SPARTAN && [contact.bodyB.node.name isEqualToString:@"bspear"]) || ([contact.bodyA.node.name isEqualToString:@"spartan"] && [contact.bodyB.node.name isEqualToString:@"battack"])){
+//        
+//        if (defendendo) {
+//            [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
+//        }
+//        else{
+//            [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
+//            HP--;
+//        }
+//    }
+//    
+//    if(([contact.bodyB.node.name isEqualToString:@"spartan"] && [contact.bodyA.node.name isEqualToString:@"bspear"]) || ([contact.bodyB.node.name isEqualToString:@"spartan"] && [contact.bodyA.node.name isEqualToString:@"battack"])){
+//        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
+//        
+//        if (defendendo) {
+//            [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
+//        }
+//        else{
+//            [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
+//            HP--;
+//        }
+//        
+//    }
+//    if(([contact.bodyA.node.name isEqualToString:@"boss"] && [contact.bodyB.node.name isEqualToString:@"spear"]) || ([contact.bodyA.node.name isEqualToString:@"boss"] && [contact.bodyB.node.name isEqualToString:@"attack"])){
+//        
+//        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
+//        
+//        if (bossHP>0) {
+//            bossHP--;
+//        }
+//        else
+//            [contact.bodyA.node removeFromParent];
+//        score = score+stages+100;
+//        specialAux++;
+//    }
+//    
+//    if(([contact.bodyB.node.name isEqualToString:@"boss"] && [contact.bodyA.node.name isEqualToString:@"spear"]) || ([contact.bodyB.node.name isEqualToString:@"boss"] && [contact.bodyA.node.name isEqualToString:@"attack"])){
+//        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
+//        
+//        if (bossHP>0) {
+//            bossHP--;
+//        }
+//        else
+//            [contact.bodyA.node removeFromParent];
+//        score = score+stages+100;
+//        specialAux++;
+//        
+//    }
+//    //end attack in boss
     
-    if(([contact.bodyB.node.name isEqualToString:@"spartan"] && [contact.bodyA.node.name isEqualToString:@"bspear"]) || ([contact.bodyB.node.name isEqualToString:@"spartan"] && [contact.bodyA.node.name isEqualToString:@"battack"])){
-        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-        
-        if (defendendo) {
-            [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
-        }
-        else{
-            [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-            HP--;
-        }
-        
-    }
-    if(([contact.bodyA.node.name isEqualToString:@"boss"] && [contact.bodyB.node.name isEqualToString:@"spear"]) || ([contact.bodyA.node.name isEqualToString:@"boss"] && [contact.bodyB.node.name isEqualToString:@"attack"])){
-        
-        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-        
-        if (bossHP>0) {
-            bossHP--;
-        }
-        else
-            [contact.bodyA.node removeFromParent];
-        score = score+stages+100;
-        specialAux++;
-    }
-    
-    if(([contact.bodyB.node.name isEqualToString:@"boss"] && [contact.bodyA.node.name isEqualToString:@"spear"]) || ([contact.bodyB.node.name isEqualToString:@"boss"] && [contact.bodyA.node.name isEqualToString:@"attack"])){
-        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-        
-        if (bossHP>0) {
-            bossHP--;
-        }
-        else
-            [contact.bodyA.node removeFromParent];
-        score = score+stages+100;
-        specialAux++;
-        
-    }
-    //end attack in boss
     //Attack melee / ranged, remove enemy
-    if(([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"spear"]) || ([contact.bodyA.node.name isEqualToString:@"enemy"] && [contact.bodyB.node.name isEqualToString:@"attack"])){
+    if((contact.bodyA.categoryBitMask == ENEMY && contact.bodyB.categoryBitMask == BIRIBINHA) || (contact.bodyA.categoryBitMask == ENEMY && contact.bodyB.categoryBitMask == ATTACK)){
         
         [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
         
@@ -926,7 +933,8 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
         specialAux++;
     }
     
-    if(([contact.bodyB.node.name isEqualToString:@"enemy"] && [contact.bodyA.node.name isEqualToString:@"spear"]) || ([contact.bodyB.node.name isEqualToString:@"enemy"] && [contact.bodyA.node.name isEqualToString:@"attack"])){
+    if((contact.bodyB.categoryBitMask == ENEMY && contact.bodyA.categoryBitMask == BIRIBINHA) || (contact.bodyB.categoryBitMask == ENEMY && contact.bodyA.categoryBitMask == ATTACK)){
+        
         [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
         
         //Drop random loot
@@ -949,7 +957,7 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
         specialAux++;
     }
 
-    if(([contact.bodyA.node.name isEqualToString:@"enemy2"] && [contact.bodyB.node.name isEqualToString:@"spear"]) || ([contact.bodyA.node.name isEqualToString:@"enemy2"] && [contact.bodyB.node.name isEqualToString:@"attack"])){
+    if((contact.bodyA.categoryBitMask == ENEMY2 && contact.bodyB.categoryBitMask == BIRIBINHA) || (contact.bodyA.categoryBitMask == ENEMY2 && contact.bodyB.categoryBitMask == ATTACK)){
         
         [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
         
@@ -972,7 +980,7 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
         specialAux++;
     }
     
-    if(([contact.bodyB.node.name isEqualToString:@"enemy2"] && [contact.bodyA.node.name isEqualToString:@"spear"]) || ([contact.bodyB.node.name isEqualToString:@"enemy2"] && [contact.bodyA.node.name isEqualToString:@"attack"])){
+    if((contact.bodyB.categoryBitMask == ENEMY2 && contact.bodyA.categoryBitMask == BIRIBINHA) || (contact.bodyB.categoryBitMask == ENEMY2 && contact.bodyA.categoryBitMask == ATTACK)){
         [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
         
         //Drop random loot
@@ -996,28 +1004,28 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     }
     
     //Grecules touches loot
-    if([contact.bodyB.node.name isEqualToString:@"spartan"] && [contact.bodyA.node.name isEqualToString:@"loot"]){
+    if((contact.bodyB.categoryBitMask == SPARTAN) && (contact.bodyA.categoryBitMask == LOOT)){
         [contact.bodyA.node removeFromParent];
         lancas++;
     }
-    if([contact.bodyA.node.name isEqualToString:@"spartan"] && [contact.bodyB.node.name isEqualToString:@"loot"]){
+    if((contact.bodyA.categoryBitMask == SPARTAN) && (contact.bodyB.categoryBitMask == LOOT)){
         [contact.bodyB.node removeFromParent];
         lancas++;
     }
     
     //Remove attack / spear node
-    if([contact.bodyB.node.name isEqualToString:@"spear"] || [contact.bodyB.node.name isEqualToString:@"attack"]){
+    if((contact.bodyB.categoryBitMask == BIRIBINHA) || (contact.bodyB.categoryBitMask == ATTACK)){
         [projectile removeFromParent];
         [attackRegion removeFromParent];
     }
-    if([contact.bodyA.node.name isEqualToString:@"spear"] || [contact.bodyA.node.name isEqualToString:@"attack"]){
+    if((contact.bodyA.categoryBitMask == BIRIBINHA) || (contact.bodyA.categoryBitMask == ATTACK)){
         [projectile removeFromParent];
         [attackRegion removeFromParent];
     }
     
     //Inflict damage on Grecules
     //Left
-    if([contact.bodyB.node.name isEqualToString:@"spartan"] && [contact.bodyA.node.name isEqualToString:@"enemy"]){
+    if((contact.bodyB.categoryBitMask == SPARTAN) && (contact.bodyA.categoryBitMask == ENEMY)){
         SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
         if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
         else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
@@ -1059,7 +1067,7 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
         }
     }
     
-    if([contact.bodyA.node.name isEqualToString:@"spartan"] && [contact.bodyB.node.name isEqualToString:@"enemy"]){
+    if((contact.bodyA.categoryBitMask == SPARTAN) && (contact.bodyB.categoryBitMask == ENEMY)){
         SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
         if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
         else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
@@ -1099,7 +1107,7 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     }
     
     //Right
-    if([contact.bodyB.node.name isEqualToString:@"spartan"] && [contact.bodyA.node.name isEqualToString:@"enemy2"]){
+    if((contact.bodyB.categoryBitMask == SPARTAN) && (contact.bodyA.categoryBitMask == ENEMY2)){
         SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
         if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
         else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
@@ -1141,7 +1149,7 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
         }
     }
     
-    if([contact.bodyA.node.name isEqualToString:@"spartan"] && [contact.bodyB.node.name isEqualToString:@"enemy2"]){
+    if((contact.bodyA.categoryBitMask == SPARTAN) && (contact.bodyB.categoryBitMask == ENEMY2)){
         SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
         if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
         else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
