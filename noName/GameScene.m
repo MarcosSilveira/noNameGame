@@ -157,17 +157,17 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
 
 -(SKSpriteNode *)createBoss{
     boss = [[SKSpriteNode alloc] initWithColor:[SKColor blackColor] size:CGSizeMake(width*0.08, height*0.08)];
-    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
-    SKTexture *parado = [atlas textureNamed:@"WALK_LEFT_006.png"];
+    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"BOSS"];
+    SKTexture *parado = [atlas textureNamed:@"inimigo2_04_L_parado.png"];
     boss.texture = parado;
     CGSize hue = CGSizeMake(spartan.size.width/2, spartan.size.height);
     boss.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:hue];
     boss.position = CGPointMake(-camera.position.x+width/4, -height/2+(platform.size.height));;
     boss.name = @"boss";
     boss.zPosition = 1;
-    block.physicsBody.categoryBitMask = BOSS;
-    block.physicsBody.collisionBitMask = SPARTAN | ROCK;
-    block.physicsBody.contactTestBitMask = SPARTAN | BIRIBINHA | ROCK | ATTACK;
+    boss.physicsBody.categoryBitMask = BOSS;
+    boss.physicsBody.collisionBitMask = SPARTAN | ROCK;
+    boss.physicsBody.contactTestBitMask = SPARTAN | BIRIBINHA | ROCK | ATTACK;
     
     return boss;
 }
@@ -337,7 +337,13 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
         projectile.physicsBody.collisionBitMask = BOSSBIRIBINHA | ROCK;
         projectile.physicsBody.contactTestBitMask = ROCK;
         [projectile.physicsBody applyImpulse:CGVectorMake(-10, 0)];
-
+    
+    SKTextureAtlas *actionAtlas = [SKTextureAtlas atlasNamed:@"BOSS"];
+    SKTexture *f1 = [actionAtlas textureNamed:@"ARCHER1_ATACK_001.png"];
+    SKTexture *f2 = [actionAtlas textureNamed:@"ARCHER1_ATACK_002.png"];
+    NSArray *enemyLeftWalk = @[f1,f2];
+    [boss runAction:[SKAction animateWithTextures:enemyLeftWalk timePerFrame:0.1f]];
+    
 }
 
 -(void)throwBiribinhaRight{
