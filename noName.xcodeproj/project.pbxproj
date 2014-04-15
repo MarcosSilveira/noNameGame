@@ -18,6 +18,7 @@
 		8D4D72F718FC668A002D3898 /* special_available.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D4D72F518FC668A002D3898 /* special_available.png */; };
 		8D4D72F818FC668A002D3898 /* special_unavailable.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D4D72F618FC668A002D3898 /* special_unavailable.png */; };
 		8D5CABBB18E9E4B500FDFDF1 /* grecia.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D5CABBA18E9E4B500FDFDF1 /* grecia.jpg */; };
+		8D663E4E18FDA5DE00E15005 /* BOSS.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8D663E4D18FDA5DE00E15005 /* BOSS.atlas */; };
 		8D6F788518EC999600A1F41D /* ATTACK_LEFT.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8D6F788418EC999600A1F41D /* ATTACK_LEFT.atlas */; };
 		8D6F788718EC9CBC00A1F41D /* WALK_LEFT.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8D6F788618EC9CBC00A1F41D /* WALK_LEFT.atlas */; };
 		8DA4AF3318F70FDE005CB817 /* jogar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF3118F70FDE005CB817 /* jogar.png */; };
@@ -95,6 +96,7 @@
 		8D4D72F518FC668A002D3898 /* special_available.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = special_available.png; sourceTree = "<group>"; };
 		8D4D72F618FC668A002D3898 /* special_unavailable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = special_unavailable.png; sourceTree = "<group>"; };
 		8D5CABBA18E9E4B500FDFDF1 /* grecia.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grecia.jpg; sourceTree = "<group>"; };
+		8D663E4D18FDA5DE00E15005 /* BOSS.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = BOSS.atlas; sourceTree = "<group>"; };
 		8D6F788418EC999600A1F41D /* ATTACK_LEFT.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ATTACK_LEFT.atlas; sourceTree = "<group>"; };
 		8D6F788618EC9CBC00A1F41D /* WALK_LEFT.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = WALK_LEFT.atlas; sourceTree = "<group>"; };
 		8DA4AF3118F70FDE005CB817 /* jogar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jogar.png; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 		8DAC9A7018E098A7000A016F = {
 			isa = PBXGroup;
 			children = (
+				8D663E4D18FDA5DE00E15005 /* BOSS.atlas */,
 				8D4625FA18F85FA7005B871C /* Fire.sks */,
 				8DA6096418F8552500CBD4A0 /* spark.png */,
 				A03A683518F86B8D00A2661B /* SPARTAN_DEF.atlas */,
@@ -368,7 +371,7 @@
 				ORGANIZATIONNAME = "Marcos Sokolowski";
 				TargetAttributes = {
 					8DAC9A7818E098A7000A016F = {
-						DevelopmentTeam = 4452968868;
+						DevelopmentTeam = T5N5TT4E82;
 					};
 					8DAC9AA018E098A7000A016F = {
 						TestTargetID = 8DAC9A7818E098A7000A016F;
@@ -442,6 +445,7 @@
 				8DA4AF3C18F71FC3005CB817 /* play.png in Resources */,
 				A03A683A18F87AAF00A2661B /* lanca_diagonal.png in Resources */,
 				A03A682B18F85EB700A2661B /* attack.mp3 in Resources */,
+				8D663E4E18FDA5DE00E15005 /* BOSS.atlas in Resources */,
 				8DA4AF3818F71B76005CB817 /* lanca_contador.png in Resources */,
 				8DAB851918F5CA610099437C /* botao_atira_lanca_indisponivel.png in Resources */,
 				8D4D72F818FC668A002D3898 /* special_unavailable.png in Resources */,
