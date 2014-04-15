@@ -17,6 +17,7 @@
 
 -(id)initWithSize:(CGSize)size andScore:(int)score
 {
+    pontosAux = score;
     if (self = [super initWithSize:size]) {
        
         width = self.scene.size.width;
@@ -36,14 +37,36 @@
         scoreAux.fontColor = [UIColor grayColor];
         scoreAux.fontSize = 60;
         scoreAux.position = CGPointMake(width*0.70, height*0.46);
+        
+        [self verificaRecorde];
+        
+        LBRecorde = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
+        LBRecorde.fontSize = 60;
+        LBRecorde.text = [NSString stringWithFormat:@"Recorde :%ld", (long)recorde];
+        LBRecorde.fontColor = [UIColor grayColor];
+        LBRecorde.position = CGPointMake(scoreAux.position.x, scoreAux.position.y-100);
+        
+        
         [self addChild:fundo2];
         [self addChild:playAgain];
         [self addChild:scoreAux];
+        [self addChild:LBRecorde];
     }
     
     return self;
 }
-
+-(void)verificaRecorde{
+    recordeAux = [[NSUserDefaults standardUserDefaults] integerForKey:@"recorde"];
+    if (recordeAux < pontosAux) {
+        
+        [[NSUserDefaults standardUserDefaults] setInteger:pontosAux forKey:@"recorde"];
+        recorde = pontosAux;
+    }
+    else
+        recorde = recordeAux;
+    
+    
+}
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];

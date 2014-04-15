@@ -12,11 +12,15 @@
 {
     SKTexture *background;
     SKSpriteNode *playAgain;
-    int width;
-    int height;
+    NSInteger width;
+    NSInteger height;
     SKLabelNode *scoreAux;
+    NSInteger pontosAux;
+    NSInteger recordeAux;
+    NSInteger recorde;
+    SKLabelNode *LBRecorde;
 }
 
--(id)initWithSize:(CGSize)size andScore:(NSInteger)score;
+-(id)initWithSize:(CGSize)size andScore:(int)score;
 
 @end

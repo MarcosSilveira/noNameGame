@@ -34,14 +34,15 @@
     SKLabelNode *lancasCount;
     SKLabelNode *vidaCount;
     SKLabelNode *pontosCount;
-    SKSpriteNode *vidas;
     NSString *aux;
     NSString *auxHP;
     NSString *auxPontos;
+    SKSpriteNode *vidas;
     SKSpriteNode *block;
     SKSpriteNode *block2;
     SKSpriteNode *pause;
     SKSpriteNode *lancasNode;
+    SKSpriteNode *boss;
     }
 
 @end
