@@ -511,7 +511,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
     else{
     
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"BOSS.atlas"];
-    SKAction *moveRight = [SKAction moveByX:400 y:0 duration:5];
+    SKAction *moveRight = [SKAction moveByX:450 y:0 duration:5];
     SKTexture *f1 = [atlas textureNamed:@"ARCHER1_000.png"];
     SKTexture *f2 = [atlas textureNamed:@"ARCHER1_001.png"];
     SKTexture *f3 = [atlas textureNamed:@"ARCHER1_002.png"];
@@ -920,6 +920,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
         
         if (defendendo) {
             [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
+            [contact.bodyB.node removeFromParent];
         }
         else{
             [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
@@ -931,6 +932,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
             HP--;
             NSString *textureName = [NSString stringWithFormat:@"heart%d",HP];
             vidas.texture = [lifeAtlas textureNamed:textureName];
+            [contact.bodyB.node removeFromParent];
         }
     }
     
@@ -939,6 +941,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
         
         if (defendendo) {
             [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
+            [contact.bodyA.node removeFromParent];
         }
         else{
             [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
@@ -950,6 +953,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
             HP--;
             NSString *textureName = [NSString stringWithFormat:@"heart%d",HP];
             vidas.texture = [lifeAtlas textureNamed:textureName];
+            [contact.bodyA.node removeFromParent];
             
         }
         
