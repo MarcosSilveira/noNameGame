@@ -72,6 +72,13 @@ const uint32_t ENEMY2 = 0x1 << 8;
     self.anchorPoint = CGPointMake (0.5,0.5);
     self.physicsWorld.gravity = CGVectorMake(0.0f, -1.0f);
     [self touchesEnded:nil withEvent:nil];
+    mainAtlas = [SKTextureAtlas atlasNamed:@"SPARTA.atlas"];
+    walkFrames = [NSMutableArray array];
+    for(int i = 1; i <= 6; i++){
+        NSString *textureName = [NSString stringWithFormat:@"wl%d", i];
+        SKTexture *temp = [mainAtlas textureNamed:textureName];
+        [walkFrames addObject:temp];
+    }
     SKNode *myWorld = [SKNode node];
     
     [self addChild:myWorld];
@@ -129,7 +136,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
     SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
     texturaAux = [lifeAtlas textureNamed:@"heart5.png"];
     vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(width*0.17, height*0.06)];
-    vidas.position = CGPointMake(0, lancasCount.position.y+50);
+    vidas.position = CGPointMake(0, lancasCount.position.y+height*0.05);
     [self addChild:vidas];
 }
 
@@ -610,19 +617,10 @@ const uint32_t ENEMY2 = 0x1 << 8;
     
     
     else if ([node.name isEqualToString:@"left"]) {
-        currentButton = node.name;
         esquerda = YES;
-        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
-        SKTexture *f2 = [atlas textureNamed:@"WALK_LEFT_001.png"];
-        SKTexture *f3 = [atlas textureNamed:@"WALK_LEFT_002.png"];
-        SKTexture *f4 = [atlas textureNamed:@"WALK_LEFT_003.png"];
-        SKTexture *f5 = [atlas textureNamed:@"WALK_LEFT_004.png"];
-        SKTexture *f6 = [atlas textureNamed:@"WALK_LEFT_005.png"];
-        SKTexture *f7 = [atlas textureNamed:@"WALK_LEFT_006.png"];
-        NSArray *spartanMoveLeft = @[f2,f3,f4,f5,f6,f7];
         SKAction *moveLeft = [SKAction moveByX:-8.5 y:0 duration:0.1];
         [spartan runAction:[SKAction repeatActionForever:moveLeft]withKey:@"WalkLAction1"];
-        [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:spartanMoveLeft timePerFrame:0.1f]]withKey:@"WalkLAction2"];
+        [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:walkFrames timePerFrame:0.1f]]withKey:@"WalkLAction2"];
     }
     
     //__________________________________________Defense_______________________________
@@ -685,6 +683,36 @@ const uint32_t ENEMY2 = 0x1 << 8;
     }
 }
 
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    SKNode *node = [self nodeAtPoint:location];
+    
+    if ([node.name isEqualToString:@"left"]) {
+        [spartan removeActionForKey:@"WalkRAction1"];
+        [spartan removeActionForKey:@"WalkRAction2"];
+        [spartan removeAllActions];
+        
+        esquerda = YES;
+        SKAction *moveLeft = [SKAction moveByX:-8.5 y:0 duration:0.1];
+        [spartan runAction:[SKAction repeatActionForever:moveLeft]withKey:@"WalkLAction1"];
+        [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:walkFrames timePerFrame:0.1f]]withKey:@"WalkLAction2"];
+
+    }
+    
+    if([node.name isEqualToString:(@"right")]){
+        [spartan removeActionForKey:@"WalkRAction1"];
+        [spartan removeActionForKey:@"WalkRAction2"];
+        [spartan removeAllActions];
+        currentButton = node.name;
+        esquerda = NO;
+        SKAction *moveLeft = [SKAction moveByX:-8.5 y:0 duration:0.1];
+        [spartan runAction:[SKAction repeatActionForever:moveLeft]withKey:@"WalkLAction1"];
+        [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:walkFrames timePerFrame:0.1f]]withKey:@"WalkLAction2"];
+    }
+}
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [touches anyObject];
