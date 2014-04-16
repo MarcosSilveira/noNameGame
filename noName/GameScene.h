@@ -45,6 +45,8 @@
     SKSpriteNode *boss;
     SKTextureAtlas *mainAtlas;
     NSMutableArray *walkFrames;
+    SKNode *myWorld;
+    SKTextureAtlas *lifeAtlas;
 }
 
 @end

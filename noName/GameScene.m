@@ -83,7 +83,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
         SKTexture *temp = [mainAtlas textureNamed:textureName];
         [walkFrames addObject:temp];
     }
-    SKNode *myWorld = [SKNode node];
+    myWorld = [SKNode node];
     
     [self addChild:myWorld];
     [self background3];
@@ -137,7 +137,6 @@ const uint32_t ENEMY2 = 0x1 << 8;
     pontosCount.fontColor = [UIColor whiteColor];
     [self addChild:pontosCount];
     
-    SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
     texturaAux = [lifeAtlas textureNamed:@"heart5.png"];
     vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(width*0.17, height*0.06)];
     vidas.position = CGPointMake(0, lancasCount.position.y+height*0.05);
@@ -1172,7 +1171,6 @@ const uint32_t ENEMY2 = 0x1 << 8;
     }
     
     if((contact.bodyA.categoryBitMask == SPARTAN) && (contact.bodyB.categoryBitMask == ENEMY)){
-        SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
         if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
         else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
         if(HP == 0){
@@ -1212,7 +1210,6 @@ const uint32_t ENEMY2 = 0x1 << 8;
     
     //Right
     if((contact.bodyB.categoryBitMask == SPARTAN) && (contact.bodyA.categoryBitMask == ENEMY2)){
-        SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
         if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
         else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
         if(HP == 0){
@@ -1254,7 +1251,6 @@ const uint32_t ENEMY2 = 0x1 << 8;
     }
     
     if((contact.bodyA.categoryBitMask == SPARTAN) && (contact.bodyB.categoryBitMask == ENEMY2)){
-        SKTextureAtlas *lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
         if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
         else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
         if(HP == 0){
