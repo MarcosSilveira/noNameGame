@@ -43,6 +43,8 @@
     SKSpriteNode *pause;
     SKSpriteNode *lancasNode;
     SKSpriteNode *boss;
-    }
+    SKNode *myWorld;
+    SKTextureAtlas *lifeAtlas;
+}
 
 @end
