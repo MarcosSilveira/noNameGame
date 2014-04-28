@@ -66,6 +66,7 @@
 		A09BD64D18EDE82200202C1B /* Ground.png in Resources */ = {isa = PBXBuildFile; fileRef = A09BD64C18EDE82200202C1B /* Ground.png */; };
 		A09C852D18FC68CA00EC3654 /* gameover2.png in Resources */ = {isa = PBXBuildFile; fileRef = A09C852C18FC68CA00EC3654 /* gameover2.png */; };
 		A09C852F18FDA28400EC3654 /* back.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A09C852E18FDA28400EC3654 /* back.mp3 */; };
+		A09C853118FDB41F00EC3654 /* SPARTA.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A09C853018FDB41F00EC3654 /* SPARTA.atlas */; };
 		A0DDE61318F5AA6400F301AA /* nuvem1.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61118F5AA6400F301AA /* nuvem1.png */; };
 		A0DDE61418F5AA6400F301AA /* nuvem2.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61218F5AA6400F301AA /* nuvem2.png */; };
 		A0DDE61618F5C4B600F301AA /* backgroundfixo.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61518F5C4B600F301AA /* backgroundfixo.png */; };
@@ -153,6 +154,7 @@
 		A09BD64C18EDE82200202C1B /* Ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ground.png; sourceTree = "<group>"; };
 		A09C852C18FC68CA00EC3654 /* gameover2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameover2.png; sourceTree = "<group>"; };
 		A09C852E18FDA28400EC3654 /* back.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = back.mp3; sourceTree = "<group>"; };
+		A09C853018FDB41F00EC3654 /* SPARTA.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = SPARTA.atlas; sourceTree = "<group>"; };
 		A0DDE61118F5AA6400F301AA /* nuvem1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nuvem1.png; sourceTree = "<group>"; };
 		A0DDE61218F5AA6400F301AA /* nuvem2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nuvem2.png; sourceTree = "<group>"; };
 		A0DDE61518F5C4B600F301AA /* backgroundfixo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundfixo.png; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				8D663E4D18FDA5DE00E15005 /* BOSS.atlas */,
 				8D4625FA18F85FA7005B871C /* Fire.sks */,
 				8DA6096418F8552500CBD4A0 /* spark.png */,
+				A09C853018FDB41F00EC3654 /* SPARTA.atlas */,
 				A03A683518F86B8D00A2661B /* SPARTAN_DEF.atlas */,
 				A0DDE61718F6FD9400F301AA /* LIFE.atlas */,
 				8DBF9F7218EDF05E00C3032A /* ENEMY_LEFT.atlas */,
@@ -371,7 +374,7 @@
 				ORGANIZATIONNAME = "Marcos Sokolowski";
 				TargetAttributes = {
 					8DAC9A7818E098A7000A016F = {
-						DevelopmentTeam = T5N5TT4E82;
+						DevelopmentTeam = 4452968868;
 					};
 					8DAC9AA018E098A7000A016F = {
 						TestTargetID = 8DAC9A7818E098A7000A016F;
@@ -445,6 +448,7 @@
 				8DA4AF3C18F71FC3005CB817 /* play.png in Resources */,
 				A03A683A18F87AAF00A2661B /* lanca_diagonal.png in Resources */,
 				A03A682B18F85EB700A2661B /* attack.mp3 in Resources */,
+				A09C853118FDB41F00EC3654 /* SPARTA.atlas in Resources */,
 				8D663E4E18FDA5DE00E15005 /* BOSS.atlas in Resources */,
 				8DA4AF3818F71B76005CB817 /* lanca_contador.png in Resources */,
 				8DAB851918F5CA610099437C /* botao_atira_lanca_indisponivel.png in Resources */,

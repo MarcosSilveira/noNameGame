@@ -35,7 +35,7 @@
         scoreAux = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
         scoreAux.text = [NSString stringWithFormat:@"%d",score];
         scoreAux.fontColor = [UIColor grayColor];
-        scoreAux.fontSize = 60;
+        scoreAux.fontSize = height*0.09;
         scoreAux.position = CGPointMake(width*0.70, height*0.46);
         
         [self verificaRecorde];
@@ -44,7 +44,7 @@
         LBRecorde.fontSize = 60;
         LBRecorde.text = [NSString stringWithFormat:@"Recorde :%ld", (long)recorde];
         LBRecorde.fontColor = [UIColor grayColor];
-        LBRecorde.position = CGPointMake(scoreAux.position.x, scoreAux.position.y-100);
+        LBRecorde.position = CGPointMake(width/2, scoreAux.position.y-scoreAux.position.y/4);
         
         
         [self addChild:fundo2];
