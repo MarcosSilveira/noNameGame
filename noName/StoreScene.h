@@ -9,5 +9,10 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface StoreScene : SKScene
-
+{
+    NSInteger money;
+    SKLabelNode *moneyLB;
+    SKSpriteNode *opcao1;
+    SKSpriteNode *back;
+}
 @end

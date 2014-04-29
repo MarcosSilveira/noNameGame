@@ -20,6 +20,7 @@ const uint32_t BOSS = 0x1 << 6;
 const uint32_t BOSSBIRIBINHA = 0x1 << 7;
 const uint32_t ENEMY2 = 0x1 << 8;
 
+
 @implementation GameScene{
     int width;
     int height;
@@ -69,6 +70,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
     bossHP = 10;
     bossAttack = 0;
     lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
+    atlas = [SKTextureAtlas atlasNamed:@"SPARTAN"]; 
     
     self.physicsWorld.contactDelegate = (id)self;
     self.backgroundColor = [SKColor redColor];
@@ -161,7 +163,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
 
 -(SKSpriteNode *)createCharacter{
     spartan = [[SKSpriteNode alloc] initWithColor:[SKColor blackColor] size:CGSizeMake(width*0.08, height*0.08)];
-    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
+//    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
     SKTexture *parado = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
     spartan.texture = parado;
     CGSize hue = CGSizeMake(spartan.size.width/2, spartan.size.height);
@@ -178,12 +180,12 @@ const uint32_t ENEMY2 = 0x1 << 8;
 
 -(SKSpriteNode *)createBoss{
     boss = [[SKSpriteNode alloc] initWithColor:[SKColor blackColor] size:CGSizeMake(width*0.08, height*0.08)];
-    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"BOSS"];
+//    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"BOSS"];
     SKTexture *parado = [atlas textureNamed:@"ARCHER1_000.png"];
     boss.texture = parado;
     CGSize hue = CGSizeMake(spartan.size.width/2, spartan.size.height);
     boss.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:hue];
-    boss.position = CGPointMake(-camera.position.x+width/4, -height/2+(platform.size.height));;
+    boss.position = CGPointMake(-camera.position.x+width/3, -height/2+(platform.size.height));;
     boss.name = @"boss";
     boss.zPosition = 1;
     boss.physicsBody.categoryBitMask = BOSS;
@@ -310,7 +312,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
     especial = [[SKSpriteNode alloc] init];
     especial.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100, 10)];
     especial.position = spartan.position;
-    especial.name = @"spear";
+    especial.name = @"specialspear";
     Fire = [self newFire:especial.position.x :especial.position.y];
     Fire.position = especial.position;
     [camera addChild:especial];
@@ -328,7 +330,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
     especial = [[SKSpriteNode alloc] init];
     especial.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100, 10)];
     especial.position = spartan.position;
-    especial.name = @"spear";
+    especial.name = @"specialspear";
     Fire = [self newFire:especial.position.x :especial.position.y];
     Fire.position = especial.position;
     [camera addChild:especial];
@@ -342,7 +344,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
 }
 
 -(void)BossthrowBiribinhaLeft{
-        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEAR"];
+//        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEAR"];
         SKTexture *spear = [atlas textureNamed:@"spearToLeft.png"];
         projectile = [[SKSpriteNode alloc] initWithTexture:spear];
         projectile.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:projectile.size];
@@ -355,9 +357,9 @@ const uint32_t ENEMY2 = 0x1 << 8;
         projectile.physicsBody.contactTestBitMask = SPARTAN | ROCK;
         [projectile.physicsBody applyImpulse:CGVectorMake(-10, 0)];
     
-    SKTextureAtlas *atlas2 = [SKTextureAtlas atlasNamed:@"BOSS.atlas"];
-    SKTexture *f1 = [atlas2 textureNamed:@"ARCHER1_ATACK_001.png"];
-    SKTexture *f2 = [atlas2 textureNamed:@"ARCHER1_ATACK_002.png"];
+//    SKTextureAtlas *atlas2 = [SKTextureAtlas atlasNamed:@"BOSS.atlas"];
+    SKTexture *f1 = [atlas textureNamed:@"ARCHER1_ATACK_001.png"];
+    SKTexture *f2 = [atlas textureNamed:@"ARCHER1_ATACK_002.png"];
     NSArray *enemyLeftWalk = @[f1,f2];
     [boss runAction:[SKAction animateWithTextures:enemyLeftWalk timePerFrame:0.1f]completion:^{
         bossAttack++;
@@ -367,7 +369,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
 
 -(void)throwBiribinhaRight{
     if(lancas>0){
-        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEAR"];
+//        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEAR"];
         SKTexture *spear = [atlas textureNamed:@"spearToRight.png"];
         projectile = [[SKSpriteNode alloc] initWithTexture:spear];
         projectile.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:projectile.size];
@@ -385,7 +387,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
 
 -(void)throwBiribinhaLeft{
     if(lancas>0){
-        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEAR"];
+//        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEAR"];
         SKTexture *spear = [atlas textureNamed:@"spearToLeft.png"];
         projectile = [[SKSpriteNode alloc] initWithTexture:spear];
         projectile.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:projectile.size];
@@ -446,9 +448,9 @@ const uint32_t ENEMY2 = 0x1 << 8;
     block.physicsBody.categoryBitMask = ENEMY;
     block.physicsBody.collisionBitMask = SPARTAN | ROCK;
     block.physicsBody.contactTestBitMask = SPARTAN | BIRIBINHA | ROCK | ATTACK;
-    block.position = CGPointMake(-camera.position.x+width/4, -height/2+(platform.size.height));
+    block.position = CGPointMake(-camera.position.x+width/2, -height/2+(platform.size.height));
     block.zPosition = 1;
-    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
+//    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
     SKTexture *enemyLT = [atlas textureNamed:@"inimigo1_03_L_parado.png"];
     block.texture = enemyLT;
     [self enemyMovingLeft];
@@ -457,7 +459,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
 }
 
 -(void)enemyMovingLeft{
-    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
+//    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
     SKAction *moveLeft = [SKAction moveByX:-400 y:0 duration:5];
     SKTexture *f1 = [atlas textureNamed:@"inimigo1_05_L_correndo.png"];
     SKTexture *f2 = [atlas textureNamed:@"inimigo1_06_L_correndo.png"];
@@ -473,7 +475,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
 
 
 -(void)enemyMovingLeftAfterContact:(SKNode*) enemy{
-    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
+//    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
     SKAction *moveLeft = [SKAction moveByX:-400 y:0 duration:5];
     SKTexture *f1 = [atlas textureNamed:@"inimigo1_05_L_correndo.png"];
     SKTexture *f2 = [atlas textureNamed:@"inimigo1_06_L_correndo.png"];
@@ -498,7 +500,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
     block2.physicsBody.contactTestBitMask = SPARTAN | BIRIBINHA | ROCK | ATTACK;
     block2.position = CGPointMake(-camera.position.x-width/2, -height/2+(platform.size.height));
     block2.zPosition = 1;
-    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_RIGHT.atlas"];
+//    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_RIGHT.atlas"];
     SKTexture *enemyLT = [atlas textureNamed:@"inimigo1_03_R_parado.png"];
     block2.texture = enemyLT;
     [self enemyMovingRight];
@@ -512,8 +514,8 @@ const uint32_t ENEMY2 = 0x1 << 8;
     }
     else{
     
-    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"BOSS.atlas"];
-    SKAction *moveRight = [SKAction moveByX:450 y:0 duration:5];
+//    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"BOSS.atlas"];
+    SKAction *moveRight = [SKAction moveByX:500 y:0 duration:5];
     SKTexture *f1 = [atlas textureNamed:@"ARCHER1_000.png"];
     SKTexture *f2 = [atlas textureNamed:@"ARCHER1_001.png"];
     SKTexture *f3 = [atlas textureNamed:@"ARCHER1_002.png"];
@@ -529,7 +531,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
 }
 
 -(void)enemyMovingRight{
-    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_RIGHT.atlas"];
+//    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_RIGHT.atlas"];
     SKAction *moveRight = [SKAction moveByX:400 y:0 duration:5];
     SKTexture *f1 = [atlas textureNamed:@"inimigo1_05_R_correndo.png"];
     SKTexture *f2 = [atlas textureNamed:@"inimigo1_06_R_correndo.png"];
@@ -545,7 +547,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
 
 
 -(void)enemyMovingRightAfterContact:(SKNode*) enemy{
-    SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_RIGHT.atlas"];
+   // SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_RIGHT.atlas"];
     SKAction *moveLeft = [SKAction moveByX:400 y:0 duration:5];
     SKTexture *f1 = [atlas textureNamed:@"inimigo1_05_R_correndo.png"];
     SKTexture *f2 = [atlas textureNamed:@"inimigo1_06_R_correndo.png"];
@@ -585,7 +587,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
     
     else if ([node.name isEqualToString:@"Attack2"]){
         if (esquerda) {
-            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEARLAUNCH"];
+//            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEARLAUNCH"];
             SKTexture *f1 = [atlas textureNamed:@"lancandoSpear-LEFT.png"];
             NSArray *spartanAttackTextures = @[f1];
             [self throwBiribinhaLeft];
@@ -596,7 +598,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
             else attack2.color = [UIColor grayColor];
         }
         else{
-            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEARLAUNCH"];
+//            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPEARLAUNCH"];
             SKTexture *f1 = [atlas textureNamed:@"lancandoSpear-RIGHT.png"];
             NSArray *spartanAttackTextures = @[f1];
             [self throwBiribinhaRight];
@@ -656,7 +658,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
     else if([node.name isEqualToString:@"defense"]){
         currentButton = node.name;
         if (esquerda) {
-            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPARTAN_DEF"];
+//            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPARTAN_DEF"];
             SKTexture *f1 = [atlas textureNamed:@"DEF_LEFT.png"];
             NSArray *spartanDefenseRight = @[f1];
             [spartan runAction:[SKAction animateWithTextures:spartanDefenseRight timePerFrame:0.01f]withKey:@"DefenseLAction1"];
@@ -664,7 +666,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
             
         }
         else{
-            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPARTAN_DEF"];
+//            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"SPARTAN_DEF"];
             SKTexture *f1 = [atlas textureNamed:@"DEF_RIGHT.png"];
             NSArray *spartanDefenseLeft = @[f1];
             [spartan runAction:[SKAction animateWithTextures:spartanDefenseLeft timePerFrame:0.01f]withKey:@"DefenseRAction1"];
@@ -678,10 +680,10 @@ const uint32_t ENEMY2 = 0x1 << 8;
         if ([node.name isEqualToString:@"Attack"]) {
             if(esquerda)
             {
-                SKTextureAtlas *atlas2 = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
-                SKTexture *parado = [atlas2 textureNamed:@"WALK_LEFT_006.png"];
+//                SKTextureAtlas *atlas2 = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
+                SKTexture *parado = [atlas textureNamed:@"WALK_LEFT_006.png"];
                 spartan.texture = parado;
-                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ATTACK_LEFT"];
+//                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ATTACK_LEFT"];
                 SKTexture *f1 = [atlas textureNamed:@"ATTACK_LEFT_001.png"];
                 SKTexture *f2 = [atlas textureNamed:@"ATTACK_LEFT_002.png"];
                 NSArray *spartanAttackTextures = @[f1, f2, parado];
@@ -693,10 +695,10 @@ const uint32_t ENEMY2 = 0x1 << 8;
                 
             }
             else{
-                SKTextureAtlas *atlas2 = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
-                SKTexture *parado = [atlas2 textureNamed:@"WALK_RIGHT_006_.png"];
+//                SKTextureAtlas *atlas2 = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
+                SKTexture *parado = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
                 spartan.texture = parado;
-                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ATACK_RIGHT"];
+//                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ATACK_RIGHT"];
                 SKTexture *f1 = [atlas textureNamed:@"ATTACK_RIGHT_001.png"];
                 SKTexture *f2 = [atlas textureNamed:@"ATTACK_RIGHT_002.png"];
                 NSArray *spartanAttackTextures = @[f1, f2, parado];
@@ -789,12 +791,12 @@ const uint32_t ENEMY2 = 0x1 << 8;
     
     if(!defendendo){
         if (esquerda) {
-            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
+//            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_LEFT"];
             SKTexture *parado = [atlas textureNamed:@"WALK_LEFT_006.png"];
             spartan.texture = parado;
         }
         else{
-            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
+//            SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
             SKTexture *parado = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
             spartan.texture = parado;
         }
@@ -818,6 +820,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
     //--------BOSS--------//
     if(stages>1 && bossAux==NO){
         [camera addChild:[self createBoss]];
+        counter3 = 120;
         bossAux=YES;
         NSLog(@"**BOSS**");
     }
@@ -1003,6 +1006,31 @@ const uint32_t ENEMY2 = 0x1 << 8;
         specialAux++;
         
     }
+    if(([contact.bodyB.node.name isEqualToString:@"boss"] && [contact.bodyA.node.name isEqualToString:@"specialspear"])){
+        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
+        
+        if (bossHP>0) {
+            bossHP=bossHP-3;
+        }
+        else
+            [contact.bodyA.node removeFromParent];
+        score = score+stages+100;
+        specialAux++;
+        
+    }
+    if([contact.bodyA.node.name isEqualToString:@"specialspear"] && [contact.bodyB.node.name isEqualToString:@"boss"]){
+        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
+        
+        if (bossHP>0) {
+            bossHP=bossHP-3;
+        }
+        else{
+            [contact.bodyB.node removeFromParent];
+            score = score+stages+100;
+            specialAux++;
+        }
+    }
+
     //end attack in boss
     
     //Attack melee / ranged, remove enemy
@@ -1136,7 +1164,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
         
         else{
             if (!defendendo) {
-                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
+//                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
                 SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_L_parado.png"];
                 SKTexture *f2 = [atlas textureNamed:@"inimigo1_02_L_attack.png"];
                 NSArray *enemyLeftWalk = @[f1,f2];
@@ -1152,7 +1180,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
                 vidas.texture = [lifeAtlas textureNamed:textureName];
             }
             else{
-                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
+//                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
                 SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_L_parado.png"];
                 SKTexture *f2 = [atlas textureNamed:@"inimigo1_02_L_attack.png"];   NSArray *enemyLeftWalk = @[f1,f2];
                 [contact.bodyA.node removeAllActions];
@@ -1176,7 +1204,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
         }
         else{
             if (!defendendo) {
-                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
+//                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
                 SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_L_parado.png"];
                 SKTexture *f2 = [atlas textureNamed:@"inimigo1_02_L_attack.png"];   NSArray *enemyLeftWalk = @[f1,f2];
                 [contact.bodyB.node removeAllActions];
@@ -1190,7 +1218,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
                 vidas.texture = [lifeAtlas textureNamed:textureName];
             }
             else{
-                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
+//                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_LEFT.atlas"];
                 SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_L_parado.png"];
                 SKTexture *f2 = [atlas textureNamed:@"inimigo1_02_L_attack.png"];   NSArray *enemyLeftWalk = @[f1,f2];
                 [contact.bodyB.node removeAllActions];
@@ -1216,7 +1244,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
         
         else{
             if (!defendendo) {
-                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_RIGHT.atlas"];
+//                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_RIGHT.atlas"];
                 SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_R_parado.png"];
                 SKTexture *f2 = [atlas textureNamed:@"inimigo1_02_R_attack.png"];
                 NSArray *enemyLeftWalk = @[f1,f2];
@@ -1232,7 +1260,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
                 vidas.texture = [lifeAtlas textureNamed:textureName];
             }
             else{
-                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_RIGHT.atlas"];
+//                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_RIGHT.atlas"];
                 SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_R_parado.png"];
                 SKTexture *f2 = [atlas textureNamed:@"inimigo1_02_R_attack.png"];   NSArray *enemyLeftWalk = @[f1,f2];
                 [contact.bodyA.node removeAllActions];
@@ -1256,7 +1284,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
         }
         else{
             if (!defendendo) {
-                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_RIGHT.atlas"];
+//                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_RIGHT.atlas"];
                 SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_R_parado.png"];
                 SKTexture *f2 = [atlas textureNamed:@"inimigo1_02_R_attack.png"];   NSArray *enemyLeftWalk = @[f1,f2];
                 [contact.bodyB.node removeAllActions];
@@ -1270,7 +1298,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
                 vidas.texture = [lifeAtlas textureNamed:textureName];
             }
             else{
-                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_RIGHT.atlas"];
+//                SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_RIGHT.atlas"];
                 SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_R_parado.png"];
                 SKTexture *f2 = [atlas textureNamed:@"inimigo1_02_R_attack.png"];   NSArray *enemyLeftWalk = @[f1,f2];
                 [contact.bodyB.node removeAllActions];

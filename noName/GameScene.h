@@ -47,6 +47,7 @@
     NSMutableArray *walkFrames;
     SKNode *myWorld;
     SKTextureAtlas *lifeAtlas;
+    SKTextureAtlas *atlas;
 }
 
 @end
