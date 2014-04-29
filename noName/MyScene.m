@@ -45,10 +45,10 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
-    SKNode *loja = [self childNodeWithName:@"LojaNode"];
+    SKNode *loja = [self childNodeWithName:@"StoreLabel"];
     SKNode *play = [self childNodeWithName:@"JogarNode"];
     
-    if([node.name isEqualToString:@"LojaNode"]){
+    if([node.name isEqualToString:@"StoreLabel"]){
         SKAction *action = [SKAction scaleBy:2 duration:1];
         SKAction *action2 = [SKAction removeFromParent];
         [play runAction:action2];
