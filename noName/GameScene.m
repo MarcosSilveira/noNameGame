@@ -190,9 +190,6 @@ const uint32_t ENEMY2 = 0x1 << 8;
     boss.physicsBody.collisionBitMask = SPARTAN | ROCK;
     boss.physicsBody.contactTestBitMask = SPARTAN | BIRIBINHA | ROCK | ATTACK;
     
-
-    
-    
     return boss;
 }
 
@@ -456,8 +453,6 @@ const uint32_t ENEMY2 = 0x1 << 8;
     block.texture = enemyLT;
     [self enemyMovingLeft];
     
-
-    
     return block;
 }
 
@@ -510,6 +505,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
     
     return block2;
 }
+
 -(void)BossMovingRight{
     if (bossMovendo) {
         
@@ -530,8 +526,8 @@ const uint32_t ENEMY2 = 0x1 << 8;
     [boss runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:enemyRightWalk timePerFrame:0.1f]] withKey:@"BossMovingRight2"];
   //  [boss runAction:moveRight];
     }
-
 }
+
 -(void)enemyMovingRight{
     SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"ENEMY_RIGHT.atlas"];
     SKAction *moveRight = [SKAction moveByX:400 y:0 duration:5];
@@ -575,19 +571,12 @@ const uint32_t ENEMY2 = 0x1 << 8;
     //__________________________________________Move Right_______________________________
     
     if([node.name isEqualToString:(@"right")]){
-        currentButton = node.name;
         esquerda = NO;
-        SKTextureAtlas *atlas = [SKTextureAtlas atlasNamed:@"WALK_RIGHT"];
-        SKTexture *f2 = [atlas textureNamed:@"WALK_RIGHT_001_.png"];
-        SKTexture *f3 = [atlas textureNamed:@"WALK_RIGHT_002_.png"];
-        SKTexture *f4 = [atlas textureNamed:@"WALK_RIGHT_003_.png"];
-        SKTexture *f5 = [atlas textureNamed:@"WALK_RIGHT_004_.png"];
-        SKTexture *f6 = [atlas textureNamed:@"WALK_RIGHT_005_.png"];
-        SKTexture *f7 = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
-        NSArray *monsterWalkTextures = @[f2,f3,f4,f5,f6,f7];
-        SKAction *moveRight = [SKAction moveByX:8.5 y:0 duration:0.1];
-        [spartan runAction:[SKAction repeatActionForever:moveRight ] withKey:@"WalkRAction1"];
-        [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:monsterWalkTextures timePerFrame:0.1f]] withKey:@"WalkRAction2"];
+        spartan.xScale = -1.0;
+        spartan.physicsBody = node.physicsBody;
+        SKAction *moveLeft = [SKAction moveByX:8.5 y:0 duration:0.1];
+        [spartan runAction:[SKAction repeatActionForever:moveLeft]withKey:@"WalkLAction1"];
+        [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:walkFrames timePerFrame:0.1f]]withKey:@"WalkLAction2"];
         
     }
     
@@ -734,6 +723,8 @@ const uint32_t ENEMY2 = 0x1 << 8;
         [spartan removeAllActions];
         
         esquerda = YES;
+        spartan.xScale = 1.0;
+        spartan.physicsBody = node.physicsBody;
         SKAction *moveLeft = [SKAction moveByX:-8.5 y:0 duration:0.1];
         [spartan runAction:[SKAction repeatActionForever:moveLeft]withKey:@"WalkLAction1"];
         [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:walkFrames timePerFrame:0.1f]]withKey:@"WalkLAction2"];
@@ -744,9 +735,11 @@ const uint32_t ENEMY2 = 0x1 << 8;
         [spartan removeActionForKey:@"WalkRAction1"];
         [spartan removeActionForKey:@"WalkRAction2"];
         [spartan removeAllActions];
-        currentButton = node.name;
+        
         esquerda = NO;
-        SKAction *moveLeft = [SKAction moveByX:-8.5 y:0 duration:0.1];
+        spartan.xScale = -1.0;
+        spartan.physicsBody = node.physicsBody;
+        SKAction *moveLeft = [SKAction moveByX:8.5 y:0 duration:0.1];
         [spartan runAction:[SKAction repeatActionForever:moveLeft]withKey:@"WalkLAction1"];
         [spartan runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:walkFrames timePerFrame:0.1f]]withKey:@"WalkLAction2"];
     }
