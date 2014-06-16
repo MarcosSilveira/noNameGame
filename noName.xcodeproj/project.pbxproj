@@ -17,6 +17,7 @@
 		8D4D72F818FC668A002D3898 /* special_unavailable.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D4D72F618FC668A002D3898 /* special_unavailable.png */; };
 		8D5CABBB18E9E4B500FDFDF1 /* grecia.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D5CABBA18E9E4B500FDFDF1 /* grecia.jpg */; };
 		8D83780619118DFC00729D53 /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8D83780519118DFC00729D53 /* MyParticle.sks */; };
+		8D87FC29194F76310066D813 /* SPARTAN.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8D87FC28194F76310066D813 /* SPARTAN.atlas */; };
 		8DA4AF3318F70FDE005CB817 /* jogar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF3118F70FDE005CB817 /* jogar.png */; };
 		8DA4AF3418F70FDE005CB817 /* loja.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF3218F70FDE005CB817 /* loja.png */; };
 		8DA4AF3618F71893005CB817 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA4AF3518F71893005CB817 /* pause.png */; };
@@ -85,6 +86,7 @@
 		8D4D72F618FC668A002D3898 /* special_unavailable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = special_unavailable.png; sourceTree = "<group>"; };
 		8D5CABBA18E9E4B500FDFDF1 /* grecia.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grecia.jpg; sourceTree = "<group>"; };
 		8D83780519118DFC00729D53 /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
+		8D87FC28194F76310066D813 /* SPARTAN.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = SPARTAN.atlas; sourceTree = "<group>"; };
 		8DA4AF3118F70FDE005CB817 /* jogar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jogar.png; sourceTree = "<group>"; };
 		8DA4AF3218F70FDE005CB817 /* loja.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loja.png; sourceTree = "<group>"; };
 		8DA4AF3518F71893005CB817 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				8D83780519118DFC00729D53 /* MyParticle.sks */,
 				8D4625FA18F85FA7005B871C /* Fire.sks */,
 				8DA6096418F8552500CBD4A0 /* spark.png */,
+				8D87FC28194F76310066D813 /* SPARTAN.atlas */,
 				8DAC9A8418E098A7000A016F /* noName */,
 				8DAC9AA818E098A7000A016F /* noNameTests */,
 				8DAC9A7B18E098A7000A016F /* Frameworks */,
@@ -426,6 +429,7 @@
 				8DAB851918F5CA610099437C /* botao_atira_lanca_indisponivel.png in Resources */,
 				8D4D72F818FC668A002D3898 /* special_unavailable.png in Resources */,
 				8D4625FB18F85FA7005B871C /* Fire.sks in Resources */,
+				8D87FC29194F76310066D813 /* SPARTAN.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
