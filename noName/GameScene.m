@@ -73,7 +73,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
     bossHP = 10;
     bossAttack = 0;
     lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
-    atlas = [SKTextureAtlas atlasNamed:@"SPARTAN"]; 
+    atlas = [SKTextureAtlas atlasNamed:@"SPARTAN"];
     
     self.physicsWorld.contactDelegate = (id)self;
     self.backgroundColor = [SKColor redColor];
