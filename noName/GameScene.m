@@ -369,8 +369,6 @@ const uint32_t ENEMY2 = 0x1 << 8;
     [boss runAction:[SKAction animateWithTextures:enemyLeftWalk timePerFrame:0.1f]completion:^{
         bossAttack++;
     }];
-    }
-
 }
 
 -(void)throwBiribinhaRight{
