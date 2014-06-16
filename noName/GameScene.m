@@ -581,26 +581,15 @@ const uint32_t ENEMY2 = 0x1 << 8;
     
     
     else if ([node.name isEqualToString:@"Attack2"]){
-        if (esquerda) {
-            SKTexture *f1 = [atlas textureNamed:@"lancandoSpear-LEFT.png"];
-            NSArray *spartanAttackTextures = @[f1];
-            [self throwBiribinhaLeft];
-            if (lancas>0){
-                [spartanTexture runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]withKey:@"AttackLAction2"];
-                [self runAction:[SKAction playSoundFileNamed:@"spearT.wav" waitForCompletion:NO]];
-            }
-            else attack2.color = [UIColor grayColor];
+        SKTexture *f1 = [atlas textureNamed:@"lancandoSpear-LEFT.png"];
+        NSArray *spartanAttackTextures = @[f1];
+        if (esquerda) [self throwBiribinhaLeft];
+        else [self throwBiribinhaRight];
+        if (lancas>0){
+            [spartanTexture runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]withKey:@"AttackLAction2"];
+            [self runAction:[SKAction playSoundFileNamed:@"spearT.wav" waitForCompletion:NO]];
         }
-        else{
-            SKTexture *f1 = [atlas textureNamed:@"lancandoSpear-RIGHT.png"];
-            NSArray *spartanAttackTextures = @[f1];
-            [self throwBiribinhaRight];
-            if (lancas>0){
-                [spartanTexture runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.01f]withKey:@"AttackRAction2"];
-                [self runAction:[SKAction playSoundFileNamed:@"spearT.wav" waitForCompletion:NO]];
-            }
-            else attack2.color = [UIColor grayColor];
-        }
+        else attack2.color = [UIColor grayColor];
     }
     else if ([node.name isEqualToString:@"Special"]){
         if(esquerda)
@@ -652,19 +641,11 @@ const uint32_t ENEMY2 = 0x1 << 8;
     
     else if([node.name isEqualToString:@"defense"]){
         currentButton = node.name;
-        if (esquerda) {
-            SKTexture *f1 = [atlas textureNamed:@"DEF_LEFT.png"];
-            NSArray *spartanDefenseRight = @[f1];
-            [spartanTexture runAction:[SKAction animateWithTextures:spartanDefenseRight timePerFrame:0.01f]withKey:@"DefenseLAction1"];
-            defendendo = YES;
+        SKTexture *f1 = [atlas textureNamed:@"DEF_LEFT.png"];
+        NSArray *spartanDefenseRight = @[f1];
+        [spartanTexture runAction:[SKAction animateWithTextures:spartanDefenseRight timePerFrame:0.01f]withKey:@"DefenseLAction1"];
+        defendendo = YES;
             
-        }
-        else{
-            SKTexture *f1 = [atlas textureNamed:@"DEF_RIGHT.png"];
-            NSArray *spartanDefenseLeft = @[f1];
-            [spartanTexture runAction:[SKAction animateWithTextures:spartanDefenseLeft timePerFrame:0.01f]withKey:@"DefenseRAction1"];
-            defendendo = YES;
-        }
     }
     
     //__________________________________________Melee Attack_______________________________
@@ -737,10 +718,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
     }
     
     if([node.name isEqualToString:@"defense"]){
-        if (esquerda) {
-            [spartanTexture removeActionForKey:@"DefenseLAction1"];
-        }
-        else [spartanTexture removeActionForKey:@"DefenseRAction1"];
+        [spartanTexture removeActionForKey:@"DefenseLAction1"];
         defendendo = NO;
     }
     
