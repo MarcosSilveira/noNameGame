@@ -665,32 +665,17 @@ const uint32_t ENEMY2 = 0x1 << 8;
     
     else if(attackCool <=0){
         if ([node.name isEqualToString:@"Attack"]) {
-            if(esquerda)
-            {
-                SKTexture *parado = [atlas textureNamed:@"WALK_LEFT_006.png"];
-                spartanTexture.texture = parado;
-                SKTexture *f1 = [atlas textureNamed:@"ATTACK_LEFT_001.png"];
-                SKTexture *f2 = [atlas textureNamed:@"ATTACK_LEFT_002.png"];
-                NSArray *spartanAttackTextures = @[f1, f2, parado];
-                [self attackActionLeft];
-                [self runAction:[SKAction playSoundFileNamed:@"attack.mp3" waitForCompletion:NO]];
-                [spartanTexture runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.1f] completion:^{
-                    attackCool = 15;
-                }];
-                
-            }
-            else{
-                SKTexture *parado = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
-                spartanTexture.texture = parado;
-                SKTexture *f1 = [atlas textureNamed:@"ATTACK_RIGHT_001.png"];
-                SKTexture *f2 = [atlas textureNamed:@"ATTACK_RIGHT_002.png"];
-                NSArray *spartanAttackTextures = @[f1, f2, parado];
-                [self attackActionRight];
-                [self runAction:[SKAction playSoundFileNamed:@"attack.mp3" waitForCompletion:NO]];
-                [spartanTexture runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.1f] completion:^{
-                    attackCool = 15;
-                }];
-            }
+            SKTexture *parado = [atlas textureNamed:@"WALK_LEFT_006.png"];
+            spartanTexture.texture = parado;
+            SKTexture *f1 = [atlas textureNamed:@"ATTACK_LEFT_001.png"];
+            SKTexture *f2 = [atlas textureNamed:@"ATTACK_LEFT_002.png"];
+            NSArray *spartanAttackTextures = @[f1, f2, parado];
+            if(esquerda) [self attackActionLeft];
+            else [self attackActionRight];
+            [self runAction:[SKAction playSoundFileNamed:@"attack.mp3" waitForCompletion:NO]];
+            [spartanTexture runAction:[SKAction animateWithTextures:spartanAttackTextures timePerFrame:0.1f] completion:^{
+                attackCool = 15;
+            }];
         }
     }
 }
