@@ -64,6 +64,9 @@ const uint32_t ENEMY2 = 0x1 << 8;
     currentButton = @"";
     HP = 5;
     score = 0;
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"especialReady"])
+        FOGAREU = YES;
+    else
     FOGAREU = NO;
     specialAux = 0;
     bossAux = NO;
@@ -124,6 +127,10 @@ const uint32_t ENEMY2 = 0x1 << 8;
     
     lancasCount = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
     aux = @"Lanças:";
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"10lancas"]) {
+        lancas = 10;
+    }
+    else
     lancas = 5;
     lancasCount.text = [NSString stringWithFormat:@"%ld",(long)lancas];
     lancasCount.position = CGPointMake(width/2-lancasNode.size.width/2+lancasNode.size.width*0.2, height/3+lancasNode.size.width*0.072);
@@ -362,6 +369,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
     [boss runAction:[SKAction animateWithTextures:enemyLeftWalk timePerFrame:0.1f]completion:^{
         bossAttack++;
     }];
+    }
 
 }
 

@@ -12,7 +12,17 @@
 {
     NSInteger money;
     SKLabelNode *moneyLB;
-    SKSpriteNode *opcao1;
+    SKLabelNode *opcao1;
+    SKLabelNode *opcao2;
     SKSpriteNode *back;
-}
+    SKLabelNode *comprado1;
+    SKLabelNode *comprado2;
+    SKLabelNode *comprado3;
+    SKLabelNode *comprado4;
+    
+    }
+-(BOOL)realizaCompras:(NSInteger)valor;
+-(void)verificaCompras;
+-(void)atualizaDinheiro;
+-(void)inicializaLabels;
 @end
