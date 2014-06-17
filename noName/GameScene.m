@@ -72,7 +72,6 @@ const uint32_t ENEMY2 = 0x1 << 8;
     bossAux = NO;
     bossHP = 10;
     bossAttack = 0;
-    lifeAtlas = [SKTextureAtlas atlasNamed:@"LIFE"];
     atlas = [SKTextureAtlas atlasNamed:@"SPARTAN"];
     
     self.physicsWorld.contactDelegate = (id)self;
@@ -81,7 +80,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
     self.anchorPoint = CGPointMake (0.5,0.5);
     self.physicsWorld.gravity = CGVectorMake(0.0f, -1.0f);
     [self touchesEnded:nil withEvent:nil];
-    mainAtlas = [SKTextureAtlas atlasNamed:@"SPARTA.atlas"];
+    mainAtlas = [SKTextureAtlas atlasNamed:@"SPARTAN.atlas"];
     walkFrames = [NSMutableArray array];
     for(int i = 1; i <= 6; i++){
         NSString *textureName = [NSString stringWithFormat:@"wl%d", i];
@@ -106,6 +105,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
     [camera addChild:[self platformGG]];
     [camera addChild:[self platformGG2]];
     [camera addChild:[self createCharacter]];
+    spartanTexture.xScale = -1.0;
     
     [self addChild:[self createRightButton]];
     [self addChild:[self createLeftButton]];
@@ -146,7 +146,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
     pontosCount.fontColor = [UIColor whiteColor];
     [self addChild:pontosCount];
     
-    texturaAux = [lifeAtlas textureNamed:@"heart5.png"];
+    texturaAux = [atlas textureNamed:@"heart5.png"];
     vidas = [[SKSpriteNode alloc] initWithTexture:texturaAux color:nil size:CGSizeMake(width*0.17, height*0.06)];
     vidas.position = CGPointMake(0, lancasCount.position.y+height*0.05);
     [self addChild:vidas];
@@ -170,7 +170,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
 
 -(SKSpriteNode *)createCharacter{
     spartan = [[SKSpriteNode alloc] initWithColor:[SKColor clearColor] size:CGSizeMake(width*0.08, height*0.08)];
-    SKTexture *parado = [atlas textureNamed:@"WALK_RIGHT_006_.png"];
+    SKTexture *parado = [atlas textureNamed:@"wl6.png"];
     spartanTexture = [[SKSpriteNode alloc] initWithTexture:parado];
     [spartan addChild:spartanTexture];
     CGSize hue = CGSizeMake(spartan.size.width/2, spartan.size.height);
@@ -568,7 +568,6 @@ const uint32_t ENEMY2 = 0x1 << 8;
     //__________________________________________Move Right_______________________________
     
     if([node.name isEqualToString:(@"right")]){
-        NSLog(@"hueright");
         esquerda = NO;
         spartanTexture.xScale = -1.0;
         SKAction *moveLeft = [SKAction moveByX:8.5 y:0 duration:0.1];
@@ -640,10 +639,11 @@ const uint32_t ENEMY2 = 0x1 << 8;
     
     
     else if([node.name isEqualToString:@"defense"]){
-        currentButton = node.name;
-        SKTexture *f1 = [atlas textureNamed:@"DEF_LEFT.png"];
-        NSArray *spartanDefenseRight = @[f1];
-        [spartanTexture runAction:[SKAction animateWithTextures:spartanDefenseRight timePerFrame:0.01f]withKey:@"DefenseLAction1"];
+//        SKTexture *f1 = [atlas textureNamed:@"def.png"];
+        SKTexture *f1 = [atlas textureNamed:@"ATTACK_LEFT_001.png"];
+//        NSArray *spartanDefenseRight = @[f1];
+//        [spartanTexture runAction:[SKAction animateWithTextures:spartanDefenseRight timePerFrame:0.01f]withKey:@"DefenseLAction1"];
+        spartanTexture.texture = f1;
         defendendo = YES;
             
     }
@@ -675,8 +675,6 @@ const uint32_t ENEMY2 = 0x1 << 8;
     SKNode *node = [self nodeAtPoint:location];
     
     if ([node.name isEqualToString:@"left"]) {
-        [spartan removeActionForKey:@"WalkRAction1"];
-        [spartan removeActionForKey:@"WalkRAction2"];
         [spartan removeAllActions];
         
         esquerda = YES;
@@ -688,8 +686,6 @@ const uint32_t ENEMY2 = 0x1 << 8;
     }
     
     if([node.name isEqualToString:(@"right")]){
-        [spartan removeActionForKey:@"WalkRAction1"];
-        [spartan removeActionForKey:@"WalkRAction2"];
         [spartan removeAllActions];
         
         esquerda = NO;
@@ -723,15 +719,11 @@ const uint32_t ENEMY2 = 0x1 << 8;
     }
     
     if([node.name isEqualToString:@"left"]){
-        [spartan removeActionForKey:@"WalkLAction1"];
-        [spartanTexture removeActionForKey:@"WalkLAction2"];
         [spartanTexture removeAllActions];
         [spartan removeAllActions];
     }
     
     if([node.name isEqualToString:@"right"]){
-        [spartan removeActionForKey:@"WalkRAction1"];
-        [spartanTexture removeActionForKey:@"WalkRAction2"];
         [spartanTexture removeAllActions];
         [spartan removeAllActions];
     }
@@ -898,7 +890,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
             }
             HP--;
             NSString *textureName = [NSString stringWithFormat:@"heart%d",HP];
-            vidas.texture = [lifeAtlas textureNamed:textureName];
+            vidas.texture = [atlas textureNamed:textureName];
             [contact.bodyB.node removeFromParent];
         }
     }
@@ -919,7 +911,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
             }
             HP--;
             NSString *textureName = [NSString stringWithFormat:@"heart%d",HP];
-            vidas.texture = [lifeAtlas textureNamed:textureName];
+            vidas.texture = [atlas textureNamed:textureName];
             [contact.bodyA.node removeFromParent];
             
         }
@@ -1120,7 +1112,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
                 
                 HP--;
                 NSString *textureName = [NSString stringWithFormat:@"heart%d",HP];
-                vidas.texture = [lifeAtlas textureNamed:textureName];
+                vidas.texture = [atlas textureNamed:textureName];
             }
             else{
                 SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_L_parado.png"];
@@ -1156,7 +1148,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
                 
                 HP--;
                 NSString *textureName = [NSString stringWithFormat:@"heart%d",HP];
-                vidas.texture = [lifeAtlas textureNamed:textureName];
+                vidas.texture = [atlas textureNamed:textureName];
             }
             else{
                 SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_L_parado.png"];
@@ -1196,7 +1188,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
                 
                 HP--;
                 NSString *textureName = [NSString stringWithFormat:@"heart%d",HP];
-                vidas.texture = [lifeAtlas textureNamed:textureName];
+                vidas.texture = [atlas textureNamed:textureName];
             }
             else{
                 SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_R_parado.png"];
@@ -1232,7 +1224,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
                 
                 HP--;
                 NSString *textureName = [NSString stringWithFormat:@"heart%d",HP];
-                vidas.texture = [lifeAtlas textureNamed:textureName];
+                vidas.texture = [atlas textureNamed:textureName];
             }
             else{
                 SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_R_parado.png"];
