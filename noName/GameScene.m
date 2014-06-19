@@ -627,7 +627,6 @@ const uint32_t ENEMY2 = 0x1 << 8;
     
     
     else if ([node.name isEqualToString:@"left"]) {
-        NSLog(@"hueleft");
         esquerda = YES;
         spartanTexture.xScale = 1.0;
         SKAction *moveLeft = [SKAction moveByX:-8.5 y:0 duration:0.1];

@@ -10,6 +10,13 @@
 
 @interface Warrior : SKSpriteNode
 
--(void)walk;
+@property SKSpriteNode *warrior;
+@property SKSpriteNode *warriorTexture;
+@property BOOL esquerda;
+@property NSArray *walkFrames;
+
+-(void)takeDamage;
+-(void)die;
+-(void)walkWithDistance:(float)distance toTheLeft:(bool)direction withxScale:(float)xScale;
 
 @end
