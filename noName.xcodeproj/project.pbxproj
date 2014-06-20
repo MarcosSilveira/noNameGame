@@ -60,6 +60,7 @@
 		A09BD64D18EDE82200202C1B /* Ground.png in Resources */ = {isa = PBXBuildFile; fileRef = A09BD64C18EDE82200202C1B /* Ground.png */; };
 		A09C852D18FC68CA00EC3654 /* gameover2.png in Resources */ = {isa = PBXBuildFile; fileRef = A09C852C18FC68CA00EC3654 /* gameover2.png */; };
 		A09C852F18FDA28400EC3654 /* back.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A09C852E18FDA28400EC3654 /* back.mp3 */; };
+		A0CDE7C31954A4EE0058ED78 /* Enemy.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CDE7C21954A4EE0058ED78 /* Enemy.m */; };
 		A0DDE61318F5AA6400F301AA /* nuvem1.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61118F5AA6400F301AA /* nuvem1.png */; };
 		A0DDE61418F5AA6400F301AA /* nuvem2.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61218F5AA6400F301AA /* nuvem2.png */; };
 		A0DDE61618F5C4B600F301AA /* backgroundfixo.png in Resources */ = {isa = PBXBuildFile; fileRef = A0DDE61518F5C4B600F301AA /* backgroundfixo.png */; };
@@ -142,6 +143,8 @@
 		A09BD64C18EDE82200202C1B /* Ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ground.png; sourceTree = "<group>"; };
 		A09C852C18FC68CA00EC3654 /* gameover2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameover2.png; sourceTree = "<group>"; };
 		A09C852E18FDA28400EC3654 /* back.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = back.mp3; sourceTree = "<group>"; };
+		A0CDE7C11954A4EE0058ED78 /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		A0CDE7C21954A4EE0058ED78 /* Enemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy.m; sourceTree = "<group>"; };
 		A0DDE61118F5AA6400F301AA /* nuvem1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nuvem1.png; sourceTree = "<group>"; };
 		A0DDE61218F5AA6400F301AA /* nuvem2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nuvem2.png; sourceTree = "<group>"; };
 		A0DDE61518F5C4B600F301AA /* backgroundfixo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundfixo.png; sourceTree = "<group>"; };
@@ -274,6 +277,8 @@
 				A043A75A191019B2006A808C /* Warrior.m */,
 				A043A756191018AD006A808C /* Sparta.h */,
 				A043A757191018AD006A808C /* Sparta.m */,
+				A0CDE7C11954A4EE0058ED78 /* Enemy.h */,
+				A0CDE7C21954A4EE0058ED78 /* Enemy.m */,
 				8DA4AF3D18F7253C005CB817 /* GameOverScene.h */,
 				8DA4AF3E18F7253C005CB817 /* GameOverScene.m */,
 				8DA59F2118EB2D630017DCFD /* StoreScene.h */,
@@ -464,6 +469,7 @@
 				8DAC9A9518E098A7000A016F /* ViewController.m in Sources */,
 				8DA59F2318EB2D630017DCFD /* StoreScene.m in Sources */,
 				A08E389218E9EC2800C27179 /* GameScene.m in Sources */,
+				A0CDE7C31954A4EE0058ED78 /* Enemy.m in Sources */,
 				8DAC9A8F18E098A7000A016F /* AppDelegate.m in Sources */,
 				A043A758191018AD006A808C /* Sparta.m in Sources */,
 				8DAC9A8B18E098A7000A016F /* main.m in Sources */,

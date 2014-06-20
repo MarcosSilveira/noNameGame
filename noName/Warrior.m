@@ -13,12 +13,13 @@
     int hp;
 }
 
--(void)walkWithDistance:(float)distance toTheLeft:(bool)direction withxScale:(float)xScale{
+-(void)walkWithDistance:(float)distance toTheLeft:(bool)direction withDuration:(float)duration{
     self.esquerda = direction;
-    self.warriorTexture.xScale = xScale;
-    SKAction *move = [SKAction moveByX:distance y:0 duration:0.1];
-    [self.warrior runAction:[SKAction repeatActionForever:move]withKey:@"WalkLAction1"];
-    [self.warriorTexture runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:self.walkFrames timePerFrame:0.1f]]withKey:@"WalkLAction2"];
+    if(direction) self.warriorTexture.xScale = 1.0;
+    else self.warriorTexture.xScale = -1.0;
+    SKAction *move = [SKAction moveByX:distance y:0 duration:duration];
+    [self runAction:[SKAction repeatActionForever:move]withKey:@"WalkLAction1"];
+//    [self.warriorTexture runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:self.walkFrames timePerFrame:0.1f]]withKey:@"WalkLAction2"];
 }
 
 -(void)takeDamage{
@@ -27,6 +28,11 @@
 
 -(void)die{
     [self removeFromParent];
+}
+
+-(void)setScreenSize{
+    self.width = self.scene.size.width;
+    self.height = self.scene.size.height;
 }
 
 @end

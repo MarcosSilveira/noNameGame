@@ -7,6 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "Enemy.h"
 
 @interface GameScene : SKScene
 {
@@ -41,6 +42,7 @@
     SKSpriteNode *vidas;
     SKSpriteNode *block;
     SKSpriteNode *block2;
+    Enemy *enemy;
     SKSpriteNode *pause;
     SKSpriteNode *lancasNode;
     SKSpriteNode *boss;

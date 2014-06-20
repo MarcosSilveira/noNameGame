@@ -53,7 +53,6 @@ const uint32_t ENEMY2 = 0x1 << 8;
     backgroundMusicPlayer.numberOfLoops = -1;
     [backgroundMusicPlayer prepareToPlay];
     [backgroundMusicPlayer play];
-    
     attackCool = 15;
     counter = 120;
     counter2 = 240;
@@ -443,6 +442,20 @@ const uint32_t ENEMY2 = 0x1 << 8;
 
 //Left_____________________________________
 
+-(Enemy *)createEnemyintPosition:(CGPoint)pos{
+    enemy.width = width;
+    enemy.height = height;
+    NSMutableArray *frames = [[NSMutableArray alloc]init];
+    for(int i = 1; i <= 10; i++){
+        NSString *textureName = [NSString stringWithFormat:@"en%d", i];
+        SKTexture *temp = [mainAtlas textureNamed:textureName];
+        [frames addObject:temp];
+    }
+    enemy = [[Enemy alloc]initCreateEnemyWithTexture:frames inPosition:pos];
+    
+    return enemy;
+}
+
 -(SKSpriteNode *)creatorBlockLeft{
     block = [[SKSpriteNode alloc] initWithColor:[SKColor brownColor] size:CGSizeMake(width*0.08, height*0.08)];
     block.name = @"enemy";
@@ -827,7 +840,9 @@ const uint32_t ENEMY2 = 0x1 << 8;
     attackCool--;
     
     if (counter==0) {
-        [camera addChild:[self creatorBlockLeft]];
+        CGPoint leftPos = CGPointMake(-camera.position.x+width/2, -height/2+(platform.size.height));
+        [camera addChild:[self createEnemyintPosition:leftPos]];
+        [enemy walkWithDistance:-400 toTheLeft:YES withDuration:5];
         counter = 480/stages;
     }
     
