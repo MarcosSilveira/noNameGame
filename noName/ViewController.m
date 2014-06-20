@@ -38,6 +38,11 @@
 
 }
 
+- (BOOL) prefersStatusBarHidden
+{
+    return YES;
+}
+
 
 - (void)didReceiveMemoryWarning
 {

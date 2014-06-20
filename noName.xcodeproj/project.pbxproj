@@ -54,6 +54,8 @@
 		A03A682F18F862E500A2661B /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A03A682E18F862E500A2661B /* music.mp3 */; };
 		A03A683A18F87AAF00A2661B /* lanca_diagonal.png in Resources */ = {isa = PBXBuildFile; fileRef = A03A683918F87AAF00A2661B /* lanca_diagonal.png */; };
 		A03ACC6E18EDD2B10007299C /* grecia.png in Resources */ = {isa = PBXBuildFile; fileRef = A03ACC6D18EDD2B10007299C /* grecia.png */; };
+		A043A758191018AD006A808C /* Sparta.m in Sources */ = {isa = PBXBuildFile; fileRef = A043A757191018AD006A808C /* Sparta.m */; };
+		A043A75B191019B2006A808C /* Warrior.m in Sources */ = {isa = PBXBuildFile; fileRef = A043A75A191019B2006A808C /* Warrior.m */; };
 		A08E389218E9EC2800C27179 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A08E389118E9EC2800C27179 /* GameScene.m */; };
 		A09BD64D18EDE82200202C1B /* Ground.png in Resources */ = {isa = PBXBuildFile; fileRef = A09BD64C18EDE82200202C1B /* Ground.png */; };
 		A09C852D18FC68CA00EC3654 /* gameover2.png in Resources */ = {isa = PBXBuildFile; fileRef = A09C852C18FC68CA00EC3654 /* gameover2.png */; };
@@ -131,6 +133,10 @@
 		A03A682E18F862E500A2661B /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 		A03A683918F87AAF00A2661B /* lanca_diagonal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lanca_diagonal.png; sourceTree = "<group>"; };
 		A03ACC6D18EDD2B10007299C /* grecia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grecia.png; sourceTree = "<group>"; };
+		A043A756191018AD006A808C /* Sparta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sparta.h; sourceTree = "<group>"; };
+		A043A757191018AD006A808C /* Sparta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sparta.m; sourceTree = "<group>"; };
+		A043A759191019B2006A808C /* Warrior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Warrior.h; sourceTree = "<group>"; };
+		A043A75A191019B2006A808C /* Warrior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Warrior.m; sourceTree = "<group>"; };
 		A08E389018E9EC2800C27179 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		A08E389118E9EC2800C27179 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		A09BD64C18EDE82200202C1B /* Ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ground.png; sourceTree = "<group>"; };
@@ -264,6 +270,10 @@
 				8DAC9A9718E098A7000A016F /* MyScene.m */,
 				A08E389018E9EC2800C27179 /* GameScene.h */,
 				A08E389118E9EC2800C27179 /* GameScene.m */,
+				A043A759191019B2006A808C /* Warrior.h */,
+				A043A75A191019B2006A808C /* Warrior.m */,
+				A043A756191018AD006A808C /* Sparta.h */,
+				A043A757191018AD006A808C /* Sparta.m */,
 				8DA4AF3D18F7253C005CB817 /* GameOverScene.h */,
 				8DA4AF3E18F7253C005CB817 /* GameOverScene.m */,
 				8DA59F2118EB2D630017DCFD /* StoreScene.h */,
@@ -360,7 +370,7 @@
 				ORGANIZATIONNAME = "Marcos Sokolowski";
 				TargetAttributes = {
 					8DAC9A7818E098A7000A016F = {
-						DevelopmentTeam = T5N5TT4E82;
+						DevelopmentTeam = 4452968868;
 					};
 					8DAC9AA018E098A7000A016F = {
 						TestTargetID = 8DAC9A7818E098A7000A016F;
@@ -448,12 +458,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A043A75B191019B2006A808C /* Warrior.m in Sources */,
 				8DA4AF3F18F7253C005CB817 /* GameOverScene.m in Sources */,
 				8DAC9A9818E098A7000A016F /* MyScene.m in Sources */,
 				8DAC9A9518E098A7000A016F /* ViewController.m in Sources */,
 				8DA59F2318EB2D630017DCFD /* StoreScene.m in Sources */,
 				A08E389218E9EC2800C27179 /* GameScene.m in Sources */,
 				8DAC9A8F18E098A7000A016F /* AppDelegate.m in Sources */,
+				A043A758191018AD006A808C /* Sparta.m in Sources */,
 				8DAC9A8B18E098A7000A016F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
