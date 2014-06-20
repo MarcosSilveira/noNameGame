@@ -11,9 +11,11 @@
 @interface Warrior : SKSpriteNode
 
 @property SKSpriteNode *warrior;
-@property SKSpriteNode *warriorTexture;
+@property NSMutableArray *warriorWalkTextures;
 @property BOOL esquerda;
 @property NSArray *walkFrames;
+@property int width;
+@property int height;
 
 -(void)takeDamage;
 -(void)die;

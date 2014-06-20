@@ -15,10 +15,11 @@
 
 -(void)walkWithDistance:(float)distance toTheLeft:(bool)direction withxScale:(float)xScale{
     self.esquerda = direction;
-    self.warriorTexture.xScale = xScale;
+    self.xScale = xScale;
     SKAction *move = [SKAction moveByX:distance y:0 duration:0.1];
     [self.warrior runAction:[SKAction repeatActionForever:move]withKey:@"WalkLAction1"];
-    [self.warriorTexture runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:self.walkFrames timePerFrame:0.1f]]withKey:@"WalkLAction2"];
+    [self.warrior runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:self.warriorWalkTextures timePerFrame:0.1f]]withKey:@"WalkLAction2"];
+    
 }
 
 -(void)takeDamage{

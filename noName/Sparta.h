@@ -9,5 +9,5 @@
 #import "Warrior.h"
 
 @interface Sparta : Warrior
-
+-(Sparta*)firstValuesWithTexture:(SKTexture *) texture body:(CGSize)body;
 @end
