@@ -11,4 +11,11 @@
 @implementation Sparta
 
 
+-(Sparta*)firstValuesWithTexture:(SKTexture *)texture body:(CGSize)body{
+    self.texture = texture;
+    
+    
+    return self;
+}
+
 @end
