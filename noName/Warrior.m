@@ -8,31 +8,24 @@
 
 #import "Warrior.h"
 
-@implementation Warrior{
-    //Status
-    int hp;
-}
+@implementation Warrior
 
--(void)walkWithDistance:(float)distance toTheLeft:(bool)direction withDuration:(float)duration{
-    self.esquerda = direction;
-    if(direction) self.warriorTexture.xScale = 1.0;
-    else self.warriorTexture.xScale = -1.0;
-    SKAction *move = [SKAction moveByX:distance y:0 duration:duration];
-    [self runAction:[SKAction repeatActionForever:move]withKey:@"WalkLAction1"];
-//    [self.warriorTexture runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:self.walkFrames timePerFrame:0.1f]]withKey:@"WalkLAction2"];
+-(instancetype)initWithColor:(UIColor *)color size:(CGSize)size{
+    self = [super initWithColor:color size:size];
+    self.walkFrames = [[NSMutableArray alloc]init];
+    self.frames = [[NSMutableArray alloc]init];
+    self.attackFrames = [[NSMutableArray alloc]init];
+    
+    return self;
 }
 
 -(void)takeDamage{
-    hp--;
+    self.hp--;
+    if(self.hp == 0) [self die];
 }
 
 -(void)die{
     [self removeFromParent];
-}
-
--(void)setScreenSize{
-    self.width = self.scene.size.width;
-    self.height = self.scene.size.height;
 }
 
 @end

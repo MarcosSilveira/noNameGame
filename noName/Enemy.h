@@ -9,7 +9,9 @@
 #import "Warrior.h"
 
 @interface Enemy : Warrior
+@property SKTextureAtlas *atlas;
 
--(instancetype)initCreateEnemyWithTexture:(NSArray *)frames inPosition:(CGPoint)pos;
++(SKTextureAtlas *)createAtlas;
+
 
 @end

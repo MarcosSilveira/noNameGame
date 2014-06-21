@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84F402E219562E72006C2658 /* ENEMY1.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 84F402E019562E72006C2658 /* ENEMY1.atlas */; };
+		84F402E319562E72006C2658 /* ENEMY2.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 84F402E119562E72006C2658 /* ENEMY2.atlas */; };
 		8D2CA9F518F479970062F480 /* botao_direcao_L.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2CA9F318F479970062F480 /* botao_direcao_L.png */; };
 		8D2CA9F618F479970062F480 /* botao_direcao_R.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2CA9F418F479970062F480 /* botao_direcao_R.png */; };
 		8D2CA9F918F47F2F0062F480 /* botao_escudo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2CA9F718F47F2F0062F480 /* botao_escudo.png */; };
@@ -79,6 +81,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84F402E019562E72006C2658 /* ENEMY1.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ENEMY1.atlas; sourceTree = "<group>"; };
+		84F402E119562E72006C2658 /* ENEMY2.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ENEMY2.atlas; sourceTree = "<group>"; };
 		8D2CA9F318F479970062F480 /* botao_direcao_L.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_direcao_L.png; sourceTree = "<group>"; };
 		8D2CA9F418F479970062F480 /* botao_direcao_R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_direcao_R.png; sourceTree = "<group>"; };
 		8D2CA9F718F47F2F0062F480 /* botao_escudo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_escudo.png; sourceTree = "<group>"; };
@@ -178,6 +182,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84F402DC19562DCD006C2658 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A043A759191019B2006A808C /* Warrior.h */,
+				A043A75A191019B2006A808C /* Warrior.m */,
+				A043A756191018AD006A808C /* Sparta.h */,
+				A043A757191018AD006A808C /* Sparta.m */,
+				A0CDE7C11954A4EE0058ED78 /* Enemy.h */,
+				A0CDE7C21954A4EE0058ED78 /* Enemy.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		84F402DD19562DE7006C2658 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				8DAC9A9618E098A7000A016F /* MyScene.h */,
+				8DAC9A9718E098A7000A016F /* MyScene.m */,
+				8DA4AF3D18F7253C005CB817 /* GameOverScene.h */,
+				8DA4AF3E18F7253C005CB817 /* GameOverScene.m */,
+				8DA59F2118EB2D630017DCFD /* StoreScene.h */,
+				8DA59F2218EB2D630017DCFD /* StoreScene.m */,
+				A08E389018E9EC2800C27179 /* GameScene.h */,
+				A08E389118E9EC2800C27179 /* GameScene.m */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		84F402DE19562E40006C2658 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				8D83780519118DFC00729D53 /* MyParticle.sks */,
+				8D4625FA18F85FA7005B871C /* Fire.sks */,
+				8DA6096418F8552500CBD4A0 /* spark.png */,
+			);
+			name = Particles;
+			sourceTree = "<group>";
+		};
+		84F402DF19562E53006C2658 /* Atlases */ = {
+			isa = PBXGroup;
+			children = (
+				84F402E019562E72006C2658 /* ENEMY1.atlas */,
+				84F402E119562E72006C2658 /* ENEMY2.atlas */,
+				8D87FC28194F76310066D813 /* SPARTAN.atlas */,
+			);
+			name = Atlases;
+			sourceTree = "<group>";
+		};
 		8D775C46190ECC72007A4E13 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,10 +279,8 @@
 		8DAC9A7018E098A7000A016F = {
 			isa = PBXGroup;
 			children = (
-				8D83780519118DFC00729D53 /* MyParticle.sks */,
-				8D4625FA18F85FA7005B871C /* Fire.sks */,
-				8DA6096418F8552500CBD4A0 /* spark.png */,
-				8D87FC28194F76310066D813 /* SPARTAN.atlas */,
+				84F402DE19562E40006C2658 /* Particles */,
+				84F402DF19562E53006C2658 /* Atlases */,
 				8DAC9A8418E098A7000A016F /* noName */,
 				8DAC9AA818E098A7000A016F /* noNameTests */,
 				8DAC9A7B18E098A7000A016F /* Frameworks */,
@@ -263,30 +313,14 @@
 		8DAC9A8418E098A7000A016F /* noName */ = {
 			isa = PBXGroup;
 			children = (
-				A08E389318E9ECDB00C27179 /* iPad */,
-				8DAC9A8D18E098A7000A016F /* AppDelegate.h */,
-				8DAC9A8E18E098A7000A016F /* AppDelegate.m */,
-				8DAC9A9018E098A7000A016F /* Main.storyboard */,
 				8DAC9A9318E098A7000A016F /* ViewController.h */,
 				8DAC9A9418E098A7000A016F /* ViewController.m */,
-				8DAC9A9618E098A7000A016F /* MyScene.h */,
-				8DAC9A9718E098A7000A016F /* MyScene.m */,
-				A08E389018E9EC2800C27179 /* GameScene.h */,
-				A08E389118E9EC2800C27179 /* GameScene.m */,
-				A043A759191019B2006A808C /* Warrior.h */,
-				A043A75A191019B2006A808C /* Warrior.m */,
-				A043A756191018AD006A808C /* Sparta.h */,
-				A043A757191018AD006A808C /* Sparta.m */,
-				A0CDE7C11954A4EE0058ED78 /* Enemy.h */,
-				A0CDE7C21954A4EE0058ED78 /* Enemy.m */,
-				8DA4AF3D18F7253C005CB817 /* GameOverScene.h */,
-				8DA4AF3E18F7253C005CB817 /* GameOverScene.m */,
-				8DA59F2118EB2D630017DCFD /* StoreScene.h */,
-				8DA59F2218EB2D630017DCFD /* StoreScene.m */,
+				84F402DD19562DE7006C2658 /* Scenes */,
+				84F402DC19562DCD006C2658 /* Classes */,
 				8D775C47190ECC9E007A4E13 /* mp3 */,
 				8D775C46190ECC72007A4E13 /* images */,
-				8DAC9A9B18E098A7000A016F /* Images.xcassets */,
 				8DAC9A8518E098A7000A016F /* Supporting Files */,
+				8DAC9A9B18E098A7000A016F /* Images.xcassets */,
 			);
 			path = noName;
 			sourceTree = "<group>";
@@ -294,6 +328,9 @@
 		8DAC9A8518E098A7000A016F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8DAC9A8D18E098A7000A016F /* AppDelegate.h */,
+				8DAC9A8E18E098A7000A016F /* AppDelegate.m */,
+				8DAC9A9018E098A7000A016F /* Main.storyboard */,
 				8DAC9A8618E098A7000A016F /* noName-Info.plist */,
 				8DAC9A8718E098A7000A016F /* InfoPlist.strings */,
 				8DAC9A8A18E098A7000A016F /* main.m */,
@@ -318,13 +355,6 @@
 				8DAC9AAB18E098A7000A016F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		A08E389318E9ECDB00C27179 /* iPad */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = iPad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -412,6 +442,7 @@
 				8D4D72F418FC659B002D3898 /* menufundo.png in Resources */,
 				8DA4AF3618F71893005CB817 /* pause.png in Resources */,
 				A0EAFF2718F463DB00B76CB5 /* prebackground2.png in Resources */,
+				84F402E219562E72006C2658 /* ENEMY1.atlas in Resources */,
 				A03ACC6E18EDD2B10007299C /* grecia.png in Resources */,
 				8DAC9A8918E098A7000A016F /* InfoPlist.strings in Resources */,
 				A09C852D18FC68CA00EC3654 /* gameover2.png in Resources */,
@@ -443,6 +474,7 @@
 				8DA4AF3818F71B76005CB817 /* lanca_contador.png in Resources */,
 				8DAB851918F5CA610099437C /* botao_atira_lanca_indisponivel.png in Resources */,
 				8D4D72F818FC668A002D3898 /* special_unavailable.png in Resources */,
+				84F402E319562E72006C2658 /* ENEMY2.atlas in Resources */,
 				8D4625FB18F85FA7005B871C /* Fire.sks in Resources */,
 				8D87FC29194F76310066D813 /* SPARTAN.atlas in Resources */,
 			);

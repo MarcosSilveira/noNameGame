@@ -12,14 +12,11 @@
 
 @property SKSpriteNode *warriorTexture;
 @property BOOL esquerda;
+@property NSMutableArray *frames;
 @property NSMutableArray *walkFrames;
 @property NSMutableArray *attackFrames;
-@property int width;
-@property int height;
+@property int hp;
 
 -(void)takeDamage;
--(void)die;
--(void)walkWithDistance:(float)distance toTheLeft:(bool)direction withDuration:(float)duration;
--(void)setScreenSize;
 
 @end
