@@ -22,6 +22,10 @@
     for(int i = 0; i < 6; i++){
         [self.walkFrames addObject:self.frames[i]];
     }
+    for(int i = 7; i < 10; i++){
+        [self.attackFrames addObject:self.frames[i]];
+    }
+    
     self.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.size];
     
     SKTexture *enemyLT = self.frames[6];

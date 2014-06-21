@@ -269,7 +269,6 @@ const uint32_t ENEMY2 = 0x1 << 8;
     return right;
 }
 
-
 -(SKSpriteNode *)createLeftButton{
     left = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(width*0.08, width*0.08)];
     left.name = @"left";
@@ -278,7 +277,6 @@ const uint32_t ENEMY2 = 0x1 << 8;
     
     return left;
 }
-
 
 -(SKSpriteNode *)creatAtackButton2{
     attack2 = [[SKSpriteNode alloc] initWithColor:[UIColor orangeColor]size:CGSizeMake(width*0.08, width*0.08)];
@@ -297,6 +295,7 @@ const uint32_t ENEMY2 = 0x1 << 8;
     
     return attack;
 }
+
 -(SKSpriteNode *)createSpecialButton{
     special = [[SKSpriteNode alloc] initWithColor:[UIColor purpleColor] size:CGSizeMake(width*0.08, width*0.08)];
     special.name = @"Special";
@@ -443,8 +442,6 @@ const uint32_t ENEMY2 = 0x1 << 8;
 }
 
 #pragma mark - Enemy
-
-//Left_____________________________________
 
 -(Enemy *)createEnemyInTheLeft:(BOOL)left{
     enemy = [[Enemy alloc]initWithColor:[SKColor clearColor] size:CGSizeMake(width*0.08, height*0.08)];
@@ -817,14 +814,132 @@ const uint32_t ENEMY2 = 0x1 << 8;
     node.parent.position = CGPointMake(node.parent.position.x - cameraPositionInScene.x-width/4, node.parent.position.y);
 }
 
--(void)bossAttackedSparta:(SKPhysicsBody *)bA bossAttack:(SKPhysicsBody *)bB{
+-(void)didBeginContact:(SKPhysicsContact *)contact
+{
+    if([self checkBossContact:contact]) return;
+    if([self checkSpartaActions:contact]) return;
+    if([self checkEnemyActions:contact]) return;
+}
+
+#pragma mark - Contact Methods
+
+//Enemy---------
+
+-(BOOL)spartaWasHit:(SKPhysicsBody *)bA enemy:(SKPhysicsBody *)bB{
+    
+    if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
+    else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
+    if(HP == 1){
+        if(!defendendo){
+            [bA.node removeFromParent];
+            SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
+            SKTransition *troca = [SKTransition fadeWithDuration:0.5];
+            [self.view presentScene:GO transition:troca];
+        }
+    }
+    else{
+        [bB.node removeAllActions];
+        [bB.node runAction:[SKAction animateWithTextures:((Enemy *)bB.node).attackFrames timePerFrame:0.5] completion:^{
+            [self enemyMove:bB.node toTheLeft:YES];
+        }];
+        if (!defendendo) {
+            HP--;
+            NSString *textureName = [NSString stringWithFormat:@"heart%d",HP];
+            vidas.texture = [atlas textureNamed:textureName];
+        }
+    }
+    
+    return YES;
+}
+
+-(BOOL)checkEnemyActions:(SKPhysicsContact *)contact{
+    BOOL detected = NO;
+    
+    //Inflict damage on Grecules
+    //Left
+    if((contact.bodyA.categoryBitMask == SPARTAN) && (contact.bodyB.categoryBitMask == ENEMY)){
+        detected = [self spartaWasHit:contact.bodyA enemy:contact.bodyB];
+    }
+    
+    if((contact.bodyB.categoryBitMask == SPARTAN) && (contact.bodyA.categoryBitMask == ENEMY)){
+        detected = [self spartaWasHit:contact.bodyB enemy:contact.bodyA];
+    }
+    
+    return detected;
+}
+
+//Sparta--------
+
+-(BOOL)greculesTouchesLoot:(SKPhysicsBody *)bA loot:(SKPhysicsBody *)bB{
+    [bA.node removeFromParent];
+    lancas++;
+    
+    return YES;
+}
+
+-(void)dropRandomLootWithContact:(SKPhysicsContact *)contact{
+    int random = arc4random_uniform(5);
+    if(random == 3){
+        SKTexture *drop1 = [SKTexture textureWithImageNamed:@"lanca_diagonal.png"];
+        drop = [[SKSpriteNode alloc] initWithTexture:drop1 color:[SKColor blackColor] size:spartan_class.size];
+        drop.position = contact.contactPoint;
+        drop.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:spartan_class.size];
+        drop.name = @"loot";
+        drop.physicsBody.categoryBitMask = LOOT;
+        drop.physicsBody.collisionBitMask = ROCK;
+        drop.physicsBody.contactTestBitMask = SPARTAN;
+        [camera addChild:drop];
+    }
+}
+
+-(BOOL)enemyWasHit:(SKPhysicsBody *)bA attack:(SKPhysicsBody *)bB withContact:(SKPhysicsContact *)contact{
+    [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
+    
+    [self dropRandomLootWithContact:contact];
+    
+    [((Enemy*)bA.node) takeDamage];
+    [bB.node removeFromParent];
+    score = score+stages;
+    specialAux++;
+    
+    return YES;
+}
+
+-(BOOL)checkSpartaActions:(SKPhysicsContact *)contact{
+    
+    BOOL detected = NO;
+    //Attack melee / ranged, remove enemy
+    if(contact.bodyA.categoryBitMask == ENEMY && (contact.bodyB.categoryBitMask == BIRIBINHA || contact.bodyB.categoryBitMask == ATTACK)){
+        detected = [self enemyWasHit:contact.bodyA attack:contact.bodyB withContact:contact];
+    }
+    
+    if(contact.bodyB.categoryBitMask == ENEMY && (contact.bodyA.categoryBitMask == BIRIBINHA || contact.bodyA.categoryBitMask == ATTACK)){
+        detected = [self enemyWasHit:contact.bodyB attack:contact.bodyA withContact:contact];
+    }
+    
+    //Grecules touches loot
+    if((contact.bodyA.categoryBitMask == SPARTAN) && (contact.bodyB.categoryBitMask == LOOT)){
+        detected = [self greculesTouchesLoot:contact.bodyA loot:contact.bodyB];
+    }
+    if((contact.bodyB.categoryBitMask == SPARTAN) && (contact.bodyA.categoryBitMask == LOOT)){
+        detected = [self greculesTouchesLoot:contact.bodyB loot:contact.bodyA];
+    }
+    
+    return detected;
+}
+
+//Boss---------
+
+-(BOOL)bossAttackedSparta:(SKPhysicsBody *)bA bossAttack:(SKPhysicsBody *)bB{
+    [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
+    
     if (defendendo) {
         [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
         [bB.node removeFromParent];
     }
     else{
         [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-        if (HP<=0) {
+        if (HP<=1) {
             SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
             SKTransition *troca = [SKTransition fadeWithDuration:0.5];
             [self.view presentScene:GO transition:troca];
@@ -835,359 +950,42 @@ const uint32_t ENEMY2 = 0x1 << 8;
         vidas.texture = [atlas textureNamed:textureName];
         [bB.node removeFromParent];
     }
+    
+    return YES;
 }
 
--(void)checkBossContact:(SKPhysicsContact *)contact{
-    //Attack in boss
+-(BOOL)bossWasHit:(SKPhysicsBody *)bA attack:(SKPhysicsBody *)bB{
+    [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
+    
+    if (bossHP>0) {
+        bossHP--;
+    }
+    else
+        [bA.node removeFromParent];
+    score = score+stages+100;
+    specialAux++;
+    
+    return YES;
+}
+
+-(BOOL)checkBossContact:(SKPhysicsContact *)contact{
+    BOOL detected = NO;
     if(contact.bodyA.categoryBitMask == SPARTAN && ([contact.bodyB.node.name isEqualToString:@"Bspear"] || [contact.bodyB.node.name isEqualToString:@"battack"])){
-        
-        [self bossAttackedSparta:contact.bodyA bossAttack:contact.bodyB];
+        detected = [self bossAttackedSparta:contact.bodyA bossAttack:contact.bodyB];
     }
     
-    if(([contact.bodyB.node.name isEqualToString:@"spartan"] && [contact.bodyA.node.name isEqualToString:@"Bspear"]) || ([contact.bodyB.node.name isEqualToString:@"spartan"] && [contact.bodyA.node.name isEqualToString:@"battack"])){
-        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-        
-        if (defendendo) {
-            [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
-            [contact.bodyA.node removeFromParent];
-        }
-        else{
-            [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-            if (HP<=0) {
-                SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
-                SKTransition *troca = [SKTransition fadeWithDuration:0.5];
-                [self.view presentScene:GO transition:troca];
-            }
-            HP--;
-            NSString *textureName = [NSString stringWithFormat:@"heart%d",HP];
-            vidas.texture = [atlas textureNamed:textureName];
-            [contact.bodyA.node removeFromParent];
-            
-        }
-        
-    }
-    if(([contact.bodyA.node.name isEqualToString:@"boss"] && [contact.bodyB.node.name isEqualToString:@"spear"]) || ([contact.bodyA.node.name isEqualToString:@"boss"] && [contact.bodyB.node.name isEqualToString:@"attack"])){
-        
-        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-        
-        if (bossHP>0) {
-            bossHP--;
-        }
-        else
-            [contact.bodyA.node removeFromParent];
-        score = score+stages+100;
-        specialAux++;
+    if(contact.bodyB.categoryBitMask == SPARTAN && ([contact.bodyA.node.name isEqualToString:@"Bspear"] || [contact.bodyA.node.name isEqualToString:@"battack"])){
+        detected = [self bossAttackedSparta:contact.bodyB bossAttack:contact.bodyA];
     }
     
-    if(([contact.bodyB.node.name isEqualToString:@"boss"] && [contact.bodyA.node.name isEqualToString:@"spear"]) || ([contact.bodyB.node.name isEqualToString:@"boss"] && [contact.bodyA.node.name isEqualToString:@"attack"])){
-        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-        
-        if (bossHP>0) {
-            bossHP--;
-        }
-        else
-            [contact.bodyA.node removeFromParent];
-        score = score+stages+100;
-        specialAux++;
-        
-    }
-    if(([contact.bodyB.node.name isEqualToString:@"boss"] && [contact.bodyA.node.name isEqualToString:@"specialspear"])){
-        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-        
-        if (bossHP>0) {
-            bossHP=bossHP-3;
-        }
-        else
-            [contact.bodyA.node removeFromParent];
-        score = score+stages+100;
-        specialAux++;
-        
-    }
-    if([contact.bodyA.node.name isEqualToString:@"specialspear"] && [contact.bodyB.node.name isEqualToString:@"boss"]){
-        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-        
-        if (bossHP>0) {
-            bossHP=bossHP-3;
-        }
-        else{
-            [contact.bodyB.node removeFromParent];
-            score = score+stages+100;
-            specialAux++;
-        }
-    }
-}
-
--(void)didBeginContact:(SKPhysicsContact *)contact
-{
-    [self checkBossContact:contact];
-    
-    //Attack melee / ranged, remove enemy
-    if((contact.bodyA.categoryBitMask == ENEMY && contact.bodyB.categoryBitMask == BIRIBINHA) || (contact.bodyA.categoryBitMask == ENEMY && contact.bodyB.categoryBitMask == ATTACK)){
-        
-        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-        
-        //Drop random loot
-        int random = arc4random_uniform(5);
-        if(random == 3){
-            SKTexture *drop1 = [SKTexture textureWithImageNamed:@"lanca_diagonal.png"];
-            drop = [[SKSpriteNode alloc] initWithTexture:drop1 color:[SKColor blackColor] size:spartan_class.size];
-            drop.position = contact.contactPoint;
-            drop.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:spartan_class.size];
-            drop.name = @"loot";
-            drop.physicsBody.categoryBitMask = LOOT;
-            drop.physicsBody.collisionBitMask = ROCK;
-            drop.physicsBody.contactTestBitMask = SPARTAN;
-            [camera addChild:drop];
-        }
-        
-        [contact.bodyA.node removeFromParent];
-        score = score+stages;
-        specialAux++;
+    if(contact.bodyA.categoryBitMask == BOSS && ([contact.bodyB.node.name isEqualToString:@"spear"] || [contact.bodyB.node.name isEqualToString:@"attack"] || [contact.bodyB.node.name isEqualToString:@"specialspear"])){
+        detected = [self bossWasHit:contact.bodyA attack:contact.bodyB];
     }
     
-    if((contact.bodyB.categoryBitMask == ENEMY && contact.bodyA.categoryBitMask == BIRIBINHA) || (contact.bodyB.categoryBitMask == ENEMY && contact.bodyA.categoryBitMask == ATTACK)){
-        
-        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-        
-        //Drop random loot
-        int random = arc4random_uniform(5);
-        if(random == 3){
-            SKTexture *drop1 = [SKTexture textureWithImageNamed:@"lanca_diagonal.png"];
-            drop = [[SKSpriteNode alloc] initWithTexture:drop1 color:[SKColor blackColor] size:spartan_class.size];
-            drop.position = contact.contactPoint;
-            drop.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:spartan_class.size];
-            drop.physicsBody.categoryBitMask = LOOT;
-            drop.physicsBody.collisionBitMask = ROCK;
-            drop.physicsBody.contactTestBitMask = SPARTAN;
-            drop.name = @"loot";
-            [camera addChild:drop];
-        }
-        
-        
-        [contact.bodyB.node removeFromParent];
-        score = score+stages;
-        specialAux++;
+    if(contact.bodyB.categoryBitMask == BOSS && ([contact.bodyA.node.name isEqualToString:@"spear"] || [contact.bodyA.node.name isEqualToString:@"attack"] || [contact.bodyA.node.name isEqualToString:@"specialspear"])){
+        detected = [self bossWasHit:contact.bodyB attack:contact.bodyA];
     }
-
-    if((contact.bodyA.categoryBitMask == ENEMY2 && contact.bodyB.categoryBitMask == BIRIBINHA) || (contact.bodyA.categoryBitMask == ENEMY2 && contact.bodyB.categoryBitMask == ATTACK)){
-        
-        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-        
-        //Drop random loot
-        int random = arc4random_uniform(5);
-        if(random == 3){
-            SKTexture *drop1 = [SKTexture textureWithImageNamed:@"lanca_diagonal.png"];
-            drop = [[SKSpriteNode alloc] initWithTexture:drop1 color:[SKColor blackColor] size:spartan_class.size];
-            drop.position = contact.contactPoint;
-            drop.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:spartan_class.size];
-            drop.name = @"loot";
-            drop.physicsBody.categoryBitMask = LOOT;
-            drop.physicsBody.collisionBitMask = ROCK;
-            drop.physicsBody.contactTestBitMask = SPARTAN;
-            [camera addChild:drop];
-        }
-        
-        [contact.bodyA.node removeFromParent];
-        score = score+stages;
-        specialAux++;
-    }
-    
-    if((contact.bodyB.categoryBitMask == ENEMY2 && contact.bodyA.categoryBitMask == BIRIBINHA) || (contact.bodyB.categoryBitMask == ENEMY2 && contact.bodyA.categoryBitMask == ATTACK)){
-        [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-        
-        //Drop random loot
-        int random = arc4random_uniform(5);
-        if(random == 3){
-            SKTexture *drop1 = [SKTexture textureWithImageNamed:@"lanca_diagonal.png"];
-            drop = [[SKSpriteNode alloc] initWithTexture:drop1 color:[SKColor blackColor] size:spartan_class.size];
-            drop.position = contact.contactPoint;
-            drop.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:spartan_class.size];
-            drop.physicsBody.categoryBitMask = LOOT;
-            drop.physicsBody.collisionBitMask = ROCK;
-            drop.physicsBody.contactTestBitMask = SPARTAN;
-            drop.name = @"loot";
-            [camera addChild:drop];
-        }
-        
-        
-        [contact.bodyB.node removeFromParent];
-        score = score+stages;
-        specialAux++;
-    }
-    
-    //Grecules touches loot
-    if((contact.bodyB.categoryBitMask == SPARTAN) && (contact.bodyA.categoryBitMask == LOOT)){
-        [contact.bodyA.node removeFromParent];
-        lancas++;
-    }
-    if((contact.bodyA.categoryBitMask == SPARTAN) && (contact.bodyB.categoryBitMask == LOOT)){
-        [contact.bodyB.node removeFromParent];
-        lancas++;
-    }
-    
-    //Remove attack / spear node
-    if((contact.bodyB.categoryBitMask == BIRIBINHA) || (contact.bodyB.categoryBitMask == ATTACK)){
-        [projectile removeFromParent];
-        [attackRegion removeFromParent];
-    }
-    if((contact.bodyA.categoryBitMask == BIRIBINHA) || (contact.bodyA.categoryBitMask == ATTACK)){
-        [projectile removeFromParent];
-        [attackRegion removeFromParent];
-    }
-    
-    //Inflict damage on Grecules
-    //Left
-    if((contact.bodyB.categoryBitMask == SPARTAN) && (contact.bodyA.categoryBitMask == ENEMY)){
-        
-        if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
-        else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-        if(HP == 0){
-            if(!defendendo){
-                [contact.bodyB.node removeFromParent];
-                SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
-                SKTransition *troca = [SKTransition fadeWithDuration:0.5];
-                [self.view presentScene:GO transition:troca];
-            }
-        }
-        
-        else{
-            if (!defendendo) {
-                SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_L_parado.png"];
-                SKTexture *f2 = [atlas textureNamed:@"inimigo1_02_L_attack.png"];
-                NSArray *enemyLeftWalk = @[f1,f2];
-                [contact.bodyA.node removeAllActions];
-                [contact.bodyA.node runAction:[SKAction animateWithTextures:enemyLeftWalk timePerFrame:0.5] completion:^{
-                    
-                    [self enemyMove:contact.bodyA.node toTheLeft:YES];
-                }];
-                
-                
-                HP--;
-                NSString *textureName = [NSString stringWithFormat:@"heart%d",HP];
-                vidas.texture = [atlas textureNamed:textureName];
-            }
-            else{
-                SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_L_parado.png"];
-                SKTexture *f2 = [atlas textureNamed:@"inimigo1_02_L_attack.png"];   NSArray *enemyLeftWalk = @[f1,f2];
-                [contact.bodyA.node removeAllActions];
-                [contact.bodyA.node runAction:[SKAction animateWithTextures:enemyLeftWalk timePerFrame:0.5] completion:^{
-                    [self enemyMove:contact.bodyA.node toTheLeft:YES];
-                }];
-            }
-        }
-    }
-    
-    if((contact.bodyA.categoryBitMask == SPARTAN) && (contact.bodyB.categoryBitMask == ENEMY)){
-        if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
-        else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-        if(HP == 0){
-            if(!defendendo){
-                [contact.bodyA.node removeFromParent];
-                SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
-                SKTransition *troca = [SKTransition fadeWithDuration:0.5];
-                [self.view presentScene:GO transition:troca];
-            }
-        }
-        else{
-            if (!defendendo) {
-                SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_L_parado.png"];
-                SKTexture *f2 = [atlas textureNamed:@"inimigo1_02_L_attack.png"];   NSArray *enemyLeftWalk = @[f1,f2];
-                [contact.bodyB.node removeAllActions];
-                [contact.bodyB.node runAction:[SKAction animateWithTextures:enemyLeftWalk timePerFrame:0.5] completion:^{
-                    [self enemyMove:contact.bodyB.node toTheLeft:YES];
-                }];
-                
-                
-                HP--;
-                NSString *textureName = [NSString stringWithFormat:@"heart%d",HP];
-                vidas.texture = [atlas textureNamed:textureName];
-            }
-            else{
-                SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_L_parado.png"];
-                SKTexture *f2 = [atlas textureNamed:@"inimigo1_02_L_attack.png"];   NSArray *enemyLeftWalk = @[f1,f2];
-                [contact.bodyB.node removeAllActions];
-                [contact.bodyB.node runAction:[SKAction animateWithTextures:enemyLeftWalk timePerFrame:0.5] completion:^{
-                    [self enemyMove:contact.bodyB.node toTheLeft:YES];
-                }];
-            }
-        }
-    }
-    
-    //Right
-    if((contact.bodyB.categoryBitMask == SPARTAN) && (contact.bodyA.categoryBitMask == ENEMY2)){
-        if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
-        else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-        if(HP == 0){
-            if(!defendendo){
-                [contact.bodyB.node removeFromParent];
-                SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
-                SKTransition *troca = [SKTransition fadeWithDuration:0.5];
-                [self.view presentScene:GO transition:troca];
-            }
-        }
-        
-        else{
-            if (!defendendo) {
-                SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_R_parado.png"];
-                SKTexture *f2 = [atlas textureNamed:@"inimigo1_02_R_attack.png"];
-                NSArray *enemyLeftWalk = @[f1,f2];
-                [contact.bodyA.node removeAllActions];
-                [contact.bodyA.node runAction:[SKAction animateWithTextures:enemyLeftWalk timePerFrame:0.5] completion:^{
-                    
-                    [self enemyMove:contact.bodyA.node toTheLeft:NO];
-                }];
-                
-                
-                HP--;
-                NSString *textureName = [NSString stringWithFormat:@"heart%d",HP];
-                vidas.texture = [atlas textureNamed:textureName];
-            }
-            else{
-                SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_R_parado.png"];
-                SKTexture *f2 = [atlas textureNamed:@"inimigo1_02_R_attack.png"];   NSArray *enemyLeftWalk = @[f1,f2];
-                [contact.bodyA.node removeAllActions];
-                [contact.bodyA.node runAction:[SKAction animateWithTextures:enemyLeftWalk timePerFrame:0.5] completion:^{
-                    [self enemyMove:contact.bodyA.node toTheLeft:NO];
-                }];
-            }
-        }
-    }
-    
-    if((contact.bodyA.categoryBitMask == SPARTAN) && (contact.bodyB.categoryBitMask == ENEMY2)){
-        if(defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
-        else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-        if(HP == 0){
-            if(!defendendo){
-                [contact.bodyA.node removeFromParent];
-                SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];
-                SKTransition *troca = [SKTransition fadeWithDuration:0.5];
-                [self.view presentScene:GO transition:troca];
-            }
-        }
-        else{
-            if (!defendendo) {
-                SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_R_parado.png"];
-                SKTexture *f2 = [atlas textureNamed:@"inimigo1_02_R_attack.png"];   NSArray *enemyLeftWalk = @[f1,f2];
-                [contact.bodyB.node removeAllActions];
-                [contact.bodyB.node runAction:[SKAction animateWithTextures:enemyLeftWalk timePerFrame:0.5] completion:^{
-                    [self enemyMove:contact.bodyB.node toTheLeft:NO];
-                }];
-                
-                
-                HP--;
-                NSString *textureName = [NSString stringWithFormat:@"heart%d",HP];
-                vidas.texture = [atlas textureNamed:textureName];
-            }
-            else{
-                SKTexture *f1 = [atlas textureNamed:@"inimigo1_01_R_parado.png"];
-                SKTexture *f2 = [atlas textureNamed:@"inimigo1_02_R_attack.png"];   NSArray *enemyLeftWalk = @[f1,f2];
-                [contact.bodyB.node removeAllActions];
-                [contact.bodyB.node runAction:[SKAction animateWithTextures:enemyLeftWalk timePerFrame:0.5] completion:^{
-                    [self enemyMove:contact.bodyB.node toTheLeft:NO];
-                }];
-            }
-        }
-    }
+    return detected;
 }
 
 @end
