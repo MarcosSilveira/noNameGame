@@ -17,6 +17,6 @@
 @property NSMutableArray *attackFrames;
 @property int hp;
 
--(void)takeDamage;
+-(void)takeDamage:(int)damage;
 
 @end

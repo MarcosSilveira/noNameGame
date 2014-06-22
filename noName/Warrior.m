@@ -19,9 +19,9 @@
     return self;
 }
 
--(void)takeDamage{
-    self.hp--;
-    if(self.hp == 0) [self die];
+-(void)takeDamage:(int)damage{
+    self.hp -= damage;
+    if(self.hp <= 0) [self die];
 }
 
 -(void)die{

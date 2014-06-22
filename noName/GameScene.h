@@ -9,40 +9,39 @@
 #import <SpriteKit/SpriteKit.h>
 #import "Sparta.h"
 #import "Enemy.h"
+#import "Boss.h"
 
 @interface GameScene : SKScene
 {
+    //Buttons---
     SKSpriteNode *rightBtn;
     SKSpriteNode *leftBtn;
     SKSpriteNode *attack;
     SKSpriteNode *attack2;
+    SKSpriteNode *defense;
+    //Attacks----
     SKSpriteNode *projectile;
     SKSpriteNode *especial;
     SKSpriteNode *attackRegion;
-    SKSpriteNode *defense;
+    SKSpriteNode *special;
+    SKSpriteNode *drop;
+    //Scenario----
     SKSpriteNode *platform;
     SKSpriteNode *platform2;
     SKSpriteNode *fundo;
     SKSpriteNode *fundo2;
-    SKSpriteNode *special;
-    SKSpriteNode *drop;
+    SKNode *myWorld;
     SKNode *camera;
-    BOOL FOGAREU;
-    int specialAux;
+    //Status---
     SKLabelNode *lancasCount;
     SKLabelNode *vidaCount;
     SKLabelNode *pontosCount;
-    NSString *aux;
-    NSString *auxHP;
-    NSString *auxPontos;
     SKSpriteNode *vidas;
     SKSpriteNode *block;
     SKSpriteNode *block2;
-    Enemy *enemy;
     SKSpriteNode *pause;
     SKSpriteNode *lancasNode;
-    SKSpriteNode *boss;
-    SKNode *myWorld;
+    //---
     SKTextureAtlas *atlas;
 }
 

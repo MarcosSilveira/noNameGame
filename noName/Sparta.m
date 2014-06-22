@@ -43,4 +43,9 @@
     return self;
 }
 
+-(void)killedEnemy{
+    self.killedEnem++;
+    if(self.killedEnem % 10 == 0) self.specialAvailable = YES;
+}
+
 @end

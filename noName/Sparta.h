@@ -14,9 +14,11 @@
 @property SKTextureAtlas *atlas;
 
 @property BOOL defendendo;
+@property BOOL specialAvailable;
 @property int lancas;
 @property int killedEnem;
 @property int attackCool;
 
+-(void)killedEnemy;
 
 @end
