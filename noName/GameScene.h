@@ -7,14 +7,13 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "Sparta.h"
 #import "Enemy.h"
 
 @interface GameScene : SKScene
 {
-    SKSpriteNode *spartan;
-    SKSpriteNode *spartanTexture;
-    SKSpriteNode *right;
-    SKSpriteNode *left;
+    SKSpriteNode *rightBtn;
+    SKSpriteNode *leftBtn;
     SKSpriteNode *attack;
     SKSpriteNode *attack2;
     SKSpriteNode *projectile;
@@ -28,11 +27,8 @@
     SKSpriteNode *special;
     SKSpriteNode *drop;
     SKNode *camera;
-    BOOL esquerda;
-    BOOL defendendo;
     BOOL FOGAREU;
     int specialAux;
-    NSInteger lancas;
     SKLabelNode *lancasCount;
     SKLabelNode *vidaCount;
     SKLabelNode *pontosCount;
@@ -46,9 +42,7 @@
     SKSpriteNode *pause;
     SKSpriteNode *lancasNode;
     SKSpriteNode *boss;
-    NSMutableArray *walkFrames;
     SKNode *myWorld;
-    SKTextureAtlas *lifeAtlas;
     SKTextureAtlas *atlas;
 }
 

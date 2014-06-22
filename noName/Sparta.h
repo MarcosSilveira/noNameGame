@@ -9,5 +9,14 @@
 #import "Warrior.h"
 
 @interface Sparta : Warrior
--(Sparta*)firstValuesWithTexture:(SKTexture *) texture body:(CGSize)body;
+@property NSMutableArray *attack2Frames;
+@property NSMutableArray *defFrames;
+@property SKTextureAtlas *atlas;
+
+@property BOOL defendendo;
+@property int lancas;
+@property int killedEnem;
+@property int attackCool;
+
+
 @end

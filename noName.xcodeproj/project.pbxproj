@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		84F402E219562E72006C2658 /* ENEMY1.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 84F402E019562E72006C2658 /* ENEMY1.atlas */; };
 		84F402E319562E72006C2658 /* ENEMY2.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 84F402E119562E72006C2658 /* ENEMY2.atlas */; };
+		84F402E51956547F006C2658 /* GRECULES.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 84F402E41956547F006C2658 /* GRECULES.atlas */; };
 		8D2CA9F518F479970062F480 /* botao_direcao_L.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2CA9F318F479970062F480 /* botao_direcao_L.png */; };
 		8D2CA9F618F479970062F480 /* botao_direcao_R.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2CA9F418F479970062F480 /* botao_direcao_R.png */; };
 		8D2CA9F918F47F2F0062F480 /* botao_escudo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2CA9F718F47F2F0062F480 /* botao_escudo.png */; };
@@ -83,6 +84,7 @@
 /* Begin PBXFileReference section */
 		84F402E019562E72006C2658 /* ENEMY1.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ENEMY1.atlas; sourceTree = "<group>"; };
 		84F402E119562E72006C2658 /* ENEMY2.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ENEMY2.atlas; sourceTree = "<group>"; };
+		84F402E41956547F006C2658 /* GRECULES.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = GRECULES.atlas; sourceTree = "<group>"; };
 		8D2CA9F318F479970062F480 /* botao_direcao_L.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_direcao_L.png; sourceTree = "<group>"; };
 		8D2CA9F418F479970062F480 /* botao_direcao_R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_direcao_R.png; sourceTree = "<group>"; };
 		8D2CA9F718F47F2F0062F480 /* botao_escudo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_escudo.png; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			children = (
 				84F402E019562E72006C2658 /* ENEMY1.atlas */,
 				84F402E119562E72006C2658 /* ENEMY2.atlas */,
+				84F402E41956547F006C2658 /* GRECULES.atlas */,
 				8D87FC28194F76310066D813 /* SPARTAN.atlas */,
 			);
 			name = Atlases;
@@ -441,6 +444,7 @@
 				A03A682418F85BBB00A2661B /* hitC.mp3 in Resources */,
 				8D4D72F418FC659B002D3898 /* menufundo.png in Resources */,
 				8DA4AF3618F71893005CB817 /* pause.png in Resources */,
+				84F402E51956547F006C2658 /* GRECULES.atlas in Resources */,
 				A0EAFF2718F463DB00B76CB5 /* prebackground2.png in Resources */,
 				84F402E219562E72006C2658 /* ENEMY1.atlas in Resources */,
 				A03ACC6E18EDD2B10007299C /* grecia.png in Resources */,
