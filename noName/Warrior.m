@@ -15,17 +15,23 @@
     self.walkFrames = [[NSMutableArray alloc]init];
     self.frames = [[NSMutableArray alloc]init];
     self.attackFrames = [[NSMutableArray alloc]init];
+    self.isAlive = YES;
     
     return self;
 }
 
--(void)takeDamage:(int)damage{
+-(BOOL)takeDamage:(int)damage{
     self.hp -= damage;
-    if(self.hp <= 0) [self die];
+    if(self.hp <= 0){
+        [self die];
+        return YES;
+    }
+    return NO;
 }
 
 -(void)die{
     [self removeFromParent];
+    self.isAlive = NO;
 }
 
 @end

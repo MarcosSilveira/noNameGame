@@ -16,7 +16,8 @@
 @property NSMutableArray *walkFrames;
 @property NSMutableArray *attackFrames;
 @property int hp;
+@property BOOL isAlive;
 
--(void)takeDamage:(int)damage;
+-(BOOL)takeDamage:(int)damage;
 
 @end

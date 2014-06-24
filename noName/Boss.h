@@ -11,4 +11,6 @@
 @interface Boss : Warrior
 @property SKTextureAtlas *atlas;
 
+@property int attackCool;
+
 @end
