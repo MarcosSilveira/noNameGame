@@ -28,15 +28,10 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     AVAudioPlayer * backgroundMusicPlayer;
     int counter; //Left Enemy Spawn
     int counter2; //Right Enemy Spawn
-    int counter3; //Boss Spawn
     int stages;
     int score;
     SKEmitterNode *Fire;
     BOOL specialEsquerda;
-    BOOL bossAux;
-    BOOL bossMovendo;
-    int bossHP;
-    int bossAttack;
     Enemy *enemy;
     Sparta *spartan;
     Boss *boss;
@@ -56,7 +51,6 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
 //--------------------------------
     counter = 120;
     counter2 = 240;
-    counter3 = 120;
     stages = 1;
     width = self.scene.size.width;
     height = self.scene.size.height;
@@ -65,8 +59,6 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
         spartan.specialAvailable = YES;          //verificacao se o especial foi comprado
     else
     spartan.specialAvailable = NO;
-    bossAux = NO;       //boss na tela?
-    bossAttack = 0;     //auxiliar para controle dos ataques e movimentacao do boss
     atlas = [SKTextureAtlas atlasNamed:@"SPARTAN"];
     
     self.physicsWorld.contactDelegate = (id)self;
@@ -426,7 +418,8 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
         [((Warrior *)enemyToMove).warriorTexture removeAllActions];
         if([enemyToMove isKindOfClass:[Boss class]]){
             boss.attackCool = 120;
-            boss.warriorTexture.xScale = -1.0;
+            boss.warriorTexture.xScale = 1.0;
+            [boss.warriorTexture runAction:[SKAction animateWithTextures:boss.walkFrames timePerFrame:0.1]];
         }
     }];
 }
