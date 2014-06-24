@@ -111,7 +111,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "179"
             endingLineNumber = "179"
-            landmarkName = "-createCharacter"
+            landmarkName = "-background1"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -142,9 +142,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1004"
-            endingLineNumber = "1004"
-            landmarkName = "-didBeginContact:"
-            landmarkType = "5">
+            endingLineNumber = "1004">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
