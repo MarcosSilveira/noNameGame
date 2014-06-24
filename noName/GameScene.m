@@ -330,9 +330,7 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
         projectile.physicsBody.contactTestBitMask = SPARTAN | ROCK;
         [projectile.physicsBody applyImpulse:CGVectorMake(-10, 0)];
     
-    [boss.warriorTexture runAction:[SKAction animateWithTextures:boss.attackFrames timePerFrame:0.1f]completion:^{
-        bossAttack++;
-    }];
+    [boss.warriorTexture runAction:[SKAction animateWithTextures:boss.attackFrames timePerFrame:0.1f]];
 }
 
 -(void)throwBiribinhaRight{
@@ -405,26 +403,32 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     else{
         enemy.position = CGPointMake(-camera.position.x-width/2, -height/2+(platform.size.height));
     }
-    [self enemyMove:enemy toTheLeft:left];
+    [self enemyMove:enemy toTheLeft:left withDistance:400 withDuration:5];
     
     return enemy;
 }
 
--(void)enemyMove:(SKNode *)enemyToMove toTheLeft:(BOOL)left{
+-(void)enemyMove:(SKNode *)enemyToMove toTheLeft:(BOOL)left withDistance:(float)distance withDuration:(float)duration{
     SKAction *move;
     if(left){
-        move = [SKAction moveByX:-400 y:0 duration:5];
+        move = [SKAction moveByX:-distance y:0 duration:duration];
         ((Warrior *)enemyToMove).warriorTexture.xScale = 1.0;
         ((Warrior *)enemyToMove).esquerda = YES;
     }
     else{
-        move = [SKAction moveByX:500 y:0 duration:5];
+        move = [SKAction moveByX:distance y:0 duration:duration];
         ((Warrior *)enemyToMove).warriorTexture.xScale = -1.0;
         ((Warrior *)enemyToMove).esquerda = NO;
     }
-    [enemyToMove runAction:[SKAction repeatActionForever:move] withKey:@"EnemyWalkLAction1"];
+    [enemyToMove runAction:move withKey:@"EnemyWalkLAction1"];
     [((Warrior *)enemyToMove).warriorTexture runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:((Warrior *)enemyToMove).walkFrames timePerFrame:0.1f]] withKey:@"EnemyWalkLAction2"];
-    [enemyToMove runAction:move];
+    [enemyToMove runAction:move completion:^{
+        [((Warrior *)enemyToMove).warriorTexture removeAllActions];
+        if([enemyToMove isKindOfClass:[Boss class]]){
+            boss.attackCool = 120;
+            boss.warriorTexture.xScale = -1.0;
+        }
+    }];
 }
 
 -(SKSpriteNode *)createBoss{
@@ -438,27 +442,6 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     
     return boss;
 }
-
-//-(void)BossMovingRight{
-//    if (bossMovendo) {
-//        
-//    }
-//    else{
-//    
-//    SKAction *moveRight = [SKAction moveByX:500 y:0 duration:5];
-//    SKTexture *f1 = [atlas textureNamed:@"ARCHER1_000.png"];
-//    SKTexture *f2 = [atlas textureNamed:@"ARCHER1_001.png"];
-//    SKTexture *f3 = [atlas textureNamed:@"ARCHER1_002.png"];
-//    SKTexture *f4 = [atlas textureNamed:@"ARCHER1_003.png"];
-//    SKTexture *f5 = [atlas textureNamed:@"ARCHER1_004.png"];
-//    SKTexture *f6 = [atlas textureNamed:@"ARCHER1_005.png"];
-//    SKTexture *f7 = [atlas textureNamed:@"ARCHER1_006.png"];
-//    NSArray *enemyRightWalk = @[f1,f2,f3,f4,f5,f6,f7];
-//    [boss runAction:[SKAction repeatActionForever:moveRight] withKey:@"BossMovingRight"];
-//    [boss runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:enemyRightWalk timePerFrame:0.1f]] withKey:@"BossMovingRight2"];
-//  //  [boss runAction:moveRight];
-//    }
-//}
 
 #pragma mark - Touch Control
 
@@ -643,40 +626,27 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
 #pragma mark - Update
 
 -(void)update:(NSTimeInterval)currentTime{
+    counter--;
+    counter2--;
+    spartan.attackCool--;
     
     //--------BOSS--------//
-    if(stages>1 && bossAux==NO){
+    boss.attackCool--;
+    if(stages>1 && boss == nil){
         [camera addChild:[self createBoss]];
-        counter3 = 120;
-        bossAux=YES;
-        NSLog(@"**BOSS**");
     }
-    
-    if (counter3<0 && bossAux) {
-        
-        if (bossAttack<3) {
-            
-            [self BossthrowBiribinhaLeft];
-//            bossAttack++;
-            counter3 = 120;
+    if (!boss.hasActions && boss.isAlive) {
+//        if(boss.warriorTexture.hasActions){
+//            [boss.warriorTexture removeAllActions];
+//            boss.warriorTexture.xScale = 1.0;
+//        }
+        if (boss.position.x - spartan.position.x <spartan.size.width*2){
+            [self enemyMove:boss toTheLeft:NO withDistance:150 withDuration:3];
         }
-        
     }
-    counter3--;
-    
-    CGPoint pointTranslated = [camera convertPoint:boss.position toNode:myWorld];
-
-    
-    if (bossAttack>=3) {
-        if (pointTranslated.x<(width/2)*0.9){
-            [self enemyMove:boss toTheLeft:NO];
-            bossMovendo = YES;
-        }
-        else{
-            [boss removeAllActions];
-            bossAttack=-1;
-            bossMovendo = NO;
-        }
+    if (!boss.hasActions && boss.attackCool == 0 && boss.isAlive) {
+        [self BossthrowBiribinhaLeft];
+        boss.attackCool = 120;
     }
     //------ENDBOSS-------//
     
@@ -708,9 +678,6 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
         attack2.texture = [SKTexture textureWithImageNamed:@"botao_atira_lanca_disponivel"];
     }
     
-    counter--;
-    counter2--;
-    spartan.attackCool--;
     
     if (counter==0) {
         [camera addChild:[self createEnemyInTheLeft:YES]];
@@ -783,7 +750,7 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     else{
         [bB.node removeAllActions];
         [((Enemy *)bB.node).warriorTexture runAction:[SKAction animateWithTextures:((Enemy *)bB.node).attackFrames timePerFrame:0.5] completion:^{
-            [self enemyMove:bB.node toTheLeft:((Enemy *)bB.node).esquerda];
+            [self enemyMove:bB.node toTheLeft:((Enemy *)bB.node).esquerda withDistance:500 withDuration:5];
         }];
         if (!spartan.defendendo) {
             spartan.hp--;
@@ -841,7 +808,9 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     [self dropRandomLootWithContact:contact];
     
     [((Enemy*)bA.node) takeDamage:1];
-    [bB.node removeFromParent];
+    if(![bB.node.name isEqual:@"specialspear"]){
+        [bB.node removeFromParent];
+    }
     score = score+stages;
     [spartan killedEnemy];
     
@@ -898,10 +867,13 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
 -(BOOL)bossWasHit:(SKPhysicsBody *)bA attack:(SKPhysicsBody *)bB{
     [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
     
-    [boss takeDamage:1];
-    score = score+stages+100;
-    [spartan killedEnemy];
-    
+    if([boss takeDamage:1]){
+        score = score+stages+500;
+        [spartan killedEnemy];
+    }
+    if(![bB.node.name isEqual:@"specialspear"]){
+        [bB.node removeFromParent];
+    }
     return YES;
 }
 

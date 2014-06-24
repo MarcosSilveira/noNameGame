@@ -33,6 +33,7 @@
     [self addChild:self.warriorTexture];
     
     self.hp = 5;
+    self.attackCool = 60;
     
     return self;
 }
