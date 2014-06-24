@@ -20,7 +20,7 @@ NSInteger height;
     money = [[NSUserDefaults standardUserDefaults] integerForKey:@"recorde"];
     
     moneyLB = [[SKLabelNode alloc]initWithFontNamed:@"Arial"];
-    moneyLB.fontSize = 40;
+    moneyLB.fontSize = width*0.04;
     moneyLB.text = [NSString stringWithFormat:@"Dinheiro:%ld",(long)money];
     moneyLB.fontColor = [UIColor grayColor];
     moneyLB.position = CGPointMake(width/2,height*0.8);
@@ -30,14 +30,14 @@ NSInteger height;
     back.name = @"back";
     
     opcao1 = [[SKLabelNode alloc]initWithFontNamed:@"Arial"];
-    opcao1.fontSize = 40;
+    opcao1.fontSize = width*0.04;
     opcao1.fontColor = [UIColor grayColor];
     opcao1.text = @"500 - 10 Lanças no inicio do jogo";
     opcao1.position = CGPointMake(width*0.3, height/2);
     opcao1.name = @"opcao1";
     
     opcao2 = [[SKLabelNode alloc]initWithFontNamed:@"Arial"];
-    opcao2.fontSize = 40;
+    opcao2.fontSize = width*0.04;
     opcao2.fontColor = [UIColor grayColor];
     opcao2.text = @"1000 - Especial pronto desde o inicio do jogo";
     opcao2.position = CGPointMake(width*0.4, height*0.3);

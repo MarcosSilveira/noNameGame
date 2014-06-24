@@ -28,7 +28,7 @@
         fundo2.anchorPoint = CGPointZero;
         
         playAgain = [[SKSpriteNode alloc] initWithImageNamed:@"jogarnovamente.png"];
-        playAgain.size = CGSizeMake(self.scene.size.width*0.70, self.scene.size.height*0.08);
+        playAgain.size = CGSizeMake(self.scene.size.width*0.45, self.scene.size.height*0.04);
         playAgain.position = CGPointMake(CGRectGetMidX(self.frame), self.scene.size.height/4);
         playAgain.name = @"playAgain";
         
@@ -41,16 +41,21 @@
         [self verificaRecorde];
         
         LBRecorde = [[SKLabelNode alloc] initWithFontNamed:@"Arial"];
-        LBRecorde.fontSize = 60;
+        LBRecorde.fontSize = height*0.06;
         LBRecorde.text = [NSString stringWithFormat:@"Recorde :%ld", (long)recorde];
         LBRecorde.fontColor = [UIColor grayColor];
         LBRecorde.position = CGPointMake(width/2, scoreAux.position.y-scoreAux.position.y/4);
+        
+        back = [[SKSpriteNode alloc]initWithColor:[UIColor blueColor] size:CGSizeMake(100, 50)];
+        back.position = CGPointMake(width*0.1, height*0.9);
+        back.name = @"back";
         
         
         [self addChild:fundo2];
         [self addChild:playAgain];
         [self addChild:scoreAux];
         [self addChild:LBRecorde];
+        [self addChild:back];
     }
     
     return self;
@@ -71,6 +76,13 @@
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
+    
+    if([node.name isEqualToString:(@"back")]){
+        
+        SKScene *Menu = [[MyScene alloc] initWithSize:self.size];
+        SKTransition *troca = [SKTransition fadeWithDuration:0.5];
+        [self.view presentScene:Menu transition:troca];
+    }
     
     if ([node.name isEqualToString:@"playAgain"]) {
         SKAction *action = [SKAction scaleBy:1.2 duration:0.5];

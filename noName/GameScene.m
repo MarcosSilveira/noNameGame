@@ -61,10 +61,7 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     width = self.scene.size.width;
     height = self.scene.size.height;
     score = 0;
-    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"especialReady"])
-        spartan.specialAvailable = YES;          //verificacao se o especial foi comprado
-    else
-    spartan.specialAvailable = NO;
+
     bossAux = NO;       //boss na tela?
     bossAttack = 0;     //auxiliar para controle dos ataques e movimentacao do boss
     atlas = [SKTextureAtlas atlasNamed:@"SPARTAN"];
@@ -123,6 +120,12 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     else
     spartan.lancas = 5;
     
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"especialReady"])
+        spartan.specialAvailable = YES;          //verificacao se o especial foi comprado
+    
+    else
+        spartan.specialAvailable = NO;
+    
     //contador de lancas
     lancasCount.text = [NSString stringWithFormat:@"%d",spartan.lancas];
     lancasCount.position = CGPointMake(width/2-lancasNode.size.width/2+lancasNode.size.width*0.2, height/3+lancasNode.size.width*0.072);
@@ -154,6 +157,7 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     emitter.zPosition=2.0;
     return emitter;
 }
+
 
 #pragma mark - Create Sparta
 
@@ -316,6 +320,8 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     especial.physicsBody.dynamic=NO;
     specialEsquerda = YES;
 }
+
+
 
 -(void)BossthrowBiribinhaLeft{
         SKTexture *spear = [atlas textureNamed:@"spearToLeft.png"];

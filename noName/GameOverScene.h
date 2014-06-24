@@ -19,6 +19,7 @@
     NSInteger recordeAux;
     NSInteger recorde;
     SKLabelNode *LBRecorde;
+    SKSpriteNode *back;
 }
 
 -(id)initWithSize:(CGSize)size andScore:(int)score;
