@@ -13,11 +13,13 @@
 @property NSMutableArray *defFrames;
 @property SKTextureAtlas *atlas;
 
+@property BOOL defenseEnabled;
 @property BOOL defendendo;
 @property BOOL specialAvailable;
 @property int lancas;
 @property int killedEnem;
 @property int attackCool;
+@property int shield;
 
 -(void)killedEnemy;
 

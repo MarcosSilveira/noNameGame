@@ -48,6 +48,10 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     backgroundMusicPlayer.numberOfLoops = -1;
     [backgroundMusicPlayer prepareToPlay];
     [backgroundMusicPlayer play];
+
+
+    
+
 //--------------------------------
     counter = 120;
     counter2 = 240;
@@ -55,9 +59,11 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     width = self.scene.size.width;
     height = self.scene.size.height;
     score = 0;
-
-    bossAux = NO;       //boss na tela?
-    bossAttack = 0;     //auxiliar para controle dos ataques e movimentacao do boss
+//    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"especialReady"];
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"especialReady"])
+        spartan.specialAvailable = YES;          //verificacao se o especial foi comprado
+    else
+    spartan.specialAvailable = NO;
     atlas = [SKTextureAtlas atlasNamed:@"SPARTAN"];
     
     self.physicsWorld.contactDelegate = (id)self;
@@ -120,6 +126,8 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     else
         spartan.specialAvailable = NO;
     
+    spartan.shield = 5;
+    
     //contador de lancas
     lancasCount.text = [NSString stringWithFormat:@"%d",spartan.lancas];
     lancasCount.position = CGPointMake(width/2-lancasNode.size.width/2+lancasNode.size.width*0.2, height/3+lancasNode.size.width*0.072);
@@ -136,7 +144,12 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     
     vidas = [[SKSpriteNode alloc] initWithTexture:[atlas textureNamed:@"heart5.png"] color:nil size:CGSizeMake(width*0.17, height*0.06)];
     vidas.position = CGPointMake(0, lancasCount.position.y+height*0.05);
+    
+    shield = [[SKSpriteNode alloc] initWithTexture:[atlas textureNamed:@"heart5.png"] color:nil size:CGSizeMake(width*0.17, height*0.06)];
+    shield.position = CGPointMake(0, vidas.position.y+height*0.05);
+    [self addChild:shield];
     [self addChild:vidas];
+    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(reloadShield) userInfo:nil repeats:YES];
 }
 
 #pragma mark - Create Particles
@@ -150,6 +163,15 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     emitter.numParticlesToEmit = 1000;
     emitter.zPosition=2.0;
     return emitter;
+}
+
+#pragma mark - Spartan Shield Controll
+-(void)reloadShield{
+    if (spartan.shield<5) {
+        spartan.shield++;
+        NSString *textureName = [NSString stringWithFormat:@"heart%d",spartan.shield];
+        shield.texture = [atlas textureNamed:textureName];
+    }
 }
 
 
@@ -508,9 +530,11 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     
     
     else if([node.name isEqualToString:@"defense"]){
+        if (spartan.defenseEnabled) {
         [spartan.warriorTexture runAction:[SKAction animateWithTextures:spartan.defFrames timePerFrame:0.01f]withKey:@"DefenseLAction1"];
         spartan.defendendo = YES;
-            
+        }
+        
     }
     
     //__________________________________________Melee Attack_______________________________
@@ -616,6 +640,13 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     counter--;
     counter2--;
     spartan.attackCool--;
+    NSString *textureName = [NSString stringWithFormat:@"heart%d",spartan.hp];
+    vidas.texture = [atlas textureNamed:textureName];
+    if (spartan.shield<1){
+        spartan.defenseEnabled = NO;
+        spartan.defendendo = NO;
+    }
+    else spartan.defenseEnabled = YES;
     
     //--------BOSS--------//
     boss.attackCool--;
@@ -637,18 +668,14 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
     pontosCount.text = [NSString stringWithFormat:@"Pontos: %ld",(long)score];
     
     
-    if(spartan.specialAvailable){
-        special.texture = [SKTexture textureWithImageNamed:@"special_available.png"];
-    }
-    else{
-        special.texture = [SKTexture textureWithImageNamed:@"special_unavailable.png"];
-    }
+    if(spartan.specialAvailable) special.texture = [SKTexture textureWithImageNamed:@"special_available.png"];
     
-    if (specialEsquerda) {
-        [especial runAction:[SKAction moveByX:-30 y:0 duration:1]];
-    }
-    else
-        [especial runAction:[SKAction moveByX:30 y:0 duration:1]];
+    else special.texture = [SKTexture textureWithImageNamed:@"special_unavailable.png"];
+    
+    
+    if (specialEsquerda) [especial runAction:[SKAction moveByX:-30 y:0 duration:1]];
+    
+    else [especial runAction:[SKAction moveByX:30 y:0 duration:1]];
     
     lancasCount.text = [NSString stringWithFormat:@"%d", spartan.lancas];
 
@@ -720,9 +747,14 @@ const uint32_t BOSSBIRIBINHA = 0x1 << 7;
 
 -(BOOL)spartaWasHit:(SKPhysicsBody *)bA enemy:(SKPhysicsBody *)bB{
     
-    if(spartan.defendendo) [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
+    if(spartan.defendendo){ [self runAction:[SKAction playSoundFileNamed:@"hitS.wav" waitForCompletion:NO]];
+        spartan.shield --;
+       // spartan.hp--;
+        NSString *textureName = [NSString stringWithFormat:@"heart%d",spartan.shield];
+        shield.texture = [atlas textureNamed:textureName];
+    }
     else [self runAction:[SKAction playSoundFileNamed:@"hitC.mp3" waitForCompletion:NO]];
-    if(spartan.hp == 1){
+    if(spartan.hp <= 1){
         if(!spartan.defendendo){
             [bA.node removeFromParent];
             SKScene *GO = [[GameOverScene alloc] initWithSize:self.size andScore:score];

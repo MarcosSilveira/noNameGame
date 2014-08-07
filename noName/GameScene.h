@@ -37,6 +37,7 @@
     SKLabelNode *vidaCount;
     SKLabelNode *pontosCount;
     SKSpriteNode *vidas;
+    SKSpriteNode *shield;
     SKSpriteNode *block;
     SKSpriteNode *block2;
     SKSpriteNode *pause;

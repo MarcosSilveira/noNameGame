@@ -49,7 +49,7 @@
     SKNode *play = [self childNodeWithName:@"JogarNode"];
     
     if([node.name isEqualToString:@"StoreLabel"]){
-        SKAction *action = [SKAction scaleBy:2 duration:1];
+        SKAction *action = [SKAction scaleBy:1.2 duration:0.5];
         SKAction *action2 = [SKAction removeFromParent];
         [play runAction:action2];
         [loja runAction:action completion:^{
